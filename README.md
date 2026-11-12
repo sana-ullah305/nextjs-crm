@@ -1,36 +1,183 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Acme CRM
 
-## Getting Started
+A complete, production-ready Customer Relationship Management application.
+Modern SaaS-style UI, REST API, session authentication, role-based access
+control, and a fully working database — no mocks.
 
-First, run the development server:
+Built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, Prisma,
+Zod, Recharts, and Radix UI primitives.
+
+## Features
+
+- **Dashboard** — KPIs (customers, new leads, active deals, conversion rate,
+  revenue, weighted pipeline), revenue trend chart, lead funnel, recent
+  activity timeline, upcoming tasks, top performers.
+- **Contacts** — CRUD, search/filter, tags, company association, owner
+  assignment, CSV import (duplicate-safe) and CSV export (formula-injection
+  safe), detail page with activity timeline, notes, tasks, and deals.
+- **Companies** — CRUD, search, account ownership, associated contacts,
+  activity history.
+- **Leads** — capture with automatic scoring (reachability, value, source,
+  engagement), duplicate detection, assignment, follow-up scheduling,
+  one-click conversion to contact + deal.
+- **Sales Pipeline** — multiple pipelines, drag-and-drop Kanban across
+  stages, stage probabilities, weighted forecasting, win/loss tracking with
+  reasons.
+- **Tasks** — calls, meetings, follow-ups, to-dos; priorities, due dates,
+  overdue tracking, complete/skip, assignment notifications.
+- **Reports** — revenue by month, win rates, lead conversion funnel,
+  acquisition by source, team performance; CSV export.
+- **Users & Roles** — Admin / Manager / Sales Rep with a central permission
+  matrix; admin-only user management; last-admin protection; audit log.
+- **Settings** — organization profile, pipelines, lead sources, tags, email
+  templates, custom field definitions, notification preferences.
+- **Security** — bcrypt password hashing (cost 12), HttpOnly session
+  cookies with hashed tokens, login rate limiting, Zod validation on every
+  endpoint, org-scoped queries, record-level ownership rules, audit trail,
+  security headers. See `docs/security.md`.
+
+## Quick Start
+
+Requirements: Node.js 22+, npm.
 
 ```bash
-npm run dev
+# 1. Install dependencies
+npm install
+
+# 2. Configure environment
+cp .env.example .env
+
+# 3. Create the database and apply migrations
+npm run db:migrate
+
+# 4. Seed realistic demo data (5 users, 8 companies, 30+ contacts,
+#    25 leads, 35+ deals, tasks, activities, templates, audit entries)
+npm run db:seed
+
+# 5. Run
+npm run dev        # development (http://localhost:3000)
 # or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build && npm run start   # production
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Demo accounts (password: `password123`)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Email | Role |
+|-------|------|
+| `admin@acme.test` | Administrator |
+| `manager@acme.test` | Manager |
+| `jamie@acme.test` | Sales Representative |
+| `riley@acme.test` | Sales Representative |
+| `casey@acme.test` | Sales Representative |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**These credentials are for development/demo only.** Change all passwords
+before any real deployment.
 
-## Learn More
+## Scripts
 
-To learn more about Next.js, take a look at the following resources:
+| Command | Purpose |
+|---------|---------|
+| `npm run dev` | Start development server |
+| `npm run build` | Production build |
+| `npm run start` | Start production server |
+| `npm run db:migrate` | Create/apply database migrations |
+| `npm run db:seed` | Reset + seed demo data (destructive) |
+| `npm run db:generate` | Regenerate Prisma client |
+| `npm test` | Run test suite (46 tests) |
+| `npm run test:coverage` | Tests with coverage report |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | TypeScript strict check |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Database
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+SQLite via Prisma (driver adapters) so the app runs anywhere with zero
+external services. The schema avoids Postgres-specific features, so
+switching to PostgreSQL in production is a one-line change:
 
-## Deploy on Vercel
+```env
+DATABASE_URL="postgresql://user:pass@host:5432/crm"
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+…then set the `sqlite` → `postgresql` provider in `prisma/schema.prisma`,
+swap the Prisma adapter in `src/server/db.ts` (e.g.
+`@prisma/adapter-pg`), and run `prisma migrate dev`. No application code
+changes. Schema documentation: `docs/database-schema.md`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Testing
+
+46 automated tests across 6 files, all run against a real (isolated)
+database — no mocked data layer:
+
+- **Unit** — lead scoring model, Zod validation schemas, RBAC permission
+  matrix, record-level access rules, password hashing, rate limiter
+  (sliding window).
+- **Integration** — login flow (valid/invalid/rate-limited), contact CRUD
+  lifecycle with soft-delete verification, lead creation with scoring +
+  duplicate detection, task creation/completion, permission enforcement
+  (401/403/404/400 envelopes), dashboard and reports endpoints.
+
+```bash
+npm test
+```
+
+## Project Structure
+
+```
+docs/                    Architecture, schema, plan, security docs
+prisma/
+  schema.prisma          17-model database schema
+  migrations/            SQL migrations
+  seed.ts                Realistic seed data
+src/
+  app/(app)/             Authenticated app shell (dashboard, contacts,
+                         companies, leads, pipeline, tasks, reports,
+                         settings)
+  app/api/               REST API routes
+  components/            UI primitives + feature components
+  lib/                   Client-safe shared code (schemas, api client,
+                         formatting, lead scoring)
+  server/                Server-only modules (db, auth, rbac, rate limit,
+                         audit, api wrapper)
+  proxy.ts               Cookie-presence route protection
+```
+
+Full architecture notes: `docs/architecture.md`.
+API reference: `docs/api.md`.
+
+## Deployment
+
+### Any Node host (recommended for this setup)
+
+```bash
+npm ci
+npm run build
+DATABASE_URL="file:./data/crm.db" npm run db:migrate
+npm run start   # set PORT if needed
+```
+
+Run behind a TLS-terminating reverse proxy (Caddy, nginx). Cookies are
+`Secure`-flagged automatically in production.
+
+### PostgreSQL production
+
+1. Provision PostgreSQL and set `DATABASE_URL` to the Postgres URL.
+2. Change the provider in `prisma/schema.prisma` to `postgresql`.
+3. Swap the adapter in `src/server/db.ts` to `@prisma/adapter-pg`.
+4. `npm run db:migrate && npm run start`.
+
+### Scaling notes
+
+- The login rate limiter is in-memory (single instance). For horizontal
+  scaling, back it with Redis — `src/server/rate-limit.ts` is the single
+  integration point.
+- Email sending is architected (templates, notification channels, SMTP
+  settings model) but delivery is stubbed pending real SMTP credentials —
+  see "Remaining Limitations" in `docs/security.md`.
+
+## Documentation
+
+- [Architecture](docs/architecture.md)
+- [Database schema](docs/database-schema.md)
+- [Implementation plan](docs/implementation-plan.md)
+- [Security](docs/security.md)
+- [API reference](docs/api.md)
