@@ -38,6 +38,9 @@ jobs:
       - name: Apply database migrations
         run: npm run db:migrate
 
+      - name: Generate route types
+        run: npx next typegen
+
       - name: Test
         run: npm test
 
