@@ -36,7 +36,9 @@ model Organization {
   customFields      CustomField[]
   emailSettings     EmailSettings?
   sentEmails        SentEmail[]
+  inboundEmails     InboundEmail[]
   reminders         FollowUpReminder[]
+  apiKeys           ApiKey[]
   currency          String   @default("USD")
 }
 
@@ -68,7 +70,8 @@ model User {
   notes          Note[]
   notifications  Notification[]
   sentEmails     SentEmail[] @relation("SentEmailSender")
-  reminders      FollowUpReminder[] @relation("ReminderRecipient")
+  reminders     FollowUpReminder[] @relation("ReminderRecipient")
+  createdApiKeys ApiKey[] @relation("ApiKeyCreator")
 
   @@unique([organizationId, email])
   @@index([organizationId])
@@ -147,6 +150,7 @@ model Contact {
   notes        Note[]
   deals        Deal[]      @relation("DealContact")
   sentEmails   SentEmail[] @relation("SentEmailContact")
+  inboundEmails InboundEmail[]
 
   tags Tag[]
 
@@ -219,6 +223,7 @@ model Lead {
   notes        Note[]
   deals        Deal[]      @relation("DealLead")
   sentEmails   SentEmail[] @relation("SentEmailLead")
+  inboundEmails InboundEmail[]
   reminders    FollowUpReminder[] @relation("ReminderLead")
 
   @@index([organizationId, status])
@@ -491,6 +496,7 @@ model SentEmail {
   body           String
   recipientEmail String
   recipientName  String    @default("")
+  messageId      String    @default("")
   contactId      String?
   leadId         String?
   dealId         String?
@@ -506,6 +512,7 @@ model SentEmail {
   lead         Lead?          @relation("SentEmailLead", fields: [leadId], references: [id], onDelete: SetNull)
   deal         Deal?          @relation("SentEmailDeal", fields: [dealId], references: [id], onDelete: SetNull)
   template     EmailTemplate? @relation("SentEmailTemplate", fields: [templateId], references: [id], onDelete: SetNull)
+  inboundEmails InboundEmail[] @relation("InboundEmailThread")
 
   @@index([organizationId, createdAt])
   @@index([contactId])
@@ -537,4 +544,57 @@ model FollowUpReminder {
 
   @@unique([organizationId, dedupeKey])
   @@index([organizationId, createdAt])
+}
+
+// An inbound email received in the shared IMAP inbox and matched to CRM
+// records. "Matched" means the reply belongs to a known thread (In-Reply-To
+// points at a SentEmail), the sender is an open lead, or the sender is a
+// known contact. Unmatched mail is never stored.
+model InboundEmail {
+  id             String   @id @default(cuid())
+  organizationId String
+  fromEmail      String
+  fromName       String   @default("")
+  subject        String   @default("")
+  body           String   @default("")
+  messageId      String
+  inReplyTo      String   @default("")
+  sentEmailId    String?
+  contactId      String?
+  leadId         String?
+  status         String   @default("UNREAD") // UNREAD | READ | IGNORED
+  receivedAt     DateTime @default(now())
+  createdAt      DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  contact      Contact?     @relation(fields: [contactId], references: [id], onDelete: SetNull)
+  lead         Lead?        @relation(fields: [leadId], references: [id], onDelete: SetNull)
+  sentEmail    SentEmail?   @relation("InboundEmailThread", fields: [sentEmailId], references: [id], onDelete: SetNull)
+
+  @@unique([organizationId, messageId])
+  @@index([organizationId, receivedAt])
+  @@index([contactId])
+  @@index([leadId])
+}
+
+// A public lead-capture API key. Only the SHA-256 hash of the full key is
+// stored; the prefix (first 8 chars, e.g. "lc_a1b2c") supports display and
+// index-friendly lookup before a constant-time hash comparison. Revocation
+// is soft (isActive=false + revokedAt) to preserve the audit trail.
+model ApiKey {
+  id             String    @id @default(cuid())
+  organizationId String
+  name           String
+  keyHash        String    @unique
+  prefix         String
+  createdById    String
+  lastUsedAt     DateTime?
+  isActive       Boolean   @default(true)
+  revokedAt      DateTime?
+  createdAt      DateTime  @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  createdBy    User        @relation("ApiKeyCreator", fields: [createdById], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, prefix])
 }

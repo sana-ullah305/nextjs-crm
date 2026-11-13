@@ -16,6 +16,8 @@ Organization 1───* AuditLog
 Organization 1───* Notification 1───* NotificationChannel
 Organization 1───* EmailTemplate
 Organization 1───* CustomField 1───* CustomFieldValue (polymorphic: contact/company/lead/deal)
+Organization 1───* ApiKey (public lead-capture keys; SHA-256 hash at rest, soft revoke)
+Organization 1───* InboundEmail (matched IMAP replies; threads to SentEmail via In-Reply-To)
 ```
 
 ## Tables
@@ -123,6 +125,9 @@ isRequired, position`. Values: polymorphic on `(fieldId, entityId)`.
 - tasks: `(organizationId, assignedUserId, status, dueAt)`
 - activities: `(organizationId, occurredAt)`, `(contactId, occurredAt)`
 - sessions: unique `token`; index `userId, expiresAt`
+- api_keys: unique `keyHash` (SHA-256 of the full key); `(organizationId, prefix)` for prefix-first lookup
+- inbound_emails: unique `(organizationId, messageId)` (idempotent scan); `(organizationId, receivedAt)` watermark scan; `contactId` / `leadId` for record scoping
+
 
 ## Migration & Seed
 

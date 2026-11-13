@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { z } from "zod";
 import { apiHandler, ok, parseBody, ApiNotFoundError, ApiValidationError, clientIp } from "@/server/api";
 import { requireApiUserWith } from "@/server/rbac";
@@ -9,9 +9,11 @@ import {
   pipelineCreateSchema,
   emailTemplateCreateSchema,
   customFieldCreateSchema,
+  apiKeyCreateSchema,
 } from "@/lib/schemas";
 import { db } from "@/server/db";
 import { writeAudit } from "@/server/audit";
+import { generateApiKey } from "@/server/apikeys";
 
 type Ctx = { params: Promise<{ section?: string[]; id?: string[] }> };
 
@@ -80,6 +82,24 @@ export const GET = apiHandler<Ctx>(async (req, ctx) => {
         orderBy: { name: "asc" },
       });
       return ok({ users });
+    }
+    case "api-keys": {
+      // List never exposes the hash (or the full key — undisplayable after
+      // creation by design).
+      const keys = await db.apiKey.findMany({
+        where: { organizationId: orgId },
+        select: {
+          id: true,
+          name: true,
+          prefix: true,
+          lastUsedAt: true,
+          isActive: true,
+          revokedAt: true,
+          createdAt: true,
+        },
+        orderBy: { createdAt: "desc" },
+      });
+      return ok({ apiKeys: keys });
     }
     default:
       return NextResponse.json({ error: { code: "NOT_FOUND", message: "Unknown settings section" } }, { status: 404 });
@@ -221,6 +241,33 @@ export const POST = apiHandler<Ctx>(async (req, ctx) => {
           ipAddress: clientIp(req),
         });
         return ok(field, { status: 201 });
+      }
+      case "api-keys": {
+        // POST /settings/api-keys: create a key. The full key value is
+        // returned exactly once; only the SHA-256 hash is persisted.
+        const user = await requireApiUserWith("settings:manage");
+        const body = await parseBody(req, apiKeyCreateSchema);
+        const { key, keyHash, prefix } = generateApiKey();
+        const record = await db.apiKey.create({
+          data: {
+            organizationId: user.organizationId,
+            name: body.name,
+            keyHash,
+            prefix,
+            createdById: user.id,
+          },
+          select: { id: true, name: true, prefix: true, createdAt: true },
+        });
+        await writeAudit({
+          organizationId: user.organizationId,
+          userId: user.id,
+          action: "API_KEY_CREATE",
+          entityType: "apiKey",
+          entityId: record.id,
+          ipAddress: clientIp(req),
+          metadata: { keyPrefix: prefix },
+        });
+        return ok({ ...record, key }, { status: 201 });
       }
       default:
         return NextResponse.json({ error: { code: "NOT_FOUND", message: "Unknown section" } }, { status: 404 });
@@ -436,6 +483,30 @@ export const DELETE = apiHandler<Ctx>(async (req, ctx) => {
         ipAddress: clientIp(req),
       });
       return ok({ deleted: true });
+    }
+    case "api-keys": {
+      // DELETE /settings/api-keys/:id — soft revoke (isActive=false +
+      // revokedAt) so the key's history and audit trail are preserved.
+      const user = await requireApiUserWith("settings:manage");
+      const key = await db.apiKey.findFirst({
+        where: { id, organizationId: user.organizationId },
+        select: { id: true, prefix: true },
+      });
+      if (!key) throw new ApiNotFoundError("API key not found");
+      await db.apiKey.update({
+        where: { id },
+        data: { isActive: false, revokedAt: new Date() },
+      });
+      await writeAudit({
+        organizationId: user.organizationId,
+        userId: user.id,
+        action: "API_KEY_REVOKE",
+        entityType: "apiKey",
+        entityId: id,
+        ipAddress: clientIp(req),
+        metadata: { keyPrefix: key.prefix },
+      });
+      return ok({ revoked: true });
     }
     default:
       return NextResponse.json({ error: { code: "NOT_FOUND", message: "Not found" } }, { status: 404 });

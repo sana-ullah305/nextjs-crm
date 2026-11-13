@@ -18,7 +18,7 @@ except where noted. Responses use a consistent envelope:
 | 401 | Not authenticated |
 | 403 | Role/permission or ownership denied |
 | 404 | Entity not found |
-| 429 | Rate limited (login only; includes `Retry-After`) |
+| 429 | Rate limited (login and public lead capture; includes `Retry-After`) |
 | 500 | Unexpected error (logged server-side, never leaks internals) |
 
 Common query params for list endpoints: `q` (search), `page`, `pageSize`,
@@ -70,6 +70,25 @@ Revokes the session server-side and clears the cookie.
 | POST | `/:id` | **Convert**: `{ createDeal?: boolean, dealName?, dealValue?, pipelineId?, expectedCloseDate? }` → creates contact (+ optional deal in default pipeline's first stage), marks lead `CONVERTED` |
 | PATCH | `/:id` | Partial update; rescoring is automatic |
 | DELETE | `/:id` | Soft delete |
+
+### Public capture — `POST /api/leads/capture`
+
+API-key-authenticated ingestion for external forms. **No session required** —
+auth is `Authorization: Bearer lc_...` or `?apikey=lc_...`.
+
+- Body (flat, allow-listed): `firstName*`, `lastName*`, `email*`, `phone`,
+  `companyName`, `source` (free-text tag, ≤ 60 chars). Internal fields
+  (owner, assignment, status, …) are rejected — mass-assignment guard.
+- Pipeline: org-scoped duplicate email detection (409 `DUPLICATE_LEAD`),
+  score computed server-side (same model as internal capture), company
+  auto-created by name, round-robin assignment to active `SALES_REP` users
+  (falls back to the key's creator when the org has none).
+- Rate limit: 30 req / 5 min / key → `429` with `Retry-After`.
+- Errors: `401` bad key, `403` revoked/inactive key, `400` validation,
+  `409 DUPLICATE_LEAD`.
+- Success: `201` → `{ data: { id, score, status } }` — nothing else is
+  exposed. Audited as `LEAD_CAPTURE` (metadata: key prefix + source) and
+  bumps the key's `lastUsedAt`.
 
 ## Deals — `/api/deals`
 
@@ -158,9 +177,11 @@ The SMTP password is never stored in the database — it is read from the
 
 | Method | Path | Permission |
 |--------|------|-----------|
-| GET | `/organization` · `/users` (id/name list) · `/tags` · `/lead-sources` · `/pipelines` · `/email-templates` · `/custom-fields` | `settings:read` |
+| GET | `/organization` · `/users` (id/name list) · `/tags` · `/lead-sources` · `/pipelines` · `/email-templates` · `/custom-fields` · `/api-keys` | `settings:read` |
 | PATCH | `/organization` — org profile | `settings:manage` |
 | POST / DELETE | `/tags`, `/lead-sources` (blocked when in use), `/email-templates`, `/custom-fields` | `settings:manage` |
+| POST | `/api-keys` — create key `{ name* }`; the full `lc_…` key is returned **exactly once** (only a SHA-256 hash is stored) | `settings:manage` |
+| DELETE | `/api-keys/:id` — soft revoke (`isActive=false`, `revokedAt` set); audited as `API_KEY_REVOKE` | `settings:manage` |
 | POST | `/pipelines` — create pipeline + stages `{ name, stages: [{ name, probability, type }] }` | `pipelines:manage` (admin) |
 | PATCH | `/pipelines/:id` — rename / set default | `pipelines:manage` |
 | DELETE | `/pipelines/:id` — blocked when it has deals or is the last pipeline | `pipelines:manage` |
@@ -183,3 +204,11 @@ The SMTP password is never stored in the database — it is read from the
 | Trigger reminder scan | ✔ | ✔ | — |
 
 Full matrix: `src/server/rbac.ts`.
+
+## Inbound Email — `/api/inbound`
+
+| Method | Path | Notes |
+|--------|------|-------|
+| GET | `/` | Matched replies (org-scoped; reps see own matched records). Filters: `contactId`, `leadId`, `status`, `page`, `pageSize`. Permission: `activities:read`. |
+| POST | `/` | Body `{ ids: string[] }` marks UNREAD rows READ (org-scoped). Permission: `activities:read`. |
+| POST | `/run` | Trigger an IMAP scan (`{ stored, skipped, scannedAt, configured }`). Cron-driven; `configured: false` when IMAP env unset. Permission: `inbound:run` (admin, manager). |

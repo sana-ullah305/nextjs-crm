@@ -260,6 +260,7 @@ export type UserWhereInput = {
   notifications?: Prisma.NotificationListRelationFilter
   sentEmails?: Prisma.SentEmailListRelationFilter
   reminders?: Prisma.FollowUpReminderListRelationFilter
+  createdApiKeys?: Prisma.ApiKeyListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -290,6 +291,7 @@ export type UserOrderByWithRelationInput = {
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
   sentEmails?: Prisma.SentEmailOrderByRelationAggregateInput
   reminders?: Prisma.FollowUpReminderOrderByRelationAggregateInput
+  createdApiKeys?: Prisma.ApiKeyOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -324,6 +326,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   notifications?: Prisma.NotificationListRelationFilter
   sentEmails?: Prisma.SentEmailListRelationFilter
   reminders?: Prisma.FollowUpReminderListRelationFilter
+  createdApiKeys?: Prisma.ApiKeyListRelationFilter
 }, "id" | "organizationId_email">
 
 export type UserOrderByWithAggregationInput = {
@@ -391,6 +394,7 @@ export type UserCreateInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -420,6 +424,7 @@ export type UserUncheckedCreateInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUpdateInput = {
@@ -449,6 +454,7 @@ export type UserUpdateInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -478,6 +484,7 @@ export type UserUncheckedUpdateInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -844,6 +851,20 @@ export type UserUpdateOneRequiredWithoutRemindersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRemindersInput, Prisma.UserUpdateWithoutRemindersInput>, Prisma.UserUncheckedUpdateWithoutRemindersInput>
 }
 
+export type UserCreateNestedOneWithoutCreatedApiKeysInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedApiKeysInput, Prisma.UserUncheckedCreateWithoutCreatedApiKeysInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedApiKeysInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCreatedApiKeysNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedApiKeysInput, Prisma.UserUncheckedCreateWithoutCreatedApiKeysInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedApiKeysInput
+  upsert?: Prisma.UserUpsertWithoutCreatedApiKeysInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedApiKeysInput, Prisma.UserUpdateWithoutCreatedApiKeysInput>, Prisma.UserUncheckedUpdateWithoutCreatedApiKeysInput>
+}
+
 export type UserCreateWithoutOrganizationInput = {
   id?: string
   email: string
@@ -870,6 +891,7 @@ export type UserCreateWithoutOrganizationInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutOrganizationInput = {
@@ -898,6 +920,7 @@ export type UserUncheckedCreateWithoutOrganizationInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutOrganizationInput = {
@@ -970,6 +993,7 @@ export type UserCreateWithoutSessionsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -998,6 +1022,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1042,6 +1067,7 @@ export type UserUpdateWithoutSessionsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1070,6 +1096,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutOwnedCompaniesInput = {
@@ -1098,6 +1125,7 @@ export type UserCreateWithoutOwnedCompaniesInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutOwnedCompaniesInput = {
@@ -1126,6 +1154,7 @@ export type UserUncheckedCreateWithoutOwnedCompaniesInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutOwnedCompaniesInput = {
@@ -1170,6 +1199,7 @@ export type UserUpdateWithoutOwnedCompaniesInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedCompaniesInput = {
@@ -1198,6 +1228,7 @@ export type UserUncheckedUpdateWithoutOwnedCompaniesInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutOwnedContactsInput = {
@@ -1226,6 +1257,7 @@ export type UserCreateWithoutOwnedContactsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutOwnedContactsInput = {
@@ -1254,6 +1286,7 @@ export type UserUncheckedCreateWithoutOwnedContactsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutOwnedContactsInput = {
@@ -1298,6 +1331,7 @@ export type UserUpdateWithoutOwnedContactsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedContactsInput = {
@@ -1326,6 +1360,7 @@ export type UserUncheckedUpdateWithoutOwnedContactsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutAssignedLeadsInput = {
@@ -1354,6 +1389,7 @@ export type UserCreateWithoutAssignedLeadsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutAssignedLeadsInput = {
@@ -1382,6 +1418,7 @@ export type UserUncheckedCreateWithoutAssignedLeadsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutAssignedLeadsInput = {
@@ -1415,6 +1452,7 @@ export type UserCreateWithoutOwnedLeadsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutOwnedLeadsInput = {
@@ -1443,6 +1481,7 @@ export type UserUncheckedCreateWithoutOwnedLeadsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutOwnedLeadsInput = {
@@ -1487,6 +1526,7 @@ export type UserUpdateWithoutAssignedLeadsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssignedLeadsInput = {
@@ -1515,6 +1555,7 @@ export type UserUncheckedUpdateWithoutAssignedLeadsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUpsertWithoutOwnedLeadsInput = {
@@ -1554,6 +1595,7 @@ export type UserUpdateWithoutOwnedLeadsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedLeadsInput = {
@@ -1582,6 +1624,7 @@ export type UserUncheckedUpdateWithoutOwnedLeadsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutOwnedDealsInput = {
@@ -1610,6 +1653,7 @@ export type UserCreateWithoutOwnedDealsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutOwnedDealsInput = {
@@ -1638,6 +1682,7 @@ export type UserUncheckedCreateWithoutOwnedDealsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutOwnedDealsInput = {
@@ -1682,6 +1727,7 @@ export type UserUpdateWithoutOwnedDealsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedDealsInput = {
@@ -1710,6 +1756,7 @@ export type UserUncheckedUpdateWithoutOwnedDealsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutCreatedTasksInput = {
@@ -1738,6 +1785,7 @@ export type UserCreateWithoutCreatedTasksInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutCreatedTasksInput = {
@@ -1766,6 +1814,7 @@ export type UserUncheckedCreateWithoutCreatedTasksInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutCreatedTasksInput = {
@@ -1799,6 +1848,7 @@ export type UserCreateWithoutTasksInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutTasksInput = {
@@ -1827,6 +1877,7 @@ export type UserUncheckedCreateWithoutTasksInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutTasksInput = {
@@ -1871,6 +1922,7 @@ export type UserUpdateWithoutCreatedTasksInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedTasksInput = {
@@ -1899,6 +1951,7 @@ export type UserUncheckedUpdateWithoutCreatedTasksInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUpsertWithoutTasksInput = {
@@ -1938,6 +1991,7 @@ export type UserUpdateWithoutTasksInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTasksInput = {
@@ -1966,6 +2020,7 @@ export type UserUncheckedUpdateWithoutTasksInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutActivitiesInput = {
@@ -1994,6 +2049,7 @@ export type UserCreateWithoutActivitiesInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutActivitiesInput = {
@@ -2022,6 +2078,7 @@ export type UserUncheckedCreateWithoutActivitiesInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutActivitiesInput = {
@@ -2066,6 +2123,7 @@ export type UserUpdateWithoutActivitiesInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutActivitiesInput = {
@@ -2094,6 +2152,7 @@ export type UserUncheckedUpdateWithoutActivitiesInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutNotesInput = {
@@ -2122,6 +2181,7 @@ export type UserCreateWithoutNotesInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutNotesInput = {
@@ -2150,6 +2210,7 @@ export type UserUncheckedCreateWithoutNotesInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutNotesInput = {
@@ -2194,6 +2255,7 @@ export type UserUpdateWithoutNotesInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotesInput = {
@@ -2222,6 +2284,7 @@ export type UserUncheckedUpdateWithoutNotesInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -2250,6 +2313,7 @@ export type UserCreateWithoutNotificationsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -2278,6 +2342,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -2322,6 +2387,7 @@ export type UserUpdateWithoutNotificationsInput = {
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -2350,6 +2416,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutSentEmailsInput = {
@@ -2378,6 +2445,7 @@ export type UserCreateWithoutSentEmailsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutSentEmailsInput = {
@@ -2406,6 +2474,7 @@ export type UserUncheckedCreateWithoutSentEmailsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutSentEmailsInput = {
@@ -2450,6 +2519,7 @@ export type UserUpdateWithoutSentEmailsInput = {
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSentEmailsInput = {
@@ -2478,6 +2548,7 @@ export type UserUncheckedUpdateWithoutSentEmailsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutRemindersInput = {
@@ -2506,6 +2577,7 @@ export type UserCreateWithoutRemindersInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutRemindersInput = {
@@ -2534,6 +2606,7 @@ export type UserUncheckedCreateWithoutRemindersInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutRemindersInput = {
@@ -2578,6 +2651,7 @@ export type UserUpdateWithoutRemindersInput = {
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRemindersInput = {
@@ -2606,6 +2680,139 @@ export type UserUncheckedUpdateWithoutRemindersInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserCreateWithoutCreatedApiKeysInput = {
+  id?: string
+  email: string
+  name: string
+  passwordHash: string
+  role?: string
+  title?: string
+  phone?: string
+  avatarColor?: string
+  isActive?: boolean
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
+  ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
+  ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
+  assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
+  ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
+  createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
+  notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutCreatedApiKeysInput = {
+  id?: string
+  organizationId: string
+  email: string
+  name: string
+  passwordHash: string
+  role?: string
+  title?: string
+  phone?: string
+  avatarColor?: string
+  isActive?: boolean
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
+  ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
+  ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
+  assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
+  ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
+  createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutCreatedApiKeysInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedApiKeysInput, Prisma.UserUncheckedCreateWithoutCreatedApiKeysInput>
+}
+
+export type UserUpsertWithoutCreatedApiKeysInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedApiKeysInput, Prisma.UserUncheckedUpdateWithoutCreatedApiKeysInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedApiKeysInput, Prisma.UserUncheckedCreateWithoutCreatedApiKeysInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedApiKeysInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedApiKeysInput, Prisma.UserUncheckedUpdateWithoutCreatedApiKeysInput>
+}
+
+export type UserUpdateWithoutCreatedApiKeysInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
+  ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
+  ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
+  assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
+  ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
+  createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedApiKeysInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
+  ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
+  ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
+  assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
+  ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
+  createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyOrganizationInput = {
@@ -2649,6 +2856,7 @@ export type UserUpdateWithoutOrganizationInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrganizationInput = {
@@ -2677,6 +2885,7 @@ export type UserUncheckedUpdateWithoutOrganizationInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutOrganizationInput = {
@@ -2713,6 +2922,7 @@ export type UserCountOutputType = {
   notifications: number
   sentEmails: number
   reminders: number
+  createdApiKeys: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2729,6 +2939,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
   sentEmails?: boolean | UserCountOutputTypeCountSentEmailsArgs
   reminders?: boolean | UserCountOutputTypeCountRemindersArgs
+  createdApiKeys?: boolean | UserCountOutputTypeCountCreatedApiKeysArgs
 }
 
 /**
@@ -2832,6 +3043,13 @@ export type UserCountOutputTypeCountRemindersArgs<ExtArgs extends runtime.Types.
   where?: Prisma.FollowUpReminderWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedApiKeysArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ApiKeyWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2861,6 +3079,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   sentEmails?: boolean | Prisma.User$sentEmailsArgs<ExtArgs>
   reminders?: boolean | Prisma.User$remindersArgs<ExtArgs>
+  createdApiKeys?: boolean | Prisma.User$createdApiKeysArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2930,6 +3149,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   sentEmails?: boolean | Prisma.User$sentEmailsArgs<ExtArgs>
   reminders?: boolean | Prisma.User$remindersArgs<ExtArgs>
+  createdApiKeys?: boolean | Prisma.User$createdApiKeysArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2956,6 +3176,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
     sentEmails: Prisma.$SentEmailPayload<ExtArgs>[]
     reminders: Prisma.$FollowUpReminderPayload<ExtArgs>[]
+    createdApiKeys: Prisma.$ApiKeyPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3379,6 +3600,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sentEmails<T extends Prisma.User$sentEmailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sentEmailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SentEmailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reminders<T extends Prisma.User$remindersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$remindersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FollowUpReminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdApiKeys<T extends Prisma.User$createdApiKeysArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdApiKeysArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4129,6 +4351,30 @@ export type User$remindersArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.FollowUpReminderScalarFieldEnum | Prisma.FollowUpReminderScalarFieldEnum[]
+}
+
+/**
+ * User.createdApiKeys
+ */
+export type User$createdApiKeysArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ApiKey
+   */
+  select?: Prisma.ApiKeySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ApiKey
+   */
+  omit?: Prisma.ApiKeyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ApiKeyInclude<ExtArgs> | null
+  where?: Prisma.ApiKeyWhereInput
+  orderBy?: Prisma.ApiKeyOrderByWithRelationInput | Prisma.ApiKeyOrderByWithRelationInput[]
+  cursor?: Prisma.ApiKeyWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ApiKeyScalarFieldEnum | Prisma.ApiKeyScalarFieldEnum[]
 }
 
 /**

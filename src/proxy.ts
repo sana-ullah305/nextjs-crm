@@ -12,6 +12,9 @@ const PUBLIC_PREFIXES = [
   "/login",
   "/api/auth/login",
   "/api/auth/logout",
+  // Public lead-capture endpoint: authenticated by an API key instead of a
+  // session cookie, so it must skip the cookie-presence check.
+  "/api/leads/capture",
 ];
 
 export function proxy(req: NextRequest) {

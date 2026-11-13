@@ -48,11 +48,26 @@ defense-in-depth, every control mapped to a risk).
    trails and preventing accidental cascading data loss.
 10. **Data export hygiene**: CSV export escapes formula-injection prefixes
     (`=`, `+`, `-`, `@`) to prevent spreadsheet injection.
+11. **API-key auth (lead capture)**: keys are `lc_…` CSPRNG values stored
+    only as SHA-256 hashes; lookup by public prefix then constant-time hash
+    compare. Wrong and unknown keys return identical 401s (no validity
+    oracle); revoked keys 403; per-key sliding-window rate limit (30 / 5
+    min) with `Retry-After`. The public capture schema is strictly
+    allow-listed — internal fields are never stored (mass-assignment guard).
+    `?apikey=` transport can leak keys into access logs; prefer the
+    `Authorization: Bearer` header (documented) and scrub at the proxy.
+12. **Inbound IMAP ingestion**: credentials come exclusively from
+    `IMAP_*` env vars, never the database; imapflow's debug logger is
+    disabled so credentials are never echoed. Unmatched mail (sender not a
+    known contact/lead and no matching sent-thread) is never stored.
+    Message-ID + watermark make scans idempotent; row access follows the
+    same org + ownership scoping as everywhere else.
 
 ## Remaining Limitations (documented honestly)
 
 - Rate limiting and session store are in-memory/DB-local; for multi-instance
-  deployments back the limiter with Redis.
+  deployments back the limiter with Redis. This now applies to both the
+  login limiter and the per-API-key capture limiter.
 - Email sending is fully implemented (SMTP via nodemailer, per-send audit
   trail, failure recording) and configured through Settings > Email; the
   SMTP password is supplied via the `SMTP_PASS` environment variable and is

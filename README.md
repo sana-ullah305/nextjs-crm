@@ -35,9 +35,18 @@ Zod, Recharts, and Radix UI primitives.
   follow-ups and overdue tasks into in-app notifications for the
   responsible rep. Deduplicated per day; trigger via
   `POST /api/reminders/run` from cron or an uptime monitor.
+- **Lead Capture API** — public, API-key-authenticated ingestion at
+  `POST /api/leads/capture` for websites and forms: keys hashed at rest,
+  per-key rate limiting, strict allow-listed fields, reuse of the same
+  scoring / duplicate-detection / assignment pipeline as the internal
+  route.
 - **Global Search / Command Palette** — `⌘K` (or Ctrl+K) from the topbar
   searches contacts, companies, leads, deals, and tasks at once, with
   keyboard navigation and RBAC-scoped results.
+- **Inbound Email Tracking** — an IMAP scan (`POST /api/inbound/run`,
+  cron-driven) matches inbox replies to CRM threads via Message-ID,
+  auto-logs them on the matched contact/lead, notifies the owner, and
+  flips NEW leads to CONTACTED — no rep action needed.
 - **Users & Roles** — Admin / Manager / Sales Rep with a central permission
   matrix; admin-only user management; last-admin protection; audit log.
 - **Settings** — organization profile, pipelines, lead sources, tags, email
@@ -94,7 +103,7 @@ before any real deployment.
 | `npm run db:migrate` | Create/apply database migrations |
 | `npm run db:seed` | Reset + seed demo data (destructive) |
 | `npm run db:generate` | Regenerate Prisma client |
-| `npm test` | Run test suite (66 tests) |
+| `npm test` | Run test suite (98 tests) |
 | `npm run test:coverage` | Tests with coverage report |
 | `npm run lint` | ESLint |
 | `npm run typecheck` | TypeScript strict check |
@@ -116,7 +125,7 @@ changes. Schema documentation: `docs/database-schema.md`.
 
 ## Testing
 
-66 automated tests across 8 files, all run against a real (isolated)
+98 automated tests across 10 files, all run against a real (isolated)
 database — no mocked data layer:
 
 - **Unit** — lead scoring model, Zod validation schemas, RBAC permission
