@@ -26,6 +26,9 @@ export type SendEmailParams = {
   dealId?: string | null;
   templateId?: string | null;
   clientIp?: string;
+  // SEQUENCES: optional nodemailer headers (e.g. List-Unsubscribe) set by
+  // the sequence scheduler; existing callers are unaffected.
+  headers?: Record<string, string>;
 };
 
 const transportCache = new Map<string, { key: string; transporter: Transporter } | null>();
@@ -134,6 +137,10 @@ export async function sendEmail(params: SendEmailParams) {
         to: params.to.name ? `${params.to.name} <${params.to.email}>` : params.to.email,
         subject,
         text: params.body,
+        // SEQUENCES: pass through optional per-send headers (e.g. the
+        // List-Unsubscribe pair from sequence emails). Undefined for all
+        // existing call sites.
+        headers: params.headers,
         // HTML is intentionally not sent: bodies are plain text templates.
         // Rendering user-authored HTML would require sanitization we don't ship.
       });

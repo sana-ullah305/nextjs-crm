@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { Flame, Plus, Search, Send, Sparkles, Trash2, TrendingUp, UserCheck } from "lucide-react";
+import { Copy, Flame, Plus, Repeat, Search, Send, Sparkles, Trash2, TrendingUp, UserCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar } from "@/components/ui/avatar";
@@ -12,6 +12,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { EmptyState } from "@/components/ui/empty-state";
 import { EntityForm, type FieldDef, type FieldErrors } from "@/components/entity-form";
 import { ComposeEmail } from "@/components/compose-email";
+import { EnrollDialog } from "@/components/enroll-dialog";
+import { MergeDialog } from "@/components/merge-dialog";
 import { api, ApiError, validationDetails } from "@/lib/api-client";
 import { formatCurrency, formatDate } from "@/lib/format";
 import { cn } from "@/lib/cn";
@@ -89,6 +91,10 @@ export default function LeadsPage() {
   const [convertValue, setConvertValue] = useState("");
   const [composeTarget, setComposeTarget] = useState<Lead | null>(null);
   const [composeOpen, setComposeOpen] = useState(false);
+  const [enrollTarget, setEnrollTarget] = useState<Lead | null>(null);
+  const [enrollOpen, setEnrollOpen] = useState(false);
+  const [mergeTarget, setMergeTarget] = useState<Lead | null>(null);
+  const [mergeOpen, setMergeOpen] = useState(false);
 
   const pageSize = 20;
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
@@ -402,6 +408,34 @@ export default function LeadsPage() {
                           <Send className="h-3.5 w-3.5" />
                         </Button>
                       )}
+                      {l.status !== "CONVERTED" && l.email && (
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          aria-label={`Enroll ${l.firstName} ${l.lastName} in a sequence`}
+                          title="Enroll in sequence"
+                          onClick={() => {
+                            setEnrollTarget(l);
+                            setEnrollOpen(true);
+                          }}
+                        >
+                          <Repeat className="h-3.5 w-3.5" />
+                        </Button>
+                      )}
+                      {l.status !== "CONVERTED" && (
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          aria-label={`Find duplicates for ${l.firstName} ${l.lastName}`}
+                          title="Find duplicates"
+                          onClick={() => {
+                            setMergeTarget(l);
+                            setMergeOpen(true);
+                          }}
+                        >
+                          <Copy className="h-3.5 w-3.5" />
+                        </Button>
+                      )}
                       {l.status !== "CONVERTED" && (
                         <Button variant="ghost" size="icon" aria-label="Delete lead" onClick={() => void onDelete(l)}>
                           <Trash2 className="h-3.5 w-3.5 text-destructive" />
@@ -523,6 +557,22 @@ export default function LeadsPage() {
             : {}
         }
         onSent={() => void load()}
+      />
+
+      <EnrollDialog
+        open={enrollOpen && enrollTarget !== null}
+        onOpenChange={setEnrollOpen}
+        recordType="lead"
+        recordId={enrollTarget?.id ?? ""}
+        recordName={enrollTarget ? `${enrollTarget.firstName} ${enrollTarget.lastName}` : ""}
+        onEnrolled={() => setNotice(`${enrollTarget?.firstName} enrolled in the sequence.`)}
+      />
+
+      <MergeDialog
+        open={mergeOpen && mergeTarget !== null}
+        onOpenChange={setMergeOpen}
+        sourceType="lead"
+        sourceId={mergeTarget?.id ?? ""}
       />
     </div>
   );

@@ -74,7 +74,11 @@ export const ModelName = {
   SentEmail: 'SentEmail',
   FollowUpReminder: 'FollowUpReminder',
   InboundEmail: 'InboundEmail',
-  ApiKey: 'ApiKey'
+  ApiKey: 'ApiKey',
+  Sequence: 'Sequence',
+  SequenceStep: 'SequenceStep',
+  SequenceEnrollment: 'SequenceEnrollment',
+  SequenceStepEnrollment: 'SequenceStepEnrollment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -177,6 +181,7 @@ export const ContactScalarFieldEnum = {
   ownerId: 'ownerId',
   status: 'status',
   avatarColor: 'avatarColor',
+  summary: 'summary',
   lastContactedAt: 'lastContactedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -508,6 +513,62 @@ export const ApiKeyScalarFieldEnum = {
 } as const
 
 export type ApiKeyScalarFieldEnum = (typeof ApiKeyScalarFieldEnum)[keyof typeof ApiKeyScalarFieldEnum]
+
+
+export const SequenceScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  description: 'description',
+  isActive: 'isActive',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SequenceScalarFieldEnum = (typeof SequenceScalarFieldEnum)[keyof typeof SequenceScalarFieldEnum]
+
+
+export const SequenceStepScalarFieldEnum = {
+  id: 'id',
+  sequenceId: 'sequenceId',
+  position: 'position',
+  delayHours: 'delayHours',
+  subjectTemplate: 'subjectTemplate',
+  bodyTemplate: 'bodyTemplate',
+  createdAt: 'createdAt'
+} as const
+
+export type SequenceStepScalarFieldEnum = (typeof SequenceStepScalarFieldEnum)[keyof typeof SequenceStepScalarFieldEnum]
+
+
+export const SequenceEnrollmentScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  sequenceId: 'sequenceId',
+  contactId: 'contactId',
+  leadId: 'leadId',
+  enrolledEmail: 'enrolledEmail',
+  currentStep: 'currentStep',
+  nextSendAt: 'nextSendAt',
+  status: 'status',
+  stoppedReason: 'stoppedReason',
+  responderUserId: 'responderUserId',
+  unsubToken: 'unsubToken',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SequenceEnrollmentScalarFieldEnum = (typeof SequenceEnrollmentScalarFieldEnum)[keyof typeof SequenceEnrollmentScalarFieldEnum]
+
+
+export const SequenceStepEnrollmentScalarFieldEnum = {
+  id: 'id',
+  stepId: 'stepId',
+  enrollmentId: 'enrollmentId'
+} as const
+
+export type SequenceStepEnrollmentScalarFieldEnum = (typeof SequenceStepEnrollmentScalarFieldEnum)[keyof typeof SequenceStepEnrollmentScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -368,6 +368,7 @@ export type LeadWhereInput = {
   sentEmails?: Prisma.SentEmailListRelationFilter
   inboundEmails?: Prisma.InboundEmailListRelationFilter
   reminders?: Prisma.FollowUpReminderListRelationFilter
+  sequenceEnrollments?: Prisma.SequenceEnrollmentListRelationFilter
 }
 
 export type LeadOrderByWithRelationInput = {
@@ -405,6 +406,7 @@ export type LeadOrderByWithRelationInput = {
   sentEmails?: Prisma.SentEmailOrderByRelationAggregateInput
   inboundEmails?: Prisma.InboundEmailOrderByRelationAggregateInput
   reminders?: Prisma.FollowUpReminderOrderByRelationAggregateInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentOrderByRelationAggregateInput
 }
 
 export type LeadWhereUniqueInput = Prisma.AtLeast<{
@@ -445,6 +447,7 @@ export type LeadWhereUniqueInput = Prisma.AtLeast<{
   sentEmails?: Prisma.SentEmailListRelationFilter
   inboundEmails?: Prisma.InboundEmailListRelationFilter
   reminders?: Prisma.FollowUpReminderListRelationFilter
+  sequenceEnrollments?: Prisma.SequenceEnrollmentListRelationFilter
 }, "id">
 
 export type LeadOrderByWithAggregationInput = {
@@ -534,6 +537,7 @@ export type LeadCreateInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateInput = {
@@ -565,6 +569,7 @@ export type LeadUncheckedCreateInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUpdateInput = {
@@ -596,6 +601,7 @@ export type LeadUpdateInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateInput = {
@@ -627,6 +633,7 @@ export type LeadUncheckedUpdateInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateManyInput = {
@@ -1162,6 +1169,22 @@ export type LeadUpdateOneWithoutInboundEmailsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutInboundEmailsInput, Prisma.LeadUpdateWithoutInboundEmailsInput>, Prisma.LeadUncheckedUpdateWithoutInboundEmailsInput>
 }
 
+export type LeadCreateNestedOneWithoutSequenceEnrollmentsInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutSequenceEnrollmentsInput, Prisma.LeadUncheckedCreateWithoutSequenceEnrollmentsInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutSequenceEnrollmentsInput
+  connect?: Prisma.LeadWhereUniqueInput
+}
+
+export type LeadUpdateOneWithoutSequenceEnrollmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadCreateWithoutSequenceEnrollmentsInput, Prisma.LeadUncheckedCreateWithoutSequenceEnrollmentsInput>
+  connectOrCreate?: Prisma.LeadCreateOrConnectWithoutSequenceEnrollmentsInput
+  upsert?: Prisma.LeadUpsertWithoutSequenceEnrollmentsInput
+  disconnect?: Prisma.LeadWhereInput | boolean
+  delete?: Prisma.LeadWhereInput | boolean
+  connect?: Prisma.LeadWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadUpdateToOneWithWhereWithoutSequenceEnrollmentsInput, Prisma.LeadUpdateWithoutSequenceEnrollmentsInput>, Prisma.LeadUncheckedUpdateWithoutSequenceEnrollmentsInput>
+}
+
 export type LeadCreateWithoutOrganizationInput = {
   id?: string
   firstName: string
@@ -1190,6 +1213,7 @@ export type LeadCreateWithoutOrganizationInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutOrganizationInput = {
@@ -1220,6 +1244,7 @@ export type LeadUncheckedCreateWithoutOrganizationInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutOrganizationInput = {
@@ -1303,6 +1328,7 @@ export type LeadCreateWithoutOwnerInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutOwnerInput = {
@@ -1333,6 +1359,7 @@ export type LeadUncheckedCreateWithoutOwnerInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutOwnerInput = {
@@ -1372,6 +1399,7 @@ export type LeadCreateWithoutAssignedUserInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutAssignedUserInput = {
@@ -1402,6 +1430,7 @@ export type LeadUncheckedCreateWithoutAssignedUserInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutAssignedUserInput = {
@@ -1473,6 +1502,7 @@ export type LeadCreateWithoutCompanyInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutCompanyInput = {
@@ -1503,6 +1533,7 @@ export type LeadUncheckedCreateWithoutCompanyInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutCompanyInput = {
@@ -1558,6 +1589,7 @@ export type LeadCreateWithoutContactInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutContactInput = {
@@ -1588,6 +1620,7 @@ export type LeadUncheckedCreateWithoutContactInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutContactInput = {
@@ -1643,6 +1676,7 @@ export type LeadCreateWithoutSourceInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutSourceInput = {
@@ -1673,6 +1707,7 @@ export type LeadUncheckedCreateWithoutSourceInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutSourceInput = {
@@ -1728,6 +1763,7 @@ export type LeadCreateWithoutDealsInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutDealsInput = {
@@ -1758,6 +1794,7 @@ export type LeadUncheckedCreateWithoutDealsInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutDealsInput = {
@@ -1804,6 +1841,7 @@ export type LeadUpdateWithoutDealsInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutDealsInput = {
@@ -1834,6 +1872,7 @@ export type LeadUncheckedUpdateWithoutDealsInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutActivitiesInput = {
@@ -1864,6 +1903,7 @@ export type LeadCreateWithoutActivitiesInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutActivitiesInput = {
@@ -1894,6 +1934,7 @@ export type LeadUncheckedCreateWithoutActivitiesInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutActivitiesInput = {
@@ -1940,6 +1981,7 @@ export type LeadUpdateWithoutActivitiesInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutActivitiesInput = {
@@ -1970,6 +2012,7 @@ export type LeadUncheckedUpdateWithoutActivitiesInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutNotesInput = {
@@ -2000,6 +2043,7 @@ export type LeadCreateWithoutNotesInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutNotesInput = {
@@ -2030,6 +2074,7 @@ export type LeadUncheckedCreateWithoutNotesInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutNotesInput = {
@@ -2076,6 +2121,7 @@ export type LeadUpdateWithoutNotesInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutNotesInput = {
@@ -2106,6 +2152,7 @@ export type LeadUncheckedUpdateWithoutNotesInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutSentEmailsInput = {
@@ -2136,6 +2183,7 @@ export type LeadCreateWithoutSentEmailsInput = {
   deals?: Prisma.DealCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutSentEmailsInput = {
@@ -2166,6 +2214,7 @@ export type LeadUncheckedCreateWithoutSentEmailsInput = {
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutSentEmailsInput = {
@@ -2212,6 +2261,7 @@ export type LeadUpdateWithoutSentEmailsInput = {
   deals?: Prisma.DealUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutSentEmailsInput = {
@@ -2242,6 +2292,7 @@ export type LeadUncheckedUpdateWithoutSentEmailsInput = {
   deals?: Prisma.DealUncheckedUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutRemindersInput = {
@@ -2272,6 +2323,7 @@ export type LeadCreateWithoutRemindersInput = {
   deals?: Prisma.DealCreateNestedManyWithoutLeadInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutRemindersInput = {
@@ -2302,6 +2354,7 @@ export type LeadUncheckedCreateWithoutRemindersInput = {
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutLeadInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutLeadInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutRemindersInput = {
@@ -2348,6 +2401,7 @@ export type LeadUpdateWithoutRemindersInput = {
   deals?: Prisma.DealUpdateManyWithoutLeadNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutRemindersInput = {
@@ -2378,6 +2432,7 @@ export type LeadUncheckedUpdateWithoutRemindersInput = {
   deals?: Prisma.DealUncheckedUpdateManyWithoutLeadNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadCreateWithoutInboundEmailsInput = {
@@ -2408,6 +2463,7 @@ export type LeadCreateWithoutInboundEmailsInput = {
   deals?: Prisma.DealCreateNestedManyWithoutLeadInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutLeadInput
 }
 
 export type LeadUncheckedCreateWithoutInboundEmailsInput = {
@@ -2438,6 +2494,7 @@ export type LeadUncheckedCreateWithoutInboundEmailsInput = {
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutLeadInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutLeadInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutLeadInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadCreateOrConnectWithoutInboundEmailsInput = {
@@ -2484,6 +2541,7 @@ export type LeadUpdateWithoutInboundEmailsInput = {
   deals?: Prisma.DealUpdateManyWithoutLeadNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutInboundEmailsInput = {
@@ -2513,6 +2571,147 @@ export type LeadUncheckedUpdateWithoutInboundEmailsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutLeadNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutLeadNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadCreateWithoutSequenceEnrollmentsInput = {
+  id?: string
+  firstName: string
+  lastName: string
+  email: string
+  phone?: string
+  companyName?: string
+  status?: string
+  score?: number
+  estimatedValue?: number
+  expectedCloseDate?: Date | string | null
+  followUpAt?: Date | string | null
+  summary?: string
+  convertedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  organization: Prisma.OrganizationCreateNestedOneWithoutLeadsInput
+  company?: Prisma.CompanyCreateNestedOneWithoutLeadsInput
+  source?: Prisma.LeadSourceCreateNestedOneWithoutLeadsInput
+  contact?: Prisma.ContactCreateNestedOneWithoutLeadsInput
+  assignedUser?: Prisma.UserCreateNestedOneWithoutAssignedLeadsInput
+  owner?: Prisma.UserCreateNestedOneWithoutOwnedLeadsInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteCreateNestedManyWithoutLeadInput
+  deals?: Prisma.DealCreateNestedManyWithoutLeadInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutLeadInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutLeadInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutLeadInput
+}
+
+export type LeadUncheckedCreateWithoutSequenceEnrollmentsInput = {
+  id?: string
+  organizationId: string
+  firstName: string
+  lastName: string
+  email: string
+  phone?: string
+  companyName?: string
+  companyId?: string | null
+  sourceId?: string | null
+  status?: string
+  score?: number
+  estimatedValue?: number
+  expectedCloseDate?: Date | string | null
+  followUpAt?: Date | string | null
+  summary?: string
+  contactId?: string | null
+  assignedUserId?: string | null
+  ownerId?: string | null
+  convertedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutLeadInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutLeadInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutLeadInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutLeadInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutLeadInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadCreateOrConnectWithoutSequenceEnrollmentsInput = {
+  where: Prisma.LeadWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadCreateWithoutSequenceEnrollmentsInput, Prisma.LeadUncheckedCreateWithoutSequenceEnrollmentsInput>
+}
+
+export type LeadUpsertWithoutSequenceEnrollmentsInput = {
+  update: Prisma.XOR<Prisma.LeadUpdateWithoutSequenceEnrollmentsInput, Prisma.LeadUncheckedUpdateWithoutSequenceEnrollmentsInput>
+  create: Prisma.XOR<Prisma.LeadCreateWithoutSequenceEnrollmentsInput, Prisma.LeadUncheckedCreateWithoutSequenceEnrollmentsInput>
+  where?: Prisma.LeadWhereInput
+}
+
+export type LeadUpdateToOneWithWhereWithoutSequenceEnrollmentsInput = {
+  where?: Prisma.LeadWhereInput
+  data: Prisma.XOR<Prisma.LeadUpdateWithoutSequenceEnrollmentsInput, Prisma.LeadUncheckedUpdateWithoutSequenceEnrollmentsInput>
+}
+
+export type LeadUpdateWithoutSequenceEnrollmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  score?: Prisma.IntFieldUpdateOperationsInput | number
+  estimatedValue?: Prisma.FloatFieldUpdateOperationsInput | number
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  followUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  convertedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutLeadsNestedInput
+  company?: Prisma.CompanyUpdateOneWithoutLeadsNestedInput
+  source?: Prisma.LeadSourceUpdateOneWithoutLeadsNestedInput
+  contact?: Prisma.ContactUpdateOneWithoutLeadsNestedInput
+  assignedUser?: Prisma.UserUpdateOneWithoutAssignedLeadsNestedInput
+  owner?: Prisma.UserUpdateOneWithoutOwnedLeadsNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutLeadNestedInput
+  deals?: Prisma.DealUpdateManyWithoutLeadNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutLeadNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutLeadNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadUncheckedUpdateWithoutSequenceEnrollmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  companyName?: Prisma.StringFieldUpdateOperationsInput | string
+  companyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  score?: Prisma.IntFieldUpdateOperationsInput | number
+  estimatedValue?: Prisma.FloatFieldUpdateOperationsInput | number
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  followUpAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  convertedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutLeadNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutLeadNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutLeadNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutLeadNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutLeadNestedInput
 }
 
@@ -2568,6 +2767,7 @@ export type LeadUpdateWithoutOrganizationInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutOrganizationInput = {
@@ -2598,6 +2798,7 @@ export type LeadUncheckedUpdateWithoutOrganizationInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateManyWithoutOrganizationInput = {
@@ -2700,6 +2901,7 @@ export type LeadUpdateWithoutOwnerInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutOwnerInput = {
@@ -2730,6 +2932,7 @@ export type LeadUncheckedUpdateWithoutOwnerInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateManyWithoutOwnerInput = {
@@ -2784,6 +2987,7 @@ export type LeadUpdateWithoutAssignedUserInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutAssignedUserInput = {
@@ -2814,6 +3018,7 @@ export type LeadUncheckedUpdateWithoutAssignedUserInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateManyWithoutAssignedUserInput = {
@@ -2892,6 +3097,7 @@ export type LeadUpdateWithoutCompanyInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutCompanyInput = {
@@ -2922,6 +3128,7 @@ export type LeadUncheckedUpdateWithoutCompanyInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateManyWithoutCompanyInput = {
@@ -3000,6 +3207,7 @@ export type LeadUpdateWithoutContactInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutContactInput = {
@@ -3030,6 +3238,7 @@ export type LeadUncheckedUpdateWithoutContactInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateManyWithoutContactInput = {
@@ -3108,6 +3317,7 @@ export type LeadUpdateWithoutSourceInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutSourceInput = {
@@ -3138,6 +3348,7 @@ export type LeadUncheckedUpdateWithoutSourceInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutLeadNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutLeadNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutLeadNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadUncheckedUpdateManyWithoutSourceInput = {
@@ -3176,6 +3387,7 @@ export type LeadCountOutputType = {
   sentEmails: number
   inboundEmails: number
   reminders: number
+  sequenceEnrollments: number
 }
 
 export type LeadCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3185,6 +3397,7 @@ export type LeadCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   sentEmails?: boolean | LeadCountOutputTypeCountSentEmailsArgs
   inboundEmails?: boolean | LeadCountOutputTypeCountInboundEmailsArgs
   reminders?: boolean | LeadCountOutputTypeCountRemindersArgs
+  sequenceEnrollments?: boolean | LeadCountOutputTypeCountSequenceEnrollmentsArgs
 }
 
 /**
@@ -3239,6 +3452,13 @@ export type LeadCountOutputTypeCountRemindersArgs<ExtArgs extends runtime.Types.
   where?: Prisma.FollowUpReminderWhereInput
 }
 
+/**
+ * LeadCountOutputType without action
+ */
+export type LeadCountOutputTypeCountSequenceEnrollmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SequenceEnrollmentWhereInput
+}
+
 
 export type LeadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3275,6 +3495,7 @@ export type LeadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   sentEmails?: boolean | Prisma.Lead$sentEmailsArgs<ExtArgs>
   inboundEmails?: boolean | Prisma.Lead$inboundEmailsArgs<ExtArgs>
   reminders?: boolean | Prisma.Lead$remindersArgs<ExtArgs>
+  sequenceEnrollments?: boolean | Prisma.Lead$sequenceEnrollmentsArgs<ExtArgs>
   _count?: boolean | Prisma.LeadCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lead"]>
 
@@ -3379,6 +3600,7 @@ export type LeadInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   sentEmails?: boolean | Prisma.Lead$sentEmailsArgs<ExtArgs>
   inboundEmails?: boolean | Prisma.Lead$inboundEmailsArgs<ExtArgs>
   reminders?: boolean | Prisma.Lead$remindersArgs<ExtArgs>
+  sequenceEnrollments?: boolean | Prisma.Lead$sequenceEnrollmentsArgs<ExtArgs>
   _count?: boolean | Prisma.LeadCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LeadIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3413,6 +3635,7 @@ export type $LeadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     sentEmails: Prisma.$SentEmailPayload<ExtArgs>[]
     inboundEmails: Prisma.$InboundEmailPayload<ExtArgs>[]
     reminders: Prisma.$FollowUpReminderPayload<ExtArgs>[]
+    sequenceEnrollments: Prisma.$SequenceEnrollmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3843,6 +4066,7 @@ export interface Prisma__LeadClient<T, Null = never, ExtArgs extends runtime.Typ
   sentEmails<T extends Prisma.Lead$sentEmailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$sentEmailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SentEmailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   inboundEmails<T extends Prisma.Lead$inboundEmailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$inboundEmailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InboundEmailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reminders<T extends Prisma.Lead$remindersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$remindersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FollowUpReminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sequenceEnrollments<T extends Prisma.Lead$sequenceEnrollmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$sequenceEnrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SequenceEnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4529,6 +4753,30 @@ export type Lead$remindersArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.FollowUpReminderScalarFieldEnum | Prisma.FollowUpReminderScalarFieldEnum[]
+}
+
+/**
+ * Lead.sequenceEnrollments
+ */
+export type Lead$sequenceEnrollmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SequenceEnrollment
+   */
+  select?: Prisma.SequenceEnrollmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SequenceEnrollment
+   */
+  omit?: Prisma.SequenceEnrollmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SequenceEnrollmentInclude<ExtArgs> | null
+  where?: Prisma.SequenceEnrollmentWhereInput
+  orderBy?: Prisma.SequenceEnrollmentOrderByWithRelationInput | Prisma.SequenceEnrollmentOrderByWithRelationInput[]
+  cursor?: Prisma.SequenceEnrollmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SequenceEnrollmentScalarFieldEnum | Prisma.SequenceEnrollmentScalarFieldEnum[]
 }
 
 /**

@@ -161,3 +161,23 @@ export type InboundEmail = Prisma.InboundEmailModel
  * 
  */
 export type ApiKey = Prisma.ApiKeyModel
+/**
+ * Model Sequence
+ * 
+ */
+export type Sequence = Prisma.SequenceModel
+/**
+ * Model SequenceStep
+ * 
+ */
+export type SequenceStep = Prisma.SequenceStepModel
+/**
+ * Model SequenceEnrollment
+ * 
+ */
+export type SequenceEnrollment = Prisma.SequenceEnrollmentModel
+/**
+ * Model SequenceStepEnrollment
+ * 
+ */
+export type SequenceStepEnrollment = Prisma.SequenceStepEnrollmentModel

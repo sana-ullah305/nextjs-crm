@@ -202,6 +202,10 @@ The SMTP password is never stored in the database — it is read from the
 | Delete others' notes | ✔ | ✔ | own |
 | Send email | ✔ | ✔ | ✔ |
 | Trigger reminder scan | ✔ | ✔ | — |
+| Trigger inbound scan | ✔ | ✔ | — |
+| Trigger sequence scan | ✔ | ✔ | — |
+| Manage sequences | ✔ (settings:manage) | — | — |
+| Enroll/unenroll records | ✔ | ✔ | own records (leads:update) |
 
 Full matrix: `src/server/rbac.ts`.
 
@@ -212,3 +216,31 @@ Full matrix: `src/server/rbac.ts`.
 | GET | `/` | Matched replies (org-scoped; reps see own matched records). Filters: `contactId`, `leadId`, `status`, `page`, `pageSize`. Permission: `activities:read`. |
 | POST | `/` | Body `{ ids: string[] }` marks UNREAD rows READ (org-scoped). Permission: `activities:read`. |
 | POST | `/run` | Trigger an IMAP scan (`{ stored, skipped, scannedAt, configured }`). Cron-driven; `configured: false` when IMAP env unset. Permission: `inbound:run` (admin, manager). |
+
+## Follow-Up Sequences — `/api/sequences`
+
+| Method | Path | Notes |
+|--------|------|-------|
+| GET | `/` | List the org's sequences with steps + active enrollment counts. Permission: `settings:read`. |
+| POST | `/` | Create `{ name*, description, steps: [{ position, delayHours, subjectTemplate*, bodyTemplate* }] }` (1–15 steps; Zod-validated). Permission: `settings:manage` (admin). |
+| GET | `/:id` | Sequence detail incl. ordered steps. Permission: `settings:read`. |
+| PATCH | `/:id` | Update name / description / isActive (soft-off). Permission: `settings:manage`. |
+| PATCH | `/:id/steps` | Replace the steps array wholesale (same step schema). Active enrollments keep their `currentStep` index; the scan stops enrollments whose step vanished. Permission: `settings:manage`. |
+| DELETE | `/:id` | With any enrollments ever → archive (`isActive: false`); with zero enrollments → hard delete. Permission: `settings:manage`. |
+| POST | `/:id/enroll` | Enroll exactly one of `{ contactId }` / `{ leadId }` (org-scoped, not soft-deleted; reps need record access). Snapshots the record's email (400 if empty), guards double/active enrollment (409 `ALREADY_ENROLLED`) and unsubscribed senders (409 `UNSUBSCRIBED`), computes `nextSendAt = now + step[0].delayHours`, emits a 64-hex `unsubToken`. Audited as `SEQUENCE_ENROLL`. Permission: `leads:update`. |
+| GET | `/:id/enrollments?status=` | Enrollments for the sequence, `status` filter optional. Reps see only rows whose contact owner / lead assignee is theirs (or unassigned). Permission: `leads:update`. |
+| DELETE | `/enrollments/:id` | Cancel: sets STOPPED with `stoppedReason: "cancelled by user"`, audited as `SEQUENCE_UNENROLL`. Permission: `leads:update`. |
+| POST | `/run` | Trigger a sequence scan → `{ sent, completed, stopped, scannedAt }`. Cron-driven (mirrors `/api/reminders/run`); idempotent under concurrent scans via an optimistic-lock claim per enrollment. Send failures stop the enrollment (`stoppedReason: "send_failed: …"`); a stored reply from the sender stops it (`"replied"`); unsubscribed senders are skipped (`"unsubscribed"`). Permission: `sequences:run` (admin, manager). |
+
+Sequence sends go through the org mailer's `sendEmail` with `templateId` unset, the
+unsubscribe footer `\n\n—\nTo stop receiving these emails: <unsubscribeUrl>` appended
+to the body, and `List-Unsubscribe` + `List-Unsubscribe-Post: One-Click` headers for
+one-click unsubscribe compliance. Merge vars: `firstName`, `lastName`, `email`,
+`company`, `ownerName`, `unsubscribeUrl` (subject tokens render too).
+
+### Public unsubscribe — `GET /api/unsubscribe?token=<unsubToken>`
+
+No session required (the token is the credential); registered as a public
+prefix in the proxy. 404 for unknown tokens; flips the enrollment(s) carrying
+the token to UNSUBSCRIBED (`stoppedReason: "unsubscribed"`) and responds with
+`Content-Type: text/html` and a tiny static confirmation page.

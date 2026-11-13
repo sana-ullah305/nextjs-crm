@@ -8,11 +8,13 @@ import {
   Briefcase,
   Building2,
   CheckCircle2,
+  Copy,
   Mail,
   MapPin,
   Pencil,
   Phone,
   Plus,
+  Repeat,
   Send,
   StickyNote,
   Trash2,
@@ -27,6 +29,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { EmptyState } from "@/components/ui/empty-state";
 import { EntityForm, type FieldDef, type FieldErrors } from "@/components/entity-form";
 import { ComposeEmail } from "@/components/compose-email";
+import { EnrollDialog } from "@/components/enroll-dialog";
+import { MergeDialog } from "@/components/merge-dialog";
+import { findDuplicateCandidatesClient, type DuplicateCandidate } from "@/lib/duplicate-search";
 import { api, ApiError, validationDetails } from "@/lib/api-client";
 import { formatDate, formatDateTime, timeAgo } from "@/lib/format";
 
@@ -105,6 +110,30 @@ export default function ContactDetailPage() {
   const [formValues, setFormValues] = useState<Record<string, string>>({});
   const [formErrors, setFormErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
+
+  const [enrollOpen, setEnrollOpen] = useState(false);
+  const [mergeOpen, setMergeOpen] = useState(false);
+  const [dupes, setDupes] = useState<DuplicateCandidate[]>([]);
+
+  useEffect(() => {
+    if (!contact) return;
+    let cancelled = false;
+    findDuplicateCandidatesClient({
+      id: contact.id,
+      type: "contact",
+      firstName: contact.firstName,
+      lastName: contact.lastName,
+      email: contact.email,
+      companyName: contact.company?.name ?? "",
+    })
+      .then((found) => {
+        if (!cancelled) setDupes(found);
+      })
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
+  }, [contact]);
 
   const load = useCallback(async () => {
     try {
@@ -266,6 +295,14 @@ export default function ContactDetailPage() {
           <Button
             variant="outline"
             size="sm"
+            onClick={() => setEnrollOpen(true)}
+            disabled={!contact.email}
+          >
+            <Repeat className="h-4 w-4" /> Enroll
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
             onClick={() => setComposeOpen(true)}
             disabled={!contact.email}
           >
@@ -309,6 +346,24 @@ export default function ContactDetailPage() {
       />
 
       {error && <p className="text-sm text-destructive" role="alert">{error}</p>}
+
+      {dupes.length > 0 && (
+        <div
+          className="flex flex-wrap items-center gap-3 rounded-md border border-warning/40 bg-warning/10 px-3 py-2"
+          role="status"
+        >
+          <Copy className="h-4 w-4 shrink-0 text-warning" />
+          <p className="min-w-0 flex-1 text-sm text-warning">
+            <strong>Duplicates found.</strong> {dupes.length} record
+            {dupes.length === 1 ? "" : "s"} may be the same person (best match:
+            {" "}{dupes[0].score}%
+            {dupes[0].email ? `, ${dupes[0].email}` : ""}).
+          </p>
+          <Button size="sm" variant="outline" onClick={() => setMergeOpen(true)}>
+            Review & merge
+          </Button>
+        </div>
+      )}
 
       <div className="grid gap-4 lg:grid-cols-3">
         <div className="space-y-4">
@@ -541,6 +596,22 @@ export default function ContactDetailPage() {
         submitting={submitting}
         onChange={(name, value) => setFormValues((v) => ({ ...v, [name]: value }))}
         onSubmit={saveEdit}
+      />
+
+      <EnrollDialog
+        open={enrollOpen}
+        onOpenChange={setEnrollOpen}
+        recordType="contact"
+        recordId={contact.id}
+        recordName={`${contact.firstName} ${contact.lastName}`}
+        onEnrolled={() => void load()}
+      />
+
+      <MergeDialog
+        open={mergeOpen}
+        onOpenChange={setMergeOpen}
+        sourceType="contact"
+        sourceId={contact.id}
       />
     </div>
   );

@@ -344,6 +344,21 @@ export async function processInboundMessage(
     });
   }
 
+  // SEQUENCES: reply-based auto-stop — a stored reply from this sender means
+  // a human answered, so any ACTIVE sequence enrollment for their email (in
+  // the matched record's org) is stopped with reason "replied". This is the
+  // surgical sequences addition to inbound processing; keep it last.
+  if (fromEmail) {
+    await db.sequenceEnrollment.updateMany({
+      where: {
+        organizationId: match.organizationId,
+        enrolledEmail: fromEmail,
+        status: "ACTIVE",
+      },
+      data: { status: "STOPPED", stoppedReason: "replied" },
+    });
+  }
+
   void stored;
   return "stored";
 }
