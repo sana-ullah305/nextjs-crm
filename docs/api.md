@@ -118,6 +118,32 @@ Revokes the session server-side and clears the cookie.
   Permission: `reports:read` (admin, manager). CSV export adds
   `Content-Disposition`.
 
+## Email Outreach — `/api/emails`
+
+| Method | Path | Notes |
+|--------|------|-------|
+| POST | `/` | Send an email. Body: `to*` (email), `toName`, `subject*`, `body*`, plus optional `contactId` / `leadId` / `dealId` / `templateId`. Uses the org's SMTP settings; records a `SentEmail` row + EMAIL activity + audit entry, bumps `lastContactedAt` on the contact. Permission: `email:send` (all roles). Errors: `409 EMAIL_NOT_CONFIGURED`, `502 EMAIL_SEND_FAILED` (attempt still recorded with status `FAILED`). |
+| GET | `/` | Sent history (latest 50). Managers/admins see org-wide; reps see their own sends. Filters: `contactId`, `leadId`, `dealId`. Permission: `activities:read`. |
+
+### `PATCH /api/settings/email` — SMTP config
+
+Body: `{ smtpHost, smtpPort, smtpUser, fromAddress, notificationsEnabled }`.
+Permission: `settings:manage` (admin) to write, `settings:read` to read.
+The SMTP password is never stored in the database — it is read from the
+`SMTP_PASS` environment variable at send time.
+
+## Reminders — `/api/reminders/run`
+
+| Method | Path | Notes |
+|--------|------|-------|
+| POST | `/` | Trigger a reminder scan (idempotent, deduplicated). Creates in-app notifications for: lead follow-ups that are due (`followUpAt` passed, lead still open) and tasks that are due or overdue. Reminders go to the lead's assignee (fallback: owner) and the task's assignee (fallback: creator). Intended to be called by cron / an uptime monitor every ~15 minutes. Permission: `reminders:run` (admin, manager). Returns `{ leadsReminded, tasksReminded, remindersCreated, scannedAt }`. |
+
+## Global Search — `/api/search`
+
+| Method | Path | Notes |
+|--------|------|-------|
+| GET | `/?q=<term>&limit=5` | Cross-entity search over contacts (name, email), companies (name, domain), leads (name, email, company — excludes converted), deals (name, open only), and tasks (title, open only). Results are labeled and href-linked for direct navigation. RBAC-scoped: reps only see records they own (or unowned/unassigned). Permission: `contacts:read`. Min term length: 2 characters. |
+
 ## Users — `/api/users` (admin only unless noted)
 
 | Method | Path | Notes |
@@ -153,5 +179,7 @@ Revokes the session server-side and clears the cookie.
 | Reports | ✔ | ✔ | — |
 | Audit log | ✔ | ✔ | — |
 | Delete others' notes | ✔ | ✔ | own |
+| Send email | ✔ | ✔ | ✔ |
+| Trigger reminder scan | ✔ | ✔ | — |
 
 Full matrix: `src/server/rbac.ts`.

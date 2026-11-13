@@ -70,7 +70,9 @@ export const ModelName = {
   EmailTemplate: 'EmailTemplate',
   CustomField: 'CustomField',
   CustomFieldValue: 'CustomFieldValue',
-  EmailSettings: 'EmailSettings'
+  EmailSettings: 'EmailSettings',
+  SentEmail: 'SentEmail',
+  FollowUpReminder: 'FollowUpReminder'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -429,6 +431,44 @@ export const EmailSettingsScalarFieldEnum = {
 } as const
 
 export type EmailSettingsScalarFieldEnum = (typeof EmailSettingsScalarFieldEnum)[keyof typeof EmailSettingsScalarFieldEnum]
+
+
+export const SentEmailScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  userId: 'userId',
+  subject: 'subject',
+  body: 'body',
+  recipientEmail: 'recipientEmail',
+  recipientName: 'recipientName',
+  contactId: 'contactId',
+  leadId: 'leadId',
+  dealId: 'dealId',
+  templateId: 'templateId',
+  status: 'status',
+  error: 'error',
+  sentAt: 'sentAt',
+  createdAt: 'createdAt'
+} as const
+
+export type SentEmailScalarFieldEnum = (typeof SentEmailScalarFieldEnum)[keyof typeof SentEmailScalarFieldEnum]
+
+
+export const FollowUpReminderScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  userId: 'userId',
+  dedupeKey: 'dedupeKey',
+  kind: 'kind',
+  title: 'title',
+  body: 'body',
+  link: 'link',
+  leadId: 'leadId',
+  taskId: 'taskId',
+  createdAt: 'createdAt'
+} as const
+
+export type FollowUpReminderScalarFieldEnum = (typeof FollowUpReminderScalarFieldEnum)[keyof typeof FollowUpReminderScalarFieldEnum]
 
 
 export const SortOrder = {

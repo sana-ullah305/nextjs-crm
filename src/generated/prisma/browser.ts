@@ -117,3 +117,13 @@ export type CustomFieldValue = Prisma.CustomFieldValueModel
  * 
  */
 export type EmailSettings = Prisma.EmailSettingsModel
+/**
+ * Model SentEmail
+ * 
+ */
+export type SentEmail = Prisma.SentEmailModel
+/**
+ * Model FollowUpReminder
+ * 
+ */
+export type FollowUpReminder = Prisma.FollowUpReminderModel

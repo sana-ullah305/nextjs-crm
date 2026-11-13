@@ -13,6 +13,7 @@ import {
   Pencil,
   Phone,
   Plus,
+  Send,
   StickyNote,
   Trash2,
   Users,
@@ -25,6 +26,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { EmptyState } from "@/components/ui/empty-state";
 import { EntityForm, type FieldDef, type FieldErrors } from "@/components/entity-form";
+import { ComposeEmail } from "@/components/compose-email";
 import { api, ApiError, validationDetails } from "@/lib/api-client";
 import { formatDate, formatDateTime, timeAgo } from "@/lib/format";
 
@@ -99,6 +101,7 @@ export default function ContactDetailPage() {
   const [activityDuration, setActivityDuration] = useState("");
 
   const [editOpen, setEditOpen] = useState(false);
+  const [composeOpen, setComposeOpen] = useState(false);
   const [formValues, setFormValues] = useState<Record<string, string>>({});
   const [formErrors, setFormErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
@@ -259,11 +262,20 @@ export default function ContactDetailPage() {
             {contact.company ? ` at ${contact.company.name}` : ""}
           </p>
         </div>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => {
-            setFormValues({
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setComposeOpen(true)}
+            disabled={!contact.email}
+          >
+            <Send className="h-4 w-4" /> Email
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => {
+              setFormValues({
               firstName: contact.firstName,
               lastName: contact.lastName,
               email: contact.email,
@@ -276,9 +288,25 @@ export default function ContactDetailPage() {
             setEditOpen(true);
           }}
         >
-          <Pencil className="h-4 w-4" /> Edit
-        </Button>
+            <Pencil className="h-4 w-4" /> Edit
+          </Button>
+        </div>
       </div>
+
+      <ComposeEmail
+        open={composeOpen}
+        onOpenChange={setComposeOpen}
+        defaultTo={{ email: contact.email, name: `${contact.firstName} ${contact.lastName}` }}
+        contactId={contact.id}
+        templateVars={{
+          firstName: contact.firstName,
+          lastName: contact.lastName,
+          email: contact.email,
+          company: contact.company?.name ?? "",
+          ownerName: contact.owner?.name ?? "",
+        }}
+        onSent={() => void load()}
+      />
 
       {error && <p className="text-sm text-destructive" role="alert">{error}</p>}
 

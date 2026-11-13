@@ -416,7 +416,9 @@ export const ModelName = {
   EmailTemplate: 'EmailTemplate',
   CustomField: 'CustomField',
   CustomFieldValue: 'CustomFieldValue',
-  EmailSettings: 'EmailSettings'
+  EmailSettings: 'EmailSettings',
+  SentEmail: 'SentEmail',
+  FollowUpReminder: 'FollowUpReminder'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -432,7 +434,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "organization" | "user" | "session" | "company" | "contact" | "tag" | "leadSource" | "lead" | "pipeline" | "stage" | "deal" | "task" | "activity" | "note" | "auditLog" | "notification" | "emailTemplate" | "customField" | "customFieldValue" | "emailSettings"
+    modelProps: "organization" | "user" | "session" | "company" | "contact" | "tag" | "leadSource" | "lead" | "pipeline" | "stage" | "deal" | "task" | "activity" | "note" | "auditLog" | "notification" | "emailTemplate" | "customField" | "customFieldValue" | "emailSettings" | "sentEmail" | "followUpReminder"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1916,6 +1918,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SentEmail: {
+      payload: Prisma.$SentEmailPayload<ExtArgs>
+      fields: Prisma.SentEmailFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SentEmailFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SentEmailPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SentEmailFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SentEmailPayload>
+        }
+        findFirst: {
+          args: Prisma.SentEmailFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SentEmailPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SentEmailFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SentEmailPayload>
+        }
+        findMany: {
+          args: Prisma.SentEmailFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SentEmailPayload>[]
+        }
+        create: {
+          args: Prisma.SentEmailCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SentEmailPayload>
+        }
+        createMany: {
+          args: Prisma.SentEmailCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SentEmailCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SentEmailPayload>[]
+        }
+        delete: {
+          args: Prisma.SentEmailDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SentEmailPayload>
+        }
+        update: {
+          args: Prisma.SentEmailUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SentEmailPayload>
+        }
+        deleteMany: {
+          args: Prisma.SentEmailDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SentEmailUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SentEmailUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SentEmailPayload>[]
+        }
+        upsert: {
+          args: Prisma.SentEmailUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SentEmailPayload>
+        }
+        aggregate: {
+          args: Prisma.SentEmailAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSentEmail>
+        }
+        groupBy: {
+          args: Prisma.SentEmailGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SentEmailGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SentEmailCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SentEmailCountAggregateOutputType> | number
+        }
+      }
+    }
+    FollowUpReminder: {
+      payload: Prisma.$FollowUpReminderPayload<ExtArgs>
+      fields: Prisma.FollowUpReminderFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FollowUpReminderFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FollowUpReminderPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FollowUpReminderFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FollowUpReminderPayload>
+        }
+        findFirst: {
+          args: Prisma.FollowUpReminderFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FollowUpReminderPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FollowUpReminderFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FollowUpReminderPayload>
+        }
+        findMany: {
+          args: Prisma.FollowUpReminderFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FollowUpReminderPayload>[]
+        }
+        create: {
+          args: Prisma.FollowUpReminderCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FollowUpReminderPayload>
+        }
+        createMany: {
+          args: Prisma.FollowUpReminderCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FollowUpReminderCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FollowUpReminderPayload>[]
+        }
+        delete: {
+          args: Prisma.FollowUpReminderDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FollowUpReminderPayload>
+        }
+        update: {
+          args: Prisma.FollowUpReminderUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FollowUpReminderPayload>
+        }
+        deleteMany: {
+          args: Prisma.FollowUpReminderDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FollowUpReminderUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FollowUpReminderUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FollowUpReminderPayload>[]
+        }
+        upsert: {
+          args: Prisma.FollowUpReminderUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FollowUpReminderPayload>
+        }
+        aggregate: {
+          args: Prisma.FollowUpReminderAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFollowUpReminder>
+        }
+        groupBy: {
+          args: Prisma.FollowUpReminderGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FollowUpReminderGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FollowUpReminderCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FollowUpReminderCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2297,6 +2447,44 @@ export const EmailSettingsScalarFieldEnum = {
 export type EmailSettingsScalarFieldEnum = (typeof EmailSettingsScalarFieldEnum)[keyof typeof EmailSettingsScalarFieldEnum]
 
 
+export const SentEmailScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  userId: 'userId',
+  subject: 'subject',
+  body: 'body',
+  recipientEmail: 'recipientEmail',
+  recipientName: 'recipientName',
+  contactId: 'contactId',
+  leadId: 'leadId',
+  dealId: 'dealId',
+  templateId: 'templateId',
+  status: 'status',
+  error: 'error',
+  sentAt: 'sentAt',
+  createdAt: 'createdAt'
+} as const
+
+export type SentEmailScalarFieldEnum = (typeof SentEmailScalarFieldEnum)[keyof typeof SentEmailScalarFieldEnum]
+
+
+export const FollowUpReminderScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  userId: 'userId',
+  dedupeKey: 'dedupeKey',
+  kind: 'kind',
+  title: 'title',
+  body: 'body',
+  link: 'link',
+  leadId: 'leadId',
+  taskId: 'taskId',
+  createdAt: 'createdAt'
+} as const
+
+export type FollowUpReminderScalarFieldEnum = (typeof FollowUpReminderScalarFieldEnum)[keyof typeof FollowUpReminderScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2524,6 +2712,8 @@ export type GlobalOmitConfig = {
   customField?: Prisma.CustomFieldOmit
   customFieldValue?: Prisma.CustomFieldValueOmit
   emailSettings?: Prisma.EmailSettingsOmit
+  sentEmail?: Prisma.SentEmailOmit
+  followUpReminder?: Prisma.FollowUpReminderOmit
 }
 
 /* Types for Logging */

@@ -53,8 +53,14 @@ defense-in-depth, every control mapped to a risk).
 
 - Rate limiting and session store are in-memory/DB-local; for multi-instance
   deployments back the limiter with Redis.
-- Email sending requires external SMTP credentials not available here; the
-  notification/email architecture is complete (channels, templates,
-  settings) with the delivery hook stubbed and documented.
+- Email sending is fully implemented (SMTP via nodemailer, per-send audit
+  trail, failure recording) and configured through Settings > Email; the
+  SMTP password is supplied via the `SMTP_PASS` environment variable and is
+  never stored in the database or shown in the UI. Emails are sent as plain
+  text only — user-authored HTML bodies would require sanitization that is
+  deliberately not shipped.
+- Reminder scans run when an authorized caller hits
+  `POST /api/reminders/run` (cron/uptime-monitor driven); there is no
+  in-process background worker, keeping single-instance deployments simple.
 - CSP `unsafe-inline` style-src is required by Next.js styled-jsx in some
   flows; script-src remains locked down.
