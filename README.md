@@ -1,8 +1,25 @@
+<div align="center">
+
 # Acme CRM
 
-A complete, production-ready Customer Relationship Management application.
+**A complete, production-ready, open-source CRM.**
 Modern SaaS-style UI, REST API, session authentication, role-based access
 control, and a fully working database — no mocks.
+
+[Getting started](#quick-start) ·
+[Features](#features) ·
+[Documentation](#documentation) ·
+[Contributing](CONTRIBUTING.md) ·
+[Report a bug](https://github.com/sana-ullah305/nextjs-crm/issues/new?template=bug_report.md)
+
+[![CI](https://github.com/sana-ullah305/nextjs-crm/actions/workflows/ci.yml/badge.svg)](https://github.com/sana-ullah305/nextjs-crm/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/sana-ullah305/nextjs-crm?style=social)](https://github.com/sana-ullah305/nextjs-crm/stargazers)
+[![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
+</div>
+
+---
 
 Built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, Prisma,
 Zod, Recharts, and Radix UI primitives.
@@ -210,3 +227,27 @@ Run behind a TLS-terminating reverse proxy (Caddy, nginx). Cookies are
 - [Implementation plan](docs/implementation-plan.md)
 - [Security](docs/security.md)
 - [API reference](docs/api.md)
+
+## Community & contribution
+
+Contributions are welcome — bug reports, features, docs, and ideas all
+count. See [CONTRIBUTING.md](CONTRIBUTING.md) to get started, and the
+[Code of Conduct](CODE_OF_CONDUCT.md) for community standards.
+
+- 🐛 [Report a bug](https://github.com/sana-ullah305/nextjs-crm/issues/new?template=bug_report.md)
+- 💡 [Request a feature](https://github.com/sana-ullah305/nextjs-crm/issues/new?template=feature_request.md)
+- 💬 [Join a discussion](https://github.com/sana-ullah305/nextjs-crm/discussions)
+- 🔒 Found a security issue? See [SECURITY.md](SECURITY.md) — report privately, not via public issues.
+
+## Sponsor
+
+If nextjs-crm saves your team time or money, consider supporting the
+project — it keeps development and maintenance sustainable.
+
+[![Sponsor](https://img.shields.io/badge/Sponsor-❤️-db61a2?logo=github-sponsors&labelColor=222)](https://github.com/sponsors/sana-ullah305)
+
+## License
+
+Released under the [MIT License](LICENSE) — free for personal and
+commercial use. By contributing, you agree your contributions are licensed
+under the same license.
