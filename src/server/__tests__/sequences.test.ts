@@ -10,6 +10,7 @@ import { beforeAll, afterAll, beforeEach, describe, expect, it, vi } from "vites
 const cookieStore = new Map<string, { name: string; value: string }>();
 
 vi.mock("next/headers", () => ({
+  headers: async () => ({ get: (_name: string) => null }),
   cookies: async () => ({
     get: (name: string) => cookieStore.get(name),
     set: (name: string, value: string) => cookieStore.set(name, { name, value }),
