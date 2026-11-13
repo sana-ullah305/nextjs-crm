@@ -1,7 +1,25 @@
 {
-  "name": "crm",
+  "name": "nextjs-crm",
   "version": "0.1.0",
-  "private": true,
+  "description": "Open-source CRM built with Next.js: auth, RBAC, email outreach, follow-up sequences, lead capture, and global search.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sana-ullah305/nextjs-crm.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sana-ullah305/nextjs-crm/issues"
+  },
+  "homepage": "https://github.com/sana-ullah305/nextjs-crm#readme",
+  "keywords": [
+    "crm",
+    "nextjs",
+    "typescript",
+    "prisma",
+    "tailwindcss",
+    "sales-pipeline",
+    "self-hosted"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
