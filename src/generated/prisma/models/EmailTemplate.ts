@@ -207,6 +207,7 @@ export type EmailTemplateWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"EmailTemplate"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"EmailTemplate"> | Date | string
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
+  sentEmails?: Prisma.SentEmailListRelationFilter
 }
 
 export type EmailTemplateOrderByWithRelationInput = {
@@ -219,6 +220,7 @@ export type EmailTemplateOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   organization?: Prisma.OrganizationOrderByWithRelationInput
+  sentEmails?: Prisma.SentEmailOrderByRelationAggregateInput
 }
 
 export type EmailTemplateWhereUniqueInput = Prisma.AtLeast<{
@@ -234,6 +236,7 @@ export type EmailTemplateWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"EmailTemplate"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"EmailTemplate"> | Date | string
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
+  sentEmails?: Prisma.SentEmailListRelationFilter
 }, "id">
 
 export type EmailTemplateOrderByWithAggregationInput = {
@@ -273,6 +276,7 @@ export type EmailTemplateCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutEmailTemplatesInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutTemplateInput
 }
 
 export type EmailTemplateUncheckedCreateInput = {
@@ -284,6 +288,7 @@ export type EmailTemplateUncheckedCreateInput = {
   category?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutTemplateInput
 }
 
 export type EmailTemplateUpdateInput = {
@@ -295,6 +300,7 @@ export type EmailTemplateUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutEmailTemplatesNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutTemplateNestedInput
 }
 
 export type EmailTemplateUncheckedUpdateInput = {
@@ -306,6 +312,7 @@ export type EmailTemplateUncheckedUpdateInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutTemplateNestedInput
 }
 
 export type EmailTemplateCreateManyInput = {
@@ -383,6 +390,11 @@ export type EmailTemplateMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type EmailTemplateNullableScalarRelationFilter = {
+  is?: Prisma.EmailTemplateWhereInput | null
+  isNot?: Prisma.EmailTemplateWhereInput | null
+}
+
 export type EmailTemplateCreateNestedManyWithoutOrganizationInput = {
   create?: Prisma.XOR<Prisma.EmailTemplateCreateWithoutOrganizationInput, Prisma.EmailTemplateUncheckedCreateWithoutOrganizationInput> | Prisma.EmailTemplateCreateWithoutOrganizationInput[] | Prisma.EmailTemplateUncheckedCreateWithoutOrganizationInput[]
   connectOrCreate?: Prisma.EmailTemplateCreateOrConnectWithoutOrganizationInput | Prisma.EmailTemplateCreateOrConnectWithoutOrganizationInput[]
@@ -425,6 +437,22 @@ export type EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput = {
   deleteMany?: Prisma.EmailTemplateScalarWhereInput | Prisma.EmailTemplateScalarWhereInput[]
 }
 
+export type EmailTemplateCreateNestedOneWithoutSentEmailsInput = {
+  create?: Prisma.XOR<Prisma.EmailTemplateCreateWithoutSentEmailsInput, Prisma.EmailTemplateUncheckedCreateWithoutSentEmailsInput>
+  connectOrCreate?: Prisma.EmailTemplateCreateOrConnectWithoutSentEmailsInput
+  connect?: Prisma.EmailTemplateWhereUniqueInput
+}
+
+export type EmailTemplateUpdateOneWithoutSentEmailsNestedInput = {
+  create?: Prisma.XOR<Prisma.EmailTemplateCreateWithoutSentEmailsInput, Prisma.EmailTemplateUncheckedCreateWithoutSentEmailsInput>
+  connectOrCreate?: Prisma.EmailTemplateCreateOrConnectWithoutSentEmailsInput
+  upsert?: Prisma.EmailTemplateUpsertWithoutSentEmailsInput
+  disconnect?: Prisma.EmailTemplateWhereInput | boolean
+  delete?: Prisma.EmailTemplateWhereInput | boolean
+  connect?: Prisma.EmailTemplateWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EmailTemplateUpdateToOneWithWhereWithoutSentEmailsInput, Prisma.EmailTemplateUpdateWithoutSentEmailsInput>, Prisma.EmailTemplateUncheckedUpdateWithoutSentEmailsInput>
+}
+
 export type EmailTemplateCreateWithoutOrganizationInput = {
   id?: string
   name: string
@@ -433,6 +461,7 @@ export type EmailTemplateCreateWithoutOrganizationInput = {
   category?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutTemplateInput
 }
 
 export type EmailTemplateUncheckedCreateWithoutOrganizationInput = {
@@ -443,6 +472,7 @@ export type EmailTemplateUncheckedCreateWithoutOrganizationInput = {
   category?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutTemplateInput
 }
 
 export type EmailTemplateCreateOrConnectWithoutOrganizationInput = {
@@ -484,6 +514,66 @@ export type EmailTemplateScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"EmailTemplate"> | Date | string
 }
 
+export type EmailTemplateCreateWithoutSentEmailsInput = {
+  id?: string
+  name: string
+  subject: string
+  body: string
+  category?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutEmailTemplatesInput
+}
+
+export type EmailTemplateUncheckedCreateWithoutSentEmailsInput = {
+  id?: string
+  organizationId: string
+  name: string
+  subject: string
+  body: string
+  category?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type EmailTemplateCreateOrConnectWithoutSentEmailsInput = {
+  where: Prisma.EmailTemplateWhereUniqueInput
+  create: Prisma.XOR<Prisma.EmailTemplateCreateWithoutSentEmailsInput, Prisma.EmailTemplateUncheckedCreateWithoutSentEmailsInput>
+}
+
+export type EmailTemplateUpsertWithoutSentEmailsInput = {
+  update: Prisma.XOR<Prisma.EmailTemplateUpdateWithoutSentEmailsInput, Prisma.EmailTemplateUncheckedUpdateWithoutSentEmailsInput>
+  create: Prisma.XOR<Prisma.EmailTemplateCreateWithoutSentEmailsInput, Prisma.EmailTemplateUncheckedCreateWithoutSentEmailsInput>
+  where?: Prisma.EmailTemplateWhereInput
+}
+
+export type EmailTemplateUpdateToOneWithWhereWithoutSentEmailsInput = {
+  where?: Prisma.EmailTemplateWhereInput
+  data: Prisma.XOR<Prisma.EmailTemplateUpdateWithoutSentEmailsInput, Prisma.EmailTemplateUncheckedUpdateWithoutSentEmailsInput>
+}
+
+export type EmailTemplateUpdateWithoutSentEmailsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  subject?: Prisma.StringFieldUpdateOperationsInput | string
+  body?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutEmailTemplatesNestedInput
+}
+
+export type EmailTemplateUncheckedUpdateWithoutSentEmailsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  subject?: Prisma.StringFieldUpdateOperationsInput | string
+  body?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type EmailTemplateCreateManyOrganizationInput = {
   id?: string
   name: string
@@ -502,6 +592,7 @@ export type EmailTemplateUpdateWithoutOrganizationInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutTemplateNestedInput
 }
 
 export type EmailTemplateUncheckedUpdateWithoutOrganizationInput = {
@@ -512,6 +603,7 @@ export type EmailTemplateUncheckedUpdateWithoutOrganizationInput = {
   category?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutTemplateNestedInput
 }
 
 export type EmailTemplateUncheckedUpdateManyWithoutOrganizationInput = {
@@ -525,6 +617,35 @@ export type EmailTemplateUncheckedUpdateManyWithoutOrganizationInput = {
 }
 
 
+/**
+ * Count Type EmailTemplateCountOutputType
+ */
+
+export type EmailTemplateCountOutputType = {
+  sentEmails: number
+}
+
+export type EmailTemplateCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  sentEmails?: boolean | EmailTemplateCountOutputTypeCountSentEmailsArgs
+}
+
+/**
+ * EmailTemplateCountOutputType without action
+ */
+export type EmailTemplateCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EmailTemplateCountOutputType
+   */
+  select?: Prisma.EmailTemplateCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * EmailTemplateCountOutputType without action
+ */
+export type EmailTemplateCountOutputTypeCountSentEmailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SentEmailWhereInput
+}
+
 
 export type EmailTemplateSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -536,6 +657,8 @@ export type EmailTemplateSelect<ExtArgs extends runtime.Types.Extensions.Interna
   createdAt?: boolean
   updatedAt?: boolean
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  sentEmails?: boolean | Prisma.EmailTemplate$sentEmailsArgs<ExtArgs>
+  _count?: boolean | Prisma.EmailTemplateCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["emailTemplate"]>
 
 export type EmailTemplateSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -576,6 +699,8 @@ export type EmailTemplateSelectScalar = {
 export type EmailTemplateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "name" | "subject" | "body" | "category" | "createdAt" | "updatedAt", ExtArgs["result"]["emailTemplate"]>
 export type EmailTemplateInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  sentEmails?: boolean | Prisma.EmailTemplate$sentEmailsArgs<ExtArgs>
+  _count?: boolean | Prisma.EmailTemplateCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EmailTemplateIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
@@ -588,6 +713,7 @@ export type $EmailTemplatePayload<ExtArgs extends runtime.Types.Extensions.Inter
   name: "EmailTemplate"
   objects: {
     organization: Prisma.$OrganizationPayload<ExtArgs>
+    sentEmails: Prisma.$SentEmailPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -993,6 +1119,7 @@ readonly fields: EmailTemplateFieldRefs;
 export interface Prisma__EmailTemplateClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   organization<T extends Prisma.OrganizationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationDefaultArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  sentEmails<T extends Prisma.EmailTemplate$sentEmailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmailTemplate$sentEmailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SentEmailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1426,6 +1553,30 @@ export type EmailTemplateDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many EmailTemplates to delete.
    */
   limit?: number
+}
+
+/**
+ * EmailTemplate.sentEmails
+ */
+export type EmailTemplate$sentEmailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SentEmail
+   */
+  select?: Prisma.SentEmailSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SentEmail
+   */
+  omit?: Prisma.SentEmailOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SentEmailInclude<ExtArgs> | null
+  where?: Prisma.SentEmailWhereInput
+  orderBy?: Prisma.SentEmailOrderByWithRelationInput | Prisma.SentEmailOrderByWithRelationInput[]
+  cursor?: Prisma.SentEmailWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SentEmailScalarFieldEnum | Prisma.SentEmailScalarFieldEnum[]
 }
 
 /**

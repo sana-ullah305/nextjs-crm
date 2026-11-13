@@ -254,6 +254,30 @@ export const notificationSettingsSchema = z.object({
   notificationsEnabled: z.boolean().optional(),
 });
 
+export const emailSendSchema = z.object({
+  to: z.string().trim().toLowerCase().email("Invalid recipient email"),
+  toName: z.string().trim().max(120).optional(),
+  subject: z.string().trim().min(1, "Subject is required").max(200),
+  body: z.string().trim().min(1, "Body is required").max(50000),
+  contactId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  leadId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  dealId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  templateId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+});
+
+export const emailSettingsSchema = z.object({
+  smtpHost: z.string().trim().max(255).optional(),
+  smtpPort: z.coerce.number().int().min(1).max(65535).optional(),
+  smtpUser: z.string().trim().max(255).optional(),
+  fromAddress: z.string().trim().max(255).refine((v) => !v || /.+@.+\..+/.test(v), "Invalid from address").optional(),
+  notificationsEnabled: z.boolean().optional(),
+});
+
+export const searchQuerySchema = z.object({
+  q: z.string().trim().min(2, "Search term must be at least 2 characters").max(120),
+  limit: z.coerce.number().int().min(1).max(10).default(5),
+});
+
 export const contactImportSchema = z.object({
   contacts: z
     .array(
@@ -276,3 +300,5 @@ export type LeadCreateInput = z.infer<typeof leadCreateSchema>;
 export type DealCreateInput = z.infer<typeof dealCreateSchema>;
 export type TaskCreateInput = z.infer<typeof taskCreateSchema>;
 export type ActivityCreateInput = z.infer<typeof activityCreateSchema>;
+export type EmailSendInput = z.infer<typeof emailSendSchema>;
+export type EmailSettingsInput = z.infer<typeof emailSettingsSchema>;

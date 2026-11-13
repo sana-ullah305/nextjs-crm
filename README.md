@@ -27,6 +27,17 @@ Zod, Recharts, and Radix UI primitives.
   overdue tracking, complete/skip, assignment notifications.
 - **Reports** — revenue by month, win rates, lead conversion funnel,
   acquisition by source, team performance; CSV export.
+- **Email Outreach** — send email from any contact or lead through the
+  org's SMTP settings (Settings > Email); template merge with `{{tokens}}`,
+  delivery status tracking (queued/sent/failed), every send logged on the
+  record's activity timeline and in the audit log.
+- **Automated Follow-up Reminders** — a scheduler scan turns due lead
+  follow-ups and overdue tasks into in-app notifications for the
+  responsible rep. Deduplicated per day; trigger via
+  `POST /api/reminders/run` from cron or an uptime monitor.
+- **Global Search / Command Palette** — `⌘K` (or Ctrl+K) from the topbar
+  searches contacts, companies, leads, deals, and tasks at once, with
+  keyboard navigation and RBAC-scoped results.
 - **Users & Roles** — Admin / Manager / Sales Rep with a central permission
   matrix; admin-only user management; last-admin protection; audit log.
 - **Settings** — organization profile, pipelines, lead sources, tags, email
@@ -83,7 +94,7 @@ before any real deployment.
 | `npm run db:migrate` | Create/apply database migrations |
 | `npm run db:seed` | Reset + seed demo data (destructive) |
 | `npm run db:generate` | Regenerate Prisma client |
-| `npm test` | Run test suite (46 tests) |
+| `npm test` | Run test suite (66 tests) |
 | `npm run test:coverage` | Tests with coverage report |
 | `npm run lint` | ESLint |
 | `npm run typecheck` | TypeScript strict check |
@@ -105,16 +116,18 @@ changes. Schema documentation: `docs/database-schema.md`.
 
 ## Testing
 
-46 automated tests across 6 files, all run against a real (isolated)
+66 automated tests across 8 files, all run against a real (isolated)
 database — no mocked data layer:
 
 - **Unit** — lead scoring model, Zod validation schemas, RBAC permission
   matrix, record-level access rules, password hashing, rate limiter
-  (sliding window).
+  (sliding window), email template merge renderer.
 - **Integration** — login flow (valid/invalid/rate-limited), contact CRUD
   lifecycle with soft-delete verification, lead creation with scoring +
   duplicate detection, task creation/completion, permission enforcement
-  (401/403/404/400 envelopes), dashboard and reports endpoints.
+  (401/403/404/400 envelopes), dashboard and reports endpoints, email
+  send + failure recording + RBAC checks, reminder scheduler dedupe,
+  global search scoping.
 
 ```bash
 npm test
@@ -170,9 +183,16 @@ Run behind a TLS-terminating reverse proxy (Caddy, nginx). Cookies are
 - The login rate limiter is in-memory (single instance). For horizontal
   scaling, back it with Redis — `src/server/rate-limit.ts` is the single
   integration point.
-- Email sending is architected (templates, notification channels, SMTP
-  settings model) but delivery is stubbed pending real SMTP credentials —
-  see "Remaining Limitations" in `docs/security.md`.
+- Email sending goes through the org's SMTP settings (`EmailSettings`).
+  The SMTP password comes from the `SMTP_PASS` environment variable and is
+  never stored in the database. When SMTP is not configured, sends fail
+  fast with `EMAIL_NOT_CONFIGURED` and the attempt is still recorded.
+- Reminder scans run when `POST /api/reminders/run` is called (requires
+  MANAGER/ADMIN). Point a cron job at it every 15 minutes, or use an uptime
+  monitor's webhook with a service account session.
+- Global search hits indexed columns (`email`, `name`) per entity; the
+  SQLite `contains` filter is case-insensitive. For large Postgres
+  deployments consider trigram indexes per entity.
 
 ## Documentation
 

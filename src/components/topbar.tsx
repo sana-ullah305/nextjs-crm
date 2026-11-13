@@ -19,6 +19,7 @@ import { Bell, LogOut, Moon, Settings, Sun, Menu, X, BarChart3 } from "lucide-re
 import { cn } from "@/lib/cn";
 import { timeAgo } from "@/lib/format";
 import { api } from "@/lib/api-client";
+import { CommandPalette } from "@/components/command-palette";
 
 type Notification = {
   id: string;
@@ -106,6 +107,10 @@ export function Topbar({ user }: { user: SessionUser }) {
       <div className="flex items-center gap-1.5 md:hidden">
         <BarChart3 className="h-5 w-5 text-primary" />
         <span className="font-bold">Acme CRM</span>
+      </div>
+
+      <div className="flex flex-1 items-center justify-center px-2 md:px-6">
+        <CommandPalette />
       </div>
 
       <div className="ml-auto flex items-center gap-2">

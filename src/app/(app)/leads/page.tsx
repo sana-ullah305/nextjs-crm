@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { Flame, Plus, Search, Sparkles, Trash2, TrendingUp, UserCheck } from "lucide-react";
+import { Flame, Plus, Search, Send, Sparkles, Trash2, TrendingUp, UserCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar } from "@/components/ui/avatar";
@@ -11,6 +11,7 @@ import { Card } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { EmptyState } from "@/components/ui/empty-state";
 import { EntityForm, type FieldDef, type FieldErrors } from "@/components/entity-form";
+import { ComposeEmail } from "@/components/compose-email";
 import { api, ApiError, validationDetails } from "@/lib/api-client";
 import { formatCurrency, formatDate } from "@/lib/format";
 import { cn } from "@/lib/cn";
@@ -86,6 +87,8 @@ export default function LeadsPage() {
   const [convertOpen, setConvertOpen] = useState(false);
   const [convertWithDeal, setConvertWithDeal] = useState(true);
   const [convertValue, setConvertValue] = useState("");
+  const [composeTarget, setComposeTarget] = useState<Lead | null>(null);
+  const [composeOpen, setComposeOpen] = useState(false);
 
   const pageSize = 20;
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
@@ -385,6 +388,20 @@ export default function LeadsPage() {
                           </Button>
                         </Link>
                       ) : null}
+                      {l.status !== "CONVERTED" && l.email && (
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          aria-label={`Email lead ${l.firstName} ${l.lastName}`}
+                          title="Send email"
+                          onClick={() => {
+                            setComposeTarget(l);
+                            setComposeOpen(true);
+                          }}
+                        >
+                          <Send className="h-3.5 w-3.5" />
+                        </Button>
+                      )}
                       {l.status !== "CONVERTED" && (
                         <Button variant="ghost" size="icon" aria-label="Delete lead" onClick={() => void onDelete(l)}>
                           <Trash2 className="h-3.5 w-3.5 text-destructive" />
@@ -482,6 +499,31 @@ export default function LeadsPage() {
           </Card>
         </div>
       )}
+
+      <ComposeEmail
+        open={composeOpen}
+        onOpenChange={setComposeOpen}
+        defaultTo={
+          composeTarget
+            ? {
+                email: composeTarget.email,
+                name: `${composeTarget.firstName} ${composeTarget.lastName}`,
+              }
+            : { email: "" }
+        }
+        leadId={composeTarget?.id}
+        templateVars={
+          composeTarget
+            ? {
+                firstName: composeTarget.firstName,
+                lastName: composeTarget.lastName,
+                email: composeTarget.email,
+                company: composeTarget.companyName ?? "",
+              }
+            : {}
+        }
+        onSent={() => void load()}
+      />
     </div>
   );
 }

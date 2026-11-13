@@ -62,6 +62,10 @@ export const PERMISSIONS = [
   "reports:read",
   // audit
   "audit:read",
+  // email outreach
+  "email:send",
+  // reminders run (managers/admins may trigger scans on demand)
+  "reminders:run",
 ] as const;
 
 export type Permission = (typeof PERMISSIONS)[number];
@@ -75,7 +79,6 @@ const MANAGER_PERMS: Permission[] = ALL.filter(
     p !== "pipelines:manage" &&
     p !== "notes:delete_all"
 );
-
 const REP_PERMS: Permission[] = [
   "settings:read",
   "contacts:read",
@@ -101,6 +104,7 @@ const REP_PERMS: Permission[] = [
   "activities:create",
   "notes:create",
   "notes:delete",
+  "email:send",
 ];
 
 export const ROLE_PERMISSIONS: Record<string, Permission[]> = {

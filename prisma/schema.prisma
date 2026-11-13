@@ -30,11 +30,13 @@ model Organization {
   activities        Activity[]
   notes             Note[]
   notifications     Notification[]
-  tags               Tag[]
+  tags              Tag[]
   leadSources       LeadSource[]
   emailTemplates    EmailTemplate[]
   customFields      CustomField[]
   emailSettings     EmailSettings?
+  sentEmails        SentEmail[]
+  reminders         FollowUpReminder[]
   currency          String   @default("USD")
 }
 
@@ -65,6 +67,8 @@ model User {
   activities     Activity[]
   notes          Note[]
   notifications  Notification[]
+  sentEmails     SentEmail[] @relation("SentEmailSender")
+  reminders      FollowUpReminder[] @relation("ReminderRecipient")
 
   @@unique([organizationId, email])
   @@index([organizationId])
@@ -142,6 +146,7 @@ model Contact {
   activities   Activity[]
   notes        Note[]
   deals        Deal[]      @relation("DealContact")
+  sentEmails   SentEmail[] @relation("SentEmailContact")
 
   tags Tag[]
 
@@ -213,6 +218,8 @@ model Lead {
   activities   Activity[]
   notes        Note[]
   deals        Deal[]      @relation("DealLead")
+  sentEmails   SentEmail[] @relation("SentEmailLead")
+  reminders    FollowUpReminder[] @relation("ReminderLead")
 
   @@index([organizationId, status])
   @@index([organizationId, deletedAt])
@@ -284,6 +291,7 @@ model Deal {
   activities   Activity[]
   notes        Note[]
   lead         Lead?       @relation("DealLead", fields: [leadId], references: [id], onDelete: SetNull)
+  sentEmails   SentEmail[] @relation("SentEmailDeal")
 
   @@index([organizationId, deletedAt])
   @@index([organizationId, status])
@@ -315,6 +323,7 @@ model Task {
 
   activities   Activity[]
   notes        Note[]
+  reminders    FollowUpReminder[] @relation("ReminderTask")
 
   @@index([organizationId, status])
   @@index([organizationId, assignedUserId, status])
@@ -416,14 +425,15 @@ model Notification {
 model EmailTemplate {
   id             String   @id @default(cuid())
   organizationId String
-  name           String
-  subject        String
-  body           String
+  name          String
+  subject       String
+  body          String
   category        String   @default("GENERAL")
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
   organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  sentEmails   SentEmail[] @relation("SentEmailTemplate")
 
   @@index([organizationId])
 }
@@ -469,4 +479,62 @@ model EmailSettings {
   notificationsEnabled Boolean @default(true)
 
   organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+}
+
+// A single outbound email sent from the CRM, with delivery status. Recipient
+// email is snapshotted so history survives contact email changes/deletes.
+model SentEmail {
+  id             String    @id @default(cuid())
+  organizationId String
+  userId         String
+  subject        String
+  body           String
+  recipientEmail String
+  recipientName  String    @default("")
+  contactId      String?
+  leadId         String?
+  dealId         String?
+  templateId     String?
+  status         String    @default("QUEUED") // QUEUED | SENT | FAILED
+  error          String    @default("")
+  sentAt         DateTime?
+  createdAt      DateTime  @default(now())
+
+  organization Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User           @relation("SentEmailSender", fields: [userId], references: [id], onDelete: Cascade)
+  contact      Contact?       @relation("SentEmailContact", fields: [contactId], references: [id], onDelete: SetNull)
+  lead         Lead?          @relation("SentEmailLead", fields: [leadId], references: [id], onDelete: SetNull)
+  deal         Deal?          @relation("SentEmailDeal", fields: [dealId], references: [id], onDelete: SetNull)
+  template     EmailTemplate? @relation("SentEmailTemplate", fields: [templateId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, createdAt])
+  @@index([contactId])
+  @@index([leadId])
+  @@index([dealId])
+  @@index([userId, createdAt])
+}
+
+// A scheduled reminder generated for a due lead follow-up or an
+// overdue/reminder-due task. Deduplicated by a stable key so the scheduler
+// can run repeatedly without spamming the same reminder twice.
+model FollowUpReminder {
+  id             String    @id @default(cuid())
+  organizationId String
+  userId         String
+  dedupeKey      String
+  kind           String    // LEAD_FOLLOW_UP | TASK_DUE | TASK_OVERDUE
+  title          String
+  body           String    @default("")
+  link           String    @default("")
+  leadId         String?
+  taskId         String?
+  createdAt      DateTime  @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User         @relation("ReminderRecipient", fields: [userId], references: [id], onDelete: Cascade)
+  lead         Lead?        @relation("ReminderLead", fields: [leadId], references: [id], onDelete: Cascade)
+  task         Task?        @relation("ReminderTask", fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, dedupeKey])
+  @@index([organizationId, createdAt])
 }

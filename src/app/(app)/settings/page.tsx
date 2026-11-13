@@ -31,12 +31,21 @@ type Pipeline = { id: string; name: string; isDefault: boolean; stages: { id: st
 type Template = { id: string; name: string; subject: string; category: string; body: string };
 type CustomField = { id: string; entityType: string; name: string; dataType: string; options: string };
 type AuditRow = { id: string; action: string; entityType: string; entityId: string; ipAddress: string; createdAt: string; metadata: string };
+type EmailSettingsRow = {
+  id: string;
+  smtpHost: string;
+  smtpPort: number;
+  smtpUser: string;
+  fromAddress: string;
+  notificationsEnabled: boolean;
+} | null;
 
-const TABS = ["organization", "users", "pipelines", "tags", "sources", "templates", "fields", "audit"] as const;
+const TABS = ["organization", "email", "users", "pipelines", "tags", "sources", "templates", "fields", "audit"] as const;
 type Tab = (typeof TABS)[number];
 
 const TAB_META: Record<Tab, { label: string; icon: React.ComponentType<{ className?: string }> }> = {
   organization: { label: "Organization", icon: Building2 },
+  email: { label: "Email (SMTP)", icon: Mail },
   users: { label: "Users", icon: Users },
   pipelines: { label: "Pipelines", icon: KanbanSquare },
   tags: { label: "Tags", icon: Tag },
@@ -85,6 +94,37 @@ export default function SettingsPage() {
       setError(e instanceof ApiError ? e.message : "Save failed");
     } finally {
       setOrgSaving(false);
+    }
+  }
+
+  // Email (SMTP) settings
+  const [emailSettings, setEmailSettings] = useState<EmailSettingsRow>(null);
+  const [emailSaving, setEmailSaving] = useState(false);
+
+  const loadEmailSettings = useCallback(async () => {
+    const d = await api.get<{ settings: EmailSettingsRow }>("/api/settings/email");
+    setEmailSettings(d.settings);
+  }, []);
+  useEffect(() => {
+    if (tab === "email") void loadEmailSettings().catch(() => undefined);
+  }, [tab, loadEmailSettings]);
+
+  async function saveEmailSettings(e: React.FormEvent) {
+    e.preventDefault();
+    if (!emailSettings) return;
+    setEmailSaving(true);
+    try {
+      await api.patch("/api/settings/email", {
+        smtpHost: emailSettings.smtpHost,
+        smtpPort: emailSettings.smtpPort,
+        smtpUser: emailSettings.smtpUser,
+        fromAddress: emailSettings.fromAddress,
+      });
+      setNotice("Email settings updated");
+    } catch (e) {
+      setError(e instanceof ApiError ? e.message : "Save failed");
+    } finally {
+      setEmailSaving(false);
     }
   }
 
@@ -421,6 +461,90 @@ export default function SettingsPage() {
                 </div>
               )}
             </form>
+          </CardContent>
+        </Card>
+      )}
+
+      {tab === "email" && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Email delivery (SMTP)</CardTitle>
+            <CardDescription>
+              Outbound emails (follow-ups, outreach) are delivered through this
+              SMTP account. Configure it once; every send is logged on the
+              record&#39;s activity timeline.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            {emailSettings === null ? (
+              <div className="h-32 animate-pulse rounded-lg bg-muted" />
+            ) : (
+              <form onSubmit={saveEmailSettings} className="grid gap-4 sm:grid-cols-2">
+                <div className="grid gap-1.5">
+                  <Label htmlFor="smtp-host">SMTP host</Label>
+                  <Input
+                    id="smtp-host"
+                    placeholder="smtp.example.com"
+                    value={emailSettings?.smtpHost ?? ""}
+                    onChange={(e) =>
+                      setEmailSettings((s) => (s ? { ...s, smtpHost: e.target.value } : s))
+                    }
+                    disabled={!isAdmin}
+                  />
+                </div>
+                <div className="grid gap-1.5">
+                  <Label htmlFor="smtp-port">SMTP port</Label>
+                  <Input
+                    id="smtp-port"
+                    type="number"
+                    value={emailSettings?.smtpPort ?? 587}
+                    onChange={(e) =>
+                      setEmailSettings((s) =>
+                        s ? { ...s, smtpPort: Number(e.target.value) } : s
+                      )
+                    }
+                    disabled={!isAdmin}
+                  />
+                </div>
+                <div className="grid gap-1.5">
+                  <Label htmlFor="smtp-user">SMTP username</Label>
+                  <Input
+                    id="smtp-user"
+                    placeholder="alerts@example.com"
+                    value={emailSettings?.smtpUser ?? ""}
+                    onChange={(e) =>
+                      setEmailSettings((s) => (s ? { ...s, smtpUser: e.target.value } : s))
+                    }
+                    disabled={!isAdmin}
+                  />
+                </div>
+                <div className="grid gap-1.5">
+                  <Label htmlFor="smtp-from">From address</Label>
+                  <Input
+                    id="smtp-from"
+                    type="email"
+                    placeholder="sales@example.com"
+                    value={emailSettings?.fromAddress ?? ""}
+                    onChange={(e) =>
+                      setEmailSettings((s) => (s ? { ...s, fromAddress: e.target.value } : s))
+                    }
+                    disabled={!isAdmin}
+                  />
+                </div>
+                <p className="text-xs text-muted-foreground sm:col-span-2">
+                  The SMTP password is supplied via the <code>SMTP_PASS</code>{" "}
+                  environment variable on the server; it is never stored in the
+                  database or displayed here.
+                </p>
+                {isAdmin && (
+                  <div className="sm:col-span-2">
+                    <Button type="submit" disabled={emailSaving}>
+                      {emailSaving ? "Saving…" : "Save email settings"}
+                    </Button>
+                  </div>
+                )}
+              </form>
+            )}
           </CardContent>
         </Card>
       )}
