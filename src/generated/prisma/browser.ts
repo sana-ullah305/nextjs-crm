@@ -127,3 +127,13 @@ export type SentEmail = Prisma.SentEmailModel
  * 
  */
 export type FollowUpReminder = Prisma.FollowUpReminderModel
+/**
+ * Model InboundEmail
+ * 
+ */
+export type InboundEmail = Prisma.InboundEmailModel
+/**
+ * Model ApiKey
+ * 
+ */
+export type ApiKey = Prisma.ApiKeyModel

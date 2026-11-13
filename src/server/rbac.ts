@@ -66,6 +66,8 @@ export const PERMISSIONS = [
   "email:send",
   // reminders run (managers/admins may trigger scans on demand)
   "reminders:run",
+  // inbound mail scan (managers/admins may trigger scans on demand)
+  "inbound:run",
 ] as const;
 
 export type Permission = (typeof PERMISSIONS)[number];

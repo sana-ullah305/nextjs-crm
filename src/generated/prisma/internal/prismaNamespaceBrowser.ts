@@ -72,7 +72,9 @@ export const ModelName = {
   CustomFieldValue: 'CustomFieldValue',
   EmailSettings: 'EmailSettings',
   SentEmail: 'SentEmail',
-  FollowUpReminder: 'FollowUpReminder'
+  FollowUpReminder: 'FollowUpReminder',
+  InboundEmail: 'InboundEmail',
+  ApiKey: 'ApiKey'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -441,6 +443,7 @@ export const SentEmailScalarFieldEnum = {
   body: 'body',
   recipientEmail: 'recipientEmail',
   recipientName: 'recipientName',
+  messageId: 'messageId',
   contactId: 'contactId',
   leadId: 'leadId',
   dealId: 'dealId',
@@ -469,6 +472,42 @@ export const FollowUpReminderScalarFieldEnum = {
 } as const
 
 export type FollowUpReminderScalarFieldEnum = (typeof FollowUpReminderScalarFieldEnum)[keyof typeof FollowUpReminderScalarFieldEnum]
+
+
+export const InboundEmailScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  fromEmail: 'fromEmail',
+  fromName: 'fromName',
+  subject: 'subject',
+  body: 'body',
+  messageId: 'messageId',
+  inReplyTo: 'inReplyTo',
+  sentEmailId: 'sentEmailId',
+  contactId: 'contactId',
+  leadId: 'leadId',
+  status: 'status',
+  receivedAt: 'receivedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type InboundEmailScalarFieldEnum = (typeof InboundEmailScalarFieldEnum)[keyof typeof InboundEmailScalarFieldEnum]
+
+
+export const ApiKeyScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  keyHash: 'keyHash',
+  prefix: 'prefix',
+  createdById: 'createdById',
+  lastUsedAt: 'lastUsedAt',
+  isActive: 'isActive',
+  revokedAt: 'revokedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type ApiKeyScalarFieldEnum = (typeof ApiKeyScalarFieldEnum)[keyof typeof ApiKeyScalarFieldEnum]
 
 
 export const SortOrder = {

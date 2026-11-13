@@ -32,6 +32,7 @@ export type SentEmailMinAggregateOutputType = {
   body: string | null
   recipientEmail: string | null
   recipientName: string | null
+  messageId: string | null
   contactId: string | null
   leadId: string | null
   dealId: string | null
@@ -50,6 +51,7 @@ export type SentEmailMaxAggregateOutputType = {
   body: string | null
   recipientEmail: string | null
   recipientName: string | null
+  messageId: string | null
   contactId: string | null
   leadId: string | null
   dealId: string | null
@@ -68,6 +70,7 @@ export type SentEmailCountAggregateOutputType = {
   body: number
   recipientEmail: number
   recipientName: number
+  messageId: number
   contactId: number
   leadId: number
   dealId: number
@@ -88,6 +91,7 @@ export type SentEmailMinAggregateInputType = {
   body?: true
   recipientEmail?: true
   recipientName?: true
+  messageId?: true
   contactId?: true
   leadId?: true
   dealId?: true
@@ -106,6 +110,7 @@ export type SentEmailMaxAggregateInputType = {
   body?: true
   recipientEmail?: true
   recipientName?: true
+  messageId?: true
   contactId?: true
   leadId?: true
   dealId?: true
@@ -124,6 +129,7 @@ export type SentEmailCountAggregateInputType = {
   body?: true
   recipientEmail?: true
   recipientName?: true
+  messageId?: true
   contactId?: true
   leadId?: true
   dealId?: true
@@ -215,6 +221,7 @@ export type SentEmailGroupByOutputType = {
   body: string
   recipientEmail: string
   recipientName: string
+  messageId: string
   contactId: string | null
   leadId: string | null
   dealId: string | null
@@ -254,6 +261,7 @@ export type SentEmailWhereInput = {
   body?: Prisma.StringFilter<"SentEmail"> | string
   recipientEmail?: Prisma.StringFilter<"SentEmail"> | string
   recipientName?: Prisma.StringFilter<"SentEmail"> | string
+  messageId?: Prisma.StringFilter<"SentEmail"> | string
   contactId?: Prisma.StringNullableFilter<"SentEmail"> | string | null
   leadId?: Prisma.StringNullableFilter<"SentEmail"> | string | null
   dealId?: Prisma.StringNullableFilter<"SentEmail"> | string | null
@@ -268,6 +276,7 @@ export type SentEmailWhereInput = {
   lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
   deal?: Prisma.XOR<Prisma.DealNullableScalarRelationFilter, Prisma.DealWhereInput> | null
   template?: Prisma.XOR<Prisma.EmailTemplateNullableScalarRelationFilter, Prisma.EmailTemplateWhereInput> | null
+  inboundEmails?: Prisma.InboundEmailListRelationFilter
 }
 
 export type SentEmailOrderByWithRelationInput = {
@@ -278,6 +287,7 @@ export type SentEmailOrderByWithRelationInput = {
   body?: Prisma.SortOrder
   recipientEmail?: Prisma.SortOrder
   recipientName?: Prisma.SortOrder
+  messageId?: Prisma.SortOrder
   contactId?: Prisma.SortOrderInput | Prisma.SortOrder
   leadId?: Prisma.SortOrderInput | Prisma.SortOrder
   dealId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -292,6 +302,7 @@ export type SentEmailOrderByWithRelationInput = {
   lead?: Prisma.LeadOrderByWithRelationInput
   deal?: Prisma.DealOrderByWithRelationInput
   template?: Prisma.EmailTemplateOrderByWithRelationInput
+  inboundEmails?: Prisma.InboundEmailOrderByRelationAggregateInput
 }
 
 export type SentEmailWhereUniqueInput = Prisma.AtLeast<{
@@ -305,6 +316,7 @@ export type SentEmailWhereUniqueInput = Prisma.AtLeast<{
   body?: Prisma.StringFilter<"SentEmail"> | string
   recipientEmail?: Prisma.StringFilter<"SentEmail"> | string
   recipientName?: Prisma.StringFilter<"SentEmail"> | string
+  messageId?: Prisma.StringFilter<"SentEmail"> | string
   contactId?: Prisma.StringNullableFilter<"SentEmail"> | string | null
   leadId?: Prisma.StringNullableFilter<"SentEmail"> | string | null
   dealId?: Prisma.StringNullableFilter<"SentEmail"> | string | null
@@ -319,6 +331,7 @@ export type SentEmailWhereUniqueInput = Prisma.AtLeast<{
   lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
   deal?: Prisma.XOR<Prisma.DealNullableScalarRelationFilter, Prisma.DealWhereInput> | null
   template?: Prisma.XOR<Prisma.EmailTemplateNullableScalarRelationFilter, Prisma.EmailTemplateWhereInput> | null
+  inboundEmails?: Prisma.InboundEmailListRelationFilter
 }, "id">
 
 export type SentEmailOrderByWithAggregationInput = {
@@ -329,6 +342,7 @@ export type SentEmailOrderByWithAggregationInput = {
   body?: Prisma.SortOrder
   recipientEmail?: Prisma.SortOrder
   recipientName?: Prisma.SortOrder
+  messageId?: Prisma.SortOrder
   contactId?: Prisma.SortOrderInput | Prisma.SortOrder
   leadId?: Prisma.SortOrderInput | Prisma.SortOrder
   dealId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -353,6 +367,7 @@ export type SentEmailScalarWhereWithAggregatesInput = {
   body?: Prisma.StringWithAggregatesFilter<"SentEmail"> | string
   recipientEmail?: Prisma.StringWithAggregatesFilter<"SentEmail"> | string
   recipientName?: Prisma.StringWithAggregatesFilter<"SentEmail"> | string
+  messageId?: Prisma.StringWithAggregatesFilter<"SentEmail"> | string
   contactId?: Prisma.StringNullableWithAggregatesFilter<"SentEmail"> | string | null
   leadId?: Prisma.StringNullableWithAggregatesFilter<"SentEmail"> | string | null
   dealId?: Prisma.StringNullableWithAggregatesFilter<"SentEmail"> | string | null
@@ -369,6 +384,7 @@ export type SentEmailCreateInput = {
   body: string
   recipientEmail: string
   recipientName?: string
+  messageId?: string
   status?: string
   error?: string
   sentAt?: Date | string | null
@@ -379,6 +395,7 @@ export type SentEmailCreateInput = {
   lead?: Prisma.LeadCreateNestedOneWithoutSentEmailsInput
   deal?: Prisma.DealCreateNestedOneWithoutSentEmailsInput
   template?: Prisma.EmailTemplateCreateNestedOneWithoutSentEmailsInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutSentEmailInput
 }
 
 export type SentEmailUncheckedCreateInput = {
@@ -389,6 +406,7 @@ export type SentEmailUncheckedCreateInput = {
   body: string
   recipientEmail: string
   recipientName?: string
+  messageId?: string
   contactId?: string | null
   leadId?: string | null
   dealId?: string | null
@@ -397,6 +415,7 @@ export type SentEmailUncheckedCreateInput = {
   error?: string
   sentAt?: Date | string | null
   createdAt?: Date | string
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutSentEmailInput
 }
 
 export type SentEmailUpdateInput = {
@@ -405,6 +424,7 @@ export type SentEmailUpdateInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
   recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   error?: Prisma.StringFieldUpdateOperationsInput | string
   sentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -415,6 +435,7 @@ export type SentEmailUpdateInput = {
   lead?: Prisma.LeadUpdateOneWithoutSentEmailsNestedInput
   deal?: Prisma.DealUpdateOneWithoutSentEmailsNestedInput
   template?: Prisma.EmailTemplateUpdateOneWithoutSentEmailsNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutSentEmailNestedInput
 }
 
 export type SentEmailUncheckedUpdateInput = {
@@ -425,6 +446,7 @@ export type SentEmailUncheckedUpdateInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
   recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
   contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -433,6 +455,7 @@ export type SentEmailUncheckedUpdateInput = {
   error?: Prisma.StringFieldUpdateOperationsInput | string
   sentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutSentEmailNestedInput
 }
 
 export type SentEmailCreateManyInput = {
@@ -443,6 +466,7 @@ export type SentEmailCreateManyInput = {
   body: string
   recipientEmail: string
   recipientName?: string
+  messageId?: string
   contactId?: string | null
   leadId?: string | null
   dealId?: string | null
@@ -459,6 +483,7 @@ export type SentEmailUpdateManyMutationInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
   recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   error?: Prisma.StringFieldUpdateOperationsInput | string
   sentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -473,6 +498,7 @@ export type SentEmailUncheckedUpdateManyInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
   recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
   contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -501,6 +527,7 @@ export type SentEmailCountOrderByAggregateInput = {
   body?: Prisma.SortOrder
   recipientEmail?: Prisma.SortOrder
   recipientName?: Prisma.SortOrder
+  messageId?: Prisma.SortOrder
   contactId?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   dealId?: Prisma.SortOrder
@@ -519,6 +546,7 @@ export type SentEmailMaxOrderByAggregateInput = {
   body?: Prisma.SortOrder
   recipientEmail?: Prisma.SortOrder
   recipientName?: Prisma.SortOrder
+  messageId?: Prisma.SortOrder
   contactId?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   dealId?: Prisma.SortOrder
@@ -537,6 +565,7 @@ export type SentEmailMinOrderByAggregateInput = {
   body?: Prisma.SortOrder
   recipientEmail?: Prisma.SortOrder
   recipientName?: Prisma.SortOrder
+  messageId?: Prisma.SortOrder
   contactId?: Prisma.SortOrder
   leadId?: Prisma.SortOrder
   dealId?: Prisma.SortOrder
@@ -545,6 +574,11 @@ export type SentEmailMinOrderByAggregateInput = {
   error?: Prisma.SortOrder
   sentAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type SentEmailNullableScalarRelationFilter = {
+  is?: Prisma.SentEmailWhereInput | null
+  isNot?: Prisma.SentEmailWhereInput | null
 }
 
 export type SentEmailCreateNestedManyWithoutOrganizationInput = {
@@ -799,12 +833,29 @@ export type SentEmailUncheckedUpdateManyWithoutTemplateNestedInput = {
   deleteMany?: Prisma.SentEmailScalarWhereInput | Prisma.SentEmailScalarWhereInput[]
 }
 
+export type SentEmailCreateNestedOneWithoutInboundEmailsInput = {
+  create?: Prisma.XOR<Prisma.SentEmailCreateWithoutInboundEmailsInput, Prisma.SentEmailUncheckedCreateWithoutInboundEmailsInput>
+  connectOrCreate?: Prisma.SentEmailCreateOrConnectWithoutInboundEmailsInput
+  connect?: Prisma.SentEmailWhereUniqueInput
+}
+
+export type SentEmailUpdateOneWithoutInboundEmailsNestedInput = {
+  create?: Prisma.XOR<Prisma.SentEmailCreateWithoutInboundEmailsInput, Prisma.SentEmailUncheckedCreateWithoutInboundEmailsInput>
+  connectOrCreate?: Prisma.SentEmailCreateOrConnectWithoutInboundEmailsInput
+  upsert?: Prisma.SentEmailUpsertWithoutInboundEmailsInput
+  disconnect?: Prisma.SentEmailWhereInput | boolean
+  delete?: Prisma.SentEmailWhereInput | boolean
+  connect?: Prisma.SentEmailWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SentEmailUpdateToOneWithWhereWithoutInboundEmailsInput, Prisma.SentEmailUpdateWithoutInboundEmailsInput>, Prisma.SentEmailUncheckedUpdateWithoutInboundEmailsInput>
+}
+
 export type SentEmailCreateWithoutOrganizationInput = {
   id?: string
   subject: string
   body: string
   recipientEmail: string
   recipientName?: string
+  messageId?: string
   status?: string
   error?: string
   sentAt?: Date | string | null
@@ -814,6 +865,7 @@ export type SentEmailCreateWithoutOrganizationInput = {
   lead?: Prisma.LeadCreateNestedOneWithoutSentEmailsInput
   deal?: Prisma.DealCreateNestedOneWithoutSentEmailsInput
   template?: Prisma.EmailTemplateCreateNestedOneWithoutSentEmailsInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutSentEmailInput
 }
 
 export type SentEmailUncheckedCreateWithoutOrganizationInput = {
@@ -823,6 +875,7 @@ export type SentEmailUncheckedCreateWithoutOrganizationInput = {
   body: string
   recipientEmail: string
   recipientName?: string
+  messageId?: string
   contactId?: string | null
   leadId?: string | null
   dealId?: string | null
@@ -831,6 +884,7 @@ export type SentEmailUncheckedCreateWithoutOrganizationInput = {
   error?: string
   sentAt?: Date | string | null
   createdAt?: Date | string
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutSentEmailInput
 }
 
 export type SentEmailCreateOrConnectWithoutOrganizationInput = {
@@ -869,6 +923,7 @@ export type SentEmailScalarWhereInput = {
   body?: Prisma.StringFilter<"SentEmail"> | string
   recipientEmail?: Prisma.StringFilter<"SentEmail"> | string
   recipientName?: Prisma.StringFilter<"SentEmail"> | string
+  messageId?: Prisma.StringFilter<"SentEmail"> | string
   contactId?: Prisma.StringNullableFilter<"SentEmail"> | string | null
   leadId?: Prisma.StringNullableFilter<"SentEmail"> | string | null
   dealId?: Prisma.StringNullableFilter<"SentEmail"> | string | null
@@ -885,6 +940,7 @@ export type SentEmailCreateWithoutUserInput = {
   body: string
   recipientEmail: string
   recipientName?: string
+  messageId?: string
   status?: string
   error?: string
   sentAt?: Date | string | null
@@ -894,6 +950,7 @@ export type SentEmailCreateWithoutUserInput = {
   lead?: Prisma.LeadCreateNestedOneWithoutSentEmailsInput
   deal?: Prisma.DealCreateNestedOneWithoutSentEmailsInput
   template?: Prisma.EmailTemplateCreateNestedOneWithoutSentEmailsInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutSentEmailInput
 }
 
 export type SentEmailUncheckedCreateWithoutUserInput = {
@@ -903,6 +960,7 @@ export type SentEmailUncheckedCreateWithoutUserInput = {
   body: string
   recipientEmail: string
   recipientName?: string
+  messageId?: string
   contactId?: string | null
   leadId?: string | null
   dealId?: string | null
@@ -911,6 +969,7 @@ export type SentEmailUncheckedCreateWithoutUserInput = {
   error?: string
   sentAt?: Date | string | null
   createdAt?: Date | string
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutSentEmailInput
 }
 
 export type SentEmailCreateOrConnectWithoutUserInput = {
@@ -944,6 +1003,7 @@ export type SentEmailCreateWithoutContactInput = {
   body: string
   recipientEmail: string
   recipientName?: string
+  messageId?: string
   status?: string
   error?: string
   sentAt?: Date | string | null
@@ -953,6 +1013,7 @@ export type SentEmailCreateWithoutContactInput = {
   lead?: Prisma.LeadCreateNestedOneWithoutSentEmailsInput
   deal?: Prisma.DealCreateNestedOneWithoutSentEmailsInput
   template?: Prisma.EmailTemplateCreateNestedOneWithoutSentEmailsInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutSentEmailInput
 }
 
 export type SentEmailUncheckedCreateWithoutContactInput = {
@@ -963,6 +1024,7 @@ export type SentEmailUncheckedCreateWithoutContactInput = {
   body: string
   recipientEmail: string
   recipientName?: string
+  messageId?: string
   leadId?: string | null
   dealId?: string | null
   templateId?: string | null
@@ -970,6 +1032,7 @@ export type SentEmailUncheckedCreateWithoutContactInput = {
   error?: string
   sentAt?: Date | string | null
   createdAt?: Date | string
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutSentEmailInput
 }
 
 export type SentEmailCreateOrConnectWithoutContactInput = {
@@ -1003,6 +1066,7 @@ export type SentEmailCreateWithoutLeadInput = {
   body: string
   recipientEmail: string
   recipientName?: string
+  messageId?: string
   status?: string
   error?: string
   sentAt?: Date | string | null
@@ -1012,6 +1076,7 @@ export type SentEmailCreateWithoutLeadInput = {
   contact?: Prisma.ContactCreateNestedOneWithoutSentEmailsInput
   deal?: Prisma.DealCreateNestedOneWithoutSentEmailsInput
   template?: Prisma.EmailTemplateCreateNestedOneWithoutSentEmailsInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutSentEmailInput
 }
 
 export type SentEmailUncheckedCreateWithoutLeadInput = {
@@ -1022,6 +1087,7 @@ export type SentEmailUncheckedCreateWithoutLeadInput = {
   body: string
   recipientEmail: string
   recipientName?: string
+  messageId?: string
   contactId?: string | null
   dealId?: string | null
   templateId?: string | null
@@ -1029,6 +1095,7 @@ export type SentEmailUncheckedCreateWithoutLeadInput = {
   error?: string
   sentAt?: Date | string | null
   createdAt?: Date | string
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutSentEmailInput
 }
 
 export type SentEmailCreateOrConnectWithoutLeadInput = {
@@ -1062,6 +1129,7 @@ export type SentEmailCreateWithoutDealInput = {
   body: string
   recipientEmail: string
   recipientName?: string
+  messageId?: string
   status?: string
   error?: string
   sentAt?: Date | string | null
@@ -1071,6 +1139,7 @@ export type SentEmailCreateWithoutDealInput = {
   contact?: Prisma.ContactCreateNestedOneWithoutSentEmailsInput
   lead?: Prisma.LeadCreateNestedOneWithoutSentEmailsInput
   template?: Prisma.EmailTemplateCreateNestedOneWithoutSentEmailsInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutSentEmailInput
 }
 
 export type SentEmailUncheckedCreateWithoutDealInput = {
@@ -1081,6 +1150,7 @@ export type SentEmailUncheckedCreateWithoutDealInput = {
   body: string
   recipientEmail: string
   recipientName?: string
+  messageId?: string
   contactId?: string | null
   leadId?: string | null
   templateId?: string | null
@@ -1088,6 +1158,7 @@ export type SentEmailUncheckedCreateWithoutDealInput = {
   error?: string
   sentAt?: Date | string | null
   createdAt?: Date | string
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutSentEmailInput
 }
 
 export type SentEmailCreateOrConnectWithoutDealInput = {
@@ -1121,6 +1192,7 @@ export type SentEmailCreateWithoutTemplateInput = {
   body: string
   recipientEmail: string
   recipientName?: string
+  messageId?: string
   status?: string
   error?: string
   sentAt?: Date | string | null
@@ -1130,6 +1202,7 @@ export type SentEmailCreateWithoutTemplateInput = {
   contact?: Prisma.ContactCreateNestedOneWithoutSentEmailsInput
   lead?: Prisma.LeadCreateNestedOneWithoutSentEmailsInput
   deal?: Prisma.DealCreateNestedOneWithoutSentEmailsInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutSentEmailInput
 }
 
 export type SentEmailUncheckedCreateWithoutTemplateInput = {
@@ -1140,6 +1213,7 @@ export type SentEmailUncheckedCreateWithoutTemplateInput = {
   body: string
   recipientEmail: string
   recipientName?: string
+  messageId?: string
   contactId?: string | null
   leadId?: string | null
   dealId?: string | null
@@ -1147,6 +1221,7 @@ export type SentEmailUncheckedCreateWithoutTemplateInput = {
   error?: string
   sentAt?: Date | string | null
   createdAt?: Date | string
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutSentEmailInput
 }
 
 export type SentEmailCreateOrConnectWithoutTemplateInput = {
@@ -1174,6 +1249,98 @@ export type SentEmailUpdateManyWithWhereWithoutTemplateInput = {
   data: Prisma.XOR<Prisma.SentEmailUpdateManyMutationInput, Prisma.SentEmailUncheckedUpdateManyWithoutTemplateInput>
 }
 
+export type SentEmailCreateWithoutInboundEmailsInput = {
+  id?: string
+  subject: string
+  body: string
+  recipientEmail: string
+  recipientName?: string
+  messageId?: string
+  status?: string
+  error?: string
+  sentAt?: Date | string | null
+  createdAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutSentEmailsInput
+  user: Prisma.UserCreateNestedOneWithoutSentEmailsInput
+  contact?: Prisma.ContactCreateNestedOneWithoutSentEmailsInput
+  lead?: Prisma.LeadCreateNestedOneWithoutSentEmailsInput
+  deal?: Prisma.DealCreateNestedOneWithoutSentEmailsInput
+  template?: Prisma.EmailTemplateCreateNestedOneWithoutSentEmailsInput
+}
+
+export type SentEmailUncheckedCreateWithoutInboundEmailsInput = {
+  id?: string
+  organizationId: string
+  userId: string
+  subject: string
+  body: string
+  recipientEmail: string
+  recipientName?: string
+  messageId?: string
+  contactId?: string | null
+  leadId?: string | null
+  dealId?: string | null
+  templateId?: string | null
+  status?: string
+  error?: string
+  sentAt?: Date | string | null
+  createdAt?: Date | string
+}
+
+export type SentEmailCreateOrConnectWithoutInboundEmailsInput = {
+  where: Prisma.SentEmailWhereUniqueInput
+  create: Prisma.XOR<Prisma.SentEmailCreateWithoutInboundEmailsInput, Prisma.SentEmailUncheckedCreateWithoutInboundEmailsInput>
+}
+
+export type SentEmailUpsertWithoutInboundEmailsInput = {
+  update: Prisma.XOR<Prisma.SentEmailUpdateWithoutInboundEmailsInput, Prisma.SentEmailUncheckedUpdateWithoutInboundEmailsInput>
+  create: Prisma.XOR<Prisma.SentEmailCreateWithoutInboundEmailsInput, Prisma.SentEmailUncheckedCreateWithoutInboundEmailsInput>
+  where?: Prisma.SentEmailWhereInput
+}
+
+export type SentEmailUpdateToOneWithWhereWithoutInboundEmailsInput = {
+  where?: Prisma.SentEmailWhereInput
+  data: Prisma.XOR<Prisma.SentEmailUpdateWithoutInboundEmailsInput, Prisma.SentEmailUncheckedUpdateWithoutInboundEmailsInput>
+}
+
+export type SentEmailUpdateWithoutInboundEmailsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  subject?: Prisma.StringFieldUpdateOperationsInput | string
+  body?: Prisma.StringFieldUpdateOperationsInput | string
+  recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
+  recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  error?: Prisma.StringFieldUpdateOperationsInput | string
+  sentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutSentEmailsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutSentEmailsNestedInput
+  contact?: Prisma.ContactUpdateOneWithoutSentEmailsNestedInput
+  lead?: Prisma.LeadUpdateOneWithoutSentEmailsNestedInput
+  deal?: Prisma.DealUpdateOneWithoutSentEmailsNestedInput
+  template?: Prisma.EmailTemplateUpdateOneWithoutSentEmailsNestedInput
+}
+
+export type SentEmailUncheckedUpdateWithoutInboundEmailsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  subject?: Prisma.StringFieldUpdateOperationsInput | string
+  body?: Prisma.StringFieldUpdateOperationsInput | string
+  recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
+  recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dealId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  error?: Prisma.StringFieldUpdateOperationsInput | string
+  sentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type SentEmailCreateManyOrganizationInput = {
   id?: string
   userId: string
@@ -1181,6 +1348,7 @@ export type SentEmailCreateManyOrganizationInput = {
   body: string
   recipientEmail: string
   recipientName?: string
+  messageId?: string
   contactId?: string | null
   leadId?: string | null
   dealId?: string | null
@@ -1197,6 +1365,7 @@ export type SentEmailUpdateWithoutOrganizationInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
   recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   error?: Prisma.StringFieldUpdateOperationsInput | string
   sentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1206,6 +1375,7 @@ export type SentEmailUpdateWithoutOrganizationInput = {
   lead?: Prisma.LeadUpdateOneWithoutSentEmailsNestedInput
   deal?: Prisma.DealUpdateOneWithoutSentEmailsNestedInput
   template?: Prisma.EmailTemplateUpdateOneWithoutSentEmailsNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutSentEmailNestedInput
 }
 
 export type SentEmailUncheckedUpdateWithoutOrganizationInput = {
@@ -1215,6 +1385,7 @@ export type SentEmailUncheckedUpdateWithoutOrganizationInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
   recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
   contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1223,6 +1394,7 @@ export type SentEmailUncheckedUpdateWithoutOrganizationInput = {
   error?: Prisma.StringFieldUpdateOperationsInput | string
   sentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutSentEmailNestedInput
 }
 
 export type SentEmailUncheckedUpdateManyWithoutOrganizationInput = {
@@ -1232,6 +1404,7 @@ export type SentEmailUncheckedUpdateManyWithoutOrganizationInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
   recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
   contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1249,6 +1422,7 @@ export type SentEmailCreateManyUserInput = {
   body: string
   recipientEmail: string
   recipientName?: string
+  messageId?: string
   contactId?: string | null
   leadId?: string | null
   dealId?: string | null
@@ -1265,6 +1439,7 @@ export type SentEmailUpdateWithoutUserInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
   recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   error?: Prisma.StringFieldUpdateOperationsInput | string
   sentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1274,6 +1449,7 @@ export type SentEmailUpdateWithoutUserInput = {
   lead?: Prisma.LeadUpdateOneWithoutSentEmailsNestedInput
   deal?: Prisma.DealUpdateOneWithoutSentEmailsNestedInput
   template?: Prisma.EmailTemplateUpdateOneWithoutSentEmailsNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutSentEmailNestedInput
 }
 
 export type SentEmailUncheckedUpdateWithoutUserInput = {
@@ -1283,6 +1459,7 @@ export type SentEmailUncheckedUpdateWithoutUserInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
   recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
   contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1291,6 +1468,7 @@ export type SentEmailUncheckedUpdateWithoutUserInput = {
   error?: Prisma.StringFieldUpdateOperationsInput | string
   sentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutSentEmailNestedInput
 }
 
 export type SentEmailUncheckedUpdateManyWithoutUserInput = {
@@ -1300,6 +1478,7 @@ export type SentEmailUncheckedUpdateManyWithoutUserInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
   recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
   contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1318,6 +1497,7 @@ export type SentEmailCreateManyContactInput = {
   body: string
   recipientEmail: string
   recipientName?: string
+  messageId?: string
   leadId?: string | null
   dealId?: string | null
   templateId?: string | null
@@ -1333,6 +1513,7 @@ export type SentEmailUpdateWithoutContactInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
   recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   error?: Prisma.StringFieldUpdateOperationsInput | string
   sentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1342,6 +1523,7 @@ export type SentEmailUpdateWithoutContactInput = {
   lead?: Prisma.LeadUpdateOneWithoutSentEmailsNestedInput
   deal?: Prisma.DealUpdateOneWithoutSentEmailsNestedInput
   template?: Prisma.EmailTemplateUpdateOneWithoutSentEmailsNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutSentEmailNestedInput
 }
 
 export type SentEmailUncheckedUpdateWithoutContactInput = {
@@ -1352,6 +1534,7 @@ export type SentEmailUncheckedUpdateWithoutContactInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
   recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1359,6 +1542,7 @@ export type SentEmailUncheckedUpdateWithoutContactInput = {
   error?: Prisma.StringFieldUpdateOperationsInput | string
   sentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutSentEmailNestedInput
 }
 
 export type SentEmailUncheckedUpdateManyWithoutContactInput = {
@@ -1369,6 +1553,7 @@ export type SentEmailUncheckedUpdateManyWithoutContactInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
   recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1386,6 +1571,7 @@ export type SentEmailCreateManyLeadInput = {
   body: string
   recipientEmail: string
   recipientName?: string
+  messageId?: string
   contactId?: string | null
   dealId?: string | null
   templateId?: string | null
@@ -1401,6 +1587,7 @@ export type SentEmailUpdateWithoutLeadInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
   recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   error?: Prisma.StringFieldUpdateOperationsInput | string
   sentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1410,6 +1597,7 @@ export type SentEmailUpdateWithoutLeadInput = {
   contact?: Prisma.ContactUpdateOneWithoutSentEmailsNestedInput
   deal?: Prisma.DealUpdateOneWithoutSentEmailsNestedInput
   template?: Prisma.EmailTemplateUpdateOneWithoutSentEmailsNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutSentEmailNestedInput
 }
 
 export type SentEmailUncheckedUpdateWithoutLeadInput = {
@@ -1420,6 +1608,7 @@ export type SentEmailUncheckedUpdateWithoutLeadInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
   recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
   contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1427,6 +1616,7 @@ export type SentEmailUncheckedUpdateWithoutLeadInput = {
   error?: Prisma.StringFieldUpdateOperationsInput | string
   sentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutSentEmailNestedInput
 }
 
 export type SentEmailUncheckedUpdateManyWithoutLeadInput = {
@@ -1437,6 +1627,7 @@ export type SentEmailUncheckedUpdateManyWithoutLeadInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
   recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
   contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1454,6 +1645,7 @@ export type SentEmailCreateManyDealInput = {
   body: string
   recipientEmail: string
   recipientName?: string
+  messageId?: string
   contactId?: string | null
   leadId?: string | null
   templateId?: string | null
@@ -1469,6 +1661,7 @@ export type SentEmailUpdateWithoutDealInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
   recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   error?: Prisma.StringFieldUpdateOperationsInput | string
   sentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1478,6 +1671,7 @@ export type SentEmailUpdateWithoutDealInput = {
   contact?: Prisma.ContactUpdateOneWithoutSentEmailsNestedInput
   lead?: Prisma.LeadUpdateOneWithoutSentEmailsNestedInput
   template?: Prisma.EmailTemplateUpdateOneWithoutSentEmailsNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutSentEmailNestedInput
 }
 
 export type SentEmailUncheckedUpdateWithoutDealInput = {
@@ -1488,6 +1682,7 @@ export type SentEmailUncheckedUpdateWithoutDealInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
   recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
   contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1495,6 +1690,7 @@ export type SentEmailUncheckedUpdateWithoutDealInput = {
   error?: Prisma.StringFieldUpdateOperationsInput | string
   sentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutSentEmailNestedInput
 }
 
 export type SentEmailUncheckedUpdateManyWithoutDealInput = {
@@ -1505,6 +1701,7 @@ export type SentEmailUncheckedUpdateManyWithoutDealInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
   recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
   contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   templateId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1522,6 +1719,7 @@ export type SentEmailCreateManyTemplateInput = {
   body: string
   recipientEmail: string
   recipientName?: string
+  messageId?: string
   contactId?: string | null
   leadId?: string | null
   dealId?: string | null
@@ -1537,6 +1735,7 @@ export type SentEmailUpdateWithoutTemplateInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
   recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   error?: Prisma.StringFieldUpdateOperationsInput | string
   sentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1546,6 +1745,7 @@ export type SentEmailUpdateWithoutTemplateInput = {
   contact?: Prisma.ContactUpdateOneWithoutSentEmailsNestedInput
   lead?: Prisma.LeadUpdateOneWithoutSentEmailsNestedInput
   deal?: Prisma.DealUpdateOneWithoutSentEmailsNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutSentEmailNestedInput
 }
 
 export type SentEmailUncheckedUpdateWithoutTemplateInput = {
@@ -1556,6 +1756,7 @@ export type SentEmailUncheckedUpdateWithoutTemplateInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
   recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
   contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1563,6 +1764,7 @@ export type SentEmailUncheckedUpdateWithoutTemplateInput = {
   error?: Prisma.StringFieldUpdateOperationsInput | string
   sentAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutSentEmailNestedInput
 }
 
 export type SentEmailUncheckedUpdateManyWithoutTemplateInput = {
@@ -1573,6 +1775,7 @@ export type SentEmailUncheckedUpdateManyWithoutTemplateInput = {
   body?: Prisma.StringFieldUpdateOperationsInput | string
   recipientEmail?: Prisma.StringFieldUpdateOperationsInput | string
   recipientName?: Prisma.StringFieldUpdateOperationsInput | string
+  messageId?: Prisma.StringFieldUpdateOperationsInput | string
   contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1583,6 +1786,35 @@ export type SentEmailUncheckedUpdateManyWithoutTemplateInput = {
 }
 
 
+/**
+ * Count Type SentEmailCountOutputType
+ */
+
+export type SentEmailCountOutputType = {
+  inboundEmails: number
+}
+
+export type SentEmailCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  inboundEmails?: boolean | SentEmailCountOutputTypeCountInboundEmailsArgs
+}
+
+/**
+ * SentEmailCountOutputType without action
+ */
+export type SentEmailCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SentEmailCountOutputType
+   */
+  select?: Prisma.SentEmailCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * SentEmailCountOutputType without action
+ */
+export type SentEmailCountOutputTypeCountInboundEmailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InboundEmailWhereInput
+}
+
 
 export type SentEmailSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1592,6 +1824,7 @@ export type SentEmailSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   body?: boolean
   recipientEmail?: boolean
   recipientName?: boolean
+  messageId?: boolean
   contactId?: boolean
   leadId?: boolean
   dealId?: boolean
@@ -1606,6 +1839,8 @@ export type SentEmailSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   lead?: boolean | Prisma.SentEmail$leadArgs<ExtArgs>
   deal?: boolean | Prisma.SentEmail$dealArgs<ExtArgs>
   template?: boolean | Prisma.SentEmail$templateArgs<ExtArgs>
+  inboundEmails?: boolean | Prisma.SentEmail$inboundEmailsArgs<ExtArgs>
+  _count?: boolean | Prisma.SentEmailCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sentEmail"]>
 
 export type SentEmailSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1616,6 +1851,7 @@ export type SentEmailSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   body?: boolean
   recipientEmail?: boolean
   recipientName?: boolean
+  messageId?: boolean
   contactId?: boolean
   leadId?: boolean
   dealId?: boolean
@@ -1640,6 +1876,7 @@ export type SentEmailSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   body?: boolean
   recipientEmail?: boolean
   recipientName?: boolean
+  messageId?: boolean
   contactId?: boolean
   leadId?: boolean
   dealId?: boolean
@@ -1664,6 +1901,7 @@ export type SentEmailSelectScalar = {
   body?: boolean
   recipientEmail?: boolean
   recipientName?: boolean
+  messageId?: boolean
   contactId?: boolean
   leadId?: boolean
   dealId?: boolean
@@ -1674,7 +1912,7 @@ export type SentEmailSelectScalar = {
   createdAt?: boolean
 }
 
-export type SentEmailOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "userId" | "subject" | "body" | "recipientEmail" | "recipientName" | "contactId" | "leadId" | "dealId" | "templateId" | "status" | "error" | "sentAt" | "createdAt", ExtArgs["result"]["sentEmail"]>
+export type SentEmailOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "userId" | "subject" | "body" | "recipientEmail" | "recipientName" | "messageId" | "contactId" | "leadId" | "dealId" | "templateId" | "status" | "error" | "sentAt" | "createdAt", ExtArgs["result"]["sentEmail"]>
 export type SentEmailInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1682,6 +1920,8 @@ export type SentEmailInclude<ExtArgs extends runtime.Types.Extensions.InternalAr
   lead?: boolean | Prisma.SentEmail$leadArgs<ExtArgs>
   deal?: boolean | Prisma.SentEmail$dealArgs<ExtArgs>
   template?: boolean | Prisma.SentEmail$templateArgs<ExtArgs>
+  inboundEmails?: boolean | Prisma.SentEmail$inboundEmailsArgs<ExtArgs>
+  _count?: boolean | Prisma.SentEmailCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SentEmailIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
@@ -1709,6 +1949,7 @@ export type $SentEmailPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     lead: Prisma.$LeadPayload<ExtArgs> | null
     deal: Prisma.$DealPayload<ExtArgs> | null
     template: Prisma.$EmailTemplatePayload<ExtArgs> | null
+    inboundEmails: Prisma.$InboundEmailPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1718,6 +1959,7 @@ export type $SentEmailPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     body: string
     recipientEmail: string
     recipientName: string
+    messageId: string
     contactId: string | null
     leadId: string | null
     dealId: string | null
@@ -2126,6 +2368,7 @@ export interface Prisma__SentEmailClient<T, Null = never, ExtArgs extends runtim
   lead<T extends Prisma.SentEmail$leadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SentEmail$leadArgs<ExtArgs>>): Prisma.Prisma__LeadClient<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   deal<T extends Prisma.SentEmail$dealArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SentEmail$dealArgs<ExtArgs>>): Prisma.Prisma__DealClient<runtime.Types.Result.GetResult<Prisma.$DealPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   template<T extends Prisma.SentEmail$templateArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SentEmail$templateArgs<ExtArgs>>): Prisma.Prisma__EmailTemplateClient<runtime.Types.Result.GetResult<Prisma.$EmailTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  inboundEmails<T extends Prisma.SentEmail$inboundEmailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SentEmail$inboundEmailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InboundEmailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2162,6 +2405,7 @@ export interface SentEmailFieldRefs {
   readonly body: Prisma.FieldRef<"SentEmail", 'String'>
   readonly recipientEmail: Prisma.FieldRef<"SentEmail", 'String'>
   readonly recipientName: Prisma.FieldRef<"SentEmail", 'String'>
+  readonly messageId: Prisma.FieldRef<"SentEmail", 'String'>
   readonly contactId: Prisma.FieldRef<"SentEmail", 'String'>
   readonly leadId: Prisma.FieldRef<"SentEmail", 'String'>
   readonly dealId: Prisma.FieldRef<"SentEmail", 'String'>
@@ -2642,6 +2886,30 @@ export type SentEmail$templateArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   include?: Prisma.EmailTemplateInclude<ExtArgs> | null
   where?: Prisma.EmailTemplateWhereInput
+}
+
+/**
+ * SentEmail.inboundEmails
+ */
+export type SentEmail$inboundEmailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InboundEmail
+   */
+  select?: Prisma.InboundEmailSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InboundEmail
+   */
+  omit?: Prisma.InboundEmailOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InboundEmailInclude<ExtArgs> | null
+  where?: Prisma.InboundEmailWhereInput
+  orderBy?: Prisma.InboundEmailOrderByWithRelationInput | Prisma.InboundEmailOrderByWithRelationInput[]
+  cursor?: Prisma.InboundEmailWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InboundEmailScalarFieldEnum | Prisma.InboundEmailScalarFieldEnum[]
 }
 
 /**

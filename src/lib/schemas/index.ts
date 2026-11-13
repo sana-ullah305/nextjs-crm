@@ -130,6 +130,22 @@ export const leadCreateSchema = z.object({
 
 export const leadUpdateSchema = leadCreateSchema.partial();
 
+// Public lead-capture payload for API-key callers. Strictly flat and
+// allow-listed: no owner, assignment, status, or other internal fields are
+// accepted (mass-assignment guard).
+export const leadCaptureSchema = z.object({
+  firstName: z.string().trim().min(1, "First name is required").max(80),
+  lastName: z.string().trim().min(1, "Last name is required").max(80),
+  email,
+  phone,
+  companyName: optionalTrimmed,
+  source: z.string().trim().min(1).max(60).optional(),
+});
+
+export const apiKeyCreateSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(100),
+});
+
 export const leadConvertSchema = z.object({
   createDeal: z.boolean().default(true),
   dealName: z.string().trim().max(150).optional(),
@@ -297,6 +313,7 @@ export const contactImportSchema = z.object({
 export type LoginInput = z.infer<typeof loginSchema>;
 export type ContactCreateInput = z.infer<typeof contactCreateSchema>;
 export type LeadCreateInput = z.infer<typeof leadCreateSchema>;
+export type LeadCaptureInput = z.infer<typeof leadCaptureSchema>;
 export type DealCreateInput = z.infer<typeof dealCreateSchema>;
 export type TaskCreateInput = z.infer<typeof taskCreateSchema>;
 export type ActivityCreateInput = z.infer<typeof activityCreateSchema>;

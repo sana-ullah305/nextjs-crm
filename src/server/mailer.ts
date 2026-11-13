@@ -129,13 +129,19 @@ export async function sendEmail(params: SendEmailParams) {
       __testHooks.captureNextSend({ to: params.to.email, subject });
       __testHooks.captureNextSend = undefined;
     } else {
-      await transport.transporter.sendMail({
+      const info = await transport.transporter.sendMail({
         from: transport.settings.fromAddress,
         to: params.to.name ? `${params.to.name} <${params.to.email}>` : params.to.email,
         subject,
         text: params.body,
         // HTML is intentionally not sent: bodies are plain text templates.
         // Rendering user-authored HTML would require sanitization we don't ship.
+      });
+      // Persist the outbound Message-ID so inbound replies can be matched
+      // to this send via their In-Reply-To header (see server/inbound-mail.ts).
+      await db.sentEmail.update({
+        where: { id: sentEmail.id },
+        data: { messageId: String(info?.messageId ?? "").slice(0, 998) },
       });
     }
     await db.sentEmail.update({

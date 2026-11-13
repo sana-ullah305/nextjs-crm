@@ -418,7 +418,9 @@ export const ModelName = {
   CustomFieldValue: 'CustomFieldValue',
   EmailSettings: 'EmailSettings',
   SentEmail: 'SentEmail',
-  FollowUpReminder: 'FollowUpReminder'
+  FollowUpReminder: 'FollowUpReminder',
+  InboundEmail: 'InboundEmail',
+  ApiKey: 'ApiKey'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -434,7 +436,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "organization" | "user" | "session" | "company" | "contact" | "tag" | "leadSource" | "lead" | "pipeline" | "stage" | "deal" | "task" | "activity" | "note" | "auditLog" | "notification" | "emailTemplate" | "customField" | "customFieldValue" | "emailSettings" | "sentEmail" | "followUpReminder"
+    modelProps: "organization" | "user" | "session" | "company" | "contact" | "tag" | "leadSource" | "lead" | "pipeline" | "stage" | "deal" | "task" | "activity" | "note" | "auditLog" | "notification" | "emailTemplate" | "customField" | "customFieldValue" | "emailSettings" | "sentEmail" | "followUpReminder" | "inboundEmail" | "apiKey"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2066,6 +2068,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    InboundEmail: {
+      payload: Prisma.$InboundEmailPayload<ExtArgs>
+      fields: Prisma.InboundEmailFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.InboundEmailFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InboundEmailPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.InboundEmailFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InboundEmailPayload>
+        }
+        findFirst: {
+          args: Prisma.InboundEmailFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InboundEmailPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.InboundEmailFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InboundEmailPayload>
+        }
+        findMany: {
+          args: Prisma.InboundEmailFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InboundEmailPayload>[]
+        }
+        create: {
+          args: Prisma.InboundEmailCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InboundEmailPayload>
+        }
+        createMany: {
+          args: Prisma.InboundEmailCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.InboundEmailCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InboundEmailPayload>[]
+        }
+        delete: {
+          args: Prisma.InboundEmailDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InboundEmailPayload>
+        }
+        update: {
+          args: Prisma.InboundEmailUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InboundEmailPayload>
+        }
+        deleteMany: {
+          args: Prisma.InboundEmailDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.InboundEmailUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.InboundEmailUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InboundEmailPayload>[]
+        }
+        upsert: {
+          args: Prisma.InboundEmailUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$InboundEmailPayload>
+        }
+        aggregate: {
+          args: Prisma.InboundEmailAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateInboundEmail>
+        }
+        groupBy: {
+          args: Prisma.InboundEmailGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InboundEmailGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.InboundEmailCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.InboundEmailCountAggregateOutputType> | number
+        }
+      }
+    }
+    ApiKey: {
+      payload: Prisma.$ApiKeyPayload<ExtArgs>
+      fields: Prisma.ApiKeyFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ApiKeyFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ApiKeyFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>
+        }
+        findFirst: {
+          args: Prisma.ApiKeyFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ApiKeyFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>
+        }
+        findMany: {
+          args: Prisma.ApiKeyFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>[]
+        }
+        create: {
+          args: Prisma.ApiKeyCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>
+        }
+        createMany: {
+          args: Prisma.ApiKeyCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ApiKeyCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>[]
+        }
+        delete: {
+          args: Prisma.ApiKeyDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>
+        }
+        update: {
+          args: Prisma.ApiKeyUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>
+        }
+        deleteMany: {
+          args: Prisma.ApiKeyDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ApiKeyUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ApiKeyUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>[]
+        }
+        upsert: {
+          args: Prisma.ApiKeyUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>
+        }
+        aggregate: {
+          args: Prisma.ApiKeyAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateApiKey>
+        }
+        groupBy: {
+          args: Prisma.ApiKeyGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ApiKeyGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ApiKeyCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ApiKeyCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2455,6 +2605,7 @@ export const SentEmailScalarFieldEnum = {
   body: 'body',
   recipientEmail: 'recipientEmail',
   recipientName: 'recipientName',
+  messageId: 'messageId',
   contactId: 'contactId',
   leadId: 'leadId',
   dealId: 'dealId',
@@ -2483,6 +2634,42 @@ export const FollowUpReminderScalarFieldEnum = {
 } as const
 
 export type FollowUpReminderScalarFieldEnum = (typeof FollowUpReminderScalarFieldEnum)[keyof typeof FollowUpReminderScalarFieldEnum]
+
+
+export const InboundEmailScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  fromEmail: 'fromEmail',
+  fromName: 'fromName',
+  subject: 'subject',
+  body: 'body',
+  messageId: 'messageId',
+  inReplyTo: 'inReplyTo',
+  sentEmailId: 'sentEmailId',
+  contactId: 'contactId',
+  leadId: 'leadId',
+  status: 'status',
+  receivedAt: 'receivedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type InboundEmailScalarFieldEnum = (typeof InboundEmailScalarFieldEnum)[keyof typeof InboundEmailScalarFieldEnum]
+
+
+export const ApiKeyScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  keyHash: 'keyHash',
+  prefix: 'prefix',
+  createdById: 'createdById',
+  lastUsedAt: 'lastUsedAt',
+  isActive: 'isActive',
+  revokedAt: 'revokedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type ApiKeyScalarFieldEnum = (typeof ApiKeyScalarFieldEnum)[keyof typeof ApiKeyScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -2714,6 +2901,8 @@ export type GlobalOmitConfig = {
   emailSettings?: Prisma.EmailSettingsOmit
   sentEmail?: Prisma.SentEmailOmit
   followUpReminder?: Prisma.FollowUpReminderOmit
+  inboundEmail?: Prisma.InboundEmailOmit
+  apiKey?: Prisma.ApiKeyOmit
 }
 
 /* Types for Logging */
