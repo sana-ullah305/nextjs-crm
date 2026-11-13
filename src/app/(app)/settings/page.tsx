@@ -1,13 +1,14 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { Building2, FlaskConical, KanbanSquare, Mail, Plus, ScrollText, Tag, Trash2, UserPlus, Users } from "lucide-react";
+import { Building2, FlaskConical, KanbanSquare, KeyRound, Mail, Plus, Repeat, ScrollText, Tag, Trash2, UserPlus, Users, Copy, Check } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { EmptyState } from "@/components/ui/empty-state";
 import { EntityForm, type FieldDef, type FieldErrors } from "@/components/entity-form";
 import { api, ApiError, validationDetails } from "@/lib/api-client";
@@ -39,8 +40,35 @@ type EmailSettingsRow = {
   fromAddress: string;
   notificationsEnabled: boolean;
 } | null;
+type StepRow = { key: string; delayHours: string; subjectTemplate: string; bodyTemplate: string };
+type Sequence = {
+  id: string;
+  name: string;
+  description: string;
+  isActive: boolean;
+  steps: { id: string; position: number; delayHours: number; subjectTemplate: string; bodyTemplate: string }[];
+  _count?: { enrollments: number };
+};
+type ApiKeyRow = {
+  id: string;
+  name: string;
+  prefix: string;
+  lastUsedAt: string | null;
+  isActive: boolean;
+  revokedAt: string | null;
+  createdAt: string;
+};
 
-const TABS = ["organization", "email", "users", "pipelines", "tags", "sources", "templates", "fields", "audit"] as const;
+let stepKeyCounter = 0;
+function nextStepKey(): string {
+  stepKeyCounter += 1;
+  return `step-${stepKeyCounter}`;
+}
+function newStepRow(): StepRow {
+  return { key: nextStepKey(), delayHours: "24", subjectTemplate: "", bodyTemplate: "" };
+}
+
+const TABS = ["organization", "email", "users", "pipelines", "tags", "sources", "templates", "fields", "sequences", "apikeys", "audit"] as const;
 type Tab = (typeof TABS)[number];
 
 const TAB_META: Record<Tab, { label: string; icon: React.ComponentType<{ className?: string }> }> = {
@@ -52,6 +80,8 @@ const TAB_META: Record<Tab, { label: string; icon: React.ComponentType<{ classNa
   sources: { label: "Lead sources", icon: FlaskConical },
   templates: { label: "Email templates", icon: Mail },
   fields: { label: "Custom fields", icon: Tag },
+  sequences: { label: "Sequences", icon: Repeat },
+  apikeys: { label: "API keys", icon: KeyRound },
   audit: { label: "Audit log", icon: ScrollText },
 };
 
@@ -350,6 +380,154 @@ export default function SettingsPage() {
       await loadFields();
     } catch (e) {
       setError(e instanceof ApiError ? e.message : "Delete failed");
+    }
+  }
+
+  // Sequences
+  const [sequences, setSequences] = useState<Sequence[]>([]);
+  const [seqFormOpen, setSeqFormOpen] = useState(false);
+  const [seqName, setSeqName] = useState("");
+  const [seqSteps, setSeqSteps] = useState<StepRow[]>([
+    newStepRow(),
+  ]);
+  const [seqErrors, setSeqErrors] = useState<FieldErrors>({});
+  const [seqSubmitting, setSeqSubmitting] = useState(false);
+  const [editingSteps, setEditingSteps] = useState<Sequence | null>(null);
+  const [editSteps, setEditSteps] = useState<StepRow[]>([]);
+
+  const loadSequences = useCallback(async () => {
+    const d = await api.get<{ sequences: Sequence[] }>("/api/sequences");
+    setSequences(d.sequences);
+  }, []);
+  useEffect(() => {
+    if (tab === "sequences") void loadSequences().catch(() => undefined);
+  }, [tab, loadSequences]);
+
+  function stepsPayload(rows: StepRow[]) {
+    return rows.map((s, i) => ({
+      position: i,
+      delayHours: Number(s.delayHours || 0),
+      subjectTemplate: s.subjectTemplate,
+      bodyTemplate: s.bodyTemplate,
+    }));
+  }
+
+  async function createSequence(e: React.FormEvent) {
+    e.preventDefault();
+    setSeqSubmitting(true);
+    setSeqErrors({});
+    try {
+      await api.post("/api/sequences", {
+        name: seqName,
+        steps: stepsPayload(seqSteps),
+      });
+      setSeqFormOpen(false);
+      setSeqName("");
+      setSeqSteps([newStepRow()]);
+      await loadSequences();
+      setNotice("Sequence created");
+    } catch (e) {
+      setSeqErrors(validationDetails(e));
+    } finally {
+      setSeqSubmitting(false);
+    }
+  }
+
+  async function toggleSequence(s: Sequence) {
+    try {
+      await api.patch(`/api/sequences/${s.id}`, { isActive: !s.isActive });
+      await loadSequences();
+    } catch (e) {
+      setError(e instanceof ApiError ? e.message : "Update failed");
+    }
+  }
+
+  async function deleteSequence(s: Sequence) {
+    if (!confirm(`Delete sequence "${s.name}"?`)) return;
+    try {
+      const d = await api.delete<{ archived: boolean; deleted?: boolean }>(`/api/sequences/${s.id}`);
+      await loadSequences();
+      setNotice(
+        d.archived
+          ? `"${s.name}" has enrollments, so it was deactivated instead of deleted.`
+          : "Sequence deleted"
+      );
+    } catch (e) {
+      setError(e instanceof ApiError ? e.message : "Delete failed");
+    }
+  }
+
+  function openStepsEditor(s: Sequence) {
+    setEditingSteps(s);
+    setEditSteps(
+      s.steps.map((st) => ({
+        key: nextStepKey(),
+        delayHours: String(st.delayHours),
+        subjectTemplate: st.subjectTemplate,
+        bodyTemplate: st.bodyTemplate,
+      }))
+    );
+    setSeqErrors({});
+  }
+
+  async function saveSteps(e: React.FormEvent) {
+    e.preventDefault();
+    if (!editingSteps) return;
+    setSeqSubmitting(true);
+    setSeqErrors({});
+    try {
+      await api.patch(`/api/sequences/${editingSteps.id}/steps`, { steps: stepsPayload(editSteps) });
+      setEditingSteps(null);
+      await loadSequences();
+      setNotice("Steps updated");
+    } catch (e) {
+      setSeqErrors(validationDetails(e));
+    } finally {
+      setSeqSubmitting(false);
+    }
+  }
+
+  // API keys
+  const [apiKeys, setApiKeys] = useState<ApiKeyRow[]>([]);
+  const [keyName, setKeyName] = useState("");
+  const [newKey, setNewKey] = useState("");
+  const [keyCopied, setKeyCopied] = useState(false);
+  const [keySubmitting, setKeySubmitting] = useState(false);
+
+  const loadApiKeys = useCallback(async () => {
+    const d = await api.get<{ apiKeys: ApiKeyRow[] }>("/api/settings/api-keys");
+    setApiKeys(d.apiKeys);
+  }, []);
+  useEffect(() => {
+    if (tab === "apikeys") void loadApiKeys().catch(() => undefined);
+  }, [tab, loadApiKeys]);
+
+  async function createApiKey(e: React.FormEvent) {
+    e.preventDefault();
+    if (!keyName.trim()) return;
+    setKeySubmitting(true);
+    try {
+      const d = await api.post<{ id: string; key: string }>("/api/settings/api-keys", {
+        name: keyName.trim(),
+      });
+      setNewKey(d.key);
+      setKeyName("");
+      await loadApiKeys();
+    } catch (e) {
+      setError(e instanceof ApiError ? e.message : "Failed to create key");
+    } finally {
+      setKeySubmitting(false);
+    }
+  }
+
+  async function revokeApiKey(k: ApiKeyRow) {
+    if (!confirm(`Revoke key "${k.name}" (${k.prefix}…)? Leads submitted with it will be rejected.`)) return;
+    try {
+      await api.delete(`/api/settings/api-keys/${k.id}`);
+      await loadApiKeys();
+      setNotice("Key revoked");
+    } catch (e) {
+      setError(e instanceof ApiError ? e.message : "Revoke failed");
     }
   }
 
@@ -780,6 +958,159 @@ export default function SettingsPage() {
         </Card>
       )}
 
+      {tab === "sequences" && (
+        <Card>
+          <CardHeader className="flex-row items-center justify-between">
+            <div>
+              <CardTitle>Follow-up sequences</CardTitle>
+              <CardDescription>
+                Automated email steps. Each step waits after the previous one; sending stops on a reply.
+              </CardDescription>
+            </div>
+            {canManage && (
+              <Button
+                size="sm"
+                onClick={() => {
+                  setSeqName("");
+                  setSeqSteps([newStepRow()]);
+                  setSeqErrors({});
+                  setSeqFormOpen(true);
+                }}
+              >
+                <Plus className="h-4 w-4" /> New sequence
+              </Button>
+            )}
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {sequences.length === 0 && (
+              <p className="text-sm text-muted-foreground">
+                No sequences yet. Create one to enroll contacts and leads into automated follow-ups.
+              </p>
+            )}
+            {sequences.map((s) => (
+              <div key={s.id} className="rounded-lg border border-border p-3">
+                <div className="flex flex-wrap items-center gap-2">
+                  <Repeat className="h-4 w-4 text-muted-foreground" />
+                  <p className="font-medium">{s.name}</p>
+                  <Badge variant={s.isActive ? "success" : "secondary"}>
+                    {s.isActive ? "Active" : "Inactive"}
+                  </Badge>
+                  {s._count && (
+                    <Badge variant="outline">{s._count.enrollments} active</Badge>
+                  )}
+                  <span className="ml-auto flex gap-2">
+                    {canManage && (
+                      <>
+                        <Button variant="outline" size="sm" onClick={() => openStepsEditor(s)}>
+                          Edit steps
+                        </Button>
+                        <Button variant="outline" size="sm" onClick={() => void toggleSequence(s)}>
+                          {s.isActive ? "Deactivate" : "Activate"}
+                        </Button>
+                        <Button variant="ghost" size="icon" aria-label={`Delete ${s.name}`} onClick={() => void deleteSequence(s)}>
+                          <Trash2 className="h-3.5 w-3.5 text-destructive" />
+                        </Button>
+                      </>
+                    )}
+                  </span>
+                </div>
+                {s.steps.length > 0 && (
+                  <div className="mt-2 space-y-1.5">
+                    {s.steps.map((st) => (
+                      <div key={st.id} className="flex items-center gap-2 rounded-md border border-border px-2.5 py-1.5 text-xs">
+                        <Badge variant="outline">#{st.position + 1}</Badge>
+                        <span className="text-muted-foreground">after {st.delayHours}h:</span>
+                        <span className="min-w-0 flex-1 truncate font-medium">{st.subjectTemplate}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      )}
+
+      {tab === "apikeys" && (
+        <Card>
+          <CardHeader>
+            <CardTitle>API keys</CardTitle>
+            <CardDescription>
+              Keys authenticate public lead-capture form submissions against{" "}
+              <code>/api/leads/capture</code>.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {canManage && !newKey && (
+              <form onSubmit={createApiKey} className="flex max-w-md gap-2">
+                <Input
+                  placeholder="Key name (e.g. Website contact form)…"
+                  value={keyName}
+                  onChange={(e) => setKeyName(e.target.value)}
+                  aria-label="New API key name"
+                />
+                <Button type="submit" size="sm" disabled={keySubmitting}>
+                  <Plus className="h-4 w-4" /> Create
+                </Button>
+              </form>
+            )}
+            {newKey && (
+              <div className="rounded-lg border border-success/40 bg-success/10 p-3" role="status">
+                <p className="text-sm font-medium text-success">Key created — copy it now</p>
+                <p className="mt-0.5 text-xs text-warning">
+                  You will not see this value again. Store it somewhere safe.
+                </p>
+                <div className="mt-2 flex items-center gap-2">
+                  <code className="min-w-0 flex-1 overflow-x-auto rounded-md border border-border bg-card px-2.5 py-1.5 font-mono text-xs">
+                    {newKey}
+                  </code>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => {
+                      void navigator.clipboard?.writeText(newKey);
+                      setKeyCopied(true);
+                      setTimeout(() => setKeyCopied(false), 2000);
+                    }}
+                    aria-label="Copy new API key"
+                  >
+                    {keyCopied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                    {keyCopied ? "Copied" : "Copy"}
+                  </Button>
+                  <Button size="sm" variant="ghost" onClick={() => setNewKey("")}>
+                    Done
+                  </Button>
+                </div>
+              </div>
+            )}
+            <div className="space-y-2">
+              {apiKeys.map((k) => (
+                <div key={k.id} className="flex flex-wrap items-center gap-2 rounded-md border border-border p-2.5 text-sm">
+                  <span className="font-medium">{k.name}</span>
+                  <code className="rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-xs">
+                    {k.prefix}…
+                  </code>
+                  <Badge variant={k.isActive ? "success" : "destructive"}>
+                    {k.isActive ? "Active" : "Revoked"}
+                  </Badge>
+                  <span className="text-xs text-muted-foreground">
+                    {k.lastUsedAt ? `Last used ${formatDateTime(k.lastUsedAt)}` : "Never used"}
+                  </span>
+                  {canManage && k.isActive && (
+                    <Button variant="ghost" size="icon" className="ml-auto" aria-label={`Revoke ${k.name}`} onClick={() => void revokeApiKey(k)}>
+                      <Trash2 className="h-3.5 w-3.5 text-destructive" />
+                    </Button>
+                  )}
+                </div>
+              ))}
+              {apiKeys.length === 0 && (
+                <p className="text-sm text-muted-foreground">No API keys yet.</p>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       {tab === "audit" && (
         <Card>
           <CardHeader>
@@ -911,6 +1242,202 @@ export default function SettingsPage() {
                   Cancel
                 </Button>
                 <Button type="submit">Create field</Button>
+              </div>
+            </form>
+          </Card>
+        </div>
+      )}
+      {seqFormOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" role="dialog" aria-modal="true">
+          <Card className="max-h-[85vh] w-full max-w-2xl overflow-y-auto p-6">
+            <h2 className="text-lg font-semibold">New sequence</h2>
+            <form onSubmit={createSequence} className="mt-4 space-y-4">
+              <div>
+                <Label htmlFor="seq-name">Sequence name</Label>
+                <Input
+                  id="seq-name"
+                  required
+                  value={seqName}
+                  onChange={(e) => setSeqName(e.target.value)}
+                  className="mt-1"
+                  placeholder="New lead nurture"
+                />
+              </div>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <Label>Steps (max 15)</Label>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    disabled={seqSteps.length >= 15}
+                    onClick={() =>
+                      setSeqSteps((s) => [...s, newStepRow()])
+                    }
+                  >
+                    <Plus className="h-3.5 w-3.5" /> Add step
+                  </Button>
+                </div>
+                {seqSteps.map((s, i) => (
+                  <div key={s.key} className="grid gap-2 rounded-md border border-border p-3 sm:grid-cols-[7rem_1fr_2rem]">
+                    <div className="grid content-start gap-1">
+                      <Label htmlFor={`step-delay-${i}`} className="text-xs">Step {i + 1} delay (h)</Label>
+                      <Input
+                        id={`step-delay-${i}`}
+                        type="number"
+                        min={0}
+                        max={8760}
+                        required
+                        value={s.delayHours}
+                        onChange={(e) =>
+                          setSeqSteps((rows) => rows.map((r, j) => (j === i ? { ...r, delayHours: e.target.value } : r)))
+                        }
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <div className="grid gap-1">
+                        <Label htmlFor={`step-subject-${i}`} className="text-xs">Subject</Label>
+                        <Input
+                          id={`step-subject-${i}`}
+                          required
+                          value={s.subjectTemplate}
+                          onChange={(e) =>
+                            setSeqSteps((rows) => rows.map((r, j) => (j === i ? { ...r, subjectTemplate: e.target.value } : r)))
+                          }
+                          placeholder="Hi {{firstName}}, quick follow-up"
+                        />
+                      </div>
+                      <div className="grid gap-1">
+                        <Label htmlFor={`step-body-${i}`} className="text-xs">Body</Label>
+                        <Textarea
+                          id={`step-body-${i}`}
+                          required
+                          rows={3}
+                          value={s.bodyTemplate}
+                          onChange={(e) =>
+                            setSeqSteps((rows) => rows.map((r, j) => (j === i ? { ...r, bodyTemplate: e.target.value } : r)))
+                          }
+                          placeholder="Write your message. {{firstName}}, {{lastName}}, {{company}}, {{ownerName}} are replaced per recipient. An unsubscribe link is added automatically."
+                        />
+                      </div>
+                    </div>
+                    <div className="grid content-end">
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        aria-label={`Remove step ${i + 1}`}
+                        disabled={seqSteps.length <= 1}
+                        onClick={() => setSeqSteps((rows) => rows.filter((_, j) => j !== i))}
+                      >
+                        <Trash2 className="h-3.5 w-3.5 text-destructive" />
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+                <p className="text-xs text-muted-foreground">
+                  The delay of a step is the wait after the previous step (the first waits from enrollment).
+                  Templates support {"{{firstName}}"}, {"{{lastName}}"}, {"{{company}}"}, {"{{ownerName}}"}.
+                </p>
+                {seqErrors["steps"] && (
+                  <p className="text-xs text-destructive" role="alert">{seqErrors["steps"]}</p>
+                )}
+                {seqErrors["name"] && (
+                  <p className="text-xs text-destructive" role="alert">{seqErrors["name"]}</p>
+                )}
+              </div>
+              <div className="flex justify-end gap-2 pt-2">
+                <Button type="button" variant="outline" onClick={() => setSeqFormOpen(false)}>Cancel</Button>
+                <Button type="submit" disabled={seqSubmitting}>{seqSubmitting ? "Creating…" : "Create sequence"}</Button>
+              </div>
+            </form>
+          </Card>
+        </div>
+      )}
+
+      {editingSteps && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" role="dialog" aria-modal="true">
+          <Card className="max-h-[85vh] w-full max-w-2xl overflow-y-auto p-6">
+            <h2 className="text-lg font-semibold">Edit steps — {editingSteps.name}</h2>
+            <p className="mt-1 text-xs text-warning">
+              Active enrollments keep their current step index; enrollments whose step no
+              exists get stopped by the scheduler.
+            </p>
+            <form onSubmit={saveSteps} className="mt-4 space-y-3">
+              {editSteps.map((s, i) => (
+                <div key={s.key} className="grid gap-2 rounded-md border border-border p-3 sm:grid-cols-[7rem_1fr_2rem]">
+                  <div className="grid content-start gap-1">
+                    <Label htmlFor={`estep-delay-${i}`} className="text-xs">Step {i + 1} delay (h)</Label>
+                    <Input
+                      id={`estep-delay-${i}`}
+                      type="number"
+                      min={0}
+                      max={8760}
+                      required
+                      value={s.delayHours}
+                      onChange={(e) =>
+                        setEditSteps((rows) => rows.map((r, j) => (j === i ? { ...r, delayHours: e.target.value } : r)))
+                      }
+                    />
+                  </div>
+                  <div className="grid gap-2">
+                    <div className="grid gap-1">
+                      <Label htmlFor={`estep-subject-${i}`} className="text-xs">Subject</Label>
+                      <Input
+                        id={`estep-subject-${i}`}
+                        required
+                        value={s.subjectTemplate}
+                        onChange={(e) =>
+                          setEditSteps((rows) => rows.map((r, j) => (j === i ? { ...r, subjectTemplate: e.target.value } : r)))
+                        }
+                      />
+                    </div>
+                    <div className="grid gap-1">
+                      <Label htmlFor={`estep-body-${i}`} className="text-xs">Body</Label>
+                      <Textarea
+                        id={`estep-body-${i}`}
+                        required
+                        rows={3}
+                        value={s.bodyTemplate}
+                        onChange={(e) =>
+                          setEditSteps((rows) => rows.map((r, j) => (j === i ? { ...r, bodyTemplate: e.target.value } : r)))
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div className="grid content-end">
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      aria-label={`Remove step ${i + 1}`}
+                      disabled={editSteps.length <= 1}
+                      onClick={() => setEditSteps((rows) => rows.filter((_, j) => j !== i))}
+                    >
+                      <Trash2 className="h-3.5 w-3.5 text-destructive" />
+                    </Button>
+                  </div>
+                </div>
+              ))}
+              <div className="flex items-center justify-between">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  disabled={editSteps.length >= 15}
+                  onClick={() =>
+                    setEditSteps((s) => [...s, newStepRow()])
+                  }
+                >
+                  <Plus className="h-3.5 w-3.5" /> Add step
+                </Button>
+                {seqErrors["steps"] && (
+                  <p className="text-xs text-destructive" role="alert">{seqErrors["steps"]}</p>
+                )}
+              </div>
+              <div className="flex justify-end gap-2 pt-2">
+                <Button type="button" variant="outline" onClick={() => setEditingSteps(null)}>Cancel</Button>
+                <Button type="submit" disabled={seqSubmitting}>{seqSubmitting ? "Saving…" : "Save steps"}</Button>
               </div>
             </form>
           </Card>

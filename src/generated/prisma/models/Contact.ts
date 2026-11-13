@@ -41,6 +41,7 @@ export type ContactMinAggregateOutputType = {
   ownerId: string | null
   status: string | null
   avatarColor: string | null
+  summary: string | null
   lastContactedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -64,6 +65,7 @@ export type ContactMaxAggregateOutputType = {
   ownerId: string | null
   status: string | null
   avatarColor: string | null
+  summary: string | null
   lastContactedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -87,6 +89,7 @@ export type ContactCountAggregateOutputType = {
   ownerId: number
   status: number
   avatarColor: number
+  summary: number
   lastContactedAt: number
   createdAt: number
   updatedAt: number
@@ -112,6 +115,7 @@ export type ContactMinAggregateInputType = {
   ownerId?: true
   status?: true
   avatarColor?: true
+  summary?: true
   lastContactedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -135,6 +139,7 @@ export type ContactMaxAggregateInputType = {
   ownerId?: true
   status?: true
   avatarColor?: true
+  summary?: true
   lastContactedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -158,6 +163,7 @@ export type ContactCountAggregateInputType = {
   ownerId?: true
   status?: true
   avatarColor?: true
+  summary?: true
   lastContactedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -254,6 +260,7 @@ export type ContactGroupByOutputType = {
   ownerId: string | null
   status: string
   avatarColor: string
+  summary: string
   lastContactedAt: Date | null
   createdAt: Date
   updatedAt: Date
@@ -298,6 +305,7 @@ export type ContactWhereInput = {
   ownerId?: Prisma.StringNullableFilter<"Contact"> | string | null
   status?: Prisma.StringFilter<"Contact"> | string
   avatarColor?: Prisma.StringFilter<"Contact"> | string
+  summary?: Prisma.StringFilter<"Contact"> | string
   lastContactedAt?: Prisma.DateTimeNullableFilter<"Contact"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Contact"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Contact"> | Date | string
@@ -311,6 +319,7 @@ export type ContactWhereInput = {
   deals?: Prisma.DealListRelationFilter
   sentEmails?: Prisma.SentEmailListRelationFilter
   inboundEmails?: Prisma.InboundEmailListRelationFilter
+  sequenceEnrollments?: Prisma.SequenceEnrollmentListRelationFilter
   tags?: Prisma.TagListRelationFilter
 }
 
@@ -331,6 +340,7 @@ export type ContactOrderByWithRelationInput = {
   ownerId?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   avatarColor?: Prisma.SortOrder
+  summary?: Prisma.SortOrder
   lastContactedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -344,6 +354,7 @@ export type ContactOrderByWithRelationInput = {
   deals?: Prisma.DealOrderByRelationAggregateInput
   sentEmails?: Prisma.SentEmailOrderByRelationAggregateInput
   inboundEmails?: Prisma.InboundEmailOrderByRelationAggregateInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentOrderByRelationAggregateInput
   tags?: Prisma.TagOrderByRelationAggregateInput
 }
 
@@ -367,6 +378,7 @@ export type ContactWhereUniqueInput = Prisma.AtLeast<{
   ownerId?: Prisma.StringNullableFilter<"Contact"> | string | null
   status?: Prisma.StringFilter<"Contact"> | string
   avatarColor?: Prisma.StringFilter<"Contact"> | string
+  summary?: Prisma.StringFilter<"Contact"> | string
   lastContactedAt?: Prisma.DateTimeNullableFilter<"Contact"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Contact"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Contact"> | Date | string
@@ -380,6 +392,7 @@ export type ContactWhereUniqueInput = Prisma.AtLeast<{
   deals?: Prisma.DealListRelationFilter
   sentEmails?: Prisma.SentEmailListRelationFilter
   inboundEmails?: Prisma.InboundEmailListRelationFilter
+  sequenceEnrollments?: Prisma.SequenceEnrollmentListRelationFilter
   tags?: Prisma.TagListRelationFilter
 }, "id">
 
@@ -400,6 +413,7 @@ export type ContactOrderByWithAggregationInput = {
   ownerId?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   avatarColor?: Prisma.SortOrder
+  summary?: Prisma.SortOrder
   lastContactedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -429,6 +443,7 @@ export type ContactScalarWhereWithAggregatesInput = {
   ownerId?: Prisma.StringNullableWithAggregatesFilter<"Contact"> | string | null
   status?: Prisma.StringWithAggregatesFilter<"Contact"> | string
   avatarColor?: Prisma.StringWithAggregatesFilter<"Contact"> | string
+  summary?: Prisma.StringWithAggregatesFilter<"Contact"> | string
   lastContactedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Contact"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Contact"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Contact"> | Date | string
@@ -449,6 +464,7 @@ export type ContactCreateInput = {
   country?: string
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -462,6 +478,7 @@ export type ContactCreateInput = {
   deals?: Prisma.DealCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
   tags?: Prisma.TagCreateNestedManyWithoutContactsInput
 }
 
@@ -482,6 +499,7 @@ export type ContactUncheckedCreateInput = {
   ownerId?: string | null
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -492,6 +510,7 @@ export type ContactUncheckedCreateInput = {
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutContactsInput
 }
 
@@ -509,6 +528,7 @@ export type ContactUpdateInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -522,6 +542,7 @@ export type ContactUpdateInput = {
   deals?: Prisma.DealUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUpdateManyWithoutContactsNestedInput
 }
 
@@ -542,6 +563,7 @@ export type ContactUncheckedUpdateInput = {
   ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -552,6 +574,7 @@ export type ContactUncheckedUpdateInput = {
   deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutContactsNestedInput
 }
 
@@ -572,6 +595,7 @@ export type ContactCreateManyInput = {
   ownerId?: string | null
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -592,6 +616,7 @@ export type ContactUpdateManyMutationInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -615,6 +640,7 @@ export type ContactUncheckedUpdateManyInput = {
   ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -648,6 +674,7 @@ export type ContactCountOrderByAggregateInput = {
   ownerId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   avatarColor?: Prisma.SortOrder
+  summary?: Prisma.SortOrder
   lastContactedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -671,6 +698,7 @@ export type ContactMaxOrderByAggregateInput = {
   ownerId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   avatarColor?: Prisma.SortOrder
+  summary?: Prisma.SortOrder
   lastContactedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -694,6 +722,7 @@ export type ContactMinOrderByAggregateInput = {
   ownerId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   avatarColor?: Prisma.SortOrder
+  summary?: Prisma.SortOrder
   lastContactedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -965,6 +994,22 @@ export type ContactUpdateOneWithoutInboundEmailsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ContactUpdateToOneWithWhereWithoutInboundEmailsInput, Prisma.ContactUpdateWithoutInboundEmailsInput>, Prisma.ContactUncheckedUpdateWithoutInboundEmailsInput>
 }
 
+export type ContactCreateNestedOneWithoutSequenceEnrollmentsInput = {
+  create?: Prisma.XOR<Prisma.ContactCreateWithoutSequenceEnrollmentsInput, Prisma.ContactUncheckedCreateWithoutSequenceEnrollmentsInput>
+  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutSequenceEnrollmentsInput
+  connect?: Prisma.ContactWhereUniqueInput
+}
+
+export type ContactUpdateOneWithoutSequenceEnrollmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.ContactCreateWithoutSequenceEnrollmentsInput, Prisma.ContactUncheckedCreateWithoutSequenceEnrollmentsInput>
+  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutSequenceEnrollmentsInput
+  upsert?: Prisma.ContactUpsertWithoutSequenceEnrollmentsInput
+  disconnect?: Prisma.ContactWhereInput | boolean
+  delete?: Prisma.ContactWhereInput | boolean
+  connect?: Prisma.ContactWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContactUpdateToOneWithWhereWithoutSequenceEnrollmentsInput, Prisma.ContactUpdateWithoutSequenceEnrollmentsInput>, Prisma.ContactUncheckedUpdateWithoutSequenceEnrollmentsInput>
+}
+
 export type ContactCreateWithoutOrganizationInput = {
   id?: string
   firstName: string
@@ -979,6 +1024,7 @@ export type ContactCreateWithoutOrganizationInput = {
   country?: string
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -991,6 +1037,7 @@ export type ContactCreateWithoutOrganizationInput = {
   deals?: Prisma.DealCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
   tags?: Prisma.TagCreateNestedManyWithoutContactsInput
 }
 
@@ -1010,6 +1057,7 @@ export type ContactUncheckedCreateWithoutOrganizationInput = {
   ownerId?: string | null
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1020,6 +1068,7 @@ export type ContactUncheckedCreateWithoutOrganizationInput = {
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutContactsInput
 }
 
@@ -1068,6 +1117,7 @@ export type ContactScalarWhereInput = {
   ownerId?: Prisma.StringNullableFilter<"Contact"> | string | null
   status?: Prisma.StringFilter<"Contact"> | string
   avatarColor?: Prisma.StringFilter<"Contact"> | string
+  summary?: Prisma.StringFilter<"Contact"> | string
   lastContactedAt?: Prisma.DateTimeNullableFilter<"Contact"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Contact"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Contact"> | Date | string
@@ -1088,6 +1138,7 @@ export type ContactCreateWithoutOwnerInput = {
   country?: string
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1100,6 +1151,7 @@ export type ContactCreateWithoutOwnerInput = {
   deals?: Prisma.DealCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
   tags?: Prisma.TagCreateNestedManyWithoutContactsInput
 }
 
@@ -1119,6 +1171,7 @@ export type ContactUncheckedCreateWithoutOwnerInput = {
   country?: string
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1129,6 +1182,7 @@ export type ContactUncheckedCreateWithoutOwnerInput = {
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutContactsInput
 }
 
@@ -1171,6 +1225,7 @@ export type ContactCreateWithoutCompanyInput = {
   country?: string
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1183,6 +1238,7 @@ export type ContactCreateWithoutCompanyInput = {
   deals?: Prisma.DealCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
   tags?: Prisma.TagCreateNestedManyWithoutContactsInput
 }
 
@@ -1202,6 +1258,7 @@ export type ContactUncheckedCreateWithoutCompanyInput = {
   ownerId?: string | null
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1212,6 +1269,7 @@ export type ContactUncheckedCreateWithoutCompanyInput = {
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutContactsInput
 }
 
@@ -1254,6 +1312,7 @@ export type ContactCreateWithoutTagsInput = {
   country?: string
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1267,6 +1326,7 @@ export type ContactCreateWithoutTagsInput = {
   deals?: Prisma.DealCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutTagsInput = {
@@ -1286,6 +1346,7 @@ export type ContactUncheckedCreateWithoutTagsInput = {
   ownerId?: string | null
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1296,6 +1357,7 @@ export type ContactUncheckedCreateWithoutTagsInput = {
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutTagsInput = {
@@ -1333,6 +1395,7 @@ export type ContactCreateWithoutLeadsInput = {
   country?: string
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1345,6 +1408,7 @@ export type ContactCreateWithoutLeadsInput = {
   deals?: Prisma.DealCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
   tags?: Prisma.TagCreateNestedManyWithoutContactsInput
 }
 
@@ -1365,6 +1429,7 @@ export type ContactUncheckedCreateWithoutLeadsInput = {
   ownerId?: string | null
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1374,6 +1439,7 @@ export type ContactUncheckedCreateWithoutLeadsInput = {
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutContactsInput
 }
 
@@ -1407,6 +1473,7 @@ export type ContactUpdateWithoutLeadsInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1419,6 +1486,7 @@ export type ContactUpdateWithoutLeadsInput = {
   deals?: Prisma.DealUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUpdateManyWithoutContactsNestedInput
 }
 
@@ -1439,6 +1507,7 @@ export type ContactUncheckedUpdateWithoutLeadsInput = {
   ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1448,6 +1517,7 @@ export type ContactUncheckedUpdateWithoutLeadsInput = {
   deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutContactsNestedInput
 }
 
@@ -1465,6 +1535,7 @@ export type ContactCreateWithoutDealsInput = {
   country?: string
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1477,6 +1548,7 @@ export type ContactCreateWithoutDealsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
   tags?: Prisma.TagCreateNestedManyWithoutContactsInput
 }
 
@@ -1497,6 +1569,7 @@ export type ContactUncheckedCreateWithoutDealsInput = {
   ownerId?: string | null
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1506,6 +1579,7 @@ export type ContactUncheckedCreateWithoutDealsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutContactsInput
 }
 
@@ -1539,6 +1613,7 @@ export type ContactUpdateWithoutDealsInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1551,6 +1626,7 @@ export type ContactUpdateWithoutDealsInput = {
   notes?: Prisma.NoteUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUpdateManyWithoutContactsNestedInput
 }
 
@@ -1571,6 +1647,7 @@ export type ContactUncheckedUpdateWithoutDealsInput = {
   ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1580,6 +1657,7 @@ export type ContactUncheckedUpdateWithoutDealsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutContactsNestedInput
 }
 
@@ -1597,6 +1675,7 @@ export type ContactCreateWithoutActivitiesInput = {
   country?: string
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1609,6 +1688,7 @@ export type ContactCreateWithoutActivitiesInput = {
   deals?: Prisma.DealCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
   tags?: Prisma.TagCreateNestedManyWithoutContactsInput
 }
 
@@ -1629,6 +1709,7 @@ export type ContactUncheckedCreateWithoutActivitiesInput = {
   ownerId?: string | null
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1638,6 +1719,7 @@ export type ContactUncheckedCreateWithoutActivitiesInput = {
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutContactsInput
 }
 
@@ -1671,6 +1753,7 @@ export type ContactUpdateWithoutActivitiesInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1683,6 +1766,7 @@ export type ContactUpdateWithoutActivitiesInput = {
   deals?: Prisma.DealUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUpdateManyWithoutContactsNestedInput
 }
 
@@ -1703,6 +1787,7 @@ export type ContactUncheckedUpdateWithoutActivitiesInput = {
   ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1712,6 +1797,7 @@ export type ContactUncheckedUpdateWithoutActivitiesInput = {
   deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutContactsNestedInput
 }
 
@@ -1729,6 +1815,7 @@ export type ContactCreateWithoutNotesInput = {
   country?: string
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1741,6 +1828,7 @@ export type ContactCreateWithoutNotesInput = {
   deals?: Prisma.DealCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
   tags?: Prisma.TagCreateNestedManyWithoutContactsInput
 }
 
@@ -1761,6 +1849,7 @@ export type ContactUncheckedCreateWithoutNotesInput = {
   ownerId?: string | null
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1770,6 +1859,7 @@ export type ContactUncheckedCreateWithoutNotesInput = {
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutContactsInput
 }
 
@@ -1803,6 +1893,7 @@ export type ContactUpdateWithoutNotesInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1815,6 +1906,7 @@ export type ContactUpdateWithoutNotesInput = {
   deals?: Prisma.DealUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUpdateManyWithoutContactsNestedInput
 }
 
@@ -1835,6 +1927,7 @@ export type ContactUncheckedUpdateWithoutNotesInput = {
   ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1844,6 +1937,7 @@ export type ContactUncheckedUpdateWithoutNotesInput = {
   deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutContactsNestedInput
 }
 
@@ -1861,6 +1955,7 @@ export type ContactCreateWithoutSentEmailsInput = {
   country?: string
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1873,6 +1968,7 @@ export type ContactCreateWithoutSentEmailsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutContactInput
   deals?: Prisma.DealCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
   tags?: Prisma.TagCreateNestedManyWithoutContactsInput
 }
 
@@ -1893,6 +1989,7 @@ export type ContactUncheckedCreateWithoutSentEmailsInput = {
   ownerId?: string | null
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1902,6 +1999,7 @@ export type ContactUncheckedCreateWithoutSentEmailsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutContactInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutContactsInput
 }
 
@@ -1935,6 +2033,7 @@ export type ContactUpdateWithoutSentEmailsInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1947,6 +2046,7 @@ export type ContactUpdateWithoutSentEmailsInput = {
   notes?: Prisma.NoteUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUpdateManyWithoutContactsNestedInput
 }
 
@@ -1967,6 +2067,7 @@ export type ContactUncheckedUpdateWithoutSentEmailsInput = {
   ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1976,6 +2077,7 @@ export type ContactUncheckedUpdateWithoutSentEmailsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutContactsNestedInput
 }
 
@@ -1993,6 +2095,7 @@ export type ContactCreateWithoutInboundEmailsInput = {
   country?: string
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2005,6 +2108,7 @@ export type ContactCreateWithoutInboundEmailsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutContactInput
   deals?: Prisma.DealCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
   tags?: Prisma.TagCreateNestedManyWithoutContactsInput
 }
 
@@ -2025,6 +2129,7 @@ export type ContactUncheckedCreateWithoutInboundEmailsInput = {
   ownerId?: string | null
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2034,6 +2139,7 @@ export type ContactUncheckedCreateWithoutInboundEmailsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutContactInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutContactsInput
 }
 
@@ -2067,6 +2173,7 @@ export type ContactUpdateWithoutInboundEmailsInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2079,6 +2186,7 @@ export type ContactUpdateWithoutInboundEmailsInput = {
   notes?: Prisma.NoteUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUpdateManyWithoutContactsNestedInput
 }
 
@@ -2099,6 +2207,7 @@ export type ContactUncheckedUpdateWithoutInboundEmailsInput = {
   ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2108,6 +2217,147 @@ export type ContactUncheckedUpdateWithoutInboundEmailsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutContactsNestedInput
+}
+
+export type ContactCreateWithoutSequenceEnrollmentsInput = {
+  id?: string
+  firstName: string
+  lastName: string
+  email: string
+  phone?: string
+  mobile?: string
+  title?: string
+  address?: string
+  city?: string
+  state?: string
+  country?: string
+  status?: string
+  avatarColor?: string
+  summary?: string
+  lastContactedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  organization: Prisma.OrganizationCreateNestedOneWithoutContactsInput
+  company?: Prisma.CompanyCreateNestedOneWithoutContactsInput
+  owner?: Prisma.UserCreateNestedOneWithoutOwnedContactsInput
+  leads?: Prisma.LeadCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
+  notes?: Prisma.NoteCreateNestedManyWithoutContactInput
+  deals?: Prisma.DealCreateNestedManyWithoutContactInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
+  tags?: Prisma.TagCreateNestedManyWithoutContactsInput
+}
+
+export type ContactUncheckedCreateWithoutSequenceEnrollmentsInput = {
+  id?: string
+  organizationId: string
+  companyId?: string | null
+  firstName: string
+  lastName: string
+  email: string
+  phone?: string
+  mobile?: string
+  title?: string
+  address?: string
+  city?: string
+  state?: string
+  country?: string
+  ownerId?: string | null
+  status?: string
+  avatarColor?: string
+  summary?: string
+  lastContactedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutContactInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutContactsInput
+}
+
+export type ContactCreateOrConnectWithoutSequenceEnrollmentsInput = {
+  where: Prisma.ContactWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContactCreateWithoutSequenceEnrollmentsInput, Prisma.ContactUncheckedCreateWithoutSequenceEnrollmentsInput>
+}
+
+export type ContactUpsertWithoutSequenceEnrollmentsInput = {
+  update: Prisma.XOR<Prisma.ContactUpdateWithoutSequenceEnrollmentsInput, Prisma.ContactUncheckedUpdateWithoutSequenceEnrollmentsInput>
+  create: Prisma.XOR<Prisma.ContactCreateWithoutSequenceEnrollmentsInput, Prisma.ContactUncheckedCreateWithoutSequenceEnrollmentsInput>
+  where?: Prisma.ContactWhereInput
+}
+
+export type ContactUpdateToOneWithWhereWithoutSequenceEnrollmentsInput = {
+  where?: Prisma.ContactWhereInput
+  data: Prisma.XOR<Prisma.ContactUpdateWithoutSequenceEnrollmentsInput, Prisma.ContactUncheckedUpdateWithoutSequenceEnrollmentsInput>
+}
+
+export type ContactUpdateWithoutSequenceEnrollmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutContactsNestedInput
+  company?: Prisma.CompanyUpdateOneWithoutContactsNestedInput
+  owner?: Prisma.UserUpdateOneWithoutOwnedContactsNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutContactNestedInput
+  deals?: Prisma.DealUpdateManyWithoutContactNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
+  tags?: Prisma.TagUpdateManyWithoutContactsNestedInput
+}
+
+export type ContactUncheckedUpdateWithoutSequenceEnrollmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  companyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutContactNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutContactsNestedInput
 }
 
@@ -2127,6 +2377,7 @@ export type ContactCreateManyOrganizationInput = {
   ownerId?: string | null
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2147,6 +2398,7 @@ export type ContactUpdateWithoutOrganizationInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2159,6 +2411,7 @@ export type ContactUpdateWithoutOrganizationInput = {
   deals?: Prisma.DealUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUpdateManyWithoutContactsNestedInput
 }
 
@@ -2178,6 +2431,7 @@ export type ContactUncheckedUpdateWithoutOrganizationInput = {
   ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2188,6 +2442,7 @@ export type ContactUncheckedUpdateWithoutOrganizationInput = {
   deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutContactsNestedInput
 }
 
@@ -2207,6 +2462,7 @@ export type ContactUncheckedUpdateManyWithoutOrganizationInput = {
   ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2229,6 +2485,7 @@ export type ContactCreateManyOwnerInput = {
   country?: string
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2249,6 +2506,7 @@ export type ContactUpdateWithoutOwnerInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2261,6 +2519,7 @@ export type ContactUpdateWithoutOwnerInput = {
   deals?: Prisma.DealUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUpdateManyWithoutContactsNestedInput
 }
 
@@ -2280,6 +2539,7 @@ export type ContactUncheckedUpdateWithoutOwnerInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2290,6 +2550,7 @@ export type ContactUncheckedUpdateWithoutOwnerInput = {
   deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutContactsNestedInput
 }
 
@@ -2309,6 +2570,7 @@ export type ContactUncheckedUpdateManyWithoutOwnerInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2331,6 +2593,7 @@ export type ContactCreateManyCompanyInput = {
   ownerId?: string | null
   status?: string
   avatarColor?: string
+  summary?: string
   lastContactedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2351,6 +2614,7 @@ export type ContactUpdateWithoutCompanyInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2363,6 +2627,7 @@ export type ContactUpdateWithoutCompanyInput = {
   deals?: Prisma.DealUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUpdateManyWithoutContactsNestedInput
 }
 
@@ -2382,6 +2647,7 @@ export type ContactUncheckedUpdateWithoutCompanyInput = {
   ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2392,6 +2658,7 @@ export type ContactUncheckedUpdateWithoutCompanyInput = {
   deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutContactsNestedInput
 }
 
@@ -2411,6 +2678,7 @@ export type ContactUncheckedUpdateManyWithoutCompanyInput = {
   ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2431,6 +2699,7 @@ export type ContactUpdateWithoutTagsInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2444,6 +2713,7 @@ export type ContactUpdateWithoutTagsInput = {
   deals?: Prisma.DealUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutTagsInput = {
@@ -2463,6 +2733,7 @@ export type ContactUncheckedUpdateWithoutTagsInput = {
   ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2473,6 +2744,7 @@ export type ContactUncheckedUpdateWithoutTagsInput = {
   deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateManyWithoutTagsInput = {
@@ -2492,6 +2764,7 @@ export type ContactUncheckedUpdateManyWithoutTagsInput = {
   ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
   lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2510,6 +2783,7 @@ export type ContactCountOutputType = {
   deals: number
   sentEmails: number
   inboundEmails: number
+  sequenceEnrollments: number
   tags: number
 }
 
@@ -2520,6 +2794,7 @@ export type ContactCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   deals?: boolean | ContactCountOutputTypeCountDealsArgs
   sentEmails?: boolean | ContactCountOutputTypeCountSentEmailsArgs
   inboundEmails?: boolean | ContactCountOutputTypeCountInboundEmailsArgs
+  sequenceEnrollments?: boolean | ContactCountOutputTypeCountSequenceEnrollmentsArgs
   tags?: boolean | ContactCountOutputTypeCountTagsArgs
 }
 
@@ -2578,6 +2853,13 @@ export type ContactCountOutputTypeCountInboundEmailsArgs<ExtArgs extends runtime
 /**
  * ContactCountOutputType without action
  */
+export type ContactCountOutputTypeCountSequenceEnrollmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SequenceEnrollmentWhereInput
+}
+
+/**
+ * ContactCountOutputType without action
+ */
 export type ContactCountOutputTypeCountTagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TagWhereInput
 }
@@ -2600,6 +2882,7 @@ export type ContactSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   ownerId?: boolean
   status?: boolean
   avatarColor?: boolean
+  summary?: boolean
   lastContactedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -2613,6 +2896,7 @@ export type ContactSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   deals?: boolean | Prisma.Contact$dealsArgs<ExtArgs>
   sentEmails?: boolean | Prisma.Contact$sentEmailsArgs<ExtArgs>
   inboundEmails?: boolean | Prisma.Contact$inboundEmailsArgs<ExtArgs>
+  sequenceEnrollments?: boolean | Prisma.Contact$sequenceEnrollmentsArgs<ExtArgs>
   tags?: boolean | Prisma.Contact$tagsArgs<ExtArgs>
   _count?: boolean | Prisma.ContactCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["contact"]>
@@ -2634,6 +2918,7 @@ export type ContactSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   ownerId?: boolean
   status?: boolean
   avatarColor?: boolean
+  summary?: boolean
   lastContactedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -2660,6 +2945,7 @@ export type ContactSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   ownerId?: boolean
   status?: boolean
   avatarColor?: boolean
+  summary?: boolean
   lastContactedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -2686,13 +2972,14 @@ export type ContactSelectScalar = {
   ownerId?: boolean
   status?: boolean
   avatarColor?: boolean
+  summary?: boolean
   lastContactedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   deletedAt?: boolean
 }
 
-export type ContactOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "companyId" | "firstName" | "lastName" | "email" | "phone" | "mobile" | "title" | "address" | "city" | "state" | "country" | "ownerId" | "status" | "avatarColor" | "lastContactedAt" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["contact"]>
+export type ContactOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "companyId" | "firstName" | "lastName" | "email" | "phone" | "mobile" | "title" | "address" | "city" | "state" | "country" | "ownerId" | "status" | "avatarColor" | "summary" | "lastContactedAt" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["contact"]>
 export type ContactInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   company?: boolean | Prisma.Contact$companyArgs<ExtArgs>
@@ -2703,6 +2990,7 @@ export type ContactInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   deals?: boolean | Prisma.Contact$dealsArgs<ExtArgs>
   sentEmails?: boolean | Prisma.Contact$sentEmailsArgs<ExtArgs>
   inboundEmails?: boolean | Prisma.Contact$inboundEmailsArgs<ExtArgs>
+  sequenceEnrollments?: boolean | Prisma.Contact$sequenceEnrollmentsArgs<ExtArgs>
   tags?: boolean | Prisma.Contact$tagsArgs<ExtArgs>
   _count?: boolean | Prisma.ContactCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -2729,6 +3017,7 @@ export type $ContactPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     deals: Prisma.$DealPayload<ExtArgs>[]
     sentEmails: Prisma.$SentEmailPayload<ExtArgs>[]
     inboundEmails: Prisma.$InboundEmailPayload<ExtArgs>[]
+    sequenceEnrollments: Prisma.$SequenceEnrollmentPayload<ExtArgs>[]
     tags: Prisma.$TagPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -2748,6 +3037,7 @@ export type $ContactPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     ownerId: string | null
     status: string
     avatarColor: string
+    summary: string
     lastContactedAt: Date | null
     createdAt: Date
     updatedAt: Date
@@ -3155,6 +3445,7 @@ export interface Prisma__ContactClient<T, Null = never, ExtArgs extends runtime.
   deals<T extends Prisma.Contact$dealsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$dealsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sentEmails<T extends Prisma.Contact$sentEmailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$sentEmailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SentEmailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   inboundEmails<T extends Prisma.Contact$inboundEmailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$inboundEmailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InboundEmailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sequenceEnrollments<T extends Prisma.Contact$sequenceEnrollmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$sequenceEnrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SequenceEnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tags<T extends Prisma.Contact$tagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3201,6 +3492,7 @@ export interface ContactFieldRefs {
   readonly ownerId: Prisma.FieldRef<"Contact", 'String'>
   readonly status: Prisma.FieldRef<"Contact", 'String'>
   readonly avatarColor: Prisma.FieldRef<"Contact", 'String'>
+  readonly summary: Prisma.FieldRef<"Contact", 'String'>
   readonly lastContactedAt: Prisma.FieldRef<"Contact", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Contact", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Contact", 'DateTime'>
@@ -3783,6 +4075,30 @@ export type Contact$inboundEmailsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.InboundEmailScalarFieldEnum | Prisma.InboundEmailScalarFieldEnum[]
+}
+
+/**
+ * Contact.sequenceEnrollments
+ */
+export type Contact$sequenceEnrollmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SequenceEnrollment
+   */
+  select?: Prisma.SequenceEnrollmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SequenceEnrollment
+   */
+  omit?: Prisma.SequenceEnrollmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SequenceEnrollmentInclude<ExtArgs> | null
+  where?: Prisma.SequenceEnrollmentWhereInput
+  orderBy?: Prisma.SequenceEnrollmentOrderByWithRelationInput | Prisma.SequenceEnrollmentOrderByWithRelationInput[]
+  cursor?: Prisma.SequenceEnrollmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SequenceEnrollmentScalarFieldEnum | Prisma.SequenceEnrollmentScalarFieldEnum[]
 }
 
 /**

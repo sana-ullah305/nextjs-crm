@@ -146,6 +146,43 @@ export const apiKeyCreateSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
 });
 
+// Sequence steps: a single omitted position defaults to its array index at
+// insert time, but the route's unique-position guard maps every omitted
+// position to a shared sentinel — so a payload with two or more omitted
+// positions is 400-rejected. Send explicit positions (the UI always does).
+export const sequenceStepSchema = z.object({
+  position: z.coerce.number().int().min(0).max(14).optional(),
+  delayHours: z.coerce.number().int().min(0).max(24 * 365).default(24),
+  subjectTemplate: z.string().trim().min(1, "Subject template is required").max(200),
+  bodyTemplate: z.string().trim().min(1, "Body template is required").max(20000),
+});
+
+export const sequenceCreateSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(120),
+  description: z.string().trim().max(2000).default(""),
+  steps: z.array(sequenceStepSchema).min(1, "A sequence needs at least one step").max(15),
+});
+
+export const sequenceUpdateSchema = z.object({
+  name: z.string().trim().min(1).max(120).optional(),
+  description: z.string().trim().max(2000).optional(),
+  isActive: z.boolean().optional(),
+});
+
+export const sequenceStepsReplaceSchema = z.object({
+  steps: z.array(sequenceStepSchema).min(1).max(15),
+});
+
+// Exactly one of contactId / leadId, enforced at route level via refine.
+export const sequenceEnrollSchema = z
+  .object({
+    contactId: z.string().trim().min(1).max(64).optional(),
+    leadId: z.string().trim().min(1).max(64).optional(),
+  })
+  .refine((v) => Boolean(v.contactId) !== Boolean(v.leadId), {
+    message: "Provide exactly one of contactId or leadId",
+  });
+
 export const leadConvertSchema = z.object({
   createDeal: z.boolean().default(true),
   dealName: z.string().trim().max(150).optional(),

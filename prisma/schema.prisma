@@ -2,8 +2,8 @@
 // No enums (string fields + Zod validation), no arrays (join tables).
 
 generator client {
-  provider        = "prisma-client"
-  output          = "../src/generated/prisma"
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -20,26 +20,28 @@ model Organization {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  users             User[]
-  companies         Company[]
-  contacts          Contact[]
-  leads             Lead[]
-  pipelines         Pipeline[]
-  deals             Deal[]
-  tasks             Task[]
-  activities        Activity[]
-  notes             Note[]
-  notifications     Notification[]
-  tags              Tag[]
-  leadSources       LeadSource[]
-  emailTemplates    EmailTemplate[]
-  customFields      CustomField[]
-  emailSettings     EmailSettings?
-  sentEmails        SentEmail[]
-  inboundEmails     InboundEmail[]
-  reminders         FollowUpReminder[]
-  apiKeys           ApiKey[]
-  currency          String   @default("USD")
+  users               User[]
+  companies           Company[]
+  contacts            Contact[]
+  leads               Lead[]
+  pipelines           Pipeline[]
+  deals               Deal[]
+  tasks               Task[]
+  activities          Activity[]
+  notes               Note[]
+  notifications       Notification[]
+  tags                Tag[]
+  leadSources         LeadSource[]
+  emailTemplates      EmailTemplate[]
+  customFields        CustomField[]
+  emailSettings       EmailSettings?
+  sentEmails          SentEmail[]
+  inboundEmails       InboundEmail[]
+  reminders           FollowUpReminder[]
+  apiKeys             ApiKey[]
+  sequences           Sequence[]
+  sequenceEnrollments SequenceEnrollment[]
+  currency            String               @default("USD")
 }
 
 model User {
@@ -57,21 +59,23 @@ model User {
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
 
-  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  sessions     Session[]
-  ownedCompanies Company[]  @relation("CompanyOwner")
-  ownedContacts  Contact[]  @relation("ContactOwner")
-  ownedLeads     Lead[]     @relation("LeadOwner")
-  assignedLeads  Lead[]     @relation("LeadAssignee")
-  ownedDeals     Deal[]     @relation("DealOwner")
-  tasks          Task[]     @relation("TaskAssignee")
-  createdTasks   Task[]     @relation("TaskCreator")
-  activities     Activity[]
-  notes          Note[]
-  notifications  Notification[]
-  sentEmails     SentEmail[] @relation("SentEmailSender")
-  reminders     FollowUpReminder[] @relation("ReminderRecipient")
-  createdApiKeys ApiKey[] @relation("ApiKeyCreator")
+  organization        Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  sessions            Session[]
+  ownedCompanies      Company[]            @relation("CompanyOwner")
+  ownedContacts       Contact[]            @relation("ContactOwner")
+  ownedLeads          Lead[]               @relation("LeadOwner")
+  assignedLeads       Lead[]               @relation("LeadAssignee")
+  ownedDeals          Deal[]               @relation("DealOwner")
+  tasks               Task[]               @relation("TaskAssignee")
+  createdTasks        Task[]               @relation("TaskCreator")
+  activities          Activity[]
+  notes               Note[]
+  notifications       Notification[]
+  sentEmails          SentEmail[]          @relation("SentEmailSender")
+  reminders           FollowUpReminder[]   @relation("ReminderRecipient")
+  createdApiKeys      ApiKey[]             @relation("ApiKeyCreator")
+  createdSequences    Sequence[]           @relation("SequenceCreator")
+  sequenceEnrollments SequenceEnrollment[] @relation("SequenceEnrollmentResponder")
 
   @@unique([organizationId, email])
   @@index([organizationId])
@@ -86,7 +90,7 @@ model Session {
   userAgent String   @default("")
   createdAt DateTime @default(now())
 
-  user         User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Company {
@@ -121,36 +125,40 @@ model Company {
 }
 
 model Contact {
-  id             String    @id @default(cuid())
-  organizationId String
-  companyId      String?
-  firstName      String
-  lastName       String
-  email          String
-  phone          String    @default("")
-  mobile         String    @default("")
-  title          String    @default("")
-  address        String    @default("")
-  city           String    @default("")
-  state          String    @default("")
-  country        String    @default("")
-  ownerId        String?
-  status         String    @default("ACTIVE") // LEAD | ACTIVE | CUSTOMER | INACTIVE | CHURNED
-  avatarColor    String    @default("#6366f1")
+  id              String    @id @default(cuid())
+  organizationId  String
+  companyId       String?
+  firstName       String
+  lastName        String
+  email           String
+  phone           String    @default("")
+  mobile          String    @default("")
+  title           String    @default("")
+  address         String    @default("")
+  city            String    @default("")
+  state           String    @default("")
+  country         String    @default("")
+  ownerId         String?
+  status          String    @default("ACTIVE") // LEAD | ACTIVE | CUSTOMER | INACTIVE | CHURNED
+  avatarColor     String    @default("#6366f1")
+  // Free-text summary; the merge feature prefixes it with the survivor
+  // merge, mirroring the Lead.summary convention.
+  summary         String    @default("")
   lastContactedAt DateTime?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-  deletedAt      DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  deletedAt       DateTime?
 
-  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  company      Company?    @relation(fields: [companyId], references: [id], onDelete: SetNull)
-  owner        User?       @relation("ContactOwner", fields: [ownerId], references: [id], onDelete: SetNull)
-  leads        Lead[]
-  activities   Activity[]
-  notes        Note[]
-  deals        Deal[]      @relation("DealContact")
-  sentEmails   SentEmail[] @relation("SentEmailContact")
-  inboundEmails InboundEmail[]
+  organization        Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  company             Company?             @relation(fields: [companyId], references: [id], onDelete: SetNull)
+  owner               User?                @relation("ContactOwner", fields: [ownerId], references: [id], onDelete: SetNull)
+  leads               Lead[]
+  activities          Activity[]
+  notes               Note[]
+  deals               Deal[]               @relation("DealContact")
+  sentEmails          SentEmail[]          @relation("SentEmailContact")
+  inboundEmails       InboundEmail[]
+  sequenceEnrollments SequenceEnrollment[] @relation("SequenceEnrollmentContact")
 
   tags Tag[]
 
@@ -190,41 +198,42 @@ model LeadSource {
 }
 
 model Lead {
-  id               String    @id @default(cuid())
-  organizationId   String
-  firstName        String
-  lastName         String
-  email            String
-  phone            String    @default("")
-  companyName      String    @default("")
-  companyId        String?
-  sourceId         String?
-  status           String    @default("NEW") // NEW | CONTACTED | QUALIFIED | UNQUALIFIED | CONVERTED
-  score            Int       @default(0)
-  estimatedValue   Float     @default(0)
+  id                String    @id @default(cuid())
+  organizationId    String
+  firstName         String
+  lastName          String
+  email             String
+  phone             String    @default("")
+  companyName       String    @default("")
+  companyId         String?
+  sourceId          String?
+  status            String    @default("NEW") // NEW | CONTACTED | QUALIFIED | UNQUALIFIED | CONVERTED
+  score             Int       @default(0)
+  estimatedValue    Float     @default(0)
   expectedCloseDate DateTime?
-  followUpAt       DateTime?
-  summary          String    @default("")
-  contactId        String?
-  assignedUserId   String?
-  ownerId          String?
-  convertedAt      DateTime?
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
-  deletedAt        DateTime?
+  followUpAt        DateTime?
+  summary           String    @default("")
+  contactId         String?
+  assignedUserId    String?
+  ownerId           String?
+  convertedAt       DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  deletedAt         DateTime?
 
-  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  company      Company?    @relation(fields: [companyId], references: [id], onDelete: SetNull)
-  source       LeadSource? @relation(fields: [sourceId], references: [id], onDelete: SetNull)
-  contact      Contact?    @relation(fields: [contactId], references: [id], onDelete: SetNull)
-  assignedUser User?       @relation("LeadAssignee", fields: [assignedUserId], references: [id], onDelete: SetNull)
-  owner        User?       @relation("LeadOwner", fields: [ownerId], references: [id], onDelete: SetNull)
-  activities   Activity[]
-  notes        Note[]
-  deals        Deal[]      @relation("DealLead")
-  sentEmails   SentEmail[] @relation("SentEmailLead")
-  inboundEmails InboundEmail[]
-  reminders    FollowUpReminder[] @relation("ReminderLead")
+  organization        Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  company             Company?             @relation(fields: [companyId], references: [id], onDelete: SetNull)
+  source              LeadSource?          @relation(fields: [sourceId], references: [id], onDelete: SetNull)
+  contact             Contact?             @relation(fields: [contactId], references: [id], onDelete: SetNull)
+  assignedUser        User?                @relation("LeadAssignee", fields: [assignedUserId], references: [id], onDelete: SetNull)
+  owner               User?                @relation("LeadOwner", fields: [ownerId], references: [id], onDelete: SetNull)
+  activities          Activity[]
+  notes               Note[]
+  deals               Deal[]               @relation("DealLead")
+  sentEmails          SentEmail[]          @relation("SentEmailLead")
+  inboundEmails       InboundEmail[]
+  reminders           FollowUpReminder[]   @relation("ReminderLead")
+  sequenceEnrollments SequenceEnrollment[] @relation("SequenceEnrollmentLead")
 
   @@index([organizationId, status])
   @@index([organizationId, deletedAt])
@@ -261,42 +270,42 @@ model Stage {
 }
 
 model Deal {
-  id               String    @id @default(cuid())
-  organizationId   String
-  name             String
-  contactId        String?
-  companyId        String?
-  leadId           String?
-  stageId          String
-  pipelineId       String
-  ownerId          String?
-  sourceId         String?
-  value            Float     @default(0)
-  currency         String    @default("USD")
-  status           String    @default("OPEN") // OPEN | WON | LOST
-  probability      Int       @default(0)
+  id                String    @id @default(cuid())
+  organizationId    String
+  name              String
+  contactId         String?
+  companyId         String?
+  leadId            String?
+  stageId           String
+  pipelineId        String
+  ownerId           String?
+  sourceId          String?
+  value             Float     @default(0)
+  currency          String    @default("USD")
+  status            String    @default("OPEN") // OPEN | WON | LOST
+  probability       Int       @default(0)
   expectedCloseDate DateTime?
-  actualCloseDate  DateTime?
-  wonAt            DateTime?
-  lostAt           DateTime?
-  lostReason       String    @default("")
-  nextStep         String    @default("")
-  summary          String    @default("")
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
-  deletedAt        DateTime?
+  actualCloseDate   DateTime?
+  wonAt             DateTime?
+  lostAt            DateTime?
+  lostReason        String    @default("")
+  nextStep          String    @default("")
+  summary           String    @default("")
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  deletedAt         DateTime?
 
   organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  contact      Contact?    @relation("DealContact", fields: [contactId], references: [id], onDelete: SetNull)
-  company      Company?    @relation(fields: [companyId], references: [id], onDelete: SetNull)
-  stage        Stage       @relation(fields: [stageId], references: [id], onDelete: Cascade)
-  pipeline     Pipeline    @relation(fields: [pipelineId], references: [id], onDelete: Cascade)
-  owner        User?       @relation("DealOwner", fields: [ownerId], references: [id], onDelete: SetNull)
-  source       LeadSource? @relation(fields: [sourceId], references: [id], onDelete: SetNull)
+  contact      Contact?     @relation("DealContact", fields: [contactId], references: [id], onDelete: SetNull)
+  company      Company?     @relation(fields: [companyId], references: [id], onDelete: SetNull)
+  stage        Stage        @relation(fields: [stageId], references: [id], onDelete: Cascade)
+  pipeline     Pipeline     @relation(fields: [pipelineId], references: [id], onDelete: Cascade)
+  owner        User?        @relation("DealOwner", fields: [ownerId], references: [id], onDelete: SetNull)
+  source       LeadSource?  @relation(fields: [sourceId], references: [id], onDelete: SetNull)
   activities   Activity[]
   notes        Note[]
-  lead         Lead?       @relation("DealLead", fields: [leadId], references: [id], onDelete: SetNull)
-  sentEmails   SentEmail[] @relation("SentEmailDeal")
+  lead         Lead?        @relation("DealLead", fields: [leadId], references: [id], onDelete: SetNull)
+  sentEmails   SentEmail[]  @relation("SentEmailDeal")
 
   @@index([organizationId, deletedAt])
   @@index([organizationId, status])
@@ -315,7 +324,7 @@ model Task {
   dueAt          DateTime?
   reminderAt     DateTime?
   completedAt    DateTime?
-  relatedType    String?   // contact | company | lead | deal
+  relatedType    String? // contact | company | lead | deal
   relatedId      String?
   createdById    String
   assignedUserId String?
@@ -323,12 +332,12 @@ model Task {
   updatedAt      DateTime  @updatedAt
 
   organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  createdBy    User        @relation("TaskCreator", fields: [createdById], references: [id], onDelete: Cascade)
-  assignedUser User?       @relation("TaskAssignee", fields: [assignedUserId], references: [id], onDelete: SetNull)
+  createdBy    User         @relation("TaskCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  assignedUser User?        @relation("TaskAssignee", fields: [assignedUserId], references: [id], onDelete: SetNull)
 
-  activities   Activity[]
-  notes        Note[]
-  reminders    FollowUpReminder[] @relation("ReminderTask")
+  activities Activity[]
+  notes      Note[]
+  reminders  FollowUpReminder[] @relation("ReminderTask")
 
   @@index([organizationId, status])
   @@index([organizationId, assignedUserId, status])
@@ -336,28 +345,28 @@ model Task {
 }
 
 model Activity {
-  id               String   @id @default(cuid())
-  organizationId   String
-  type             String   // CALL | EMAIL | MEETING | NOTE | CREATED | UPDATED | STAGE_CHANGE | DEAL_WON | DEAL_LOST | CONVERTED | TASK_COMPLETED | LOGIN
-  title            String
-  description      String   @default("")
-  contactId        String?
-  companyId        String?
-  dealId           String?
-  leadId           String?
-  taskId           String?
-  userId           String
-  durationMinutes  Int?
-  occurredAt       DateTime @default(now())
-  createdAt        DateTime @default(now())
+  id              String   @id @default(cuid())
+  organizationId  String
+  type            String // CALL | EMAIL | MEETING | NOTE | CREATED | UPDATED | STAGE_CHANGE | DEAL_WON | DEAL_LOST | CONVERTED | TASK_COMPLETED | LOGIN
+  title           String
+  description     String   @default("")
+  contactId       String?
+  companyId       String?
+  dealId          String?
+  leadId          String?
+  taskId          String?
+  userId          String
+  durationMinutes Int?
+  occurredAt      DateTime @default(now())
+  createdAt       DateTime @default(now())
 
   organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  contact      Contact?    @relation(fields: [contactId], references: [id], onDelete: Cascade)
-  company      Company?    @relation(fields: [companyId], references: [id], onDelete: Cascade)
-  deal         Deal?       @relation(fields: [dealId], references: [id], onDelete: Cascade)
-  lead         Lead?       @relation(fields: [leadId], references: [id], onDelete: Cascade)
-  task         Task?       @relation(fields: [taskId], references: [id], onDelete: SetNull)
-  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  contact      Contact?     @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  company      Company?     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  deal         Deal?        @relation(fields: [dealId], references: [id], onDelete: Cascade)
+  lead         Lead?        @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  task         Task?        @relation(fields: [taskId], references: [id], onDelete: SetNull)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([organizationId, occurredAt])
   @@index([contactId, occurredAt])
@@ -371,21 +380,21 @@ model Note {
   organizationId String
   body           String
   contactId      String?
-  companyId       String?
+  companyId      String?
   dealId         String?
-  leadId          String?
+  leadId         String?
   taskId         String?
   userId         String
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  contact      Contact?    @relation(fields: [contactId], references: [id], onDelete: Cascade)
-  company      Company?    @relation(fields: [companyId], references: [id], onDelete: Cascade)
-  deal         Deal?       @relation(fields: [dealId], references: [id], onDelete: Cascade)
-  lead         Lead?       @relation(fields: [leadId], references: [id], onDelete: Cascade)
-  task         Task?       @relation(fields: [taskId], references: [id], onDelete: Cascade)
-  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  contact      Contact?     @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  company      Company?     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  deal         Deal?        @relation(fields: [dealId], references: [id], onDelete: Cascade)
+  lead         Lead?        @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  task         Task?        @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([organizationId, createdAt])
   @@index([contactId])
@@ -398,7 +407,7 @@ model AuditLog {
   id             String   @id @default(cuid())
   organizationId String?
   userId         String?
-  action         String   // e.g. LOGIN, LOGIN_FAILED, CONTACT_CREATE, DEAL_DELETE
+  action         String // e.g. LOGIN, LOGIN_FAILED, CONTACT_CREATE, DEAL_DELETE
   entityType     String   @default("")
   entityId       String   @default("")
   ipAddress      String   @default("")
@@ -422,7 +431,7 @@ model Notification {
   createdAt      DateTime @default(now())
 
   organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId, isRead, createdAt])
 }
@@ -430,15 +439,15 @@ model Notification {
 model EmailTemplate {
   id             String   @id @default(cuid())
   organizationId String
-  name          String
-  subject       String
-  body          String
-  category        String   @default("GENERAL")
+  name           String
+  subject        String
+  body           String
+  category       String   @default("GENERAL")
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
   organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  sentEmails   SentEmail[] @relation("SentEmailTemplate")
+  sentEmails   SentEmail[]  @relation("SentEmailTemplate")
 
   @@index([organizationId])
 }
@@ -446,7 +455,7 @@ model EmailTemplate {
 model CustomField {
   id             String   @id @default(cuid())
   organizationId String
-  entityType     String   // contact | company | lead | deal
+  entityType     String // contact | company | lead | deal
   name           String
   dataType       String   @default("TEXT") // TEXT | NUMBER | DATE | BOOLEAN
   options        String   @default("[]") // JSON array for select-type values
@@ -454,8 +463,8 @@ model CustomField {
   position       Int      @default(0)
   createdAt      DateTime @default(now())
 
-  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  values      CustomFieldValue[]
+  organization Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  values       CustomFieldValue[]
 
   @@index([organizationId, entityType])
 }
@@ -475,12 +484,12 @@ model CustomFieldValue {
 }
 
 model EmailSettings {
-  id             String   @id @default(cuid())
-  organizationId String   @unique
-  smtpHost       String   @default("")
-  smtpPort       Int      @default(587)
-  smtpUser       String   @default("")
-  fromAddress    String   @default("")
+  id                   String  @id @default(cuid())
+  organizationId       String  @unique
+  smtpHost             String  @default("")
+  smtpPort             Int     @default(587)
+  smtpUser             String  @default("")
+  fromAddress          String  @default("")
   notificationsEnabled Boolean @default(true)
 
   organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
@@ -506,12 +515,12 @@ model SentEmail {
   sentAt         DateTime?
   createdAt      DateTime  @default(now())
 
-  organization Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  user         User           @relation("SentEmailSender", fields: [userId], references: [id], onDelete: Cascade)
-  contact      Contact?       @relation("SentEmailContact", fields: [contactId], references: [id], onDelete: SetNull)
-  lead         Lead?          @relation("SentEmailLead", fields: [leadId], references: [id], onDelete: SetNull)
-  deal         Deal?          @relation("SentEmailDeal", fields: [dealId], references: [id], onDelete: SetNull)
-  template     EmailTemplate? @relation("SentEmailTemplate", fields: [templateId], references: [id], onDelete: SetNull)
+  organization  Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user          User           @relation("SentEmailSender", fields: [userId], references: [id], onDelete: Cascade)
+  contact       Contact?       @relation("SentEmailContact", fields: [contactId], references: [id], onDelete: SetNull)
+  lead          Lead?          @relation("SentEmailLead", fields: [leadId], references: [id], onDelete: SetNull)
+  deal          Deal?          @relation("SentEmailDeal", fields: [dealId], references: [id], onDelete: SetNull)
+  template      EmailTemplate? @relation("SentEmailTemplate", fields: [templateId], references: [id], onDelete: SetNull)
   inboundEmails InboundEmail[] @relation("InboundEmailThread")
 
   @@index([organizationId, createdAt])
@@ -525,17 +534,17 @@ model SentEmail {
 // overdue/reminder-due task. Deduplicated by a stable key so the scheduler
 // can run repeatedly without spamming the same reminder twice.
 model FollowUpReminder {
-  id             String    @id @default(cuid())
+  id             String   @id @default(cuid())
   organizationId String
   userId         String
   dedupeKey      String
-  kind           String    // LEAD_FOLLOW_UP | TASK_DUE | TASK_OVERDUE
+  kind           String // LEAD_FOLLOW_UP | TASK_DUE | TASK_OVERDUE
   title          String
-  body           String    @default("")
-  link           String    @default("")
+  body           String   @default("")
+  link           String   @default("")
   leadId         String?
   taskId         String?
-  createdAt      DateTime  @default(now())
+  createdAt      DateTime @default(now())
 
   organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   user         User         @relation("ReminderRecipient", fields: [userId], references: [id], onDelete: Cascade)
@@ -594,7 +603,99 @@ model ApiKey {
   createdAt      DateTime  @default(now())
 
   organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  createdBy    User        @relation("ApiKeyCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  createdBy    User         @relation("ApiKeyCreator", fields: [createdById], references: [id], onDelete: Cascade)
 
   @@index([organizationId, prefix])
+}
+
+// An automated follow-up sequence: an ordered list of email steps that get
+// rendered and sent to enrolled records by the sequence scheduler.
+model Sequence {
+  id             String   @id @default(cuid())
+  organizationId String
+  name           String
+  description    String   @default("")
+  isActive       Boolean  @default(true)
+  createdById    String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  organization Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  createdBy    User                 @relation("SequenceCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  steps        SequenceStep[]
+  enrollments  SequenceEnrollment[]
+
+  @@index([organizationId])
+}
+
+// One email step inside a sequence. `delayHours` is the wait after the
+// PREVIOUS step (step 0's delay is measured from enrollment), so a scan
+// schedules nextSendAt = lastEvent + delayHours.
+model SequenceStep {
+  id              String   @id @default(cuid())
+  sequenceId      String
+  position        Int
+  delayHours      Int      @default(24)
+  subjectTemplate String
+  bodyTemplate    String
+  createdAt       DateTime @default(now())
+
+  sequence    Sequence                 @relation(fields: [sequenceId], references: [id], onDelete: Cascade)
+  enrollments SequenceStepEnrollment[]
+
+  @@unique([sequenceId, position])
+  @@index([sequenceId])
+}
+
+// Enrollment of one record (contact or lead) in a sequence. `enrolledEmail`
+// is a snapshot so sequence history survives later record edits. The DB
+// unique on (sequenceId, contactId) / (sequenceId, leadId) is a SAFETY NET
+// only: the active-only rule "one active enrollment per record per
+// sequence" is enforced in code, so re-enrollment after COMPLETED/STOPPED is
+// allowed and raising a P2002 here means an ACTIVE enrollment already
+// exists → the route maps it to 409 ALREADY_ENROLLED.
+model SequenceEnrollment {
+  id              String    @id @default(cuid())
+  organizationId  String
+  sequenceId      String
+  contactId       String?
+  leadId          String?
+  enrolledEmail   String
+  currentStep     Int       @default(0) // index of the NEXT step to send
+  nextSendAt      DateTime?
+  status          String    @default("ACTIVE") // ACTIVE | COMPLETED | STOPPED | UNSUBSCRIBED
+  stoppedReason   String    @default("")
+  responderUserId String? // who enrolled the record
+  unsubToken      String    @unique
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  sequence     Sequence                 @relation(fields: [sequenceId], references: [id], onDelete: Cascade)
+  organization Organization             @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  contact      Contact?                 @relation("SequenceEnrollmentContact", fields: [contactId], references: [id], onDelete: SetNull)
+  lead         Lead?                    @relation("SequenceEnrollmentLead", fields: [leadId], references: [id], onDelete: SetNull)
+  responder    User?                    @relation("SequenceEnrollmentResponder", fields: [responderUserId], references: [id], onDelete: SetNull)
+  steps        SequenceStepEnrollment[]
+
+  @@unique([sequenceId, contactId])
+  @@unique([sequenceId, leadId])
+  @@index([organizationId, status, nextSendAt])
+  @@index([sequenceId])
+  @@index([contactId])
+  @@index([leadId])
+}
+
+// Join row: which step an enrollment is parked at, carried on the step so
+// step deletion can be detected (enrollment referencing a missing step is
+// stopped with stoppedReason "step missing").
+model SequenceStepEnrollment {
+  id           String @id @default(cuid())
+  stepId       String
+  enrollmentId String
+
+  step       SequenceStep       @relation(fields: [stepId], references: [id], onDelete: Cascade)
+  enrollment SequenceEnrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+
+  @@unique([stepId, enrollmentId])
+  @@index([enrollmentId])
 }

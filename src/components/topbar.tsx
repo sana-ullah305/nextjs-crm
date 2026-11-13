@@ -15,7 +15,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Bell, LogOut, Moon, Settings, Sun, Menu, X, BarChart3 } from "lucide-react";
+import { Bell, LogOut, Mail, Moon, Settings, Sun, Menu, X, BarChart3 } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { timeAgo } from "@/lib/format";
 import { api } from "@/lib/api-client";
@@ -29,6 +29,17 @@ type Notification = {
   link: string;
   isRead: boolean;
   createdAt: string;
+};
+
+type InboundReply = {
+  id: string;
+  fromName: string;
+  fromEmail: string;
+  subject: string;
+  status: string;
+  receivedAt: string;
+  contact: { id: string; firstName: string; lastName: string } | null;
+  lead: { id: string; firstName: string; lastName: string } | null;
 };
 
 const MOBILE_NAV = [
@@ -50,6 +61,8 @@ export function Topbar({ user }: { user: SessionUser }) {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [unread, setUnread] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [replies, setReplies] = useState<InboundReply[]>([]);
+  const [unreadReplies, setUnreadReplies] = useState(0);
 
   useEffect(() => setMounted(true), []);
 
@@ -75,6 +88,39 @@ export function Topbar({ user }: { user: SessionUser }) {
       clearInterval(interval);
     };
   }, [pathname]);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function fetchReplies() {
+      try {
+        const data = await api.get<{ emails: InboundReply[]; total: number }>(
+          "/api/inbound?status=UNREAD&pageSize=10"
+        );
+        if (!cancelled) {
+          setReplies(data.emails);
+          setUnreadReplies(data.total);
+        }
+      } catch {
+        // Unauthorized (expired session) — do nothing; middleware redirects.
+      }
+    }
+    fetchReplies();
+    const interval = setInterval(fetchReplies, 60_000);
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
+  }, [pathname]);
+
+  async function markReplyRead(id: string) {
+    try {
+      await api.post("/api/inbound", { ids: [id] });
+      setReplies((r) => r.filter((x) => x.id !== id));
+      setUnreadReplies((n) => Math.max(0, n - 1));
+    } catch {
+      /* noop */
+    }
+  }
 
   async function markAllRead() {
     try {
@@ -122,6 +168,67 @@ export function Topbar({ user }: { user: SessionUser }) {
         >
           {mounted && theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
         </Button>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon" className="relative" aria-label="Inbox replies">
+              <Mail className="h-4 w-4" />
+              {unreadReplies > 0 && (
+                <span className="absolute top-1.5 right-1.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-destructive px-1 text-[10px] font-bold text-destructive-foreground">
+                  {unreadReplies > 9 ? "9+" : unreadReplies}
+                </span>
+              )}
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-80">
+            <DropdownMenuLabel className="flex items-center justify-between">
+              <span>Replies</span>
+              <Link href="/inbox" className="text-xs font-normal text-primary hover:underline">
+                View all
+              </Link>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            {replies.length === 0 ? (
+              <p className="px-3 py-6 text-center text-sm text-muted-foreground">No unread replies</p>
+            ) : (
+              <div className="max-h-72 overflow-y-auto scroll-thin">
+                {replies.map((r) => (
+                  <DropdownMenuItem key={r.id} asChild>
+                    <div className="flex w-full flex-col items-start gap-0.5 bg-accent/50 py-2 pr-2">
+                      <Link
+                        href={
+                          r.contact
+                            ? `/contacts/${r.contact.id}`
+                            : r.lead
+                              ? `/leads?q=${encodeURIComponent(`${r.lead.firstName} ${r.lead.lastName}`)}`
+                              : "/inbox"
+                        }
+                        className="min-w-0 flex-1"
+                      >
+                        <span className="block truncate font-medium">
+                          {r.fromName || r.fromEmail}
+                        </span>
+                        <span className="line-clamp-2 text-xs text-muted-foreground">
+                          {r.subject || "(no subject)"}
+                        </span>
+                        <span className="text-[10px] text-muted-foreground">
+                          {timeAgo(r.receivedAt)}
+                        </span>
+                      </Link>
+                      <button
+                        onClick={() => void markReplyRead(r.id)}
+                        className="self-end text-xs font-normal text-primary hover:underline"
+                        aria-label={`Mark reply from ${r.fromName || r.fromEmail} as read`}
+                      >
+                        Mark read
+                      </button>
+                    </div>
+                  </DropdownMenuItem>
+                ))}
+              </div>
+            )}
+          </DropdownMenuContent>
+        </DropdownMenu>
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

@@ -15,6 +15,9 @@ const PUBLIC_PREFIXES = [
   // Public lead-capture endpoint: authenticated by an API key instead of a
   // session cookie, so it must skip the cookie-presence check.
   "/api/leads/capture",
+  // Public one-click unsubscribe endpoint: authenticated by the per-
+  // enrollment token in the query string, so it must skip the cookie check.
+  "/api/unsubscribe",
 ];
 
 export function proxy(req: NextRequest) {
