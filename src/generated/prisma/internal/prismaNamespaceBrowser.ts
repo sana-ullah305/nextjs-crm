@@ -61,6 +61,8 @@ export const ModelName = {
   Lead: 'Lead',
   Pipeline: 'Pipeline',
   Stage: 'Stage',
+  StageHistory: 'StageHistory',
+  LostReason: 'LostReason',
   Deal: 'Deal',
   Task: 'Task',
   Activity: 'Activity',
@@ -266,6 +268,33 @@ export const StageScalarFieldEnum = {
 export type StageScalarFieldEnum = (typeof StageScalarFieldEnum)[keyof typeof StageScalarFieldEnum]
 
 
+export const StageHistoryScalarFieldEnum = {
+  id: 'id',
+  dealId: 'dealId',
+  fromStageId: 'fromStageId',
+  toStageId: 'toStageId',
+  userId: 'userId',
+  at: 'at',
+  wonAtSnapshot: 'wonAtSnapshot',
+  lostAtSnapshot: 'lostAtSnapshot',
+  actualCloseDateSnapshot: 'actualCloseDateSnapshot'
+} as const
+
+export type StageHistoryScalarFieldEnum = (typeof StageHistoryScalarFieldEnum)[keyof typeof StageHistoryScalarFieldEnum]
+
+
+export const LostReasonScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  description: 'description',
+  isSystem: 'isSystem',
+  createdAt: 'createdAt'
+} as const
+
+export type LostReasonScalarFieldEnum = (typeof LostReasonScalarFieldEnum)[keyof typeof LostReasonScalarFieldEnum]
+
+
 export const DealScalarFieldEnum = {
   id: 'id',
   organizationId: 'organizationId',
@@ -277,6 +306,7 @@ export const DealScalarFieldEnum = {
   pipelineId: 'pipelineId',
   ownerId: 'ownerId',
   sourceId: 'sourceId',
+  lostReasonId: 'lostReasonId',
   value: 'value',
   currency: 'currency',
   status: 'status',

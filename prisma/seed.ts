@@ -38,6 +38,8 @@ async function main() {
   await db.customField.deleteMany();
   await db.emailTemplate.deleteMany();
   await db.emailSettings.deleteMany();
+  await db.stageHistory.deleteMany();
+  await db.lostReason.deleteMany();
   await db.deal.deleteMany();
   await db.lead.deleteMany();
   await db.stage.deleteMany();
@@ -99,6 +101,27 @@ async function main() {
     sourceNames.map((name, i) =>
       db.leadSource.create({
         data: { organizationId: org.id, name, description: `Leads from ${name.toLowerCase()}`, isSystem: i < 3 },
+      })
+    )
+  );
+
+  // Lost reasons
+  const lostReasonNames = [
+    { name: "Lost to competitor", description: "Deal lost to a competing vendor", isSystem: true },
+    { name: "No budget", description: "Prospect does not have budget available", isSystem: true },
+    { name: "Timing", description: "Not the right time for the prospect", isSystem: true },
+    { name: "Feature gap", description: "Product missing required features", isSystem: false },
+    { name: "No decision", description: "Prospect decided not to move forward", isSystem: true },
+  ];
+  const lostReasons = await Promise.all(
+    lostReasonNames.map((lr) =>
+      db.lostReason.create({
+        data: {
+          organizationId: org.id,
+          name: lr.name,
+          description: lr.description,
+          isSystem: lr.isSystem,
+        },
       })
     )
   );

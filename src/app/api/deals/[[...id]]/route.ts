@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { apiHandler, ok, parseBody, parseQuery, ApiNotFoundError, clientIp } from "@/server/api";
+import { apiHandler, ok, parseBody, parseQuery, ApiNotFoundError, ApiValidationError, clientIp } from "@/server/api";
 import { requireApiUserWith, hasPermission } from "@/server/rbac";
 import { dealCreateSchema, dealUpdateSchema, stageMoveSchema } from "@/lib/schemas";
 import { db } from "@/server/db";
@@ -165,9 +165,40 @@ async function moveDeal(req: NextRequest, dealId: string) {
     throw new ApiNotFoundError("Target stage not found");
   }
 
+  const isStageChange = deal.stageId !== stage.id;
   const now = new Date();
   const isWon = stage.type === "WON";
   const isLost = stage.type === "LOST";
+
+  // Require lostReasonId when moving to LOST stage
+  if (isLost && !body.lostReasonId) {
+    throw new ApiValidationError([
+      { path: ["lostReasonId"], message: "lostReasonId is required when moving to a LOST stage" },
+    ]);
+  }
+
+  // Determine wonAt / lostAt / actualCloseDate with preserve-on-reopen semantics
+  let wonAt: Date | null = null;
+  let lostAt: Date | null = null;
+  let actualCloseDate: Date | null = null;
+  let lostReasonId: string | null = null;
+
+  if (isWon) {
+    wonAt = deal.wonAt ?? now;
+    lostAt = null;
+    actualCloseDate = deal.actualCloseDate ?? now;
+  } else if (isLost) {
+    wonAt = null;
+    lostAt = deal.lostAt ?? now;
+    actualCloseDate = deal.actualCloseDate ?? now;
+    lostReasonId = body.lostReasonId ?? null;
+  } else {
+    // Moving to OPEN — preserve existing wonAt/lostAt/actualCloseDate on reopen
+    wonAt = deal.wonAt;
+    lostAt = deal.lostAt;
+    actualCloseDate = deal.actualCloseDate;
+  }
+
   const updated = await db.deal.update({
     where: { id: dealId },
     data: {
@@ -175,14 +206,30 @@ async function moveDeal(req: NextRequest, dealId: string) {
       pipelineId: stage.pipelineId,
       probability: stage.probability,
       status: isWon ? "WON" : isLost ? "LOST" : "OPEN",
-      wonAt: isWon ? (deal.wonAt ?? now) : null,
-      lostAt: isLost ? (deal.lostAt ?? now) : null,
-      actualCloseDate: isWon || isLost ? (deal.actualCloseDate ?? now) : null,
+      ...(isStageChange || body.position !== undefined ? {} : {}),
+      ...(wonAt !== undefined ? { wonAt } : {}),
+      ...(lostAt !== undefined ? { lostAt } : {}),
+      ...(actualCloseDate !== undefined ? { actualCloseDate } : {}),
+      ...(lostReasonId !== null ? { lostReasonId } : {}),
     },
     include: { stage: true },
   });
 
-  if (deal.stageId !== stage.id) {
+  // Create StageHistory record on stage change
+  if (isStageChange) {
+    await db.stageHistory.create({
+      data: {
+        dealId: deal.id,
+        fromStageId: deal.stageId,
+        toStageId: stage.id,
+        userId: user.id,
+        at: now,
+        wonAtSnapshot: deal.wonAt,
+        lostAtSnapshot: deal.lostAt,
+        actualCloseDateSnapshot: deal.actualCloseDate,
+      },
+    });
+
     await db.activity.create({
       data: {
         organizationId: user.organizationId,
@@ -197,6 +244,7 @@ async function moveDeal(req: NextRequest, dealId: string) {
       },
     });
   }
+
   await writeAudit({
     organizationId: user.organizationId,
     userId: user.id,
@@ -213,7 +261,7 @@ async function updateDeal(req: NextRequest, dealId: string) {
   const user = await requireApiUserWith("deals:update");
   const deal = await db.deal.findFirst({
     where: { id: dealId, organizationId: user.organizationId, deletedAt: null },
-    select: { id: true, ownerId: true },
+    include: { stage: true },
   });
   if (!deal) throw new ApiNotFoundError("Deal not found");
   if (deal.ownerId && deal.ownerId !== user.id && !hasPermission(user, "deals:update_all")) {
@@ -222,6 +270,9 @@ async function updateDeal(req: NextRequest, dealId: string) {
   const body = await parseBody(req, dealUpdateSchema);
 
   let stageUpdate: Record<string, unknown> = {};
+  let stageHistoryData: Record<string, unknown> | null = null;
+  let activityData: Record<string, unknown> | null = null;
+
   if (body.stageId) {
     const stage = await db.stage.findFirst({
       where: { id: body.stageId },
@@ -230,15 +281,73 @@ async function updateDeal(req: NextRequest, dealId: string) {
     if (!stage || stage.pipeline.organizationId !== user.organizationId) {
       throw new ApiNotFoundError("Stage not found");
     }
+
+    const isStageChange = deal.stageId !== stage.id;
     const now = new Date();
+    const isWon = stage.type === "WON";
+    const isLost = stage.type === "LOST";
+
+    // Require lostReasonId when moving to LOST stage
+    if (isLost && !body.lostReasonId) {
+      throw new ApiValidationError([
+        { path: ["lostReasonId"], message: "lostReasonId is required when moving to a LOST stage" },
+      ]);
+    }
+
+    let wonAt: Date | null = null;
+    let lostAt: Date | null = null;
+    let actualCloseDate: Date | null = null;
+    let lostReasonId: string | null = null;
+
+    if (isWon) {
+      wonAt = deal.wonAt ?? now;
+      lostAt = null;
+      actualCloseDate = deal.actualCloseDate ?? now;
+    } else if (isLost) {
+      wonAt = null;
+      lostAt = deal.lostAt ?? now;
+      actualCloseDate = deal.actualCloseDate ?? now;
+      lostReasonId = body.lostReasonId ?? null;
+    } else {
+      wonAt = deal.wonAt;
+      lostAt = deal.lostAt;
+      actualCloseDate = deal.actualCloseDate;
+    }
+
     stageUpdate = {
       stageId: stage.id,
       pipelineId: stage.pipelineId,
       probability: stage.probability,
-      status: stage.type === "WON" ? "WON" : stage.type === "LOST" ? "LOST" : "OPEN",
-      ...(stage.type === "WON" ? { wonAt: now, actualCloseDate: now } : {}),
-      ...(stage.type === "LOST" ? { lostAt: now, actualCloseDate: now } : {}),
+      status: isWon ? "WON" : isLost ? "LOST" : "OPEN",
+      ...(wonAt !== undefined ? { wonAt } : {}),
+      ...(lostAt !== undefined ? { lostAt } : {}),
+      ...(actualCloseDate !== undefined ? { actualCloseDate } : {}),
+      ...(lostReasonId !== null ? { lostReasonId } : {}),
     };
+
+    if (isStageChange) {
+      stageHistoryData = {
+        dealId: deal.id,
+        fromStageId: deal.stageId,
+        toStageId: stage.id,
+        userId: user.id,
+        at: now,
+        wonAtSnapshot: deal.wonAt,
+        lostAtSnapshot: deal.lostAt,
+        actualCloseDateSnapshot: deal.actualCloseDate,
+      };
+      activityData = {
+        organizationId: user.organizationId,
+        type: isWon ? "DEAL_WON" : isLost ? "DEAL_LOST" : "STAGE_CHANGE",
+        title: isWon
+          ? `Deal won: ${deal.name}`
+          : isLost
+            ? `Deal lost: ${deal.name}`
+            : `${deal.name}: ${deal.stage.name} → ${stage.name}`,
+        dealId: deal.id,
+        userId: user.id,
+      };
+    }
   }
 
   const updated = await db.deal.update({
@@ -260,13 +369,22 @@ async function updateDeal(req: NextRequest, dealId: string) {
       ...stageUpdate,
     },
   });
+
+  if (stageHistoryData) {
+    await db.stageHistory.create({ data: stageHistoryData as any });
+  }
+  if (activityData) {
+    await db.activity.create({ data: activityData as any });
+  }
+
   await writeAudit({
     organizationId: user.organizationId,
     userId: user.id,
-    action: "DEAL_UPDATE",
+    action: body.stageId ? "DEAL_STAGE_MOVE" : "DEAL_UPDATE",
     entityType: "deal",
     entityId: dealId,
     ipAddress: clientIp(req),
+    metadata: body.stageId ? { from: deal.stage.name, to: (await db.stage.findUnique({ where: { id: body.stageId } }))?.name } : undefined,
   });
   return ok(updated);
 }

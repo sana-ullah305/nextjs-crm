@@ -226,6 +226,7 @@ export type OrganizationWhereInput = {
   notifications?: Prisma.NotificationListRelationFilter
   tags?: Prisma.TagListRelationFilter
   leadSources?: Prisma.LeadSourceListRelationFilter
+  lostReasons?: Prisma.LostReasonListRelationFilter
   emailTemplates?: Prisma.EmailTemplateListRelationFilter
   customFields?: Prisma.CustomFieldListRelationFilter
   emailSettings?: Prisma.XOR<Prisma.EmailSettingsNullableScalarRelationFilter, Prisma.EmailSettingsWhereInput> | null
@@ -259,6 +260,7 @@ export type OrganizationOrderByWithRelationInput = {
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
   tags?: Prisma.TagOrderByRelationAggregateInput
   leadSources?: Prisma.LeadSourceOrderByRelationAggregateInput
+  lostReasons?: Prisma.LostReasonOrderByRelationAggregateInput
   emailTemplates?: Prisma.EmailTemplateOrderByRelationAggregateInput
   customFields?: Prisma.CustomFieldOrderByRelationAggregateInput
   emailSettings?: Prisma.EmailSettingsOrderByWithRelationInput
@@ -295,6 +297,7 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   notifications?: Prisma.NotificationListRelationFilter
   tags?: Prisma.TagListRelationFilter
   leadSources?: Prisma.LeadSourceListRelationFilter
+  lostReasons?: Prisma.LostReasonListRelationFilter
   emailTemplates?: Prisma.EmailTemplateListRelationFilter
   customFields?: Prisma.CustomFieldListRelationFilter
   emailSettings?: Prisma.XOR<Prisma.EmailSettingsNullableScalarRelationFilter, Prisma.EmailSettingsWhereInput> | null
@@ -358,6 +361,7 @@ export type OrganizationCreateInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -391,6 +395,7 @@ export type OrganizationUncheckedCreateInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -424,6 +429,7 @@ export type OrganizationUpdateInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -457,6 +463,7 @@ export type OrganizationUncheckedUpdateInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -649,6 +656,20 @@ export type OrganizationUpdateOneRequiredWithoutPipelinesNestedInput = {
   upsert?: Prisma.OrganizationUpsertWithoutPipelinesInput
   connect?: Prisma.OrganizationWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutPipelinesInput, Prisma.OrganizationUpdateWithoutPipelinesInput>, Prisma.OrganizationUncheckedUpdateWithoutPipelinesInput>
+}
+
+export type OrganizationCreateNestedOneWithoutLostReasonsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutLostReasonsInput, Prisma.OrganizationUncheckedCreateWithoutLostReasonsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutLostReasonsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutLostReasonsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutLostReasonsInput, Prisma.OrganizationUncheckedCreateWithoutLostReasonsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutLostReasonsInput
+  upsert?: Prisma.OrganizationUpsertWithoutLostReasonsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutLostReasonsInput, Prisma.OrganizationUpdateWithoutLostReasonsInput>, Prisma.OrganizationUncheckedUpdateWithoutLostReasonsInput>
 }
 
 export type OrganizationCreateNestedOneWithoutDealsInput = {
@@ -868,6 +889,7 @@ export type OrganizationCreateWithoutUsersInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -900,6 +922,7 @@ export type OrganizationUncheckedCreateWithoutUsersInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -948,6 +971,7 @@ export type OrganizationUpdateWithoutUsersInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -980,6 +1004,7 @@ export type OrganizationUncheckedUpdateWithoutUsersInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -1012,6 +1037,7 @@ export type OrganizationCreateWithoutCompaniesInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -1044,6 +1070,7 @@ export type OrganizationUncheckedCreateWithoutCompaniesInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -1092,6 +1119,7 @@ export type OrganizationUpdateWithoutCompaniesInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -1124,6 +1152,7 @@ export type OrganizationUncheckedUpdateWithoutCompaniesInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -1156,6 +1185,7 @@ export type OrganizationCreateWithoutContactsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -1188,6 +1218,7 @@ export type OrganizationUncheckedCreateWithoutContactsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -1236,6 +1267,7 @@ export type OrganizationUpdateWithoutContactsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -1268,6 +1300,7 @@ export type OrganizationUncheckedUpdateWithoutContactsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -1300,6 +1333,7 @@ export type OrganizationCreateWithoutTagsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -1332,6 +1366,7 @@ export type OrganizationUncheckedCreateWithoutTagsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -1380,6 +1415,7 @@ export type OrganizationUpdateWithoutTagsInput = {
   notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -1412,6 +1448,7 @@ export type OrganizationUncheckedUpdateWithoutTagsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -1444,6 +1481,7 @@ export type OrganizationCreateWithoutLeadSourcesInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -1476,6 +1514,7 @@ export type OrganizationUncheckedCreateWithoutLeadSourcesInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -1524,6 +1563,7 @@ export type OrganizationUpdateWithoutLeadSourcesInput = {
   notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -1556,6 +1596,7 @@ export type OrganizationUncheckedUpdateWithoutLeadSourcesInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -1588,6 +1629,7 @@ export type OrganizationCreateWithoutLeadsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -1620,6 +1662,7 @@ export type OrganizationUncheckedCreateWithoutLeadsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -1668,6 +1711,7 @@ export type OrganizationUpdateWithoutLeadsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -1700,6 +1744,7 @@ export type OrganizationUncheckedUpdateWithoutLeadsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -1732,6 +1777,7 @@ export type OrganizationCreateWithoutPipelinesInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -1764,6 +1810,7 @@ export type OrganizationUncheckedCreateWithoutPipelinesInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -1812,6 +1859,7 @@ export type OrganizationUpdateWithoutPipelinesInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -1837,6 +1885,155 @@ export type OrganizationUncheckedUpdateWithoutPipelinesInput = {
   companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
   contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutLostReasonsInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutLostReasonsInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutLostReasonsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutLostReasonsInput, Prisma.OrganizationUncheckedCreateWithoutLostReasonsInput>
+}
+
+export type OrganizationUpsertWithoutLostReasonsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutLostReasonsInput, Prisma.OrganizationUncheckedUpdateWithoutLostReasonsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutLostReasonsInput, Prisma.OrganizationUncheckedCreateWithoutLostReasonsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutLostReasonsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutLostReasonsInput, Prisma.OrganizationUncheckedUpdateWithoutLostReasonsInput>
+}
+
+export type OrganizationUpdateWithoutLostReasonsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutLostReasonsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1876,6 +2073,7 @@ export type OrganizationCreateWithoutDealsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -1908,6 +2106,7 @@ export type OrganizationUncheckedCreateWithoutDealsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -1956,6 +2155,7 @@ export type OrganizationUpdateWithoutDealsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -1988,6 +2188,7 @@ export type OrganizationUncheckedUpdateWithoutDealsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -2020,6 +2221,7 @@ export type OrganizationCreateWithoutTasksInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -2052,6 +2254,7 @@ export type OrganizationUncheckedCreateWithoutTasksInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -2100,6 +2303,7 @@ export type OrganizationUpdateWithoutTasksInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -2132,6 +2336,7 @@ export type OrganizationUncheckedUpdateWithoutTasksInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -2164,6 +2369,7 @@ export type OrganizationCreateWithoutActivitiesInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -2196,6 +2402,7 @@ export type OrganizationUncheckedCreateWithoutActivitiesInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -2244,6 +2451,7 @@ export type OrganizationUpdateWithoutActivitiesInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -2276,6 +2484,7 @@ export type OrganizationUncheckedUpdateWithoutActivitiesInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -2308,6 +2517,7 @@ export type OrganizationCreateWithoutNotesInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -2340,6 +2550,7 @@ export type OrganizationUncheckedCreateWithoutNotesInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -2388,6 +2599,7 @@ export type OrganizationUpdateWithoutNotesInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -2420,6 +2632,7 @@ export type OrganizationUncheckedUpdateWithoutNotesInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -2452,6 +2665,7 @@ export type OrganizationCreateWithoutNotificationsInput = {
   notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -2484,6 +2698,7 @@ export type OrganizationUncheckedCreateWithoutNotificationsInput = {
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -2532,6 +2747,7 @@ export type OrganizationUpdateWithoutNotificationsInput = {
   notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -2564,6 +2780,7 @@ export type OrganizationUncheckedUpdateWithoutNotificationsInput = {
   notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -2597,6 +2814,7 @@ export type OrganizationCreateWithoutEmailTemplatesInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
@@ -2629,6 +2847,7 @@ export type OrganizationUncheckedCreateWithoutEmailTemplatesInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2677,6 +2896,7 @@ export type OrganizationUpdateWithoutEmailTemplatesInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
@@ -2709,6 +2929,7 @@ export type OrganizationUncheckedUpdateWithoutEmailTemplatesInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2741,6 +2962,7 @@ export type OrganizationCreateWithoutCustomFieldsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
@@ -2773,6 +2995,7 @@ export type OrganizationUncheckedCreateWithoutCustomFieldsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2821,6 +3044,7 @@ export type OrganizationUpdateWithoutCustomFieldsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
@@ -2853,6 +3077,7 @@ export type OrganizationUncheckedUpdateWithoutCustomFieldsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2885,6 +3110,7 @@ export type OrganizationCreateWithoutEmailSettingsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
@@ -2917,6 +3143,7 @@ export type OrganizationUncheckedCreateWithoutEmailSettingsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2965,6 +3192,7 @@ export type OrganizationUpdateWithoutEmailSettingsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
@@ -2997,6 +3225,7 @@ export type OrganizationUncheckedUpdateWithoutEmailSettingsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -3029,6 +3258,7 @@ export type OrganizationCreateWithoutSentEmailsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -3061,6 +3291,7 @@ export type OrganizationUncheckedCreateWithoutSentEmailsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -3109,6 +3340,7 @@ export type OrganizationUpdateWithoutSentEmailsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -3141,6 +3373,7 @@ export type OrganizationUncheckedUpdateWithoutSentEmailsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -3173,6 +3406,7 @@ export type OrganizationCreateWithoutRemindersInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -3205,6 +3439,7 @@ export type OrganizationUncheckedCreateWithoutRemindersInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -3253,6 +3488,7 @@ export type OrganizationUpdateWithoutRemindersInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -3285,6 +3521,7 @@ export type OrganizationUncheckedUpdateWithoutRemindersInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -3317,6 +3554,7 @@ export type OrganizationCreateWithoutInboundEmailsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -3349,6 +3587,7 @@ export type OrganizationUncheckedCreateWithoutInboundEmailsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -3397,6 +3636,7 @@ export type OrganizationUpdateWithoutInboundEmailsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -3429,6 +3669,7 @@ export type OrganizationUncheckedUpdateWithoutInboundEmailsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -3461,6 +3702,7 @@ export type OrganizationCreateWithoutApiKeysInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -3493,6 +3735,7 @@ export type OrganizationUncheckedCreateWithoutApiKeysInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -3541,6 +3784,7 @@ export type OrganizationUpdateWithoutApiKeysInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -3573,6 +3817,7 @@ export type OrganizationUncheckedUpdateWithoutApiKeysInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -3605,6 +3850,7 @@ export type OrganizationCreateWithoutSequencesInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -3637,6 +3883,7 @@ export type OrganizationUncheckedCreateWithoutSequencesInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -3685,6 +3932,7 @@ export type OrganizationUpdateWithoutSequencesInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -3717,6 +3965,7 @@ export type OrganizationUncheckedUpdateWithoutSequencesInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -3749,6 +3998,7 @@ export type OrganizationCreateWithoutSequenceEnrollmentsInput = {
   notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -3781,6 +4031,7 @@ export type OrganizationUncheckedCreateWithoutSequenceEnrollmentsInput = {
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -3829,6 +4080,7 @@ export type OrganizationUpdateWithoutSequenceEnrollmentsInput = {
   notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -3861,6 +4113,7 @@ export type OrganizationUncheckedUpdateWithoutSequenceEnrollmentsInput = {
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -3889,6 +4142,7 @@ export type OrganizationCountOutputType = {
   notifications: number
   tags: number
   leadSources: number
+  lostReasons: number
   emailTemplates: number
   customFields: number
   sentEmails: number
@@ -3912,6 +4166,7 @@ export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   notifications?: boolean | OrganizationCountOutputTypeCountNotificationsArgs
   tags?: boolean | OrganizationCountOutputTypeCountTagsArgs
   leadSources?: boolean | OrganizationCountOutputTypeCountLeadSourcesArgs
+  lostReasons?: boolean | OrganizationCountOutputTypeCountLostReasonsArgs
   emailTemplates?: boolean | OrganizationCountOutputTypeCountEmailTemplatesArgs
   customFields?: boolean | OrganizationCountOutputTypeCountCustomFieldsArgs
   sentEmails?: boolean | OrganizationCountOutputTypeCountSentEmailsArgs
@@ -4019,6 +4274,13 @@ export type OrganizationCountOutputTypeCountLeadSourcesArgs<ExtArgs extends runt
 /**
  * OrganizationCountOutputType without action
  */
+export type OrganizationCountOutputTypeCountLostReasonsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LostReasonWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
 export type OrganizationCountOutputTypeCountEmailTemplatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.EmailTemplateWhereInput
 }
@@ -4095,6 +4357,7 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   notifications?: boolean | Prisma.Organization$notificationsArgs<ExtArgs>
   tags?: boolean | Prisma.Organization$tagsArgs<ExtArgs>
   leadSources?: boolean | Prisma.Organization$leadSourcesArgs<ExtArgs>
+  lostReasons?: boolean | Prisma.Organization$lostReasonsArgs<ExtArgs>
   emailTemplates?: boolean | Prisma.Organization$emailTemplatesArgs<ExtArgs>
   customFields?: boolean | Prisma.Organization$customFieldsArgs<ExtArgs>
   emailSettings?: boolean | Prisma.Organization$emailSettingsArgs<ExtArgs>
@@ -4157,6 +4420,7 @@ export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   notifications?: boolean | Prisma.Organization$notificationsArgs<ExtArgs>
   tags?: boolean | Prisma.Organization$tagsArgs<ExtArgs>
   leadSources?: boolean | Prisma.Organization$leadSourcesArgs<ExtArgs>
+  lostReasons?: boolean | Prisma.Organization$lostReasonsArgs<ExtArgs>
   emailTemplates?: boolean | Prisma.Organization$emailTemplatesArgs<ExtArgs>
   customFields?: boolean | Prisma.Organization$customFieldsArgs<ExtArgs>
   emailSettings?: boolean | Prisma.Organization$emailSettingsArgs<ExtArgs>
@@ -4186,6 +4450,7 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
     tags: Prisma.$TagPayload<ExtArgs>[]
     leadSources: Prisma.$LeadSourcePayload<ExtArgs>[]
+    lostReasons: Prisma.$LostReasonPayload<ExtArgs>[]
     emailTemplates: Prisma.$EmailTemplatePayload<ExtArgs>[]
     customFields: Prisma.$CustomFieldPayload<ExtArgs>[]
     emailSettings: Prisma.$EmailSettingsPayload<ExtArgs> | null
@@ -4612,6 +4877,7 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   notifications<T extends Prisma.Organization$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tags<T extends Prisma.Organization$tagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadSources<T extends Prisma.Organization$leadSourcesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$leadSourcesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadSourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  lostReasons<T extends Prisma.Organization$lostReasonsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$lostReasonsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LostReasonPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   emailTemplates<T extends Prisma.Organization$emailTemplatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$emailTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   customFields<T extends Prisma.Organization$customFieldsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$customFieldsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CustomFieldPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   emailSettings<T extends Prisma.Organization$emailSettingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$emailSettingsArgs<ExtArgs>>): Prisma.Prisma__EmailSettingsClient<runtime.Types.Result.GetResult<Prisma.$EmailSettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -5335,6 +5601,30 @@ export type Organization$leadSourcesArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.LeadSourceScalarFieldEnum | Prisma.LeadSourceScalarFieldEnum[]
+}
+
+/**
+ * Organization.lostReasons
+ */
+export type Organization$lostReasonsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LostReason
+   */
+  select?: Prisma.LostReasonSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LostReason
+   */
+  omit?: Prisma.LostReasonOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LostReasonInclude<ExtArgs> | null
+  where?: Prisma.LostReasonWhereInput
+  orderBy?: Prisma.LostReasonOrderByWithRelationInput | Prisma.LostReasonOrderByWithRelationInput[]
+  cursor?: Prisma.LostReasonWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LostReasonScalarFieldEnum | Prisma.LostReasonScalarFieldEnum[]
 }
 
 /**

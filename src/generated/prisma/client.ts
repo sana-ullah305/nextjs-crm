@@ -92,6 +92,16 @@ export type Pipeline = Prisma.PipelineModel
  */
 export type Stage = Prisma.StageModel
 /**
+ * Model StageHistory
+ * 
+ */
+export type StageHistory = Prisma.StageHistoryModel
+/**
+ * Model LostReason
+ * 
+ */
+export type LostReason = Prisma.LostReasonModel
+/**
  * Model Deal
  * 
  */
