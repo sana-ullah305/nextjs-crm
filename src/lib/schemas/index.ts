@@ -322,6 +322,7 @@ export const emailSettingsSchema = z.object({
   smtpHost: z.string().trim().max(255).optional(),
   smtpPort: z.coerce.number().int().min(1).max(65535).optional(),
   smtpUser: z.string().trim().max(255).optional(),
+  smtpPassword: z.string().optional(),
   fromAddress: z.string().trim().max(255).refine((v) => !v || /.+@.+\..+/.test(v), "Invalid from address").optional(),
   notificationsEnabled: z.boolean().optional(),
 });
