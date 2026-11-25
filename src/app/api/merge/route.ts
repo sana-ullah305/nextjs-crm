@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import { z } from "zod";
 import { apiHandler, ok, parseBody, ApiNotFoundError, clientIp } from "@/server/api";
-import { requireApiUserWith } from "@/server/rbac";
+import { requireApiUserWith, canAccessRecord } from "@/server/rbac";
 import { db } from "@/server/db";
 import { writeAudit } from "@/server/audit";
 
@@ -88,7 +88,7 @@ export const POST = apiHandler(async (req: NextRequest) => {
  */
 async function executeMerge(
   req: NextRequest,
-  user: { id: string; organizationId: string },
+  user: { id: string; organizationId: string; role: string },
   body: z.infer<typeof mergeBodySchema>
 ): Promise<MergeResult> {
   const { type, sourceId, targetId } = body;
@@ -113,6 +113,17 @@ async function executeMerge(
 
   if (!source) throw new ApiNotFoundError("Source record not found");
   if (!target) throw new ApiNotFoundError("Target record not found");
+
+  // Record-level read scoping. This route requires contacts:update_all (only
+  // managers/admins reach it, and they pass canAccessRecord unconditionally),
+  // but the guard is enforced here so the merge can never touch a record the
+  // actor may not read even if the permission gate is later relaxed. A blocked
+  // record looks like 404 to avoid leaking its existence.
+  const sourceOwner = (source as { ownerId?: string | null }).ownerId;
+  const targetOwner = (target as { ownerId?: string | null }).ownerId;
+  if (!canAccessRecord(user as never, sourceOwner) || !canAccessRecord(user as never, targetOwner)) {
+    throw new ApiNotFoundError("Source record not found");
+  }
 
   const sourceKind: "contact" | "lead" = type === "contact-into-contact" ? "contact" : "lead";
   const targetKind: "contact" | "lead" = type === "lead-into-lead" ? "lead" : "contact";

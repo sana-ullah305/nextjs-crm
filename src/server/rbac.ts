@@ -131,6 +131,25 @@ export function canAccessRecord(
   return !ownerId || ownerId === user.id;
 }
 
+/**
+ * May the actor reassign a record's owner/assignee to `targetId`?
+ *
+ * - Clearing the assignment (null) is always allowed.
+ * - Assigning to yourself is always allowed.
+ * - Assigning to anyone else requires the entity's `*_update_all` permission
+ *   (managers/admins). A rep cannot transfer "their" record to another rep,
+ *   which would let them read records they otherwise couldn't via ownership.
+ */
+export function canReassignRecord(
+  user: Pick<SessionUser, "id" | "role">,
+  targetId: string | null | undefined,
+  writeAllPerm: Permission
+): boolean {
+  if (!targetId) return true;
+  if (targetId === user.id) return true;
+  return hasPermission(user, writeAllPerm);
+}
+
 export async function requireApiUser(): Promise<SessionUser> {
   const user = await getSessionUser();
   if (!user) {
@@ -168,4 +187,26 @@ export function recordScope<T extends { ownerId?: string | null }>(
 ): T[] {
   if (hasPermission(user, readAllPerm)) return rows;
   return rows.filter((r) => !r.ownerId || r.ownerId === user.id);
+}
+
+/**
+ * Build the Prisma `where` fragment that scopes a LIST query to the records a
+ * user may read. Reps (without the read_all permission) are limited to rows
+ * they own or that are unowned; managers/admins get an empty fragment (no
+ * extra restriction).
+ *
+ * IMPORTANT: callers MUST merge this fragment under `AND` alongside any other
+ * `OR` clause (e.g. a free-text search). Spreading two `OR` keys into the same
+ * object silently overwrites the first — the visibility clause would be lost
+ * and a rep could enumerate other reps' records via search. Use:
+ *
+ *   where: { organizationId, ...rest, AND: [ visibilityScope(...), ...extra ] }
+ */
+export function visibilityScope(
+  user: Pick<SessionUser, "role" | "id">,
+  readAllPerm: Permission,
+  ownerField: "ownerId" | "assignedUserId" = "ownerId"
+): Record<string, unknown> {
+  if (hasPermission(user as SessionUser, readAllPerm)) return {};
+  return { OR: [{ [ownerField]: user.id }, { [ownerField]: null }] };
 }

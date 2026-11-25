@@ -132,14 +132,22 @@ export const PATCH = apiHandler<Ctx>(async (req, ctx) => {
   if (body.phone !== undefined) data.phone = body.phone;
   if (body.role !== undefined) data.role = body.role;
   if (body.isActive !== undefined) data.isActive = body.isActive;
-  if (body.password !== undefined) data.passwordHash = await hashPassword(body.password);
+  let passwordChanged = false;
+  if (body.password !== undefined) {
+    data.passwordHash = await hashPassword(body.password);
+    passwordChanged = true;
+  }
 
   const updated = await db.user.update({
     where: { id },
     data,
     select: { id: true, name: true, email: true, role: true, isActive: true, avatarColor: true },
   });
-  if (body.isActive === false) {
+  // Password change invalidates every existing session for the account so
+  // all other devices/tokens are forced to re-authenticate.
+  if (passwordChanged) {
+    await db.session.deleteMany({ where: { userId: id } });
+  } else if (body.isActive === false) {
     await db.session.deleteMany({ where: { userId: id } });
   }
   await writeAudit({

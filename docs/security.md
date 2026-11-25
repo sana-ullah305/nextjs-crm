@@ -37,8 +37,11 @@ defense-in-depth, every control mapped to a risk).
    (`src/server/rate-limit.ts`). In-memory (single-instance); swap to Redis
    for horizontal scale (noted limitation).
 6. **Headers**: `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`,
-   `Referrer-Policy`, and a restrictive `Content-Security-Policy` set in
-   `next.config.ts` (relaxed only for Next.js dev tools).
+   `Referrer-Policy`, `Strict-Transport-Security` (HSTS), and a restrictive
+   `Content-Security-Policy` (default-src 'self', frame-ancestors 'none',
+   base-uri 'self', form-action 'self'; script-src 'self' with `unsafe-eval`
+   and style-src `unsafe-inline` relaxed only for Next.js dev tooling) set in
+   `next.config.ts`.
 7. **Secrets**: `.env` for session secret + database URL; `.env.example`
    documents variables; `.env` is gitignored; seed passwords are dev-only
    and clearly labeled.
@@ -77,5 +80,7 @@ defense-in-depth, every control mapped to a risk).
 - Reminder scans run when an authorized caller hits
   `POST /api/reminders/run` (cron/uptime-monitor driven); there is no
   in-process background worker, keeping single-instance deployments simple.
-- CSP `unsafe-inline` style-src is required by Next.js styled-jsx in some
-  flows; script-src remains locked down.
+- CSP `unsafe-inline` style-src is required for Next.js inline `<style>` blocks
+  in dev/production builds; script-src stays locked down (`'self'`, plus
+  `'unsafe-eval'` only outside production). HSTS is emitted on all responses
+  (browsers ignore it over plain HTTP/localhost).

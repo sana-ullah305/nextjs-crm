@@ -1,7 +1,8 @@
 import { createHash, randomBytes, timingSafeEqual } from "node:crypto";
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 import bcrypt from "bcryptjs";
 import { db } from "@/server/db";
+import { sessionCookieSecure } from "@/server/config";
 
 export const SESSION_COOKIE = "crm_session";
 const SESSION_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
@@ -47,17 +48,13 @@ export async function createSession(
     data: { tokenHash: hashToken(token), userId, expiresAt, ip, userAgent },
   });
   const store = await cookies();
-  // Behind the nginx reverse proxy the effective scheme comes from
-  // X-Forwarded-Proto; over plain HTTP (no TLS terminator yet) the Secure
-  // flag would make browsers drop the cookie and break login.
-  const forwardedProto = (await headers()).get("x-forwarded-proto") ?? "";
-  const isHttps = forwardedProto
-    ? forwardedProto.includes("https")
-    : process.env.NODE_ENV === "production";
+  // The Secure flag is decided centrally in src/server/config.ts (env var
+  // SESSION_COOKIE_SECURE, else the APP_URL scheme) rather than inferred
+  // per-request from X-Forwarded-Proto.
   store.set(SESSION_COOKIE, token, {
     httpOnly: true,
     sameSite: "lax",
-    secure: isHttps,
+    secure: sessionCookieSecure(),
     expires: expiresAt,
     path: "/",
   });
