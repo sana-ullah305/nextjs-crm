@@ -317,16 +317,20 @@ export const PATCH = apiHandler<Ctx>(async (req, ctx) => {
           isDefault: z.boolean().optional(),
         })
       );
-      if (body.isDefault) {
-        await db.pipeline.updateMany({
-          where: { organizationId: user.organizationId },
-          data: { isDefault: false },
+      // Clearing the previous default and setting the new one commit atomically,
+      // so a failure never leaves zero (or two) default pipelines.
+      const updated = await db.$transaction(async (tx) => {
+        if (body.isDefault) {
+          await tx.pipeline.updateMany({
+            where: { organizationId: user.organizationId },
+            data: { isDefault: false },
+          });
+        }
+        return tx.pipeline.update({
+          where: { id },
+          data: { ...(body.name !== undefined ? { name: body.name } : {}), ...(body.isDefault !== undefined ? { isDefault: body.isDefault } : {}) },
+          include: { stages: { orderBy: { position: "asc" } } },
         });
-      }
-      const updated = await db.pipeline.update({
-        where: { id },
-        data: { ...(body.name !== undefined ? { name: body.name } : {}), ...(body.isDefault !== undefined ? { isDefault: body.isDefault } : {}) },
-        include: { stages: { orderBy: { position: "asc" } } },
       });
       await writeAudit({
         organizationId: user.organizationId,

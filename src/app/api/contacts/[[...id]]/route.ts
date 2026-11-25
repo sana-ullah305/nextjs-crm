@@ -210,49 +210,66 @@ async function createContact(req: NextRequest) {
 async function importContacts(req: NextRequest) {
   const user = await requireApiUserWith("contacts:import");
   const body = await parseBody(req, contactImportSchema);
+
+  // Batch transactions: row-by-row writes are committed in batches of 50 rows
+  // so a failure in one batch rolls back only that batch (previous batches
+  // stay committed) instead of the whole import. Within a batch, reads see
+  // earlier writes, so duplicate emails within one payload are skipped.
+  const IMPORT_BATCH_SIZE = 50;
   let imported = 0;
   let skipped = 0;
-  for (const row of body.contacts) {
-    if (!row.firstName) {
-      skipped++;
-      continue;
-    }
-    const dup = row.email
-      ? await db.contact.findFirst({
-          where: { organizationId: user.organizationId, email: row.email, deletedAt: null },
-          select: { id: true },
-        })
-      : null;
-    if (dup) {
-      skipped++;
-      continue;
-    }
-    let companyId: string | null = null;
-    if (row.company) {
-      const company = await db.company.findFirst({
-        where: { organizationId: user.organizationId, name: row.company, deletedAt: null },
-        select: { id: true },
-      });
-      companyId =
-        company?.id ??
-        (await db.company.create({
-          data: { organizationId: user.organizationId, name: row.company },
-        })).id;
-    }
-    await db.contact.create({
-      data: {
-        organizationId: user.organizationId,
-        firstName: row.firstName,
-        lastName: row.lastName,
-        email: row.email,
-        phone: row.phone,
-        title: row.title,
-        companyId,
-        ownerId: user.id,
-      },
+  for (let offset = 0; offset < body.contacts.length; offset += IMPORT_BATCH_SIZE) {
+    const batch = body.contacts.slice(offset, offset + IMPORT_BATCH_SIZE);
+    const result = await db.$transaction(async (tx) => {
+      let batchImported = 0;
+      let batchSkipped = 0;
+      for (const row of batch) {
+        if (!row.firstName) {
+          batchSkipped++;
+          continue;
+        }
+        const dup = row.email
+          ? await tx.contact.findFirst({
+              where: { organizationId: user.organizationId, email: row.email, deletedAt: null },
+              select: { id: true },
+            })
+          : null;
+        if (dup) {
+          batchSkipped++;
+          continue;
+        }
+        let companyId: string | null = null;
+        if (row.company) {
+          const company = await tx.company.findFirst({
+            where: { organizationId: user.organizationId, name: row.company, deletedAt: null },
+            select: { id: true },
+          });
+          companyId =
+            company?.id ??
+            (await tx.company.create({
+              data: { organizationId: user.organizationId, name: row.company },
+            })).id;
+        }
+        await tx.contact.create({
+          data: {
+            organizationId: user.organizationId,
+            firstName: row.firstName,
+            lastName: row.lastName,
+            email: row.email,
+            phone: row.phone,
+            title: row.title,
+            companyId,
+            ownerId: user.id,
+          },
+        });
+        batchImported++;
+      }
+      return { imported: batchImported, skipped: batchSkipped };
     });
-    imported++;
+    imported += result.imported;
+    skipped += result.skipped;
   }
+
   await writeAudit({
     organizationId: user.organizationId,
     userId: user.id,
