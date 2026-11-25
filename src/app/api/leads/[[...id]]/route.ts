@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { apiHandler, ok, parseBody, parseQuery, ApiNotFoundError, ApiValidationError, clientIp } from "@/server/api";
-import { requireApiUserWith, hasPermission } from "@/server/rbac";
+import { requireApiUserWith, hasPermission, recordScope } from "@/server/rbac";
 import { leadCreateSchema, leadUpdateSchema, leadConvertSchema } from "@/lib/schemas";
 import { db } from "@/server/db";
 import { writeAudit } from "@/server/audit";
@@ -43,11 +43,8 @@ async function listLeads(req: NextRequest) {
   const user = await requireApiUserWith("leads:read");
   const q = parseQuery(req, listQuerySchema);
   const where = {
-    organizationId: user.organizationId,
+    ...recordScope(user, "lead", "read"),
     deletedAt: null,
-    ...(hasPermission(user, "leads:read_all")
-      ? {}
-      : { OR: [{ assignedUserId: user.id }, { ownerId: user.id }, { assignedUserId: null }] }),
     ...(q.status ? { status: q.status } : {}),
     ...(q.sourceId ? { sourceId: q.sourceId } : {}),
     ...(q.assignedUserId ? { assignedUserId: q.assignedUserId } : {}),
@@ -88,7 +85,7 @@ async function listLeads(req: NextRequest) {
 async function getLead(id: string) {
   const user = await requireApiUserWith("leads:read");
   const lead = await db.lead.findFirst({
-    where: { id, organizationId: user.organizationId, deletedAt: null },
+    where: { ...recordScope(user, "lead", "read"), id, deletedAt: null },
     include: {
       source: true,
       assignedUser: { select: { id: true, name: true, avatarColor: true } },
@@ -195,7 +192,7 @@ async function createLead(req: NextRequest) {
       expectedCloseDate: parseDate(body.expectedCloseDate),
       followUpAt: followUp,
       summary: body.notes ?? "",
-      assignedUserId: body.assignedUserId || user.id,
+      assignedUserId: hasPermission(user, "leads:update_all") ? (body.assignedUserId || user.id) : user.id,
       ownerId: user.id,
     },
     include: { source: true, assignedUser: { select: { id: true, name: true, avatarColor: true } } },
@@ -223,7 +220,7 @@ async function createLead(req: NextRequest) {
 async function convertLead(req: NextRequest, leadId: string) {
   const user = await requireApiUserWith("leads:convert");
   const lead = await db.lead.findFirst({
-    where: { id: leadId, organizationId: user.organizationId, deletedAt: null },
+    where: { ...recordScope(user, "lead", "read"), id: leadId, deletedAt: null },
     include: { company: true },
   });
   if (!lead) throw new ApiNotFoundError("Lead not found");

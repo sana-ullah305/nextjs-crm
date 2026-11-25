@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { apiHandler, ok, parseBody, parseQuery, ApiNotFoundError, clientIp } from "@/server/api";
-import { requireApiUserWith } from "@/server/rbac";
+import { requireApiUserWith, recordScope } from "@/server/rbac";
 import { activityCreateSchema, noteCreateSchema } from "@/lib/schemas";
 import { db } from "@/server/db";
 import { writeAudit } from "@/server/audit";
@@ -37,7 +37,7 @@ export const GET = apiHandler<Ctx>(async (req, ctx) => {
   // GET /activities/notes?contactId=... style: second segment is not used; notes are fetched via ?notesOf=
   void id;
   const where = {
-    organizationId: user.organizationId,
+    ...recordScope(user, "activity", "read"),
     ...(q.contactId ? { contactId: q.contactId } : {}),
     ...(q.companyId ? { companyId: q.companyId } : {}),
     ...(q.dealId ? { dealId: q.dealId } : {}),

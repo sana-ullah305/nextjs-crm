@@ -1,5 +1,5 @@
 import { apiHandler, ok, parseQuery, parseBody, clientIp } from "@/server/api";
-import { requireApiUserWith, canAccessRecord } from "@/server/rbac";
+import { requireApiUserWith, canAccessRecord, recordScope } from "@/server/rbac";
 import { db } from "@/server/db";
 import { sendEmail, EmailValidationError, EmailConfigError, EmailSendError } from "@/server/mailer";
 import { writeAudit } from "@/server/audit";
@@ -32,13 +32,9 @@ export const GET = apiHandler<Ctx>(async (req, ctx) => {
     : (parseQuery(req, filterSchema) as unknown as Record<string, string | undefined>);
 
   const where: Record<string, unknown> = {
-    organizationId: user.organizationId,
+    ...recordScope(user, "sentEmail", "read"),
     ...Object.fromEntries(Object.entries(queryFilters).filter(([, v]) => v)),
   };
-  if (user.role === "SALES_REP") {
-    // Reps see only their own sends; managers/admins see the org history.
-    where.userId = user.id;
-  }
 
   const emails = await db.sentEmail.findMany({
     where,

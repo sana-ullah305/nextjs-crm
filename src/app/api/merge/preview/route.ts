@@ -1,7 +1,7 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { apiHandler, ok, ApiNotFoundError, ApiValidationError } from "@/server/api";
-import { requireApiUserWith } from "@/server/rbac";
+import { requireApiUserWith, canAccessRecord } from "@/server/rbac";
 import { db } from "@/server/db";
 
 /**
@@ -202,6 +202,9 @@ export const GET = apiHandler(async (req) => {
   ]);
   if (!source) throw new ApiNotFoundError("Source record not found");
   if (!target) throw new ApiNotFoundError("Target record not found");
+  if (!canAccessRecord(user, source.ownerId) || !canAccessRecord(user, target.ownerId)) {
+    return NextResponse.json({ error: { code: "FORBIDDEN", message: "Forbidden" } }, { status: 403 });
+  }
 
   const fields: MergePreviewField[] = [
     ["firstName", source.firstName, target.firstName],

@@ -9,7 +9,7 @@ import {
   ApiValidationError,
   clientIp,
 } from "@/server/api";
-import { requireApiUserWith, canAccessRecord } from "@/server/rbac";
+import { requireApiUserWith, canAccessRecord, recordScope } from "@/server/rbac";
 import {
   sequenceCreateSchema,
   sequenceUpdateSchema,
@@ -47,7 +47,7 @@ const enrollmentsQuerySchema = z.object({
 async function listSequences() {
   const user = await requireApiUserWith("settings:read");
   const sequences = await db.sequence.findMany({
-    where: { organizationId: user.organizationId },
+    where: { ...recordScope(user, "sequence", "read") },
     orderBy: { createdAt: "desc" },
     include: {
       steps: { orderBy: { position: "asc" } },
@@ -68,7 +68,7 @@ async function listSequences() {
 async function getSequence(id: string) {
   const user = await requireApiUserWith("settings:read");
   const sequence = await db.sequence.findFirst({
-    where: { id, organizationId: user.organizationId },
+    where: { ...recordScope(user, "sequence", "read"), id },
     include: { steps: { orderBy: { position: "asc" } } },
   });
   if (!sequence) throw new ApiNotFoundError("Sequence not found");

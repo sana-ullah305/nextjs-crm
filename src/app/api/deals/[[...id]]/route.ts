@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { apiHandler, ok, parseBody, parseQuery, ApiNotFoundError, clientIp } from "@/server/api";
-import { requireApiUserWith, hasPermission } from "@/server/rbac";
+import { requireApiUserWith, hasPermission, canWriteRecord, recordScope } from "@/server/rbac";
 import { dealCreateSchema, dealUpdateSchema, stageMoveSchema } from "@/lib/schemas";
 import { db } from "@/server/db";
 import { writeAudit } from "@/server/audit";
@@ -39,7 +39,7 @@ async function listDeals(req: NextRequest) {
   const user = await requireApiUserWith("deals:read");
   const q = parseQuery(req, listQuerySchema);
   const where = {
-    organizationId: user.organizationId,
+    ...recordScope(user, "deal", "read"),
     deletedAt: null,
     ...(q.pipelineId ? { pipelineId: q.pipelineId } : {}),
     ...(q.status ? { status: q.status } : {}),
@@ -67,7 +67,7 @@ async function listDeals(req: NextRequest) {
 async function getDeal(id: string) {
   const user = await requireApiUserWith("deals:read");
   const deal = await db.deal.findFirst({
-    where: { id, organizationId: user.organizationId, deletedAt: null },
+    where: { ...recordScope(user, "deal", "read"), id, deletedAt: null },
     include: {
       stage: true,
       pipeline: { include: { stages: { orderBy: { position: "asc" } } } },
@@ -105,7 +105,8 @@ async function createDeal(req: NextRequest) {
       companyId: body.companyId || null,
       stageId: stage.id,
       pipelineId: stage.pipelineId,
-      ownerId: body.ownerId || user.id,
+      // Reps can only own the records they create; managers/admins may assign owner.
+      ownerId: hasPermission(user, "deals:update_all") ? (body.ownerId || user.id) : user.id,
       sourceId: body.sourceId || null,
       value: body.value,
       expectedCloseDate: parseDate(body.expectedCloseDate),
@@ -154,7 +155,7 @@ async function moveDeal(req: NextRequest, dealId: string) {
     include: { stage: true },
   });
   if (!deal) throw new ApiNotFoundError("Deal not found");
-  if (deal.ownerId && deal.ownerId !== user.id && !hasPermission(user, "deals:update_all")) {
+  if (!canWriteRecord(user, deal.ownerId, "deals:update_all")) {
     return NextResponse.json({ error: { code: "FORBIDDEN", message: "Forbidden" } }, { status: 403 });
   }
   const stage = await db.stage.findFirst({
@@ -216,7 +217,7 @@ async function updateDeal(req: NextRequest, dealId: string) {
     select: { id: true, ownerId: true },
   });
   if (!deal) throw new ApiNotFoundError("Deal not found");
-  if (deal.ownerId && deal.ownerId !== user.id && !hasPermission(user, "deals:update_all")) {
+  if (!canWriteRecord(user, deal.ownerId, "deals:update_all")) {
     return NextResponse.json({ error: { code: "FORBIDDEN", message: "Forbidden" } }, { status: 403 });
   }
   const body = await parseBody(req, dealUpdateSchema);
@@ -282,7 +283,7 @@ export const DELETE = apiHandler<Ctx>(async (req, ctx) => {
     select: { ownerId: true },
   });
   if (!deal) throw new ApiNotFoundError("Deal not found");
-  if (deal.ownerId && deal.ownerId !== user.id && !hasPermission(user, "deals:delete_all")) {
+  if (!canWriteRecord(user, deal.ownerId, "deals:delete_all")) {
     return NextResponse.json({ error: { code: "FORBIDDEN", message: "Forbidden" } }, { status: 403 });
   }
   await db.deal.update({ where: { id }, data: { deletedAt: new Date() } });
