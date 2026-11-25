@@ -294,6 +294,7 @@ export type SequenceEnrollmentWhereInput = {
   lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
   responder?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   steps?: Prisma.SequenceStepEnrollmentListRelationFilter
+  deadLetters?: Prisma.SequenceDeadLetterListRelationFilter
 }
 
 export type SequenceEnrollmentOrderByWithRelationInput = {
@@ -317,6 +318,7 @@ export type SequenceEnrollmentOrderByWithRelationInput = {
   lead?: Prisma.LeadOrderByWithRelationInput
   responder?: Prisma.UserOrderByWithRelationInput
   steps?: Prisma.SequenceStepEnrollmentOrderByRelationAggregateInput
+  deadLetters?: Prisma.SequenceDeadLetterOrderByRelationAggregateInput
 }
 
 export type SequenceEnrollmentWhereUniqueInput = Prisma.AtLeast<{
@@ -345,6 +347,7 @@ export type SequenceEnrollmentWhereUniqueInput = Prisma.AtLeast<{
   lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
   responder?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   steps?: Prisma.SequenceStepEnrollmentListRelationFilter
+  deadLetters?: Prisma.SequenceDeadLetterListRelationFilter
 }, "id" | "unsubToken" | "sequenceId_contactId" | "sequenceId_leadId">
 
 export type SequenceEnrollmentOrderByWithAggregationInput = {
@@ -405,6 +408,7 @@ export type SequenceEnrollmentCreateInput = {
   lead?: Prisma.LeadCreateNestedOneWithoutSequenceEnrollmentsInput
   responder?: Prisma.UserCreateNestedOneWithoutSequenceEnrollmentsInput
   steps?: Prisma.SequenceStepEnrollmentCreateNestedManyWithoutEnrollmentInput
+  deadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutEnrollmentInput
 }
 
 export type SequenceEnrollmentUncheckedCreateInput = {
@@ -423,6 +427,7 @@ export type SequenceEnrollmentUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   steps?: Prisma.SequenceStepEnrollmentUncheckedCreateNestedManyWithoutEnrollmentInput
+  deadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutEnrollmentInput
 }
 
 export type SequenceEnrollmentUpdateInput = {
@@ -441,6 +446,7 @@ export type SequenceEnrollmentUpdateInput = {
   lead?: Prisma.LeadUpdateOneWithoutSequenceEnrollmentsNestedInput
   responder?: Prisma.UserUpdateOneWithoutSequenceEnrollmentsNestedInput
   steps?: Prisma.SequenceStepEnrollmentUpdateManyWithoutEnrollmentNestedInput
+  deadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutEnrollmentNestedInput
 }
 
 export type SequenceEnrollmentUncheckedUpdateInput = {
@@ -459,6 +465,7 @@ export type SequenceEnrollmentUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   steps?: Prisma.SequenceStepEnrollmentUncheckedUpdateManyWithoutEnrollmentNestedInput
+  deadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutEnrollmentNestedInput
 }
 
 export type SequenceEnrollmentCreateManyInput = {
@@ -815,6 +822,20 @@ export type SequenceEnrollmentUpdateOneRequiredWithoutStepsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SequenceEnrollmentUpdateToOneWithWhereWithoutStepsInput, Prisma.SequenceEnrollmentUpdateWithoutStepsInput>, Prisma.SequenceEnrollmentUncheckedUpdateWithoutStepsInput>
 }
 
+export type SequenceEnrollmentCreateNestedOneWithoutDeadLettersInput = {
+  create?: Prisma.XOR<Prisma.SequenceEnrollmentCreateWithoutDeadLettersInput, Prisma.SequenceEnrollmentUncheckedCreateWithoutDeadLettersInput>
+  connectOrCreate?: Prisma.SequenceEnrollmentCreateOrConnectWithoutDeadLettersInput
+  connect?: Prisma.SequenceEnrollmentWhereUniqueInput
+}
+
+export type SequenceEnrollmentUpdateOneRequiredWithoutDeadLettersNestedInput = {
+  create?: Prisma.XOR<Prisma.SequenceEnrollmentCreateWithoutDeadLettersInput, Prisma.SequenceEnrollmentUncheckedCreateWithoutDeadLettersInput>
+  connectOrCreate?: Prisma.SequenceEnrollmentCreateOrConnectWithoutDeadLettersInput
+  upsert?: Prisma.SequenceEnrollmentUpsertWithoutDeadLettersInput
+  connect?: Prisma.SequenceEnrollmentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SequenceEnrollmentUpdateToOneWithWhereWithoutDeadLettersInput, Prisma.SequenceEnrollmentUpdateWithoutDeadLettersInput>, Prisma.SequenceEnrollmentUncheckedUpdateWithoutDeadLettersInput>
+}
+
 export type SequenceEnrollmentCreateWithoutOrganizationInput = {
   id?: string
   enrolledEmail: string
@@ -830,6 +851,7 @@ export type SequenceEnrollmentCreateWithoutOrganizationInput = {
   lead?: Prisma.LeadCreateNestedOneWithoutSequenceEnrollmentsInput
   responder?: Prisma.UserCreateNestedOneWithoutSequenceEnrollmentsInput
   steps?: Prisma.SequenceStepEnrollmentCreateNestedManyWithoutEnrollmentInput
+  deadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutEnrollmentInput
 }
 
 export type SequenceEnrollmentUncheckedCreateWithoutOrganizationInput = {
@@ -847,6 +869,7 @@ export type SequenceEnrollmentUncheckedCreateWithoutOrganizationInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   steps?: Prisma.SequenceStepEnrollmentUncheckedCreateNestedManyWithoutEnrollmentInput
+  deadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutEnrollmentInput
 }
 
 export type SequenceEnrollmentCreateOrConnectWithoutOrganizationInput = {
@@ -909,6 +932,7 @@ export type SequenceEnrollmentCreateWithoutResponderInput = {
   contact?: Prisma.ContactCreateNestedOneWithoutSequenceEnrollmentsInput
   lead?: Prisma.LeadCreateNestedOneWithoutSequenceEnrollmentsInput
   steps?: Prisma.SequenceStepEnrollmentCreateNestedManyWithoutEnrollmentInput
+  deadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutEnrollmentInput
 }
 
 export type SequenceEnrollmentUncheckedCreateWithoutResponderInput = {
@@ -926,6 +950,7 @@ export type SequenceEnrollmentUncheckedCreateWithoutResponderInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   steps?: Prisma.SequenceStepEnrollmentUncheckedCreateNestedManyWithoutEnrollmentInput
+  deadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutEnrollmentInput
 }
 
 export type SequenceEnrollmentCreateOrConnectWithoutResponderInput = {
@@ -968,6 +993,7 @@ export type SequenceEnrollmentCreateWithoutContactInput = {
   lead?: Prisma.LeadCreateNestedOneWithoutSequenceEnrollmentsInput
   responder?: Prisma.UserCreateNestedOneWithoutSequenceEnrollmentsInput
   steps?: Prisma.SequenceStepEnrollmentCreateNestedManyWithoutEnrollmentInput
+  deadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutEnrollmentInput
 }
 
 export type SequenceEnrollmentUncheckedCreateWithoutContactInput = {
@@ -985,6 +1011,7 @@ export type SequenceEnrollmentUncheckedCreateWithoutContactInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   steps?: Prisma.SequenceStepEnrollmentUncheckedCreateNestedManyWithoutEnrollmentInput
+  deadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutEnrollmentInput
 }
 
 export type SequenceEnrollmentCreateOrConnectWithoutContactInput = {
@@ -1027,6 +1054,7 @@ export type SequenceEnrollmentCreateWithoutLeadInput = {
   contact?: Prisma.ContactCreateNestedOneWithoutSequenceEnrollmentsInput
   responder?: Prisma.UserCreateNestedOneWithoutSequenceEnrollmentsInput
   steps?: Prisma.SequenceStepEnrollmentCreateNestedManyWithoutEnrollmentInput
+  deadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutEnrollmentInput
 }
 
 export type SequenceEnrollmentUncheckedCreateWithoutLeadInput = {
@@ -1044,6 +1072,7 @@ export type SequenceEnrollmentUncheckedCreateWithoutLeadInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   steps?: Prisma.SequenceStepEnrollmentUncheckedCreateNestedManyWithoutEnrollmentInput
+  deadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutEnrollmentInput
 }
 
 export type SequenceEnrollmentCreateOrConnectWithoutLeadInput = {
@@ -1086,6 +1115,7 @@ export type SequenceEnrollmentCreateWithoutSequenceInput = {
   lead?: Prisma.LeadCreateNestedOneWithoutSequenceEnrollmentsInput
   responder?: Prisma.UserCreateNestedOneWithoutSequenceEnrollmentsInput
   steps?: Prisma.SequenceStepEnrollmentCreateNestedManyWithoutEnrollmentInput
+  deadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutEnrollmentInput
 }
 
 export type SequenceEnrollmentUncheckedCreateWithoutSequenceInput = {
@@ -1103,6 +1133,7 @@ export type SequenceEnrollmentUncheckedCreateWithoutSequenceInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   steps?: Prisma.SequenceStepEnrollmentUncheckedCreateNestedManyWithoutEnrollmentInput
+  deadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutEnrollmentInput
 }
 
 export type SequenceEnrollmentCreateOrConnectWithoutSequenceInput = {
@@ -1145,6 +1176,7 @@ export type SequenceEnrollmentCreateWithoutStepsInput = {
   contact?: Prisma.ContactCreateNestedOneWithoutSequenceEnrollmentsInput
   lead?: Prisma.LeadCreateNestedOneWithoutSequenceEnrollmentsInput
   responder?: Prisma.UserCreateNestedOneWithoutSequenceEnrollmentsInput
+  deadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutEnrollmentInput
 }
 
 export type SequenceEnrollmentUncheckedCreateWithoutStepsInput = {
@@ -1162,6 +1194,7 @@ export type SequenceEnrollmentUncheckedCreateWithoutStepsInput = {
   unsubToken: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  deadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutEnrollmentInput
 }
 
 export type SequenceEnrollmentCreateOrConnectWithoutStepsInput = {
@@ -1195,6 +1228,7 @@ export type SequenceEnrollmentUpdateWithoutStepsInput = {
   contact?: Prisma.ContactUpdateOneWithoutSequenceEnrollmentsNestedInput
   lead?: Prisma.LeadUpdateOneWithoutSequenceEnrollmentsNestedInput
   responder?: Prisma.UserUpdateOneWithoutSequenceEnrollmentsNestedInput
+  deadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutEnrollmentNestedInput
 }
 
 export type SequenceEnrollmentUncheckedUpdateWithoutStepsInput = {
@@ -1212,6 +1246,95 @@ export type SequenceEnrollmentUncheckedUpdateWithoutStepsInput = {
   unsubToken?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutEnrollmentNestedInput
+}
+
+export type SequenceEnrollmentCreateWithoutDeadLettersInput = {
+  id?: string
+  enrolledEmail: string
+  currentStep?: number
+  nextSendAt?: Date | string | null
+  status?: string
+  stoppedReason?: string
+  unsubToken: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sequence: Prisma.SequenceCreateNestedOneWithoutEnrollmentsInput
+  organization: Prisma.OrganizationCreateNestedOneWithoutSequenceEnrollmentsInput
+  contact?: Prisma.ContactCreateNestedOneWithoutSequenceEnrollmentsInput
+  lead?: Prisma.LeadCreateNestedOneWithoutSequenceEnrollmentsInput
+  responder?: Prisma.UserCreateNestedOneWithoutSequenceEnrollmentsInput
+  steps?: Prisma.SequenceStepEnrollmentCreateNestedManyWithoutEnrollmentInput
+}
+
+export type SequenceEnrollmentUncheckedCreateWithoutDeadLettersInput = {
+  id?: string
+  organizationId: string
+  sequenceId: string
+  contactId?: string | null
+  leadId?: string | null
+  enrolledEmail: string
+  currentStep?: number
+  nextSendAt?: Date | string | null
+  status?: string
+  stoppedReason?: string
+  responderUserId?: string | null
+  unsubToken: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  steps?: Prisma.SequenceStepEnrollmentUncheckedCreateNestedManyWithoutEnrollmentInput
+}
+
+export type SequenceEnrollmentCreateOrConnectWithoutDeadLettersInput = {
+  where: Prisma.SequenceEnrollmentWhereUniqueInput
+  create: Prisma.XOR<Prisma.SequenceEnrollmentCreateWithoutDeadLettersInput, Prisma.SequenceEnrollmentUncheckedCreateWithoutDeadLettersInput>
+}
+
+export type SequenceEnrollmentUpsertWithoutDeadLettersInput = {
+  update: Prisma.XOR<Prisma.SequenceEnrollmentUpdateWithoutDeadLettersInput, Prisma.SequenceEnrollmentUncheckedUpdateWithoutDeadLettersInput>
+  create: Prisma.XOR<Prisma.SequenceEnrollmentCreateWithoutDeadLettersInput, Prisma.SequenceEnrollmentUncheckedCreateWithoutDeadLettersInput>
+  where?: Prisma.SequenceEnrollmentWhereInput
+}
+
+export type SequenceEnrollmentUpdateToOneWithWhereWithoutDeadLettersInput = {
+  where?: Prisma.SequenceEnrollmentWhereInput
+  data: Prisma.XOR<Prisma.SequenceEnrollmentUpdateWithoutDeadLettersInput, Prisma.SequenceEnrollmentUncheckedUpdateWithoutDeadLettersInput>
+}
+
+export type SequenceEnrollmentUpdateWithoutDeadLettersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  enrolledEmail?: Prisma.StringFieldUpdateOperationsInput | string
+  currentStep?: Prisma.IntFieldUpdateOperationsInput | number
+  nextSendAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  stoppedReason?: Prisma.StringFieldUpdateOperationsInput | string
+  unsubToken?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sequence?: Prisma.SequenceUpdateOneRequiredWithoutEnrollmentsNestedInput
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutSequenceEnrollmentsNestedInput
+  contact?: Prisma.ContactUpdateOneWithoutSequenceEnrollmentsNestedInput
+  lead?: Prisma.LeadUpdateOneWithoutSequenceEnrollmentsNestedInput
+  responder?: Prisma.UserUpdateOneWithoutSequenceEnrollmentsNestedInput
+  steps?: Prisma.SequenceStepEnrollmentUpdateManyWithoutEnrollmentNestedInput
+}
+
+export type SequenceEnrollmentUncheckedUpdateWithoutDeadLettersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  sequenceId?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enrolledEmail?: Prisma.StringFieldUpdateOperationsInput | string
+  currentStep?: Prisma.IntFieldUpdateOperationsInput | number
+  nextSendAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  stoppedReason?: Prisma.StringFieldUpdateOperationsInput | string
+  responderUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unsubToken?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  steps?: Prisma.SequenceStepEnrollmentUncheckedUpdateManyWithoutEnrollmentNestedInput
 }
 
 export type SequenceEnrollmentCreateManyOrganizationInput = {
@@ -1245,6 +1368,7 @@ export type SequenceEnrollmentUpdateWithoutOrganizationInput = {
   lead?: Prisma.LeadUpdateOneWithoutSequenceEnrollmentsNestedInput
   responder?: Prisma.UserUpdateOneWithoutSequenceEnrollmentsNestedInput
   steps?: Prisma.SequenceStepEnrollmentUpdateManyWithoutEnrollmentNestedInput
+  deadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutEnrollmentNestedInput
 }
 
 export type SequenceEnrollmentUncheckedUpdateWithoutOrganizationInput = {
@@ -1262,6 +1386,7 @@ export type SequenceEnrollmentUncheckedUpdateWithoutOrganizationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   steps?: Prisma.SequenceStepEnrollmentUncheckedUpdateManyWithoutEnrollmentNestedInput
+  deadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutEnrollmentNestedInput
 }
 
 export type SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationInput = {
@@ -1311,6 +1436,7 @@ export type SequenceEnrollmentUpdateWithoutResponderInput = {
   contact?: Prisma.ContactUpdateOneWithoutSequenceEnrollmentsNestedInput
   lead?: Prisma.LeadUpdateOneWithoutSequenceEnrollmentsNestedInput
   steps?: Prisma.SequenceStepEnrollmentUpdateManyWithoutEnrollmentNestedInput
+  deadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutEnrollmentNestedInput
 }
 
 export type SequenceEnrollmentUncheckedUpdateWithoutResponderInput = {
@@ -1328,6 +1454,7 @@ export type SequenceEnrollmentUncheckedUpdateWithoutResponderInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   steps?: Prisma.SequenceStepEnrollmentUncheckedUpdateManyWithoutEnrollmentNestedInput
+  deadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutEnrollmentNestedInput
 }
 
 export type SequenceEnrollmentUncheckedUpdateManyWithoutResponderInput = {
@@ -1377,6 +1504,7 @@ export type SequenceEnrollmentUpdateWithoutContactInput = {
   lead?: Prisma.LeadUpdateOneWithoutSequenceEnrollmentsNestedInput
   responder?: Prisma.UserUpdateOneWithoutSequenceEnrollmentsNestedInput
   steps?: Prisma.SequenceStepEnrollmentUpdateManyWithoutEnrollmentNestedInput
+  deadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutEnrollmentNestedInput
 }
 
 export type SequenceEnrollmentUncheckedUpdateWithoutContactInput = {
@@ -1394,6 +1522,7 @@ export type SequenceEnrollmentUncheckedUpdateWithoutContactInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   steps?: Prisma.SequenceStepEnrollmentUncheckedUpdateManyWithoutEnrollmentNestedInput
+  deadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutEnrollmentNestedInput
 }
 
 export type SequenceEnrollmentUncheckedUpdateManyWithoutContactInput = {
@@ -1443,6 +1572,7 @@ export type SequenceEnrollmentUpdateWithoutLeadInput = {
   contact?: Prisma.ContactUpdateOneWithoutSequenceEnrollmentsNestedInput
   responder?: Prisma.UserUpdateOneWithoutSequenceEnrollmentsNestedInput
   steps?: Prisma.SequenceStepEnrollmentUpdateManyWithoutEnrollmentNestedInput
+  deadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutEnrollmentNestedInput
 }
 
 export type SequenceEnrollmentUncheckedUpdateWithoutLeadInput = {
@@ -1460,6 +1590,7 @@ export type SequenceEnrollmentUncheckedUpdateWithoutLeadInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   steps?: Prisma.SequenceStepEnrollmentUncheckedUpdateManyWithoutEnrollmentNestedInput
+  deadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutEnrollmentNestedInput
 }
 
 export type SequenceEnrollmentUncheckedUpdateManyWithoutLeadInput = {
@@ -1509,6 +1640,7 @@ export type SequenceEnrollmentUpdateWithoutSequenceInput = {
   lead?: Prisma.LeadUpdateOneWithoutSequenceEnrollmentsNestedInput
   responder?: Prisma.UserUpdateOneWithoutSequenceEnrollmentsNestedInput
   steps?: Prisma.SequenceStepEnrollmentUpdateManyWithoutEnrollmentNestedInput
+  deadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutEnrollmentNestedInput
 }
 
 export type SequenceEnrollmentUncheckedUpdateWithoutSequenceInput = {
@@ -1526,6 +1658,7 @@ export type SequenceEnrollmentUncheckedUpdateWithoutSequenceInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   steps?: Prisma.SequenceStepEnrollmentUncheckedUpdateManyWithoutEnrollmentNestedInput
+  deadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutEnrollmentNestedInput
 }
 
 export type SequenceEnrollmentUncheckedUpdateManyWithoutSequenceInput = {
@@ -1551,10 +1684,12 @@ export type SequenceEnrollmentUncheckedUpdateManyWithoutSequenceInput = {
 
 export type SequenceEnrollmentCountOutputType = {
   steps: number
+  deadLetters: number
 }
 
 export type SequenceEnrollmentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   steps?: boolean | SequenceEnrollmentCountOutputTypeCountStepsArgs
+  deadLetters?: boolean | SequenceEnrollmentCountOutputTypeCountDeadLettersArgs
 }
 
 /**
@@ -1572,6 +1707,13 @@ export type SequenceEnrollmentCountOutputTypeDefaultArgs<ExtArgs extends runtime
  */
 export type SequenceEnrollmentCountOutputTypeCountStepsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.SequenceStepEnrollmentWhereInput
+}
+
+/**
+ * SequenceEnrollmentCountOutputType without action
+ */
+export type SequenceEnrollmentCountOutputTypeCountDeadLettersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SequenceDeadLetterWhereInput
 }
 
 
@@ -1596,6 +1738,7 @@ export type SequenceEnrollmentSelect<ExtArgs extends runtime.Types.Extensions.In
   lead?: boolean | Prisma.SequenceEnrollment$leadArgs<ExtArgs>
   responder?: boolean | Prisma.SequenceEnrollment$responderArgs<ExtArgs>
   steps?: boolean | Prisma.SequenceEnrollment$stepsArgs<ExtArgs>
+  deadLetters?: boolean | Prisma.SequenceEnrollment$deadLettersArgs<ExtArgs>
   _count?: boolean | Prisma.SequenceEnrollmentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sequenceEnrollment"]>
 
@@ -1668,6 +1811,7 @@ export type SequenceEnrollmentInclude<ExtArgs extends runtime.Types.Extensions.I
   lead?: boolean | Prisma.SequenceEnrollment$leadArgs<ExtArgs>
   responder?: boolean | Prisma.SequenceEnrollment$responderArgs<ExtArgs>
   steps?: boolean | Prisma.SequenceEnrollment$stepsArgs<ExtArgs>
+  deadLetters?: boolean | Prisma.SequenceEnrollment$deadLettersArgs<ExtArgs>
   _count?: boolean | Prisma.SequenceEnrollmentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SequenceEnrollmentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1694,6 +1838,7 @@ export type $SequenceEnrollmentPayload<ExtArgs extends runtime.Types.Extensions.
     lead: Prisma.$LeadPayload<ExtArgs> | null
     responder: Prisma.$UserPayload<ExtArgs> | null
     steps: Prisma.$SequenceStepEnrollmentPayload<ExtArgs>[]
+    deadLetters: Prisma.$SequenceDeadLetterPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2110,6 +2255,7 @@ export interface Prisma__SequenceEnrollmentClient<T, Null = never, ExtArgs exten
   lead<T extends Prisma.SequenceEnrollment$leadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SequenceEnrollment$leadArgs<ExtArgs>>): Prisma.Prisma__LeadClient<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   responder<T extends Prisma.SequenceEnrollment$responderArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SequenceEnrollment$responderArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   steps<T extends Prisma.SequenceEnrollment$stepsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SequenceEnrollment$stepsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SequenceStepEnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  deadLetters<T extends Prisma.SequenceEnrollment$deadLettersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SequenceEnrollment$deadLettersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SequenceDeadLetterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2630,6 +2776,30 @@ export type SequenceEnrollment$stepsArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.SequenceStepEnrollmentScalarFieldEnum | Prisma.SequenceStepEnrollmentScalarFieldEnum[]
+}
+
+/**
+ * SequenceEnrollment.deadLetters
+ */
+export type SequenceEnrollment$deadLettersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SequenceDeadLetter
+   */
+  select?: Prisma.SequenceDeadLetterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SequenceDeadLetter
+   */
+  omit?: Prisma.SequenceDeadLetterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SequenceDeadLetterInclude<ExtArgs> | null
+  where?: Prisma.SequenceDeadLetterWhereInput
+  orderBy?: Prisma.SequenceDeadLetterOrderByWithRelationInput | Prisma.SequenceDeadLetterOrderByWithRelationInput[]
+  cursor?: Prisma.SequenceDeadLetterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SequenceDeadLetterScalarFieldEnum | Prisma.SequenceDeadLetterScalarFieldEnum[]
 }
 
 /**
