@@ -424,7 +424,8 @@ export const ModelName = {
   Sequence: 'Sequence',
   SequenceStep: 'SequenceStep',
   SequenceEnrollment: 'SequenceEnrollment',
-  SequenceStepEnrollment: 'SequenceStepEnrollment'
+  SequenceStepEnrollment: 'SequenceStepEnrollment',
+  SequenceDeadLetter: 'SequenceDeadLetter'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -440,7 +441,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "organization" | "user" | "session" | "company" | "contact" | "tag" | "leadSource" | "lead" | "pipeline" | "stage" | "deal" | "task" | "activity" | "note" | "auditLog" | "notification" | "emailTemplate" | "customField" | "customFieldValue" | "emailSettings" | "sentEmail" | "followUpReminder" | "inboundEmail" | "apiKey" | "sequence" | "sequenceStep" | "sequenceEnrollment" | "sequenceStepEnrollment"
+    modelProps: "organization" | "user" | "session" | "company" | "contact" | "tag" | "leadSource" | "lead" | "pipeline" | "stage" | "deal" | "task" | "activity" | "note" | "auditLog" | "notification" | "emailTemplate" | "customField" | "customFieldValue" | "emailSettings" | "sentEmail" | "followUpReminder" | "inboundEmail" | "apiKey" | "sequence" | "sequenceStep" | "sequenceEnrollment" | "sequenceStepEnrollment" | "sequenceDeadLetter"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2516,6 +2517,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SequenceDeadLetter: {
+      payload: Prisma.$SequenceDeadLetterPayload<ExtArgs>
+      fields: Prisma.SequenceDeadLetterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SequenceDeadLetterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SequenceDeadLetterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SequenceDeadLetterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SequenceDeadLetterPayload>
+        }
+        findFirst: {
+          args: Prisma.SequenceDeadLetterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SequenceDeadLetterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SequenceDeadLetterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SequenceDeadLetterPayload>
+        }
+        findMany: {
+          args: Prisma.SequenceDeadLetterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SequenceDeadLetterPayload>[]
+        }
+        create: {
+          args: Prisma.SequenceDeadLetterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SequenceDeadLetterPayload>
+        }
+        createMany: {
+          args: Prisma.SequenceDeadLetterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SequenceDeadLetterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SequenceDeadLetterPayload>[]
+        }
+        delete: {
+          args: Prisma.SequenceDeadLetterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SequenceDeadLetterPayload>
+        }
+        update: {
+          args: Prisma.SequenceDeadLetterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SequenceDeadLetterPayload>
+        }
+        deleteMany: {
+          args: Prisma.SequenceDeadLetterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SequenceDeadLetterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SequenceDeadLetterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SequenceDeadLetterPayload>[]
+        }
+        upsert: {
+          args: Prisma.SequenceDeadLetterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SequenceDeadLetterPayload>
+        }
+        aggregate: {
+          args: Prisma.SequenceDeadLetterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSequenceDeadLetter>
+        }
+        groupBy: {
+          args: Prisma.SequenceDeadLetterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SequenceDeadLetterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SequenceDeadLetterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SequenceDeadLetterCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -3029,6 +3104,23 @@ export const SequenceStepEnrollmentScalarFieldEnum = {
 export type SequenceStepEnrollmentScalarFieldEnum = (typeof SequenceStepEnrollmentScalarFieldEnum)[keyof typeof SequenceStepEnrollmentScalarFieldEnum]
 
 
+export const SequenceDeadLetterScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  sequenceId: 'sequenceId',
+  enrollmentId: 'enrollmentId',
+  contactId: 'contactId',
+  leadId: 'leadId',
+  stepId: 'stepId',
+  stepPosition: 'stepPosition',
+  attempts: 'attempts',
+  lastError: 'lastError',
+  createdAt: 'createdAt'
+} as const
+
+export type SequenceDeadLetterScalarFieldEnum = (typeof SequenceDeadLetterScalarFieldEnum)[keyof typeof SequenceDeadLetterScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -3264,6 +3356,7 @@ export type GlobalOmitConfig = {
   sequenceStep?: Prisma.SequenceStepOmit
   sequenceEnrollment?: Prisma.SequenceEnrollmentOmit
   sequenceStepEnrollment?: Prisma.SequenceStepEnrollmentOmit
+  sequenceDeadLetter?: Prisma.SequenceDeadLetterOmit
 }
 
 /* Types for Logging */

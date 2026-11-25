@@ -157,3 +157,8 @@ export type SequenceEnrollment = Prisma.SequenceEnrollmentModel
  * 
  */
 export type SequenceStepEnrollment = Prisma.SequenceStepEnrollmentModel
+/**
+ * Model SequenceDeadLetter
+ * 
+ */
+export type SequenceDeadLetter = Prisma.SequenceDeadLetterModel

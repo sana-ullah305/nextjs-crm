@@ -78,7 +78,8 @@ export const ModelName = {
   Sequence: 'Sequence',
   SequenceStep: 'SequenceStep',
   SequenceEnrollment: 'SequenceEnrollment',
-  SequenceStepEnrollment: 'SequenceStepEnrollment'
+  SequenceStepEnrollment: 'SequenceStepEnrollment',
+  SequenceDeadLetter: 'SequenceDeadLetter'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -569,6 +570,23 @@ export const SequenceStepEnrollmentScalarFieldEnum = {
 } as const
 
 export type SequenceStepEnrollmentScalarFieldEnum = (typeof SequenceStepEnrollmentScalarFieldEnum)[keyof typeof SequenceStepEnrollmentScalarFieldEnum]
+
+
+export const SequenceDeadLetterScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  sequenceId: 'sequenceId',
+  enrollmentId: 'enrollmentId',
+  contactId: 'contactId',
+  leadId: 'leadId',
+  stepId: 'stepId',
+  stepPosition: 'stepPosition',
+  attempts: 'attempts',
+  lastError: 'lastError',
+  createdAt: 'createdAt'
+} as const
+
+export type SequenceDeadLetterScalarFieldEnum = (typeof SequenceDeadLetterScalarFieldEnum)[keyof typeof SequenceDeadLetterScalarFieldEnum]
 
 
 export const SortOrder = {

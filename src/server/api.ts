@@ -65,21 +65,40 @@ export function parseQuery<T>(req: NextRequest, schema: ZodType<T>): T {
   return result.data;
 }
 
-type Handler<C> = (req: NextRequest, ctx: C, user: SessionUser) => Promise<NextResponse>;
+export type ApiHandlerOptions = {
+  /**
+   * "required" (default): a valid session is mandatory, missing session → 401.
+   * "optional": the handler runs with `user === null` when no session is
+   * present; the handler is expected to enforce its own auth (e.g. a
+   * scheduler service token verified via src/server/scheduler-auth).
+   */
+  auth?: "required" | "optional";
+};
+
+type Handler<C> = (
+  req: NextRequest,
+  ctx: C,
+  user: SessionUser | null
+) => Promise<NextResponse>;
 
 /**
  * Wraps a route handler with:
- *  - authentication (401 envelope),
+ *  - authentication (401 envelope) unless auth: "optional",
  *  - consistent error mapping (Zod → 400, NotFound → 404, Forbidden → 403),
  *  - never leaks stack traces to clients.
  */
 export function apiHandler<C>(
-  handler: Handler<C>
+  handler: Handler<C>,
+  options: ApiHandlerOptions = {}
 ): (req: NextRequest, ctx: C) => Promise<NextResponse> {
+  const requireAuth = options.auth !== "optional";
   return async (req: NextRequest, ctx: C) => {
     try {
-      const { requireApiUser } = await import("@/server/rbac");
-      const user = await requireApiUser();
+      let user: SessionUser | null = null;
+      if (requireAuth) {
+        const { requireApiUser } = await import("@/server/rbac");
+        user = await requireApiUser();
+      }
       return await handler(req, ctx, user);
     } catch (err) {
       if (err instanceof ApiValidationError) {
