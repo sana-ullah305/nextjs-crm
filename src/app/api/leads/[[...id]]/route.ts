@@ -232,78 +232,88 @@ async function convertLead(req: NextRequest, leadId: string) {
   }
   const body = await parseBody(req, leadConvertSchema);
 
-  const contact = await db.contact.create({
-    data: {
-      organizationId: lead.organizationId,
-      companyId: lead.companyId,
-      firstName: lead.firstName,
-      lastName: lead.lastName,
-      email: lead.email,
-      phone: lead.phone,
-      status: "CUSTOMER",
-      ownerId: lead.assignedUserId ?? user.id,
-    },
-  });
-
-  let deal = null;
-  if (body.createDeal) {
-    const pipeline = body.pipelineId
-      ? await db.pipeline.findFirst({
-          where: { id: body.pipelineId, organizationId: lead.organizationId },
-        })
-      : await db.pipeline.findFirst({
-          where: { organizationId: lead.organizationId, isDefault: true },
-        });
-    if (!pipeline) throw new ApiNotFoundError("No pipeline configured for this organization");
-    const firstStage = await db.stage.findFirst({
-      where: { pipelineId: pipeline.id },
-      orderBy: { position: "asc" },
-    });
-    if (!firstStage) throw new ApiNotFoundError("Pipeline has no stages");
-    deal = await db.deal.create({
+  // All-or-nothing: the converted contact, optional deal, lead status flip,
+  // activity and audit row commit together or not at all. Any thrown error
+  // rolls the entire transaction back, so a failed conversion leaves no
+  // orphaned contact/deal behind.
+  const result = await db.$transaction(async (tx) => {
+    const contact = await tx.contact.create({
       data: {
         organizationId: lead.organizationId,
-        name: body.dealName || `${lead.companyName || contact.lastName} — new deal`,
-        contactId: contact.id,
         companyId: lead.companyId,
-        stageId: firstStage.id,
-        pipelineId: pipeline.id,
+        firstName: lead.firstName,
+        lastName: lead.lastName,
+        email: lead.email,
+        phone: lead.phone,
+        status: "CUSTOMER",
         ownerId: lead.assignedUserId ?? user.id,
-        sourceId: lead.sourceId,
-        value: body.dealValue ?? lead.estimatedValue,
-        probability: firstStage.probability,
-        expectedCloseDate: parseDate(body.expectedCloseDate) ?? lead.expectedCloseDate,
-        leadId: lead.id,
       },
     });
-  }
 
-  const updated = await db.lead.update({
-    where: { id: leadId },
-    data: { status: "CONVERTED", convertedAt: new Date(), contactId: contact.id },
+    let deal = null;
+    if (body.createDeal) {
+      const pipeline = body.pipelineId
+        ? await tx.pipeline.findFirst({
+            where: { id: body.pipelineId, organizationId: lead.organizationId },
+          })
+        : await tx.pipeline.findFirst({
+            where: { organizationId: lead.organizationId, isDefault: true },
+          });
+      if (!pipeline) throw new ApiNotFoundError("No pipeline configured for this organization");
+      const firstStage = await tx.stage.findFirst({
+        where: { pipelineId: pipeline.id },
+        orderBy: { position: "asc" },
+      });
+      if (!firstStage) throw new ApiNotFoundError("Pipeline has no stages");
+      deal = await tx.deal.create({
+        data: {
+          organizationId: lead.organizationId,
+          name: body.dealName || `${lead.companyName || contact.lastName} — new deal`,
+          contactId: contact.id,
+          companyId: lead.companyId,
+          stageId: firstStage.id,
+          pipelineId: pipeline.id,
+          ownerId: lead.assignedUserId ?? user.id,
+          sourceId: lead.sourceId,
+          value: body.dealValue ?? lead.estimatedValue,
+          probability: firstStage.probability,
+          expectedCloseDate: parseDate(body.expectedCloseDate) ?? lead.expectedCloseDate,
+          leadId: lead.id,
+        },
+      });
+    }
+
+    const updated = await tx.lead.update({
+      where: { id: leadId },
+      data: { status: "CONVERTED", convertedAt: new Date(), contactId: contact.id },
+    });
+
+    await tx.activity.create({
+      data: {
+        organizationId: user.organizationId,
+        type: "CONVERTED",
+        title: `Lead converted: ${lead.firstName} ${lead.lastName}`,
+        leadId: lead.id,
+        contactId: contact.id,
+        dealId: deal?.id,
+        userId: user.id,
+      },
+    });
+    await tx.auditLog.create({
+      data: {
+        organizationId: user.organizationId,
+        userId: user.id,
+        action: "LEAD_CONVERT",
+        entityType: "lead",
+        entityId: lead.id,
+        ipAddress: clientIp(req),
+        metadata: JSON.stringify({ contactId: contact.id, dealId: deal?.id }),
+      },
+    });
+    return { lead: updated, contact, deal };
   });
 
-  await db.activity.create({
-    data: {
-      organizationId: user.organizationId,
-      type: "CONVERTED",
-      title: `Lead converted: ${lead.firstName} ${lead.lastName}`,
-      leadId: lead.id,
-      contactId: contact.id,
-      dealId: deal?.id,
-      userId: user.id,
-    },
-  });
-  await writeAudit({
-    organizationId: user.organizationId,
-    userId: user.id,
-    action: "LEAD_CONVERT",
-    entityType: "lead",
-    entityId: lead.id,
-    ipAddress: clientIp(req),
-    metadata: { contactId: contact.id, dealId: deal?.id },
-  });
-  return ok({ lead: updated, contact, deal });
+  return ok(result);
 }
 
 export const PATCH = apiHandler<Ctx>(async (req, ctx) => {
