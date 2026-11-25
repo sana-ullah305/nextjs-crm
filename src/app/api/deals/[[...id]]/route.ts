@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { apiHandler, ok, parseBody, parseQuery, ApiNotFoundError, clientIp } from "@/server/api";
-import { requireApiUserWith, hasPermission } from "@/server/rbac";
+import { requireApiUserWith, hasPermission, canReassignRecord } from "@/server/rbac";
 import { dealCreateSchema, dealUpdateSchema, stageMoveSchema } from "@/lib/schemas";
 import { db } from "@/server/db";
 import { writeAudit } from "@/server/audit";
@@ -38,6 +38,13 @@ export const GET = apiHandler<Ctx>(async (req, ctx) => {
 async function listDeals(req: NextRequest) {
   const user = await requireApiUserWith("deals:read");
   const q = parseQuery(req, listQuerySchema);
+  // Record-level read scoping: reps without deals:read_all see only deals they
+  // own or that are unowned. The name search is a plain (non-OR) clause so it
+  // composes safely, but the ownership filter is kept in its own AND entry for
+  // consistency with the other list routes.
+  const visibility = hasPermission(user, "deals:read_all")
+    ? {}
+    : { OR: [{ ownerId: user.id }, { ownerId: null }] };
   const where = {
     organizationId: user.organizationId,
     deletedAt: null,
@@ -45,6 +52,7 @@ async function listDeals(req: NextRequest) {
     ...(q.status ? { status: q.status } : {}),
     ...(q.ownerId ? { ownerId: q.ownerId } : {}),
     ...(q.q ? { name: { contains: q.q } } : {}),
+    AND: [visibility],
   };
   const [total, deals] = await Promise.all([
     db.deal.count({ where }),
@@ -78,6 +86,14 @@ async function getDeal(id: string) {
     },
   });
   if (!deal) throw new ApiNotFoundError("Deal not found");
+  // Record-level read scoping mirrors the list: reps without deals:read_all
+  // may only read deals they own or unowned deals.
+  if (!hasPermission(user, "deals:read_all") && deal.ownerId && deal.ownerId !== user.id) {
+    return NextResponse.json(
+      { error: { code: "FORBIDDEN", message: "Forbidden" } },
+      { status: 403 }
+    );
+  }
   return ok(deal);
 }
 
@@ -90,6 +106,14 @@ export const POST = apiHandler<Ctx>(async (req, ctx) => {
 async function createDeal(req: NextRequest) {
   const user = await requireApiUserWith("deals:create");
   const body = await parseBody(req, dealCreateSchema);
+  // A rep may only create deals they own; assigning to another user requires
+  // deals:update_all.
+  if (body.ownerId && !canReassignRecord(user, body.ownerId, "deals:update_all")) {
+    return NextResponse.json(
+      { error: { code: "FORBIDDEN", message: "Forbidden" } },
+      { status: 403 }
+    );
+  }
   const stage = await db.stage.findFirst({
     where: { id: body.stageId },
     include: { pipeline: true },
@@ -220,6 +244,14 @@ async function updateDeal(req: NextRequest, dealId: string) {
     return NextResponse.json({ error: { code: "FORBIDDEN", message: "Forbidden" } }, { status: 403 });
   }
   const body = await parseBody(req, dealUpdateSchema);
+  // A rep may only take deal ownership themselves; transferring to another
+  // user requires deals:update_all.
+  if (body.ownerId !== undefined && !canReassignRecord(user, body.ownerId || null, "deals:update_all")) {
+    return NextResponse.json(
+      { error: { code: "FORBIDDEN", message: "Forbidden" } },
+      { status: 403 }
+    );
+  }
 
   let stageUpdate: Record<string, unknown> = {};
   if (body.stageId) {

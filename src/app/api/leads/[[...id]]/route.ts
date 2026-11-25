@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { apiHandler, ok, parseBody, parseQuery, ApiNotFoundError, ApiValidationError, clientIp } from "@/server/api";
-import { requireApiUserWith, hasPermission } from "@/server/rbac";
+import { requireApiUserWith, hasPermission, canAccessRecord, canReassignRecord, visibilityScope } from "@/server/rbac";
 import { leadCreateSchema, leadUpdateSchema, leadConvertSchema } from "@/lib/schemas";
 import { db } from "@/server/db";
 import { writeAudit } from "@/server/audit";
@@ -42,26 +42,31 @@ export const GET = apiHandler<Ctx>(async (req, ctx) => {
 async function listLeads(req: NextRequest) {
   const user = await requireApiUserWith("leads:read");
   const q = parseQuery(req, listQuerySchema);
+  // A lead is visible to a rep when they own it OR it is assigned to them OR
+  // it is unassigned. This OR-shaped visibility clause and the free-text `q`
+  // OR clause must occupy separate AND entries — collapsing them into one
+  // object lets search overwrite the ownership filter (RBAC bypass).
+  const visibility = hasPermission(user, "leads:read_all")
+    ? {}
+    : { OR: [{ assignedUserId: user.id }, { ownerId: user.id }, { assignedUserId: null }] };
+  const searchClause = q.q
+    ? {
+        OR: [
+          { firstName: { contains: q.q } },
+          { lastName: { contains: q.q } },
+          { email: { contains: q.q } },
+          { companyName: { contains: q.q } },
+        ],
+      }
+    : {};
   const where = {
     organizationId: user.organizationId,
     deletedAt: null,
-    ...(hasPermission(user, "leads:read_all")
-      ? {}
-      : { OR: [{ assignedUserId: user.id }, { ownerId: user.id }, { assignedUserId: null }] }),
     ...(q.status ? { status: q.status } : {}),
     ...(q.sourceId ? { sourceId: q.sourceId } : {}),
     ...(q.assignedUserId ? { assignedUserId: q.assignedUserId } : {}),
     ...(q.minScore !== undefined ? { score: { gte: q.minScore } } : {}),
-    ...(q.q
-      ? {
-          OR: [
-            { firstName: { contains: q.q } },
-            { lastName: { contains: q.q } },
-            { email: { contains: q.q } },
-            { companyName: { contains: q.q } },
-          ],
-        }
-      : {}),
+    AND: [visibility, searchClause],
   };
   const [total, leads] = await Promise.all([
     db.lead.count({ where }),
@@ -97,6 +102,20 @@ async function getLead(id: string) {
     },
   });
   if (!lead) throw new ApiNotFoundError("Lead not found");
+  // Record-level read scoping: a rep may only read a lead they own or that is
+  // assigned to them (or unassigned). Managers/admins pass canAccessRecord.
+  if (
+    !hasPermission(user, "leads:read_all") &&
+    lead.ownerId !== user.id &&
+    lead.assignedUserId !== user.id &&
+    lead.assignedUserId !== null
+  ) {
+    return NextResponse.json(
+      { error: { code: "FORBIDDEN", message: "Forbidden" } },
+      { status: 403 }
+    );
+  }
+  void canAccessRecord;
   return ok(lead);
 }
 
@@ -232,78 +251,86 @@ async function convertLead(req: NextRequest, leadId: string) {
   }
   const body = await parseBody(req, leadConvertSchema);
 
-  const contact = await db.contact.create({
-    data: {
-      organizationId: lead.organizationId,
-      companyId: lead.companyId,
-      firstName: lead.firstName,
-      lastName: lead.lastName,
-      email: lead.email,
-      phone: lead.phone,
-      status: "CUSTOMER",
-      ownerId: lead.assignedUserId ?? user.id,
-    },
-  });
-
-  let deal = null;
-  if (body.createDeal) {
-    const pipeline = body.pipelineId
-      ? await db.pipeline.findFirst({
-          where: { id: body.pipelineId, organizationId: lead.organizationId },
-        })
-      : await db.pipeline.findFirst({
-          where: { organizationId: lead.organizationId, isDefault: true },
-        });
-    if (!pipeline) throw new ApiNotFoundError("No pipeline configured for this organization");
-    const firstStage = await db.stage.findFirst({
-      where: { pipelineId: pipeline.id },
-      orderBy: { position: "asc" },
-    });
-    if (!firstStage) throw new ApiNotFoundError("Pipeline has no stages");
-    deal = await db.deal.create({
+  // All-or-nothing: the converted contact, optional deal, lead status flip,
+  // activity and audit row commit together or not at all.
+  const result = await db.$transaction(async (tx) => {
+    const contact = await tx.contact.create({
       data: {
         organizationId: lead.organizationId,
-        name: body.dealName || `${lead.companyName || contact.lastName} — new deal`,
-        contactId: contact.id,
         companyId: lead.companyId,
-        stageId: firstStage.id,
-        pipelineId: pipeline.id,
+        firstName: lead.firstName,
+        lastName: lead.lastName,
+        email: lead.email,
+        phone: lead.phone,
+        status: "CUSTOMER",
         ownerId: lead.assignedUserId ?? user.id,
-        sourceId: lead.sourceId,
-        value: body.dealValue ?? lead.estimatedValue,
-        probability: firstStage.probability,
-        expectedCloseDate: parseDate(body.expectedCloseDate) ?? lead.expectedCloseDate,
-        leadId: lead.id,
       },
     });
-  }
 
-  const updated = await db.lead.update({
-    where: { id: leadId },
-    data: { status: "CONVERTED", convertedAt: new Date(), contactId: contact.id },
+    let deal = null;
+    if (body.createDeal) {
+      const pipeline = body.pipelineId
+        ? await tx.pipeline.findFirst({
+            where: { id: body.pipelineId, organizationId: lead.organizationId },
+          })
+        : await tx.pipeline.findFirst({
+            where: { organizationId: lead.organizationId, isDefault: true },
+          });
+      if (!pipeline) throw new ApiNotFoundError("No pipeline configured for this organization");
+      const firstStage = await tx.stage.findFirst({
+        where: { pipelineId: pipeline.id },
+        orderBy: { position: "asc" },
+      });
+      if (!firstStage) throw new ApiNotFoundError("Pipeline has no stages");
+      deal = await tx.deal.create({
+        data: {
+          organizationId: lead.organizationId,
+          name: body.dealName || `${lead.companyName || contact.lastName} — new deal`,
+          contactId: contact.id,
+          companyId: lead.companyId,
+          stageId: firstStage.id,
+          pipelineId: pipeline.id,
+          ownerId: lead.assignedUserId ?? user.id,
+          sourceId: lead.sourceId,
+          value: body.dealValue ?? lead.estimatedValue,
+          probability: firstStage.probability,
+          expectedCloseDate: parseDate(body.expectedCloseDate) ?? lead.expectedCloseDate,
+          leadId: lead.id,
+        },
+      });
+    }
+
+    const updated = await tx.lead.update({
+      where: { id: leadId },
+      data: { status: "CONVERTED", convertedAt: new Date(), contactId: contact.id },
+    });
+
+    await tx.activity.create({
+      data: {
+        organizationId: user.organizationId,
+        type: "CONVERTED",
+        title: `Lead converted: ${lead.firstName} ${lead.lastName}`,
+        leadId: lead.id,
+        contactId: contact.id,
+        dealId: deal?.id,
+        userId: user.id,
+      },
+    });
+    await tx.auditLog.create({
+      data: {
+        organizationId: user.organizationId,
+        userId: user.id,
+        action: "LEAD_CONVERT",
+        entityType: "lead",
+        entityId: lead.id,
+        ipAddress: clientIp(req),
+        metadata: JSON.stringify({ contactId: contact.id, dealId: deal?.id }),
+      },
+    });
+    return { lead: updated, contact, deal };
   });
 
-  await db.activity.create({
-    data: {
-      organizationId: user.organizationId,
-      type: "CONVERTED",
-      title: `Lead converted: ${lead.firstName} ${lead.lastName}`,
-      leadId: lead.id,
-      contactId: contact.id,
-      dealId: deal?.id,
-      userId: user.id,
-    },
-  });
-  await writeAudit({
-    organizationId: user.organizationId,
-    userId: user.id,
-    action: "LEAD_CONVERT",
-    entityType: "lead",
-    entityId: lead.id,
-    ipAddress: clientIp(req),
-    metadata: { contactId: contact.id, dealId: deal?.id },
-  });
-  return ok({ lead: updated, contact, deal });
+  return ok(result);
 }
 
 export const PATCH = apiHandler<Ctx>(async (req, ctx) => {
@@ -325,6 +352,14 @@ export const PATCH = apiHandler<Ctx>(async (req, ctx) => {
     return NextResponse.json({ error: { code: "FORBIDDEN", message: "Forbidden" } }, { status: 403 });
   }
   const body = await parseBody(req, leadUpdateSchema);
+  // A rep may only (un)assign a lead to themselves; assigning to another user
+  // requires leads:update_all.
+  if (body.assignedUserId !== undefined && !canReassignRecord(user, body.assignedUserId || null, "leads:update_all")) {
+    return NextResponse.json(
+      { error: { code: "FORBIDDEN", message: "Forbidden" } },
+      { status: 403 }
+    );
+  }
   const nextEmail = body.email ?? lead.email;
   const nextPhone = body.phone ?? lead.phone;
   const nextCompany = body.companyName ?? lead.companyName;

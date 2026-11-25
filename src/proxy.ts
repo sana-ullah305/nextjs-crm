@@ -15,8 +15,10 @@ const PUBLIC_PREFIXES = [
   // Public lead-capture endpoint: authenticated by an API key instead of a
   // session cookie, so it must skip the cookie-presence check.
   "/api/leads/capture",
-  // Public one-click unsubscribe endpoint: authenticated by the per-
-  // enrollment token in the query string, so it must skip the cookie check.
+  // Public one-click unsubscribe: the landing page and its token-
+  // authenticated API endpoint. The per-enrollment token in the query
+  // string IS the credential, so both must skip the cookie check.
+  "/unsubscribe",
   "/api/unsubscribe",
 ];
 

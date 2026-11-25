@@ -1,7 +1,7 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { apiHandler, ok, ApiNotFoundError, ApiValidationError } from "@/server/api";
-import { requireApiUserWith } from "@/server/rbac";
+import { requireApiUserWith, hasPermission, canAccessRecord } from "@/server/rbac";
 import { db } from "@/server/db";
 
 /**
@@ -202,6 +202,23 @@ export const GET = apiHandler(async (req) => {
   ]);
   if (!source) throw new ApiNotFoundError("Source record not found");
   if (!target) throw new ApiNotFoundError("Target record not found");
+
+  // Record-level read scoping. Preview is available to every role that can
+  // read the entity (contacts:read), so a rep must not be able to diff a
+  // record they cannot see. Managers/admins (contacts:read_all) bypass; reps
+  // are limited to records they own or that are unowned (canAccessRecord).
+  // Leads use assignedUserId as their effective owner for scoping parity with
+  // the lead list/get routes — loadLead maps that onto ownerId via the owner
+  // relation, so we additionally honour the read_all permission here.
+  if (!hasPermission(user, "contacts:read_all")) {
+    const canSee = (r: RecordShape): boolean => canAccessRecord(user, r.ownerId);
+    if (!canSee(source) || !canSee(target)) {
+      return NextResponse.json(
+        { error: { code: "FORBIDDEN", message: "Forbidden" } },
+        { status: 403 }
+      );
+    }
+  }
 
   const fields: MergePreviewField[] = [
     ["firstName", source.firstName, target.firstName],
