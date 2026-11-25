@@ -56,3 +56,91 @@ export function validationDetails(err: unknown): Record<string, string> {
   }
   return {};
 }
+
+export type Deal = {
+  id: string;
+  name: string;
+  value: number;
+  currency: string;
+  status: string; // OPEN | WON | LOST
+  probability: number;
+  expectedCloseDate: string | null;
+  actualCloseDate: string | null;
+  wonAt: string | null;
+  lostAt: string | null;
+  lostReason: string;
+  lostReasonId: string | null;
+  nextStep: string;
+  summary: string;
+  createdAt: string;
+  updatedAt: string;
+  stage: { id: string; name: string; position: number; type: string; probability: number };
+  pipeline: {
+    id: string;
+    name: string;
+    stages: { id: string; name: string; position: number; type: string; probability: number }[];
+  };
+  contact: { id: string; firstName: string; lastName: string; email: string; avatarColor: string } | null;
+  company: { id: string; name: string } | null;
+  owner: { id: string; name: string; avatarColor: string } | null;
+  stageHistory: Array<{
+    id: string;
+    fromStage: { id: string; name: string } | null;
+    toStage: { id: string; name: string; type: string };
+    user: { id: string; name: string; avatarColor: string };
+    at: string;
+    wonAtSnapshot: string | null;
+    lostAtSnapshot: string | null;
+    actualCloseDateSnapshot: string | null;
+  }>;
+};
+
+export type LostReason = {
+  id: string;
+  organizationId: string;
+  name: string;
+  description: string;
+  isSystem: boolean;
+  createdAt: string;
+};
+
+export type ActivityItem = {
+  id: string;
+  type: string;
+  title: string;
+  description: string;
+  occurredAt: string;
+  user: { id: string; name: string; avatarColor: string };
+};
+
+export type EmailItem = {
+  id: string;
+  subject: string;
+  recipientEmail: string;
+  recipientName: string;
+  status: string;
+  createdAt: string;
+  user: { name: string };
+};
+
+export type TaskItem = {
+  id: string;
+  title: string;
+  type: string;
+  priority: string;
+  status: string;
+  dueAt: string | null;
+  assignedUser: { id: string; name: string; avatarColor: string } | null;
+};
+
+export const dealApi = {
+  get: (id: string) => api.get<Deal>(`/api/deals/${id}`),
+  update: (id: string, body: unknown) => api.patch<Deal>(`/api/deals/${id}`, body),
+  remove: (id: string) => api.delete<{ deleted: boolean }>(`/api/deals/${id}`),
+  move: (id: string, body: { stageId: string; lostReasonId?: string }) =>
+    api.patch<Deal>(`/api/deals/${id}?action=move`, body),
+};
+
+export const lostReasonApi = {
+  list: () => api.get<{ lostReasons: LostReason[] }>("/api/settings/lost-reasons"),
+};

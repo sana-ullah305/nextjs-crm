@@ -1,13 +1,15 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { KanbanSquare, Plus, Settings2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar } from "@/components/ui/avatar";
 import { EmptyState } from "@/components/ui/empty-state";
-import { EntityForm, type FieldDef, type FieldErrors } from "@/components/entity-form";
+import { type FieldErrors } from "@/components/entity-form";
+import { DealForm } from "@/components/deal-form";
 import { api, ApiError, validationDetails } from "@/lib/api-client";
 import { formatCompactCurrency } from "@/lib/format";
 import { cn } from "@/lib/cn";
@@ -41,13 +43,15 @@ export default function PipelinePage() {
   const [error, setError] = useState("");
 
   const [formOpen, setFormOpen] = useState(false);
-  const [formValues, setFormValues] = useState<Record<string, string>>({});
   const [formErrors, setFormErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
 
   const [draggingId, setDraggingId] = useState<string | null>(null);
   const [dragOverStage, setDragOverStage] = useState<string | null>(null);
+  const [highlightedId, setHighlightedId] = useState("");
+  const cardRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const movedRef = useRef(false);
+  const router = useRouter();
 
   const activePipeline = pipelines.find((p) => p.id === activePipelineId) ?? pipelines[0];
 
@@ -83,9 +87,19 @@ export default function PipelinePage() {
     }
   }, [pipelines, activePipelineId]);
 
+  const searchParams = useSearchParams();
+
   useEffect(() => {
     void loadDeals();
   }, [loadDeals]);
+
+  useEffect(() => {
+    const dealId = searchParams.get("deal") || "";
+    setHighlightedId(dealId);
+    if (dealId && cardRefs.current[dealId]) {
+      void cardRefs.current[dealId]!.scrollIntoView({ block: "center", behavior: "smooth" });
+    }
+  }, [searchParams, cardRefs]);
 
   async function moveDeal(dealId: string, stageId: string) {
     const deal = deals.find((d) => d.id === dealId);
@@ -118,21 +132,30 @@ export default function PipelinePage() {
     return () => window.removeEventListener("dragend", onDropGlobal);
   }, []);
 
-  async function createDeal(e: React.FormEvent) {
-    e.preventDefault();
+  async function createDeal(values: {
+    name: string;
+    value: string;
+    stageId: string;
+    expectedCloseDate: string;
+    nextStep: string;
+    ownerId: string;
+    contactId: string;
+    companyId: string;
+  }) {
     setSubmitting(true);
     setFormErrors({});
     try {
       await api.post("/api/deals", {
-        name: formValues.name,
-        value: Number(formValues.value || 0),
-        stageId: formValues.stageId || activePipeline?.stages[0]?.id,
-        contactId: formValues.contactId,
-        expectedCloseDate: formValues.expectedCloseDate || undefined,
-        nextStep: formValues.nextStep,
+        name: values.name,
+        value: Number(values.value || 0),
+        stageId: values.stageId || activePipeline?.stages[0]?.id,
+        contactId: values.contactId || undefined,
+        companyId: values.companyId || undefined,
+        ownerId: values.ownerId || undefined,
+        expectedCloseDate: values.expectedCloseDate || undefined,
+        nextStep: values.nextStep,
       });
       setFormOpen(false);
-      setFormValues({});
       await loadDeals();
     } catch (e) {
       setFormErrors(validationDetails(e));
@@ -140,21 +163,6 @@ export default function PipelinePage() {
       setSubmitting(false);
     }
   }
-
-  const fields: FieldDef[] = [
-    { name: "name", label: "Deal name", required: true, colSpan: 2, placeholder: "Acme — platform rollout" },
-    { name: "value", label: "Value (USD)", type: "number", placeholder: "25000" },
-    {
-      name: "stageId",
-      label: "Stage",
-      type: "select",
-      options: (activePipeline?.stages ?? [])
-        .filter((s) => s.type === "OPEN")
-        .map((s) => ({ label: s.name, value: s.id })),
-    },
-    { name: "expectedCloseDate", label: "Expected close date", type: "date" },
-    { name: "nextStep", label: "Next step", placeholder: "Send proposal" },
-  ];
 
   if (loading) {
     return <div className="h-96 animate-pulse rounded-lg bg-muted" />;
@@ -251,13 +259,22 @@ export default function PipelinePage() {
                     key={deal.id}
                     data-deal-id={deal.id}
                     data-dragging={draggingId === deal.id}
+                    data-highlighted={highlightedId === deal.id}
+                    ref={(el) => { if (el) cardRefs.current[deal.id] = el; else delete cardRefs.current[deal.id]; }}
                     draggable
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      void router.push(`/deals/${deal.id}`);
+                    }}
                     onDragStart={(e) => {
                       setDraggingId(deal.id);
                       e.dataTransfer.setData("text/deal-id", deal.id);
                       e.dataTransfer.effectAllowed = "move";
                     }}
-                    className="kanban-card cursor-grab gap-1 p-3 active:cursor-grabbing"
+                    className={cn(
+                      "kanban-card cursor-grab gap-1 p-3 active:cursor-grabbing",
+                      highlightedId === deal.id && "ring-2 ring-ring ring-offset-2"
+                    )}
                   >
                     <p className="text-sm font-medium">{deal.name}</p>
                     <p className="text-sm font-semibold text-primary">{formatCompactCurrency(deal.value)}</p>
@@ -281,17 +298,12 @@ export default function PipelinePage() {
         </div>
       </div>
 
-      <EntityForm
+      <DealForm
         open={formOpen}
         onOpenChange={setFormOpen}
-        title="New deal"
-        description={`Adding to ${activePipeline.name}`}
-        fields={fields}
-        values={formValues}
-        errors={formErrors}
-        submitting={submitting}
-        onChange={(name, value) => setFormValues((v) => ({ ...v, [name]: value }))}
-        onSubmit={createDeal}
+        mode="create"
+        stages={(activePipeline?.stages ?? []).filter((s) => s.type === "OPEN")}
+        onSave={createDeal}
       />
     </div>
   );
