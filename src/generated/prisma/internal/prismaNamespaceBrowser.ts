@@ -433,6 +433,7 @@ export const EmailSettingsScalarFieldEnum = {
   smtpHost: 'smtpHost',
   smtpPort: 'smtpPort',
   smtpUser: 'smtpUser',
+  smtpPasswordEncrypted: 'smtpPasswordEncrypted',
   fromAddress: 'fromAddress',
   notificationsEnabled: 'notificationsEnabled'
 } as const

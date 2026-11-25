@@ -489,6 +489,7 @@ model EmailSettings {
   smtpHost             String  @default("")
   smtpPort             Int     @default(587)
   smtpUser             String  @default("")
+  smtpPasswordEncrypted String  @default("")
   fromAddress          String  @default("")
   notificationsEnabled Boolean @default(true)
 

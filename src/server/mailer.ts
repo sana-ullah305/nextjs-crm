@@ -1,5 +1,6 @@
 import nodemailer, { type Transporter } from "nodemailer";
 import { db } from "@/server/db";
+import { decrypt } from "@/server/encryption";
 import type { SessionUser } from "@/server/auth";
 
 /**
@@ -33,11 +34,11 @@ export type SendEmailParams = {
 
 const transportCache = new Map<string, { key: string; transporter: Transporter } | null>();
 
-function settingsKey(s: { smtpHost: string; smtpPort: number; smtpUser: string }): string {
-  return `${s.smtpHost}:${s.smtpPort}:${s.smtpUser}`;
+function settingsKey(s: { smtpHost: string; smtpPort: number; smtpUser: string; smtpPasswordEncrypted: string }): string {
+  return `${s.smtpHost}:${s.smtpPort}:${s.smtpUser}:${s.smtpPasswordEncrypted}`;
 }
 
-async function getTransporter(orgId: string) {
+export async function getTransporter(orgId: string) {
   const settings = await db.emailSettings.findUnique({ where: { organizationId: orgId } });
   if (!settings || !settings.smtpHost || !settings.fromAddress) return null;
   const key = settingsKey(settings);
@@ -54,7 +55,7 @@ async function getTransporter(orgId: string) {
     port: settings.smtpPort,
     secure: settings.smtpPort === 465,
     auth: settings.smtpUser
-      ? { user: settings.smtpUser, pass: process.env.SMTP_PASS ?? "" }
+      ? { user: settings.smtpUser, pass: settings.smtpPasswordEncrypted ? decrypt(settings.smtpPasswordEncrypted) : "" }
       : undefined,
     connectionTimeout: 5_000,
     greetingTimeout: 5_000,
