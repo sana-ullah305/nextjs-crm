@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { apiHandler, ok, parseBody, parseQuery, ApiNotFoundError, clientIp } from "@/server/api";
-import { requireApiUserWith, hasPermission } from "@/server/rbac";
+import { requireApiUserWith, hasPermission, recordScope } from "@/server/rbac";
 import { taskCreateSchema, taskUpdateSchema } from "@/lib/schemas";
 import { db } from "@/server/db";
 import { writeAudit } from "@/server/audit";
@@ -46,10 +46,7 @@ async function listTasks(req: NextRequest) {
   const weekEnd = new Date(todayEnd.getTime() + 7 * 24 * 60 * 60 * 1000);
 
   const where = {
-    organizationId: user.organizationId,
-    ...(hasPermission(user, "tasks:read_all")
-      ? {}
-      : { OR: [{ assignedUserId: user.id }, { createdById: user.id }] }),
+    ...recordScope(user, "task", "read"),
     ...(q.status ? { status: q.status } : { status: { in: ["PENDING", "IN_PROGRESS"] } }),
     ...(q.assignedUserId ? { assignedUserId: q.assignedUserId } : {}),
     ...(q.type ? { type: q.type } : {}),
@@ -95,7 +92,7 @@ export const POST = apiHandler<Ctx>(async (req, _ctx) => {
       relatedType: body.relatedType || null,
       relatedId: body.relatedId || null,
       createdById: user.id,
-      assignedUserId: body.assignedUserId || user.id,
+      assignedUserId: hasPermission(user, "tasks:update_all") ? (body.assignedUserId || user.id) : user.id,
     },
     include: {
       assignedUser: { select: { id: true, name: true, avatarColor: true } },

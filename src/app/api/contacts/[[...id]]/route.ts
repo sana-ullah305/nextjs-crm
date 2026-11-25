@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { apiHandler, ok, parseBody, parseQuery, ApiNotFoundError, clientIp } from "@/server/api";
-import { requireApiUserWith, hasPermission, canAccessRecord } from "@/server/rbac";
+import { requireApiUserWith, hasPermission, canAccessRecord, recordScope } from "@/server/rbac";
 import { contactCreateSchema, contactUpdateSchema, contactImportSchema } from "@/lib/schemas";
 import { db } from "@/server/db";
 import { writeAudit } from "@/server/audit";
@@ -35,11 +35,8 @@ async function listContacts(req: NextRequest) {
   const user = await requireApiUserWith("contacts:read");
   const q = parseQuery(req, listQuerySchema);
   const where = {
-    organizationId: user.organizationId,
+    ...recordScope(user, "contact", "read"),
     deletedAt: null,
-    ...(hasPermission(user, "contacts:read_all")
-      ? {}
-      : { OR: [{ ownerId: user.id }, { ownerId: null }] }),
     ...(q.status ? { status: q.status } : {}),
     ...(q.companyId ? { companyId: q.companyId } : {}),
     ...(q.ownerId ? { ownerId: q.ownerId } : {}),
@@ -79,7 +76,7 @@ async function listContacts(req: NextRequest) {
 async function getContact(id: string) {
   const user = await requireApiUserWith("contacts:read");
   const contact = await db.contact.findFirst({
-    where: { id, organizationId: user.organizationId, deletedAt: null },
+    where: { ...recordScope(user, "contact", "read"), id, deletedAt: null },
     include: {
       company: true,
       owner: { select: { id: true, name: true, avatarColor: true } },
@@ -102,11 +99,8 @@ async function exportContacts(req: NextRequest) {
   const user = await requireApiUserWith("contacts:export");
   const contacts = await db.contact.findMany({
     where: {
-      organizationId: user.organizationId,
+      ...recordScope(user, "contact", "read"),
       deletedAt: null,
-      ...(hasPermission(user, "contacts:read_all")
-        ? {}
-        : { OR: [{ ownerId: user.id }, { ownerId: null }] }),
     },
     include: { company: { select: { name: true } }, tags: true },
     orderBy: { createdAt: "desc" },
@@ -177,7 +171,8 @@ async function createContact(req: NextRequest) {
       mobile: body.mobile ?? "",
       title: body.title,
       companyId: body.companyId || null,
-      ownerId: body.ownerId || user.id,
+      // Reps can only own the records they create; managers/admins may assign owner.
+      ownerId: hasPermission(user, "contacts:update_all") ? (body.ownerId || user.id) : user.id,
       status: body.status,
       address: body.address,
       city: body.city,
