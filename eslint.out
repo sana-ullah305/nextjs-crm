@@ -1,0 +1,95 @@
+
+/root/projects/nextjs-crm/src/app/(app)/companies/[id]/page.tsx
+   8:10  warning  'Badge' is defined but never used                                                                                @typescript-eslint/no-unused-vars
+  59:6   warning  React Hook useCallback has a missing dependency: 'toastError'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+/root/projects/nextjs-crm/src/app/(app)/companies/page.tsx
+   5:51  warning  'Users' is defined but never used           @typescript-eslint/no-unused-vars
+   9:10  warning  'Badge' is defined but never used           @typescript-eslint/no-unused-vars
+  15:10  warning  'formatDate' is defined but never used      @typescript-eslint/no-unused-vars
+  44:10  warning  'error' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/root/projects/nextjs-crm/src/app/(app)/contacts/[id]/page.tsx
+    8:3   warning  'Briefcase' is defined but never used                                                                            @typescript-eslint/no-unused-vars
+   20:3   warning  'Trash2' is defined but never used                                                                               @typescript-eslint/no-unused-vars
+   94:10  warning  'notes' is assigned a value but never used                                                                       @typescript-eslint/no-unused-vars
+  165:6   warning  React Hook useCallback has a missing dependency: 'toastError'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+/root/projects/nextjs-crm/src/app/(app)/contacts/page.tsx
+  16:22  warning  'formatDateTime' is defined but never used  @typescript-eslint/no-unused-vars
+  55:10  warning  'error' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/root/projects/nextjs-crm/src/app/(app)/leads/page.tsx
+  19:10  warning  'cn' is defined but never used              @typescript-eslint/no-unused-vars
+  77:10  warning  'error' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/root/projects/nextjs-crm/src/app/(app)/pipeline/page.tsx
+   13:10  warning  'cn' is defined but never used                 @typescript-eslint/no-unused-vars
+   43:10  warning  'error' is assigned a value but never used     @typescript-eslint/no-unused-vars
+   52:9   warning  'movedRef' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  182:9   warning  'wonCount' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/root/projects/nextjs-crm/src/app/(app)/reports/page.tsx
+  8:10  warning  'Button' is defined but never used  @typescript-eslint/no-unused-vars
+
+/root/projects/nextjs-crm/src/app/(app)/settings/page.tsx
+  307:10  warning  'pipeErrors' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/root/projects/nextjs-crm/src/app/(app)/tasks/page.tsx
+   9:10  warning  'EmptyState' is defined but never used        @typescript-eslint/no-unused-vars
+  41:10  warning  'loading' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  42:10  warning  'error' is assigned a value but never used    @typescript-eslint/no-unused-vars
+
+/root/projects/nextjs-crm/src/app/api/companies/[[...id]]/route.ts
+  87:49  warning  '_ctx' is defined but never used  @typescript-eslint/no-unused-vars
+
+/root/projects/nextjs-crm/src/app/api/contacts/[[...id]]/route.ts
+  283:11  warning  'tags' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/root/projects/nextjs-crm/src/app/api/reports/route.ts
+  1:10  warning  'NextRequest' is defined but never used  @typescript-eslint/no-unused-vars
+
+/root/projects/nextjs-crm/src/app/api/settings/email/route.ts
+   5:10  warning  'z' is defined but never used     @typescript-eslint/no-unused-vars
+  27:50  warning  '_ctx' is defined but never used  @typescript-eslint/no-unused-vars
+
+/root/projects/nextjs-crm/src/app/api/tasks/[[...id]]/route.ts
+  83:49  warning  '_ctx' is defined but never used  @typescript-eslint/no-unused-vars
+
+/root/projects/nextjs-crm/src/app/api/users/[[...id]]/route.ts
+  67:49  warning  '_ctx' is defined but never used  @typescript-eslint/no-unused-vars
+
+/root/projects/nextjs-crm/src/server/__tests__/api-integration.test.ts
+  10:10  warning  'execSync' is defined but never used  @typescript-eslint/no-unused-vars
+  12:8   warning  'fs' is defined but never used        @typescript-eslint/no-unused-vars
+  17:33  warning  '_name' is defined but never used     @typescript-eslint/no-unused-vars
+
+/root/projects/nextjs-crm/src/server/__tests__/dedupe-merge.test.ts
+  11:33  warning  '_name' is defined but never used  @typescript-eslint/no-unused-vars
+
+/root/projects/nextjs-crm/src/server/__tests__/features.test.ts
+  11:33  warning  '_name' is defined but never used  @typescript-eslint/no-unused-vars
+
+/root/projects/nextjs-crm/src/server/__tests__/inbound.test.ts
+  14:33  warning  '_name' is defined but never used  @typescript-eslint/no-unused-vars
+
+/root/projects/nextjs-crm/src/server/__tests__/lead-capture.test.ts
+  16:33  warning  '_name' is defined but never used  @typescript-eslint/no-unused-vars
+
+/root/projects/nextjs-crm/src/server/__tests__/qa2-lead-title.test.ts
+  21:33  warning  '_name' is defined but never used  @typescript-eslint/no-unused-vars
+
+/root/projects/nextjs-crm/src/server/__tests__/qa2-secrets-steps.test.ts
+  25:33  warning  '_name' is defined but never used  @typescript-eslint/no-unused-vars
+
+/root/projects/nextjs-crm/src/server/__tests__/sequences.test.ts
+  13:33  warning  '_name' is defined but never used  @typescript-eslint/no-unused-vars
+
+/root/projects/nextjs-crm/src/server/auth.ts
+   92:21  warning  '_isActive' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  140:25  warning  '_ph' is assigned a value but never used        @typescript-eslint/no-unused-vars
+  140:40  warning  '_ia' is assigned a value but never used        @typescript-eslint/no-unused-vars
+
+✖ 43 problems (0 errors, 43 warnings)
+
+EXIT=0

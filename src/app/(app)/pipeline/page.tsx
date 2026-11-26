@@ -11,6 +11,7 @@ import { EntityForm, type FieldDef, type FieldErrors } from "@/components/entity
 import { api, ApiError, validationDetails } from "@/lib/api-client";
 import { formatCompactCurrency } from "@/lib/format";
 import { cn } from "@/lib/cn";
+import { useToast } from "@/components/ui/toast";
 
 type Deal = {
   id: string;
@@ -34,6 +35,7 @@ type Pipeline = {
 };
 
 export default function PipelinePage() {
+  const { success: toastSuccess, error: toastError } = useToast();
   const [pipelines, setPipelines] = useState<Pipeline[]>([]);
   const [activePipelineId, setActivePipelineId] = useState("");
   const [deals, setDeals] = useState<Deal[]>([]);
@@ -103,8 +105,9 @@ export default function PipelinePage() {
     );
     try {
       await api.patch(`/api/deals/${dealId}?action=move`, { stageId });
+      toastSuccess({ description: "Deal moved" });
     } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Move failed");
+      toastError({ description: e instanceof ApiError ? e.message : "Move failed" });
       await loadDeals();
     }
   }
@@ -133,9 +136,11 @@ export default function PipelinePage() {
       });
       setFormOpen(false);
       setFormValues({});
+      toastSuccess({ description: "Deal created" });
       await loadDeals();
     } catch (e) {
       setFormErrors(validationDetails(e));
+      toastError({ description: e instanceof ApiError ? e.message : "Save failed" });
     } finally {
       setSubmitting(false);
     }
@@ -207,12 +212,6 @@ export default function PipelinePage() {
           </Button>
         </div>
       </div>
-
-      {error && (
-        <p className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive" role="alert">
-          {error}
-        </p>
-      )}
 
       <div className="flex flex-1 gap-4 overflow-x-auto scroll-thin pb-4">
         {openStages.map((stage) => {

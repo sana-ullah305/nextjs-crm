@@ -17,6 +17,8 @@ import { MergeDialog } from "@/components/merge-dialog";
 import { api, ApiError, validationDetails } from "@/lib/api-client";
 import { formatCurrency, formatDate } from "@/lib/format";
 import { cn } from "@/lib/cn";
+import { useToast } from "@/components/ui/toast";
+import { useConfirm } from "@/components/ui/confirm-dialog";
 
 type Lead = {
   id: string;
@@ -67,6 +69,8 @@ function scoreBadge(s: number) {
 }
 
 export default function LeadsPage() {
+  const { success: toastSuccess, error: toastError } = useToast();
+  const { confirm } = useConfirm();
   const [leads, setLeads] = useState<Lead[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -77,13 +81,11 @@ export default function LeadsPage() {
   const [page, setPage] = useState(1);
   const [users, setUsers] = useState<UserOption[]>([]);
   const [sources, setSources] = useState<SourceOption[]>([]);
-  const [notice, setNotice] = useState("");
 
   const [formOpen, setFormOpen] = useState(false);
   const [formValues, setFormValues] = useState<Record<string, string>>({});
   const [formErrors, setFormErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
-  const [dupWarning, setDupWarning] = useState("");
 
   const [convertTarget, setConvertTarget] = useState<Lead | null>(null);
   const [convertOpen, setConvertOpen] = useState(false);
@@ -95,6 +97,7 @@ export default function LeadsPage() {
   const [enrollOpen, setEnrollOpen] = useState(false);
   const [mergeTarget, setMergeTarget] = useState<Lead | null>(null);
   const [mergeOpen, setMergeOpen] = useState(false);
+  const [duplicateWarning, setDuplicateWarning] = useState("");
 
   const pageSize = 20;
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
@@ -129,21 +132,19 @@ export default function LeadsPage() {
   }, []);
 
   async function checkDuplicate(email: string) {
-    if (!email) {
-      setDupWarning("");
-      return;
-    }
+    if (!email) return;
     try {
       const data = await api.get<{ isDuplicate: boolean; lead: { id: string } | null; contact: { id: string } | null }>(
         `/api/leads/check-duplicate?email=${encodeURIComponent(email)}`
       );
-      setDupWarning(
-        data.isDuplicate
-          ? "A record with this email already exists — creating this lead may result in a duplicate."
-          : ""
-      );
+      if (data.isDuplicate) {
+        setDuplicateWarning("A record with this email already exists — creating this lead may result in a duplicate.");
+      } else {
+        setDuplicateWarning("");
+      }
     } catch {
-      setDupWarning("");
+      // Ignore duplicate check errors
+      setDuplicateWarning("");
     }
   }
 
@@ -158,24 +159,33 @@ export default function LeadsPage() {
       });
       setFormOpen(false);
       setFormValues({});
-      setDupWarning("");
-      setNotice("Lead captured and scored");
+      setDuplicateWarning("");
+      toastSuccess({ description: "Lead captured and scored" });
       await load();
     } catch (e) {
       setFormErrors(validationDetails(e));
+      toastError({ description: e instanceof ApiError ? e.message : "Save failed" });
     } finally {
       setSubmitting(false);
     }
   }
 
   async function onDelete(l: Lead) {
-    if (!confirm(`Delete lead ${l.firstName} ${l.lastName}?`)) return;
-    try {
-      await api.delete(`/api/leads/${l.id}`);
-      await load();
-    } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Delete failed");
-    }
+    confirm({
+      title: "Delete lead",
+      description: `Delete lead ${l.firstName} ${l.lastName}?`,
+      variant: "destructive",
+      confirmText: "Delete",
+      onConfirm: async () => {
+        try {
+          await api.delete(`/api/leads/${l.id}`);
+          toastSuccess({ description: "Lead deleted" });
+          await load();
+        } catch (e) {
+          toastError({ description: e instanceof ApiError ? e.message : "Delete failed" });
+        }
+      },
+    });
   }
 
   async function onConvert(e: React.FormEvent) {
@@ -192,12 +202,13 @@ export default function LeadsPage() {
       );
       setConvertOpen(false);
       setConvertTarget(null);
-      setNotice(
-        `Converted! Contact and${result.deal ? " new deal" : ""} ${result.deal ? "" : " "}created.`
-      );
+      toastSuccess({
+        description: `Converted! Contact and${result.deal ? " new deal" : ""} ${result.deal ? "" : " "}created.`,
+      });
       await load();
     } catch (e) {
       setFormErrors(validationDetails(e));
+      toastError({ description: e instanceof ApiError ? e.message : "Convert failed" });
     } finally {
       setSubmitting(false);
     }
@@ -248,17 +259,6 @@ export default function LeadsPage() {
           <Plus className="h-4 w-4" /> Capture lead
         </Button>
       </div>
-
-      {notice && (
-        <p className="rounded-md border border-success/30 bg-success/10 px-3 py-2 text-sm text-success" role="status">
-          {notice}
-        </p>
-      )}
-      {error && (
-        <p className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive" role="alert">
-          {error}
-        </p>
-      )}
 
       <div className="flex flex-wrap gap-2">
         <div className="relative min-w-56 flex-1 max-w-md">
@@ -398,49 +398,45 @@ export default function LeadsPage() {
                         <Button
                           variant="ghost"
                           size="icon"
-                          aria-label={`Email lead ${l.firstName} ${l.lastName}`}
-                          title="Send email"
                           onClick={() => {
                             setComposeTarget(l);
                             setComposeOpen(true);
                           }}
+                          aria-label={`Email ${l.firstName} ${l.lastName}`}
                         >
                           <Send className="h-3.5 w-3.5" />
                         </Button>
                       )}
-                      {l.status !== "CONVERTED" && l.email && (
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          aria-label={`Enroll ${l.firstName} ${l.lastName} in a sequence`}
-                          title="Enroll in sequence"
-                          onClick={() => {
-                            setEnrollTarget(l);
-                            setEnrollOpen(true);
-                          }}
-                        >
-                          <Repeat className="h-3.5 w-3.5" />
-                        </Button>
-                      )}
-                      {l.status !== "CONVERTED" && (
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          aria-label={`Find duplicates for ${l.firstName} ${l.lastName}`}
-                          title="Find duplicates"
-                          onClick={() => {
-                            setMergeTarget(l);
-                            setMergeOpen(true);
-                          }}
-                        >
-                          <Copy className="h-3.5 w-3.5" />
-                        </Button>
-                      )}
-                      {l.status !== "CONVERTED" && (
-                        <Button variant="ghost" size="icon" aria-label="Delete lead" onClick={() => void onDelete(l)}>
-                          <Trash2 className="h-3.5 w-3.5 text-destructive" />
-                        </Button>
-                      )}
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => {
+                          setEnrollTarget(l);
+                          setEnrollOpen(true);
+                        }}
+                        aria-label={`Enroll ${l.firstName} ${l.lastName}`}
+                      >
+                        <Repeat className="h-3.5 w-3.5" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => {
+                          setMergeTarget(l);
+                          setMergeOpen(true);
+                        }}
+                        aria-label={`Merge ${l.firstName} ${l.lastName}`}
+                      >
+                        <Copy className="h-3.5 w-3.5" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => onDelete(l)}
+                        aria-label={`Delete ${l.firstName} ${l.lastName}`}
+                      >
+                        <Trash2 className="h-3.5 w-3.5 text-destructive" />
+                      </Button>
                     </div>
                   </TableCell>
                 </TableRow>
@@ -448,88 +444,86 @@ export default function LeadsPage() {
             </TableBody>
           </Table>
         )}
-      </Card>
 
-      {totalPages > 1 && (
-        <div className="flex items-center justify-between text-sm text-muted-foreground">
-          <span>
-            Page {page} of {totalPages}
-          </span>
-          <div className="flex gap-2">
-            <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => setPage((p) => p - 1)}>
-              Previous
-            </Button>
-            <Button variant="outline" size="sm" disabled={page >= totalPages} onClick={() => setPage((p) => p + 1)}>
-              Next
-            </Button>
+        {!loading && total > pageSize && (
+          <div className="flex items-center justify-between border-t border-border p-4">
+            <p className="text-sm text-muted-foreground">
+              Page {page} of {totalPages} · {total} total
+            </p>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={page === 1}
+                onClick={() => setPage((p) => p - 1)}
+              >
+                Previous
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={page === totalPages}
+                onClick={() => setPage((p) => p + 1)}
+              >
+                Next
+              </Button>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </Card>
 
       <EntityForm
         open={formOpen}
         onOpenChange={setFormOpen}
         title="Capture lead"
-        description="Leads are scored automatically based on reachability, value, and source."
+        description="Add a new lead to the pipeline"
         fields={fields}
         values={formValues}
         errors={formErrors}
         submitting={submitting}
+        warning={duplicateWarning}
         onChange={(name, value) => {
           setFormValues((v) => ({ ...v, [name]: value }));
-          if (name === "email") void checkDuplicate(value);
+          if (name === "email") checkDuplicate(value);
         }}
         onSubmit={onSubmit}
       />
-      {dupWarning && formOpen && (
-        <p className="text-xs text-warning" role="alert">
-          {dupWarning}
-        </p>
-      )}
 
       {convertOpen && convertTarget && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" role="dialog" aria-modal="true">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <Card className="w-full max-w-md p-6">
-            <h2 className="text-lg font-semibold">
-              Convert {convertTarget.firstName} {convertTarget.lastName}
-            </h2>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Creates a contact record{convertWithDeal ? " and an open deal" : ""}. The lead will be marked
-              converted.
+            <h2 className="text-lg font-semibold mb-4">Convert lead</h2>
+            <p className="text-sm text-muted-foreground mb-4">
+              Convert <strong>{convertTarget.firstName} {convertTarget.lastName}</strong> to a contact?
             </p>
-            <form onSubmit={onConvert} className="mt-4 space-y-3">
-              <label className="flex items-center gap-2 text-sm">
+            <div className="space-y-3 mb-4">
+              <label className="flex items-center gap-2">
                 <input
                   type="checkbox"
                   checked={convertWithDeal}
                   onChange={(e) => setConvertWithDeal(e.target.checked)}
-                  className="h-4 w-4 rounded border-input"
+                  className="h-4 w-4 rounded border-border"
                 />
-                Create a deal in the default pipeline
+                <span className="text-sm">Also create a deal</span>
               </label>
               {convertWithDeal && (
                 <div>
-                  <label htmlFor="deal-value" className="text-sm font-medium">
-                    Deal value (USD)
-                  </label>
+                  <label className="block text-sm mb-1">Deal value (USD)</label>
                   <Input
-                    id="deal-value"
                     type="number"
                     value={convertValue}
                     onChange={(e) => setConvertValue(e.target.value)}
-                    className="mt-1"
+                    placeholder="0"
                   />
                 </div>
               )}
-              <div className="flex justify-end gap-2 pt-2">
-                <Button type="button" variant="outline" onClick={() => setConvertOpen(false)}>
-                  Cancel
-                </Button>
-                <Button type="submit" disabled={submitting}>
-                  {submitting ? "Converting…" : "Convert lead"}
-                </Button>
-              </div>
-            </form>
+            </div>
+            <div className="flex justify-end gap-2">
+              <Button variant="outline" onClick={() => setConvertOpen(false)}>Cancel</Button>
+              <Button onClick={onConvert} disabled={submitting}>
+                {submitting ? "Converting…" : "Convert"}
+              </Button>
+            </div>
           </Card>
         </div>
       )}
@@ -537,26 +531,17 @@ export default function LeadsPage() {
       <ComposeEmail
         open={composeOpen}
         onOpenChange={setComposeOpen}
-        defaultTo={
-          composeTarget
-            ? {
-                email: composeTarget.email,
-                name: `${composeTarget.firstName} ${composeTarget.lastName}`,
-              }
-            : { email: "" }
-        }
+        defaultTo={{
+          email: composeTarget?.email ?? "",
+          name: composeTarget ? `${composeTarget.firstName} ${composeTarget.lastName}` : "",
+        }}
         leadId={composeTarget?.id}
-        templateVars={
-          composeTarget
-            ? {
-                firstName: composeTarget.firstName,
-                lastName: composeTarget.lastName,
-                email: composeTarget.email,
-                company: composeTarget.companyName ?? "",
-              }
-            : {}
-        }
-        onSent={() => void load()}
+        templateVars={composeTarget ? {
+          firstName: composeTarget.firstName,
+          lastName: composeTarget.lastName,
+          email: composeTarget.email,
+          company: composeTarget.companyName,
+        } : undefined}
       />
 
       <EnrollDialog
@@ -565,7 +550,7 @@ export default function LeadsPage() {
         recordType="lead"
         recordId={enrollTarget?.id ?? ""}
         recordName={enrollTarget ? `${enrollTarget.firstName} ${enrollTarget.lastName}` : ""}
-        onEnrolled={() => setNotice(`${enrollTarget?.firstName} enrolled in the sequence.`)}
+        onEnrolled={() => void load()}
       />
 
       <MergeDialog
