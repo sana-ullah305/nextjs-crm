@@ -5,15 +5,39 @@ import path from "node:path";
 export default defineConfig({
   plugins: [react()],
   test: {
-    environment: "jsdom",
     globals: true,
     setupFiles: ["./vitest.setup.ts"],
     include: ["src/**/*.test.ts", "src/**/*.test.tsx"],
     fileParallelism: false,
-    coverage: {
-      provider: "v8",
-      include: ["src/lib/**", "src/server/**"],
-    },
+    testTimeout: 30_000,
+    projects: [
+      {
+        extends: true,
+        test: {
+          name: "server",
+          environment: "node",
+          pool: "vmThreads",
+          isolate: false,
+          include: ["src/server/**/*.test.ts"],
+          coverage: {
+            provider: "v8",
+            include: ["src/server/**"],
+          },
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: "client",
+          environment: "jsdom",
+          include: ["src/components/**/*.test.tsx", "src/lib/**/*.test.ts"],
+          coverage: {
+            provider: "v8",
+            include: ["src/lib/**", "src/components/**"],
+          },
+        },
+      },
+    ],
   },
   resolve: {
     alias: {
