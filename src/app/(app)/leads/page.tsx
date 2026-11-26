@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Copy, Flame, Plus, Repeat, Search, Send, Sparkles, Trash2, TrendingUp, UserCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -67,6 +68,9 @@ function scoreBadge(s: number) {
 }
 
 export default function LeadsPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const deepLinkId = searchParams.get("q");
   const [leads, setLeads] = useState<Lead[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -122,6 +126,15 @@ export default function LeadsPage() {
   useEffect(() => {
     void load();
   }, [load]);
+
+  // Deep link: /leads?q=<leadId> opens that lead's detail page once loaded.
+  useEffect(() => {
+    if (!deepLinkId || loading) return;
+    const match = leads.find((l) => l.id === deepLinkId);
+    if (match) {
+      router.replace(`/leads/${match.id}`);
+    }
+  }, [deepLinkId, loading, leads, router]);
 
   useEffect(() => {
     api.get<{ users: UserOption[] }>("/api/settings/users").then((d) => setUsers(d.users)).catch(() => undefined);
@@ -340,7 +353,11 @@ export default function LeadsPage() {
             </TableHeader>
             <TableBody>
               {leads.map((l) => (
-                <TableRow key={l.id}>
+                <TableRow
+                  key={l.id}
+                  className="cursor-pointer hover:bg-muted/50"
+                  onClick={() => router.push(`/leads/${l.id}`)}
+                >
                   <TableCell>
                     <div>
                       <p className="font-medium">
@@ -373,7 +390,7 @@ export default function LeadsPage() {
                       "—"
                     )}
                   </TableCell>
-                  <TableCell className="text-right">
+                  <TableCell className="text-right" onClick={(e) => e.stopPropagation()}>
                     <div className="flex justify-end gap-1">
                       {l.status !== "CONVERTED" ? (
                         <Button
