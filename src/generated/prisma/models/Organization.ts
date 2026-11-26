@@ -235,6 +235,7 @@ export type OrganizationWhereInput = {
   apiKeys?: Prisma.ApiKeyListRelationFilter
   sequences?: Prisma.SequenceListRelationFilter
   sequenceEnrollments?: Prisma.SequenceEnrollmentListRelationFilter
+  roles?: Prisma.RoleListRelationFilter
 }
 
 export type OrganizationOrderByWithRelationInput = {
@@ -268,6 +269,7 @@ export type OrganizationOrderByWithRelationInput = {
   apiKeys?: Prisma.ApiKeyOrderByRelationAggregateInput
   sequences?: Prisma.SequenceOrderByRelationAggregateInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentOrderByRelationAggregateInput
+  roles?: Prisma.RoleOrderByRelationAggregateInput
 }
 
 export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
@@ -304,6 +306,7 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   apiKeys?: Prisma.ApiKeyListRelationFilter
   sequences?: Prisma.SequenceListRelationFilter
   sequenceEnrollments?: Prisma.SequenceEnrollmentListRelationFilter
+  roles?: Prisma.RoleListRelationFilter
 }, "id">
 
 export type OrganizationOrderByWithAggregationInput = {
@@ -367,6 +370,7 @@ export type OrganizationCreateInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateInput = {
@@ -400,6 +404,7 @@ export type OrganizationUncheckedCreateInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUpdateInput = {
@@ -433,6 +438,7 @@ export type OrganizationUpdateInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateInput = {
@@ -466,6 +472,7 @@ export type OrganizationUncheckedUpdateInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateManyInput = {
@@ -847,6 +854,20 @@ export type OrganizationUpdateOneRequiredWithoutSequenceEnrollmentsNestedInput =
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutSequenceEnrollmentsInput, Prisma.OrganizationUpdateWithoutSequenceEnrollmentsInput>, Prisma.OrganizationUncheckedUpdateWithoutSequenceEnrollmentsInput>
 }
 
+export type OrganizationCreateNestedOneWithoutRolesInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutRolesInput, Prisma.OrganizationUncheckedCreateWithoutRolesInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutRolesInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutRolesNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutRolesInput, Prisma.OrganizationUncheckedCreateWithoutRolesInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutRolesInput
+  upsert?: Prisma.OrganizationUpsertWithoutRolesInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutRolesInput, Prisma.OrganizationUpdateWithoutRolesInput>, Prisma.OrganizationUncheckedUpdateWithoutRolesInput>
+}
+
 export type OrganizationCreateWithoutUsersInput = {
   id?: string
   name: string
@@ -877,6 +898,7 @@ export type OrganizationCreateWithoutUsersInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutUsersInput = {
@@ -909,6 +931,7 @@ export type OrganizationUncheckedCreateWithoutUsersInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutUsersInput = {
@@ -957,6 +980,7 @@ export type OrganizationUpdateWithoutUsersInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutUsersInput = {
@@ -989,6 +1013,7 @@ export type OrganizationUncheckedUpdateWithoutUsersInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutCompaniesInput = {
@@ -1021,6 +1046,7 @@ export type OrganizationCreateWithoutCompaniesInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutCompaniesInput = {
@@ -1053,6 +1079,7 @@ export type OrganizationUncheckedCreateWithoutCompaniesInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutCompaniesInput = {
@@ -1101,6 +1128,7 @@ export type OrganizationUpdateWithoutCompaniesInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutCompaniesInput = {
@@ -1133,6 +1161,7 @@ export type OrganizationUncheckedUpdateWithoutCompaniesInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutContactsInput = {
@@ -1165,6 +1194,7 @@ export type OrganizationCreateWithoutContactsInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutContactsInput = {
@@ -1197,6 +1227,7 @@ export type OrganizationUncheckedCreateWithoutContactsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutContactsInput = {
@@ -1245,6 +1276,7 @@ export type OrganizationUpdateWithoutContactsInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutContactsInput = {
@@ -1277,6 +1309,7 @@ export type OrganizationUncheckedUpdateWithoutContactsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutTagsInput = {
@@ -1309,6 +1342,7 @@ export type OrganizationCreateWithoutTagsInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutTagsInput = {
@@ -1341,6 +1375,7 @@ export type OrganizationUncheckedCreateWithoutTagsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutTagsInput = {
@@ -1389,6 +1424,7 @@ export type OrganizationUpdateWithoutTagsInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutTagsInput = {
@@ -1421,6 +1457,7 @@ export type OrganizationUncheckedUpdateWithoutTagsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutLeadSourcesInput = {
@@ -1453,6 +1490,7 @@ export type OrganizationCreateWithoutLeadSourcesInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutLeadSourcesInput = {
@@ -1485,6 +1523,7 @@ export type OrganizationUncheckedCreateWithoutLeadSourcesInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutLeadSourcesInput = {
@@ -1533,6 +1572,7 @@ export type OrganizationUpdateWithoutLeadSourcesInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutLeadSourcesInput = {
@@ -1565,6 +1605,7 @@ export type OrganizationUncheckedUpdateWithoutLeadSourcesInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutLeadsInput = {
@@ -1597,6 +1638,7 @@ export type OrganizationCreateWithoutLeadsInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutLeadsInput = {
@@ -1629,6 +1671,7 @@ export type OrganizationUncheckedCreateWithoutLeadsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutLeadsInput = {
@@ -1677,6 +1720,7 @@ export type OrganizationUpdateWithoutLeadsInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutLeadsInput = {
@@ -1709,6 +1753,7 @@ export type OrganizationUncheckedUpdateWithoutLeadsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutPipelinesInput = {
@@ -1741,6 +1786,7 @@ export type OrganizationCreateWithoutPipelinesInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPipelinesInput = {
@@ -1773,6 +1819,7 @@ export type OrganizationUncheckedCreateWithoutPipelinesInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPipelinesInput = {
@@ -1821,6 +1868,7 @@ export type OrganizationUpdateWithoutPipelinesInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPipelinesInput = {
@@ -1853,6 +1901,7 @@ export type OrganizationUncheckedUpdateWithoutPipelinesInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutDealsInput = {
@@ -1885,6 +1934,7 @@ export type OrganizationCreateWithoutDealsInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutDealsInput = {
@@ -1917,6 +1967,7 @@ export type OrganizationUncheckedCreateWithoutDealsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutDealsInput = {
@@ -1965,6 +2016,7 @@ export type OrganizationUpdateWithoutDealsInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutDealsInput = {
@@ -1997,6 +2049,7 @@ export type OrganizationUncheckedUpdateWithoutDealsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutTasksInput = {
@@ -2029,6 +2082,7 @@ export type OrganizationCreateWithoutTasksInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutTasksInput = {
@@ -2061,6 +2115,7 @@ export type OrganizationUncheckedCreateWithoutTasksInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutTasksInput = {
@@ -2109,6 +2164,7 @@ export type OrganizationUpdateWithoutTasksInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutTasksInput = {
@@ -2141,6 +2197,7 @@ export type OrganizationUncheckedUpdateWithoutTasksInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutActivitiesInput = {
@@ -2173,6 +2230,7 @@ export type OrganizationCreateWithoutActivitiesInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutActivitiesInput = {
@@ -2205,6 +2263,7 @@ export type OrganizationUncheckedCreateWithoutActivitiesInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutActivitiesInput = {
@@ -2253,6 +2312,7 @@ export type OrganizationUpdateWithoutActivitiesInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutActivitiesInput = {
@@ -2285,6 +2345,7 @@ export type OrganizationUncheckedUpdateWithoutActivitiesInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutNotesInput = {
@@ -2317,6 +2378,7 @@ export type OrganizationCreateWithoutNotesInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutNotesInput = {
@@ -2349,6 +2411,7 @@ export type OrganizationUncheckedCreateWithoutNotesInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutNotesInput = {
@@ -2397,6 +2460,7 @@ export type OrganizationUpdateWithoutNotesInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutNotesInput = {
@@ -2429,6 +2493,7 @@ export type OrganizationUncheckedUpdateWithoutNotesInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutNotificationsInput = {
@@ -2461,6 +2526,7 @@ export type OrganizationCreateWithoutNotificationsInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutNotificationsInput = {
@@ -2493,6 +2559,7 @@ export type OrganizationUncheckedCreateWithoutNotificationsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutNotificationsInput = {
@@ -2541,6 +2608,7 @@ export type OrganizationUpdateWithoutNotificationsInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutNotificationsInput = {
@@ -2573,6 +2641,7 @@ export type OrganizationUncheckedUpdateWithoutNotificationsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutEmailTemplatesInput = {
@@ -2605,6 +2674,7 @@ export type OrganizationCreateWithoutEmailTemplatesInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutEmailTemplatesInput = {
@@ -2637,6 +2707,7 @@ export type OrganizationUncheckedCreateWithoutEmailTemplatesInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutEmailTemplatesInput = {
@@ -2685,6 +2756,7 @@ export type OrganizationUpdateWithoutEmailTemplatesInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutEmailTemplatesInput = {
@@ -2717,6 +2789,7 @@ export type OrganizationUncheckedUpdateWithoutEmailTemplatesInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutCustomFieldsInput = {
@@ -2749,6 +2822,7 @@ export type OrganizationCreateWithoutCustomFieldsInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutCustomFieldsInput = {
@@ -2781,6 +2855,7 @@ export type OrganizationUncheckedCreateWithoutCustomFieldsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutCustomFieldsInput = {
@@ -2829,6 +2904,7 @@ export type OrganizationUpdateWithoutCustomFieldsInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutCustomFieldsInput = {
@@ -2861,6 +2937,7 @@ export type OrganizationUncheckedUpdateWithoutCustomFieldsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutEmailSettingsInput = {
@@ -2893,6 +2970,7 @@ export type OrganizationCreateWithoutEmailSettingsInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutEmailSettingsInput = {
@@ -2925,6 +3003,7 @@ export type OrganizationUncheckedCreateWithoutEmailSettingsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutEmailSettingsInput = {
@@ -2973,6 +3052,7 @@ export type OrganizationUpdateWithoutEmailSettingsInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutEmailSettingsInput = {
@@ -3005,6 +3085,7 @@ export type OrganizationUncheckedUpdateWithoutEmailSettingsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutSentEmailsInput = {
@@ -3037,6 +3118,7 @@ export type OrganizationCreateWithoutSentEmailsInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutSentEmailsInput = {
@@ -3069,6 +3151,7 @@ export type OrganizationUncheckedCreateWithoutSentEmailsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutSentEmailsInput = {
@@ -3117,6 +3200,7 @@ export type OrganizationUpdateWithoutSentEmailsInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutSentEmailsInput = {
@@ -3149,6 +3233,7 @@ export type OrganizationUncheckedUpdateWithoutSentEmailsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutRemindersInput = {
@@ -3181,6 +3266,7 @@ export type OrganizationCreateWithoutRemindersInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutRemindersInput = {
@@ -3213,6 +3299,7 @@ export type OrganizationUncheckedCreateWithoutRemindersInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutRemindersInput = {
@@ -3261,6 +3348,7 @@ export type OrganizationUpdateWithoutRemindersInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutRemindersInput = {
@@ -3293,6 +3381,7 @@ export type OrganizationUncheckedUpdateWithoutRemindersInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutInboundEmailsInput = {
@@ -3325,6 +3414,7 @@ export type OrganizationCreateWithoutInboundEmailsInput = {
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutInboundEmailsInput = {
@@ -3357,6 +3447,7 @@ export type OrganizationUncheckedCreateWithoutInboundEmailsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutInboundEmailsInput = {
@@ -3405,6 +3496,7 @@ export type OrganizationUpdateWithoutInboundEmailsInput = {
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutInboundEmailsInput = {
@@ -3437,6 +3529,7 @@ export type OrganizationUncheckedUpdateWithoutInboundEmailsInput = {
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutApiKeysInput = {
@@ -3469,6 +3562,7 @@ export type OrganizationCreateWithoutApiKeysInput = {
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutApiKeysInput = {
@@ -3501,6 +3595,7 @@ export type OrganizationUncheckedCreateWithoutApiKeysInput = {
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutApiKeysInput = {
@@ -3549,6 +3644,7 @@ export type OrganizationUpdateWithoutApiKeysInput = {
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutApiKeysInput = {
@@ -3581,6 +3677,7 @@ export type OrganizationUncheckedUpdateWithoutApiKeysInput = {
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutSequencesInput = {
@@ -3613,6 +3710,7 @@ export type OrganizationCreateWithoutSequencesInput = {
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutSequencesInput = {
@@ -3645,6 +3743,7 @@ export type OrganizationUncheckedCreateWithoutSequencesInput = {
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutSequencesInput = {
@@ -3693,6 +3792,7 @@ export type OrganizationUpdateWithoutSequencesInput = {
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutSequencesInput = {
@@ -3725,6 +3825,7 @@ export type OrganizationUncheckedUpdateWithoutSequencesInput = {
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutSequenceEnrollmentsInput = {
@@ -3757,6 +3858,7 @@ export type OrganizationCreateWithoutSequenceEnrollmentsInput = {
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutSequenceEnrollmentsInput = {
@@ -3789,6 +3891,7 @@ export type OrganizationUncheckedCreateWithoutSequenceEnrollmentsInput = {
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutSequenceEnrollmentsInput = {
@@ -3837,6 +3940,7 @@ export type OrganizationUpdateWithoutSequenceEnrollmentsInput = {
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutSequenceEnrollmentsInput = {
@@ -3869,6 +3973,155 @@ export type OrganizationUncheckedUpdateWithoutSequenceEnrollmentsInput = {
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutRolesInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutRolesInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutRolesInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutRolesInput, Prisma.OrganizationUncheckedCreateWithoutRolesInput>
+}
+
+export type OrganizationUpsertWithoutRolesInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutRolesInput, Prisma.OrganizationUncheckedUpdateWithoutRolesInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutRolesInput, Prisma.OrganizationUncheckedCreateWithoutRolesInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutRolesInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutRolesInput, Prisma.OrganizationUncheckedUpdateWithoutRolesInput>
+}
+
+export type OrganizationUpdateWithoutRolesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutRolesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 
@@ -3897,6 +4150,7 @@ export type OrganizationCountOutputType = {
   apiKeys: number
   sequences: number
   sequenceEnrollments: number
+  roles: number
 }
 
 export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3920,6 +4174,7 @@ export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   apiKeys?: boolean | OrganizationCountOutputTypeCountApiKeysArgs
   sequences?: boolean | OrganizationCountOutputTypeCountSequencesArgs
   sequenceEnrollments?: boolean | OrganizationCountOutputTypeCountSequenceEnrollmentsArgs
+  roles?: boolean | OrganizationCountOutputTypeCountRolesArgs
 }
 
 /**
@@ -4072,6 +4327,13 @@ export type OrganizationCountOutputTypeCountSequenceEnrollmentsArgs<ExtArgs exte
   where?: Prisma.SequenceEnrollmentWhereInput
 }
 
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountRolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RoleWhereInput
+}
+
 
 export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -4104,6 +4366,7 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   apiKeys?: boolean | Prisma.Organization$apiKeysArgs<ExtArgs>
   sequences?: boolean | Prisma.Organization$sequencesArgs<ExtArgs>
   sequenceEnrollments?: boolean | Prisma.Organization$sequenceEnrollmentsArgs<ExtArgs>
+  roles?: boolean | Prisma.Organization$rolesArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organization"]>
 
@@ -4166,6 +4429,7 @@ export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   apiKeys?: boolean | Prisma.Organization$apiKeysArgs<ExtArgs>
   sequences?: boolean | Prisma.Organization$sequencesArgs<ExtArgs>
   sequenceEnrollments?: boolean | Prisma.Organization$sequenceEnrollmentsArgs<ExtArgs>
+  roles?: boolean | Prisma.Organization$rolesArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrganizationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -4195,6 +4459,7 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     apiKeys: Prisma.$ApiKeyPayload<ExtArgs>[]
     sequences: Prisma.$SequencePayload<ExtArgs>[]
     sequenceEnrollments: Prisma.$SequenceEnrollmentPayload<ExtArgs>[]
+    roles: Prisma.$RolePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -4621,6 +4886,7 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   apiKeys<T extends Prisma.Organization$apiKeysArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$apiKeysArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sequences<T extends Prisma.Organization$sequencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$sequencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SequencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sequenceEnrollments<T extends Prisma.Organization$sequenceEnrollmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$sequenceEnrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SequenceEnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  roles<T extends Prisma.Organization$rolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5546,6 +5812,30 @@ export type Organization$sequenceEnrollmentsArgs<ExtArgs extends runtime.Types.E
   take?: number
   skip?: number
   distinct?: Prisma.SequenceEnrollmentScalarFieldEnum | Prisma.SequenceEnrollmentScalarFieldEnum[]
+}
+
+/**
+ * Organization.roles
+ */
+export type Organization$rolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Role
+   */
+  select?: Prisma.RoleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Role
+   */
+  omit?: Prisma.RoleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoleInclude<ExtArgs> | null
+  where?: Prisma.RoleWhereInput
+  orderBy?: Prisma.RoleOrderByWithRelationInput | Prisma.RoleOrderByWithRelationInput[]
+  cursor?: Prisma.RoleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RoleScalarFieldEnum | Prisma.RoleScalarFieldEnum[]
 }
 
 /**

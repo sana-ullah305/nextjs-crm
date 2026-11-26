@@ -42,6 +42,7 @@ model Organization {
   sequences           Sequence[]
   sequenceEnrollments SequenceEnrollment[]
   currency            String               @default("USD")
+  roles               Role[]
 }
 
 model User {
@@ -76,6 +77,7 @@ model User {
   createdApiKeys      ApiKey[]             @relation("ApiKeyCreator")
   createdSequences    Sequence[]           @relation("SequenceCreator")
   sequenceEnrollments SequenceEnrollment[] @relation("SequenceEnrollmentResponder")
+  userRoles           UserRole[]
 
   @@unique([organizationId, email])
   @@index([organizationId])
@@ -698,4 +700,59 @@ model SequenceStepEnrollment {
 
   @@unique([stepId, enrollmentId])
   @@index([enrollmentId])
+}
+
+// A custom role defined within an organization. `isSystem` marks built-in
+// roles (e.g. ADMIN, MANAGER, SALES_REP) that cannot be deleted.
+model Role {
+  id             String   @id @default(cuid())
+  organizationId String
+  name           String
+  description    String   @default("")
+  isSystem       Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  organization    Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  rolePermissions RolePermission[]
+  userRoles       UserRole[]
+
+  @@index([organizationId])
+  @@index([name])
+}
+
+// A global permission definition (e.g. "contacts:read").
+model Permission {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String   @default("")
+  category    String   @default("")
+  createdAt   DateTime @default(now())
+
+  rolePermissions RolePermission[]
+}
+
+// Join table linking roles to permissions.
+model RolePermission {
+  id           String @id @default(cuid())
+  roleId       String
+  permissionId String
+
+  role       Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@unique([roleId, permissionId])
+}
+
+// Join table linking users to roles.
+model UserRole {
+  id        String   @id @default(cuid())
+  userId    String
+  roleId    String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, roleId])
 }

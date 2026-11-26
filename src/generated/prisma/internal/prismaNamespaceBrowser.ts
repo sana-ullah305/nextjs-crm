@@ -78,7 +78,11 @@ export const ModelName = {
   Sequence: 'Sequence',
   SequenceStep: 'SequenceStep',
   SequenceEnrollment: 'SequenceEnrollment',
-  SequenceStepEnrollment: 'SequenceStepEnrollment'
+  SequenceStepEnrollment: 'SequenceStepEnrollment',
+  Role: 'Role',
+  Permission: 'Permission',
+  RolePermission: 'RolePermission',
+  UserRole: 'UserRole'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -569,6 +573,49 @@ export const SequenceStepEnrollmentScalarFieldEnum = {
 } as const
 
 export type SequenceStepEnrollmentScalarFieldEnum = (typeof SequenceStepEnrollmentScalarFieldEnum)[keyof typeof SequenceStepEnrollmentScalarFieldEnum]
+
+
+export const RoleScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  description: 'description',
+  isSystem: 'isSystem',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
+
+
+export const PermissionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  category: 'category',
+  createdAt: 'createdAt'
+} as const
+
+export type PermissionScalarFieldEnum = (typeof PermissionScalarFieldEnum)[keyof typeof PermissionScalarFieldEnum]
+
+
+export const RolePermissionScalarFieldEnum = {
+  id: 'id',
+  roleId: 'roleId',
+  permissionId: 'permissionId'
+} as const
+
+export type RolePermissionScalarFieldEnum = (typeof RolePermissionScalarFieldEnum)[keyof typeof RolePermissionScalarFieldEnum]
+
+
+export const UserRoleScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  roleId: 'roleId',
+  createdAt: 'createdAt'
+} as const
+
+export type UserRoleScalarFieldEnum = (typeof UserRoleScalarFieldEnum)[keyof typeof UserRoleScalarFieldEnum]
 
 
 export const SortOrder = {

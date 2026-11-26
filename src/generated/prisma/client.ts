@@ -181,3 +181,23 @@ export type SequenceEnrollment = Prisma.SequenceEnrollmentModel
  * 
  */
 export type SequenceStepEnrollment = Prisma.SequenceStepEnrollmentModel
+/**
+ * Model Role
+ * 
+ */
+export type Role = Prisma.RoleModel
+/**
+ * Model Permission
+ * 
+ */
+export type Permission = Prisma.PermissionModel
+/**
+ * Model RolePermission
+ * 
+ */
+export type RolePermission = Prisma.RolePermissionModel
+/**
+ * Model UserRole
+ * 
+ */
+export type UserRole = Prisma.UserRoleModel
