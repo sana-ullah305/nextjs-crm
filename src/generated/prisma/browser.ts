@@ -157,3 +157,28 @@ export type SequenceEnrollment = Prisma.SequenceEnrollmentModel
  * 
  */
 export type SequenceStepEnrollment = Prisma.SequenceStepEnrollmentModel
+/**
+ * Model Product
+ * 
+ */
+export type Product = Prisma.ProductModel
+/**
+ * Model Quotation
+ * 
+ */
+export type Quotation = Prisma.QuotationModel
+/**
+ * Model QuotationLineItem
+ * 
+ */
+export type QuotationLineItem = Prisma.QuotationLineItemModel
+/**
+ * Model SalesOrder
+ * 
+ */
+export type SalesOrder = Prisma.SalesOrderModel
+/**
+ * Model SalesOrderLineItem
+ * 
+ */
+export type SalesOrderLineItem = Prisma.SalesOrderLineItemModel

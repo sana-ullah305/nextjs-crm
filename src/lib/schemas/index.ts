@@ -347,6 +347,85 @@ export const contactImportSchema = z.object({
     .max(500, "Import limited to 500 contacts per batch"),
 });
 
+
+export const QUOTATION_STATUSES = ["DRAFT", "SENT", "ACCEPTED", "REJECTED", "EXPIRED"] as const;
+export const SALES_ORDER_STATUSES = ["PENDING", "CONFIRMED", "COMPLETED", "CANCELLED"] as const;
+
+export const quotationLineItemCreateSchema = z.object({
+  productId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  name: z.string().trim().min(1, "Name is required").max(200),
+  description: z.string().max(5000).optional().default(""),
+  quantity: z.coerce.number().min(0.0001).max(1_000_000).default(1),
+  unitPrice: z.coerce.number().min(0).max(100_000_000),
+  total: z.coerce.number().min(0).max(100_000_000),
+});
+
+export const quotationCreateSchema = z.object({
+  quotationNumber: z.string().trim().min(1, "Quotation number is required").max(64),
+  dealId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  contactId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  companyId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  status: z.enum(QUOTATION_STATUSES).default("DRAFT"),
+  validUntil: z.string().trim().optional().transform(emptyToUndefined),
+  subtotal: z.coerce.number().min(0).max(100_000_000).default(0),
+  tax: z.coerce.number().min(0).max(100_000_000).default(0),
+  total: z.coerce.number().min(0).max(100_000_000).default(0),
+  notes: z.string().max(5000).optional().default(""),
+  lineItems: z.array(quotationLineItemCreateSchema).max(100).default([]),
+});
+
+export const quotationUpdateSchema = z.object({
+  quotationNumber: z.string().trim().max(64).optional(),
+  dealId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  contactId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  companyId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  status: z.enum(QUOTATION_STATUSES).optional(),
+  validUntil: z.string().trim().optional().transform(emptyToUndefined),
+  subtotal: z.coerce.number().min(0).max(100_000_000).optional(),
+  tax: z.coerce.number().min(0).max(100_000_000).optional(),
+  total: z.coerce.number().min(0).max(100_000_000).optional(),
+  notes: z.string().max(5000).optional(),
+});
+
+export const salesOrderLineItemCreateSchema = z.object({
+  productId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  name: z.string().trim().min(1, "Name is required").max(200),
+  description: z.string().max(5000).optional().default(""),
+  quantity: z.coerce.number().min(0.0001).max(1_000_000).default(1),
+  unitPrice: z.coerce.number().min(0).max(100_000_000),
+  total: z.coerce.number().min(0).max(100_000_000),
+});
+
+export const salesOrderCreateSchema = z.object({
+  orderNumber: z.string().trim().min(1, "Order number is required").max(64),
+  quotationId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  dealId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  contactId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  companyId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  status: z.enum(SALES_ORDER_STATUSES).default("PENDING"),
+  orderDate: z.string().trim().optional().transform(emptyToUndefined),
+  subtotal: z.coerce.number().min(0).max(100_000_000).default(0),
+  tax: z.coerce.number().min(0).max(100_000_000).default(0),
+  total: z.coerce.number().min(0).max(100_000_000).default(0),
+  shippingAddress: z.string().max(2000).optional().default(""),
+  notes: z.string().max(5000).optional().default(""),
+  lineItems: z.array(salesOrderLineItemCreateSchema).max(100).default([]),
+});
+
+export const salesOrderUpdateSchema = z.object({
+  orderNumber: z.string().trim().max(64).optional(),
+  quotationId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  dealId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  contactId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  companyId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  status: z.enum(SALES_ORDER_STATUSES).optional(),
+  orderDate: z.string().trim().optional().transform(emptyToUndefined),
+  subtotal: z.coerce.number().min(0).max(100_000_000).optional(),
+  tax: z.coerce.number().min(0).max(100_000_000).optional(),
+  total: z.coerce.number().min(0).max(100_000_000).optional(),
+  shippingAddress: z.string().max(2000).optional(),
+  notes: z.string().max(5000).optional(),
+});
 export type LoginInput = z.infer<typeof loginSchema>;
 export type ContactCreateInput = z.infer<typeof contactCreateSchema>;
 export type LeadCreateInput = z.infer<typeof leadCreateSchema>;
@@ -356,3 +435,10 @@ export type TaskCreateInput = z.infer<typeof taskCreateSchema>;
 export type ActivityCreateInput = z.infer<typeof activityCreateSchema>;
 export type EmailSendInput = z.infer<typeof emailSendSchema>;
 export type EmailSettingsInput = z.infer<typeof emailSettingsSchema>;
+
+export type QuotationLineItemCreateInput = z.infer<typeof quotationLineItemCreateSchema>;
+export type QuotationCreateInput = z.infer<typeof quotationCreateSchema>;
+export type QuotationUpdateInput = z.infer<typeof quotationUpdateSchema>;
+export type SalesOrderLineItemCreateInput = z.infer<typeof salesOrderLineItemCreateSchema>;
+export type SalesOrderCreateInput = z.infer<typeof salesOrderCreateSchema>;
+export type SalesOrderUpdateInput = z.infer<typeof salesOrderUpdateSchema>;

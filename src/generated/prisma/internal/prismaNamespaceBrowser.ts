@@ -78,7 +78,12 @@ export const ModelName = {
   Sequence: 'Sequence',
   SequenceStep: 'SequenceStep',
   SequenceEnrollment: 'SequenceEnrollment',
-  SequenceStepEnrollment: 'SequenceStepEnrollment'
+  SequenceStepEnrollment: 'SequenceStepEnrollment',
+  Product: 'Product',
+  Quotation: 'Quotation',
+  QuotationLineItem: 'QuotationLineItem',
+  SalesOrder: 'SalesOrder',
+  SalesOrderLineItem: 'SalesOrderLineItem'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -569,6 +574,94 @@ export const SequenceStepEnrollmentScalarFieldEnum = {
 } as const
 
 export type SequenceStepEnrollmentScalarFieldEnum = (typeof SequenceStepEnrollmentScalarFieldEnum)[keyof typeof SequenceStepEnrollmentScalarFieldEnum]
+
+
+export const ProductScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  description: 'description',
+  sku: 'sku',
+  unitPrice: 'unitPrice',
+  currency: 'currency',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+export const QuotationScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  quotationNumber: 'quotationNumber',
+  dealId: 'dealId',
+  contactId: 'contactId',
+  companyId: 'companyId',
+  status: 'status',
+  validUntil: 'validUntil',
+  subtotal: 'subtotal',
+  tax: 'tax',
+  total: 'total',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type QuotationScalarFieldEnum = (typeof QuotationScalarFieldEnum)[keyof typeof QuotationScalarFieldEnum]
+
+
+export const QuotationLineItemScalarFieldEnum = {
+  id: 'id',
+  quotationId: 'quotationId',
+  productId: 'productId',
+  name: 'name',
+  description: 'description',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  total: 'total',
+  createdAt: 'createdAt'
+} as const
+
+export type QuotationLineItemScalarFieldEnum = (typeof QuotationLineItemScalarFieldEnum)[keyof typeof QuotationLineItemScalarFieldEnum]
+
+
+export const SalesOrderScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  orderNumber: 'orderNumber',
+  quotationId: 'quotationId',
+  dealId: 'dealId',
+  contactId: 'contactId',
+  companyId: 'companyId',
+  status: 'status',
+  orderDate: 'orderDate',
+  subtotal: 'subtotal',
+  tax: 'tax',
+  total: 'total',
+  shippingAddress: 'shippingAddress',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SalesOrderScalarFieldEnum = (typeof SalesOrderScalarFieldEnum)[keyof typeof SalesOrderScalarFieldEnum]
+
+
+export const SalesOrderLineItemScalarFieldEnum = {
+  id: 'id',
+  salesOrderId: 'salesOrderId',
+  productId: 'productId',
+  name: 'name',
+  description: 'description',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  total: 'total',
+  createdAt: 'createdAt'
+} as const
+
+export type SalesOrderLineItemScalarFieldEnum = (typeof SalesOrderLineItemScalarFieldEnum)[keyof typeof SalesOrderLineItemScalarFieldEnum]
 
 
 export const SortOrder = {
