@@ -2,12 +2,13 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { Copy, Flame, Plus, Repeat, Search, Send, Sparkles, Trash2, TrendingUp, UserCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { EmptyState } from "@/components/ui/empty-state";
 import { EntityForm, type FieldDef, type FieldErrors } from "@/components/entity-form";
@@ -67,11 +68,14 @@ function scoreBadge(s: number) {
 }
 
 export default function LeadsPage() {
+  const searchParams = useSearchParams();
+  const initialQ = searchParams.get("q") || "";
+  
   const [leads, setLeads] = useState<Lead[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [q, setQ] = useState("");
+  const [q, setQ] = useState(initialQ);
   const [status, setStatus] = useState("");
   const [sort, setSort] = useState("recent");
   const [page, setPage] = useState(1);
@@ -200,6 +204,33 @@ export default function LeadsPage() {
       setFormErrors(validationDetails(e));
     } finally {
       setSubmitting(false);
+    }
+  }
+
+  async function onEnroll(e: React.FormEvent) {
+    e.preventDefault();
+    if (!enrollTarget) return;
+    try {
+      await api.post(`/api/sequences/enroll`, { leadId: enrollTarget.id, sequenceId: formValues.sequenceId });
+      setEnrollOpen(false);
+      setEnrollTarget(null);
+      setNotice("Lead enrolled in sequence");
+    } catch (e) {
+      setError(e instanceof ApiError ? e.message : "Enroll failed");
+    }
+  }
+
+  async function onMerge(e: React.FormEvent) {
+    e.preventDefault();
+    if (!mergeTarget) return;
+    try {
+      await api.post(`/api/leads/merge`, { primaryId: mergeTarget.id, secondaryId: formValues.mergeLeadId });
+      setMergeOpen(false);
+      setMergeTarget(null);
+      setNotice("Leads merged");
+      await load();
+    } catch (e) {
+      setError(e instanceof ApiError ? e.message : "Merge failed");
     }
   }
 
@@ -398,8 +429,6 @@ export default function LeadsPage() {
                         <Button
                           variant="ghost"
                           size="icon"
-                          aria-label={`Email lead ${l.firstName} ${l.lastName}`}
-                          title="Send email"
                           onClick={() => {
                             setComposeTarget(l);
                             setComposeOpen(true);
@@ -408,39 +437,35 @@ export default function LeadsPage() {
                           <Send className="h-3.5 w-3.5" />
                         </Button>
                       )}
-                      {l.status !== "CONVERTED" && l.email && (
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          aria-label={`Enroll ${l.firstName} ${l.lastName} in a sequence`}
-                          title="Enroll in sequence"
-                          onClick={() => {
-                            setEnrollTarget(l);
-                            setEnrollOpen(true);
-                          }}
-                        >
-                          <Repeat className="h-3.5 w-3.5" />
-                        </Button>
-                      )}
-                      {l.status !== "CONVERTED" && (
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          aria-label={`Find duplicates for ${l.firstName} ${l.lastName}`}
-                          title="Find duplicates"
-                          onClick={() => {
-                            setMergeTarget(l);
-                            setMergeOpen(true);
-                          }}
-                        >
-                          <Copy className="h-3.5 w-3.5" />
-                        </Button>
-                      )}
-                      {l.status !== "CONVERTED" && (
-                        <Button variant="ghost" size="icon" aria-label="Delete lead" onClick={() => void onDelete(l)}>
-                          <Trash2 className="h-3.5 w-3.5 text-destructive" />
-                        </Button>
-                      )}
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => {
+                          setEnrollTarget(l);
+                          setEnrollOpen(true);
+                        }}
+                      >
+                        <Repeat className="h-3.5 w-3.5" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => {
+                          setMergeTarget(l);
+                          setMergeOpen(true);
+                          setFormValues({ mergeLeadId: "" });
+                          setFormErrors({});
+                        }}
+                      >
+                        <Copy className="h-3.5 w-3.5" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => onDelete(l)}
+                      >
+                        <Trash2 className="h-3.5 w-3.5 text-destructive" />
+                      </Button>
                     </div>
                   </TableCell>
                 </TableRow>
@@ -449,20 +474,27 @@ export default function LeadsPage() {
           </Table>
         )}
       </Card>
-
-      {totalPages > 1 && (
-        <div className="flex items-center justify-between text-sm text-muted-foreground">
-          <span>
+      {total > pageSize && (
+        <div className="flex items-center justify-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={page === 1}
+            onClick={() => setPage((p) => p - 1)}
+          >
+            Previous
+          </Button>
+          <span className="text-sm text-muted-foreground">
             Page {page} of {totalPages}
           </span>
-          <div className="flex gap-2">
-            <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => setPage((p) => p - 1)}>
-              Previous
-            </Button>
-            <Button variant="outline" size="sm" disabled={page >= totalPages} onClick={() => setPage((p) => p + 1)}>
-              Next
-            </Button>
-          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={page === totalPages}
+            onClick={() => setPage((p) => p + 1)}
+          >
+            Next
+          </Button>
         </div>
       )}
 
@@ -470,110 +502,80 @@ export default function LeadsPage() {
         open={formOpen}
         onOpenChange={setFormOpen}
         title="Capture lead"
-        description="Leads are scored automatically based on reachability, value, and source."
         fields={fields}
         values={formValues}
         errors={formErrors}
         submitting={submitting}
         onChange={(name, value) => {
           setFormValues((v) => ({ ...v, [name]: value }));
-          if (name === "email") void checkDuplicate(value);
+          if (name === "email") checkDuplicate(value);
         }}
         onSubmit={onSubmit}
       />
-      {dupWarning && formOpen && (
-        <p className="text-xs text-warning" role="alert">
-          {dupWarning}
-        </p>
-      )}
 
       {convertOpen && convertTarget && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" role="dialog" aria-modal="true">
-          <Card className="w-full max-w-md p-6">
-            <h2 className="text-lg font-semibold">
-              Convert {convertTarget.firstName} {convertTarget.lastName}
-            </h2>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Creates a contact record{convertWithDeal ? " and an open deal" : ""}. The lead will be marked
-              converted.
-            </p>
-            <form onSubmit={onConvert} className="mt-4 space-y-3">
-              <label className="flex items-center gap-2 text-sm">
-                <input
-                  type="checkbox"
-                  checked={convertWithDeal}
-                  onChange={(e) => setConvertWithDeal(e.target.checked)}
-                  className="h-4 w-4 rounded border-input"
-                />
-                Create a deal in the default pipeline
-              </label>
-              {convertWithDeal && (
-                <div>
-                  <label htmlFor="deal-value" className="text-sm font-medium">
-                    Deal value (USD)
-                  </label>
-                  <Input
-                    id="deal-value"
-                    type="number"
-                    value={convertValue}
-                    onChange={(e) => setConvertValue(e.target.value)}
-                    className="mt-1"
-                  />
-                </div>
-              )}
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <Card className="w-full max-w-md">
+            <CardHeader>
+              <CardTitle>Convert lead</CardTitle>
+              <CardDescription>Create a contact and optionally a deal from {convertTarget.firstName} {convertTarget.lastName}</CardDescription>
+            </CardHeader>
+            <form onSubmit={onConvert} className="space-y-4 p-4">
+              <div className="space-y-2">
+                <label className="flex items-center gap-2">
+                  <input type="checkbox" checked={convertWithDeal} onChange={(e) => setConvertWithDeal(e.target.checked)} className="h-4 w-4" />
+                  <span>Also create a deal</span>
+                </label>
+                {convertWithDeal && (
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-medium">Deal value</label>
+                    <Input type="number" placeholder="0" value={convertValue} onChange={(e) => setConvertValue(e.target.value)} />
+                  </div>
+                )}
+              </div>
               <div className="flex justify-end gap-2 pt-2">
-                <Button type="button" variant="outline" onClick={() => setConvertOpen(false)}>
-                  Cancel
-                </Button>
-                <Button type="submit" disabled={submitting}>
-                  {submitting ? "Converting…" : "Convert lead"}
-                </Button>
+                <Button type="button" variant="outline" onClick={() => setConvertOpen(false)}>Cancel</Button>
+                <Button type="submit" disabled={submitting}>{submitting ? "Converting…" : "Convert"}</Button>
               </div>
             </form>
           </Card>
         </div>
       )}
 
-      <ComposeEmail
-        open={composeOpen}
-        onOpenChange={setComposeOpen}
-        defaultTo={
-          composeTarget
-            ? {
-                email: composeTarget.email,
-                name: `${composeTarget.firstName} ${composeTarget.lastName}`,
-              }
-            : { email: "" }
-        }
-        leadId={composeTarget?.id}
-        templateVars={
-          composeTarget
-            ? {
-                firstName: composeTarget.firstName,
-                lastName: composeTarget.lastName,
-                email: composeTarget.email,
-                company: composeTarget.companyName ?? "",
-              }
-            : {}
-        }
-        onSent={() => void load()}
-      />
+      {composeOpen && composeTarget && (
+        <ComposeEmail
+          open={composeOpen}
+          onOpenChange={setComposeOpen}
+          defaultTo={{ email: composeTarget.email, name: `${composeTarget.firstName} ${composeTarget.lastName}` }}
+          onSent={() => {
+            setNotice("Email sent");
+            setComposeOpen(false);
+          }}
+        />
+      )}
 
-      <EnrollDialog
-        open={enrollOpen && enrollTarget !== null}
-        onOpenChange={setEnrollOpen}
-        recordType="lead"
-        recordId={enrollTarget?.id ?? ""}
-        recordName={enrollTarget ? `${enrollTarget.firstName} ${enrollTarget.lastName}` : ""}
-        onEnrolled={() => setNotice(`${enrollTarget?.firstName} enrolled in the sequence.`)}
-      />
+      {enrollOpen && enrollTarget && (
+        <EnrollDialog
+          open={enrollOpen}
+          onOpenChange={setEnrollOpen}
+          recordType="lead"
+          recordId={enrollTarget.id}
+          recordName={`${enrollTarget.firstName} ${enrollTarget.lastName}`}
+          onEnrolled={() => {
+            setNotice("Lead enrolled in sequence");
+            setEnrollOpen(false);
+          }}
+        />
+      )}
 
-      <MergeDialog
-        open={mergeOpen && mergeTarget !== null}
-        onOpenChange={setMergeOpen}
-        sourceType="lead"
-        sourceId={mergeTarget?.id ?? ""}
-      />
+      {mergeOpen && mergeTarget && (
+        <MergeDialog
+          open={mergeOpen}
+          onOpenChange={setMergeOpen}
+          sourceType="lead"
+          sourceId={mergeTarget.id}
+        />
+      )}
     </div>
   );
 }

@@ -1,13 +1,15 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { CalendarClock, CheckCircle2, SkipForward, Plus, Trash2 } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import { CalendarClock, CheckCircle2, Plus, Search, SkipForward, Trash2 } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
 import { EntityForm, type FieldDef, type FieldErrors } from "@/components/entity-form";
+import { Input } from "@/components/ui/input";
 import { api, ApiError, validationDetails } from "@/lib/api-client";
 import { formatDateTime, relativeDue } from "@/lib/format";
 import { cn } from "@/lib/cn";
@@ -33,10 +35,14 @@ const PRIORITY_BADGE: Record<string, "destructive" | "warning" | "default" | "se
 };
 
 export default function TasksPage() {
+  const searchParams = useSearchParams();
+  const initialQ = searchParams.get("q") || "";
+  
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [filter, setFilter] = useState<"open" | "overdue" | "completed">("open");
+  const [q, setQ] = useState(initialQ);
   const [users, setUsers] = useState<UserOption[]>([]);
 
   const [formOpen, setFormOpen] = useState(false);
@@ -50,6 +56,7 @@ export default function TasksPage() {
       const params = new URLSearchParams({ pageSize: "100" });
       if (filter === "completed") params.set("status", "COMPLETED");
       if (filter === "overdue") params.set("due", "overdue");
+      if (q) params.set("q", q);
       const data = await api.get<{ tasks: Task[] }>(`/api/tasks?${params.toString()}`);
       setTasks(data.tasks);
     } catch (e) {
@@ -57,7 +64,7 @@ export default function TasksPage() {
     } finally {
       setLoading(false);
     }
-  }, [filter]);
+  }, [filter, q]);
 
   useEffect(() => {
     void load();
@@ -171,6 +178,16 @@ export default function TasksPage() {
                 {f}
               </button>
             ))}
+          </div>
+          <div className="relative min-w-56 flex-1 max-w-md">
+            <Search className="absolute top-1/2 left-2.5 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              className="pl-8"
+              placeholder="Search tasks…"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              aria-label="Search tasks"
+            />
           </div>
           <Button
             size="sm"

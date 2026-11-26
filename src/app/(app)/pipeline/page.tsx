@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { KanbanSquare, Plus, Settings2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -34,6 +35,9 @@ type Pipeline = {
 };
 
 export default function PipelinePage() {
+  const searchParams = useSearchParams();
+  const highlightDealId = searchParams.get("deal");
+  
   const [pipelines, setPipelines] = useState<Pipeline[]>([]);
   const [activePipelineId, setActivePipelineId] = useState("");
   const [deals, setDeals] = useState<Deal[]>([]);
@@ -123,7 +127,7 @@ export default function PipelinePage() {
     setSubmitting(true);
     setFormErrors({});
     try {
-      await api.post("/api/deals", {
+      const result = await api.post<{ deal: Deal }>("/api/deals", {
         name: formValues.name,
         value: Number(formValues.value || 0),
         stageId: formValues.stageId || activePipeline?.stages[0]?.id,
@@ -134,6 +138,12 @@ export default function PipelinePage() {
       setFormOpen(false);
       setFormValues({});
       await loadDeals();
+      // Navigate to highlight the newly created deal
+      if (result.deal?.id) {
+        const url = new URL(window.location.href);
+        url.searchParams.set("deal", result.deal.id);
+        window.history.pushState({}, "", url.toString());
+      }
     } catch (e) {
       setFormErrors(validationDetails(e));
     } finally {
@@ -246,28 +256,35 @@ export default function PipelinePage() {
                 <Badge variant="outline">{stage.probability}%</Badge>
               </div>
               <div className="flex flex-1 flex-col gap-2 overflow-y-auto scroll-thin p-2">
-                {stageDeals.map((deal) => (
-                  <Card
-                    key={deal.id}
-                    data-deal-id={deal.id}
-                    data-dragging={draggingId === deal.id}
-                    draggable
-                    onDragStart={(e) => {
-                      setDraggingId(deal.id);
-                      e.dataTransfer.setData("text/deal-id", deal.id);
-                      e.dataTransfer.effectAllowed = "move";
-                    }}
-                    className="kanban-card cursor-grab gap-1 p-3 active:cursor-grabbing"
-                  >
-                    <p className="text-sm font-medium">{deal.name}</p>
-                    <p className="text-sm font-semibold text-primary">{formatCompactCurrency(deal.value)}</p>
-                    <div className="flex items-center justify-between text-xs text-muted-foreground">
-                      <span>{deal.company?.name ?? "—"}</span>
-                      {deal.owner && <Avatar name={deal.owner.name} color={deal.owner.avatarColor} size="sm" />}
-                    </div>
-                    {deal.nextStep && <p className="line-clamp-1 text-xs text-muted-foreground">Next: {deal.nextStep}</p>}
-                  </Card>
-                ))}
+                {stageDeals.map((deal) => {
+                  const isHighlighted = highlightDealId === deal.id;
+                  return (
+                    <Card
+                      key={deal.id}
+                      data-deal-id={deal.id}
+                      data-dragging={draggingId === deal.id}
+                      data-highlighted={isHighlighted}
+                      draggable
+                      onDragStart={(e) => {
+                        setDraggingId(deal.id);
+                        e.dataTransfer.setData("text/deal-id", deal.id);
+                        e.dataTransfer.effectAllowed = "move";
+                      }}
+                      className={cn(
+                        "kanban-card cursor-grab gap-1 p-3 active:cursor-grabbing transition-all duration-300",
+                        isHighlighted && "ring-2 ring-primary ring-offset-2 bg-primary/5"
+                      )}
+                    >
+                      <p className="text-sm font-medium">{deal.name}</p>
+                      <p className="text-sm font-semibold text-primary">{formatCompactCurrency(deal.value)}</p>
+                      <div className="flex items-center justify-between text-xs text-muted-foreground">
+                        <span>{deal.company?.name ?? "—"}</span>
+                        {deal.owner && <Avatar name={deal.owner.name} color={deal.owner.avatarColor} size="sm" />}
+                      </div>
+                      {deal.nextStep && <p className="line-clamp-1 text-xs text-muted-foreground">Next: {deal.nextStep}</p>}
+                    </Card>
+                  );
+                })}
                 {stageDeals.length === 0 && (
                   <p className="py-6 text-center text-xs text-muted-foreground">Drop deals here</p>
                 )}

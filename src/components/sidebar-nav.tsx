@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/cn";
 import {
   BarChart3,
@@ -28,7 +28,12 @@ const NAV_ITEMS = [
 
 export function SidebarNav({ role }: { role: string }) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const items = NAV_ITEMS.filter((item) => (item.roles as readonly string[]).includes(role));
+
+  // Check if settings tab is active for workspace link
+  const settingsTab = searchParams.get("tab");
+  const workspaceActive = pathname === "/settings" && settingsTab === "organization";
 
   return (
     <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground md:flex">
@@ -62,8 +67,12 @@ export function SidebarNav({ role }: { role: string }) {
       </nav>
       <div className="border-t border-sidebar-border p-3">
         <Link
-          href="/settings/organization"
-          className="flex items-center gap-3 rounded-md px-3 py-2 text-sm text-sidebar-foreground hover:bg-sidebar-accent/60"
+          href="/settings?tab=organization"
+          aria-current={workspaceActive ? "page" : undefined}
+          className={cn(
+            "flex items-center gap-3 rounded-md px-3 py-2 text-sm text-sidebar-foreground hover:bg-sidebar-accent/60",
+            workspaceActive && "bg-sidebar-accent text-sidebar-accent-foreground"
+          )}
         >
           <ClipboardList className="h-4 w-4" />
           Workspace

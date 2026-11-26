@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Building2, FlaskConical, KanbanSquare, KeyRound, Mail, Plus, Repeat, ScrollText, Tag, Trash2, UserPlus, Users, Copy, Check } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -86,7 +87,9 @@ const TAB_META: Record<Tab, { label: string; icon: React.ComponentType<{ classNa
 };
 
 export default function SettingsPage() {
-  const [tab, setTab] = useState<Tab>("organization");
+  const searchParams = useSearchParams();
+  const initialTab = (searchParams.get("tab") as Tab) || "organization";
+  const [tab, setTab] = useState<Tab>(TABS.includes(initialTab) ? initialTab : "organization");
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [me, setMe] = useState<{ role: string } | null>(null);
@@ -94,6 +97,12 @@ export default function SettingsPage() {
   useEffect(() => {
     api.get<{ role: string }>("/api/auth/me").then((d) => setMe(d)).catch(() => undefined);
   }, []);
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("tab", tab);
+    window.history.replaceState({}, "", url.toString());
+  }, [tab]);
 
   // Organization
   const [org, setOrg] = useState<Org | null>(null);

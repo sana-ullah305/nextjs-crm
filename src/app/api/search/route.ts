@@ -166,7 +166,7 @@ export const GET = apiHandler(async (req) => {
       id: t.id,
       label: t.title,
       sub: t.dueAt ? `Due ${new Date(t.dueAt).toLocaleDateString()}` : "",
-      href: "/tasks",
+      href: `/tasks?q=${encodeURIComponent(t.title)}`,
     })),
   };
 
