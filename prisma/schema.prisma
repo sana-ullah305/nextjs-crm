@@ -41,6 +41,8 @@ model Organization {
   apiKeys             ApiKey[]
   sequences           Sequence[]
   sequenceEnrollments SequenceEnrollment[]
+  products            Product[]
+  priceLists          PriceList[]
   currency            String               @default("USD")
 }
 
@@ -141,8 +143,6 @@ model Contact {
   ownerId         String?
   status          String    @default("ACTIVE") // LEAD | ACTIVE | CUSTOMER | INACTIVE | CHURNED
   avatarColor     String    @default("#6366f1")
-  // Free-text summary; the merge feature prefixes it with the survivor
-  // merge, mirroring the Lead.summary convention.
   summary         String    @default("")
   lastContactedAt DateTime?
   createdAt       DateTime  @default(now())
@@ -182,17 +182,16 @@ model Tag {
 }
 
 model LeadSource {
-  id          String   @id @default(cuid())
-  name        String
-  description String   @default("")
-  isSystem    Boolean  @default(false)
-  createdAt   DateTime @default(now())
+  id             String   @id @default(cuid())
+  name           String
+  description    String   @default("")
+  isSystem       Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  organizationId String
 
   organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   leads        Lead[]
   deals        Deal[]
-
-  organizationId String
 
   @@unique([organizationId, name])
 }
@@ -306,6 +305,7 @@ model Deal {
   notes        Note[]
   lead         Lead?        @relation("DealLead", fields: [leadId], references: [id], onDelete: SetNull)
   sentEmails   SentEmail[]  @relation("SentEmailDeal")
+  lineItems    DealLineItem[]
 
   @@index([organizationId, deletedAt])
   @@index([organizationId, status])
@@ -495,8 +495,6 @@ model EmailSettings {
   organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 }
 
-// A single outbound email sent from the CRM, with delivery status. Recipient
-// email is snapshotted so history survives contact email changes/deletes.
 model SentEmail {
   id             String    @id @default(cuid())
   organizationId String
@@ -530,9 +528,6 @@ model SentEmail {
   @@index([userId, createdAt])
 }
 
-// A scheduled reminder generated for a due lead follow-up or an
-// overdue/reminder-due task. Deduplicated by a stable key so the scheduler
-// can run repeatedly without spamming the same reminder twice.
 model FollowUpReminder {
   id             String   @id @default(cuid())
   organizationId String
@@ -555,10 +550,6 @@ model FollowUpReminder {
   @@index([organizationId, createdAt])
 }
 
-// An inbound email received in the shared IMAP inbox and matched to CRM
-// records. "Matched" means the reply belongs to a known thread (In-Reply-To
-// points at a SentEmail), the sender is an open lead, or the sender is a
-// known contact. Unmatched mail is never stored.
 model InboundEmail {
   id             String   @id @default(cuid())
   organizationId String
@@ -586,10 +577,6 @@ model InboundEmail {
   @@index([leadId])
 }
 
-// A public lead-capture API key. Only the SHA-256 hash of the full key is
-// stored; the prefix (first 8 chars, e.g. "lc_a1b2c") supports display and
-// index-friendly lookup before a constant-time hash comparison. Revocation
-// is soft (isActive=false + revokedAt) to preserve the audit trail.
 model ApiKey {
   id             String    @id @default(cuid())
   organizationId String
@@ -608,8 +595,6 @@ model ApiKey {
   @@index([organizationId, prefix])
 }
 
-// An automated follow-up sequence: an ordered list of email steps that get
-// rendered and sent to enrolled records by the sequence scheduler.
 model Sequence {
   id             String   @id @default(cuid())
   organizationId String
@@ -628,9 +613,6 @@ model Sequence {
   @@index([organizationId])
 }
 
-// One email step inside a sequence. `delayHours` is the wait after the
-// PREVIOUS step (step 0's delay is measured from enrollment), so a scan
-// schedules nextSendAt = lastEvent + delayHours.
 model SequenceStep {
   id              String   @id @default(cuid())
   sequenceId      String
@@ -647,13 +629,6 @@ model SequenceStep {
   @@index([sequenceId])
 }
 
-// Enrollment of one record (contact or lead) in a sequence. `enrolledEmail`
-// is a snapshot so sequence history survives later record edits. The DB
-// unique on (sequenceId, contactId) / (sequenceId, leadId) is a SAFETY NET
-// only: the active-only rule "one active enrollment per record per
-// sequence" is enforced in code, so re-enrollment after COMPLETED/STOPPED is
-// allowed and raising a P2002 here means an ACTIVE enrollment already
-// exists → the route maps it to 409 ALREADY_ENROLLED.
 model SequenceEnrollment {
   id              String    @id @default(cuid())
   organizationId  String
@@ -665,7 +640,7 @@ model SequenceEnrollment {
   nextSendAt      DateTime?
   status          String    @default("ACTIVE") // ACTIVE | COMPLETED | STOPPED | UNSUBSCRIBED
   stoppedReason   String    @default("")
-  responderUserId String? // who enrolled the record
+  responderUserId String?
   unsubToken      String    @unique
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
@@ -685,9 +660,6 @@ model SequenceEnrollment {
   @@index([leadId])
 }
 
-// Join row: which step an enrollment is parked at, carried on the step so
-// step deletion can be detected (enrollment referencing a missing step is
-// stopped with stoppedReason "step missing").
 model SequenceStepEnrollment {
   id           String @id @default(cuid())
   stepId       String
@@ -698,4 +670,75 @@ model SequenceStepEnrollment {
 
   @@unique([stepId, enrollmentId])
   @@index([enrollmentId])
+}
+
+model Product {
+  id             String   @id @default(cuid())
+  organizationId String
+  name           String
+  description    String   @default("")
+  sku            String?
+  unitPrice      Float
+  currency       String   @default("USD")
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  organization    Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  priceListItems  PriceListItem[]
+  dealLineItems   DealLineItem[]
+
+  @@unique([organizationId, sku])
+  @@index([organizationId, isActive])
+  @@index([organizationId, name])
+}
+
+model PriceList {
+  id             String   @id @default(cuid())
+  organizationId String
+  name           String
+  description    String   @default("")
+  isDefault      Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  organization    Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  items           PriceListItem[]
+
+  @@index([organizationId])
+  @@index([organizationId, isDefault])
+}
+
+model PriceListItem {
+  id          String   @id @default(cuid())
+  priceListId String
+  productId   String
+  price       Float
+  currency    String   @default("USD")
+  createdAt   DateTime @default(now())
+
+  priceList   PriceList @relation(fields: [priceListId], references: [id], onDelete: Cascade)
+  product     Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([priceListId, productId])
+  @@index([priceListId])
+  @@index([productId])
+}
+
+model DealLineItem {
+  id          String   @id @default(cuid())
+  dealId      String
+  productId   String?
+  name        String
+  description String   @default("")
+  quantity    Float  @default(1)
+  unitPrice   Float
+  total       Float
+  createdAt   DateTime @default(now())
+
+  deal        Deal      @relation(fields: [dealId], references: [id], onDelete: Cascade)
+  product     Product?  @relation(fields: [productId], references: [id], onDelete: SetNull)
+
+  @@index([dealId])
+  @@index([productId])
 }

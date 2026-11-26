@@ -356,3 +356,55 @@ export type TaskCreateInput = z.infer<typeof taskCreateSchema>;
 export type ActivityCreateInput = z.infer<typeof activityCreateSchema>;
 export type EmailSendInput = z.infer<typeof emailSendSchema>;
 export type EmailSettingsInput = z.infer<typeof emailSettingsSchema>;
+
+export const productCreateSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(150),
+  description: z.string().max(5000).optional().default(""),
+  sku: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  unitPrice: z.coerce.number().min(0).max(100_000_000),
+  currency: z.string().trim().length(3).default("USD"),
+  isActive: z.boolean().default(true),
+});
+
+export const productUpdateSchema = productCreateSchema.partial();
+
+export const priceListCreateSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(120),
+  description: z.string().max(2000).optional().default(""),
+  isDefault: z.boolean().default(false),
+});
+
+export const priceListUpdateSchema = priceListCreateSchema.partial();
+
+export const priceListItemCreateSchema = z.object({
+  productId: z.string().trim().min(1).max(64),
+  price: z.coerce.number().min(0).max(100_000_000),
+  currency: z.string().trim().length(3).default("USD"),
+});
+
+export const priceListItemsReplaceSchema = z.object({
+  items: z.array(priceListItemCreateSchema).max(200),
+});
+
+export const dealLineItemCreateSchema = z.object({
+  productId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  name: z.string().trim().min(1, "Name is required").max(200),
+  description: z.string().max(5000).optional().default(""),
+  quantity: z.coerce.number().min(0.0001).max(1_000_000).default(1),
+  unitPrice: z.coerce.number().min(0).max(100_000_000),
+  total: z.coerce.number().min(0).max(100_000_000),
+});
+
+export const dealLineItemUpdateSchema = dealLineItemCreateSchema.partial();
+
+export const dealLineItemsReplaceSchema = z.object({
+  items: z.array(dealLineItemCreateSchema).max(100),
+});
+
+export type ProductCreateInput = z.infer<typeof productCreateSchema>;
+export type ProductUpdateInput = z.infer<typeof productUpdateSchema>;
+export type PriceListCreateInput = z.infer<typeof priceListCreateSchema>;
+export type PriceListUpdateInput = z.infer<typeof priceListUpdateSchema>;
+export type PriceListItemCreateInput = z.infer<typeof priceListItemCreateSchema>;
+export type DealLineItemCreateInput = z.infer<typeof dealLineItemCreateSchema>;
+export type DealLineItemUpdateInput = z.infer<typeof dealLineItemUpdateSchema>;
