@@ -66,6 +66,10 @@ export const PERMISSIONS = [
   "email:send",
   // reminders run (managers/admins may trigger scans on demand)
   "reminders:run",
+  // attachments
+  "attachments:read",
+  "attachments:create",
+  "attachments:delete",
   // inbound mail scan (managers/admins may trigger scans on demand)
   "inbound:run",
   // sequence mail scan (managers/admins may trigger scans on demand)
@@ -109,6 +113,9 @@ const REP_PERMS: Permission[] = [
   "notes:create",
   "notes:delete",
   "email:send",
+  "attachments:read",
+  "attachments:create",
+  "attachments:delete",
 ];
 
 export const ROLE_PERMISSIONS: Record<string, Permission[]> = {

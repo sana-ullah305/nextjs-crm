@@ -257,6 +257,7 @@ export type UserWhereInput = {
   createdTasks?: Prisma.TaskListRelationFilter
   activities?: Prisma.ActivityListRelationFilter
   notes?: Prisma.NoteListRelationFilter
+  attachments?: Prisma.AttachmentListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   sentEmails?: Prisma.SentEmailListRelationFilter
   reminders?: Prisma.FollowUpReminderListRelationFilter
@@ -290,6 +291,7 @@ export type UserOrderByWithRelationInput = {
   createdTasks?: Prisma.TaskOrderByRelationAggregateInput
   activities?: Prisma.ActivityOrderByRelationAggregateInput
   notes?: Prisma.NoteOrderByRelationAggregateInput
+  attachments?: Prisma.AttachmentOrderByRelationAggregateInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
   sentEmails?: Prisma.SentEmailOrderByRelationAggregateInput
   reminders?: Prisma.FollowUpReminderOrderByRelationAggregateInput
@@ -327,6 +329,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdTasks?: Prisma.TaskListRelationFilter
   activities?: Prisma.ActivityListRelationFilter
   notes?: Prisma.NoteListRelationFilter
+  attachments?: Prisma.AttachmentListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   sentEmails?: Prisma.SentEmailListRelationFilter
   reminders?: Prisma.FollowUpReminderListRelationFilter
@@ -397,6 +400,7 @@ export type UserCreateInput = {
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
@@ -429,6 +433,7 @@ export type UserUncheckedCreateInput = {
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
@@ -461,6 +466,7 @@ export type UserUpdateInput = {
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
@@ -493,6 +499,7 @@ export type UserUncheckedUpdateInput = {
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -823,6 +830,20 @@ export type UserUpdateOneRequiredWithoutNotesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotesInput, Prisma.UserUpdateWithoutNotesInput>, Prisma.UserUncheckedUpdateWithoutNotesInput>
 }
 
+export type UserCreateNestedOneWithoutAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAttachmentsInput, Prisma.UserUncheckedCreateWithoutAttachmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAttachmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAttachmentsInput, Prisma.UserUncheckedCreateWithoutAttachmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAttachmentsInput
+  upsert?: Prisma.UserUpsertWithoutAttachmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAttachmentsInput, Prisma.UserUpdateWithoutAttachmentsInput>, Prisma.UserUncheckedUpdateWithoutAttachmentsInput>
+}
+
 export type UserCreateNestedOneWithoutNotificationsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsInput
@@ -932,6 +953,7 @@ export type UserCreateWithoutOrganizationInput = {
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
@@ -963,6 +985,7 @@ export type UserUncheckedCreateWithoutOrganizationInput = {
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
@@ -1038,6 +1061,7 @@ export type UserCreateWithoutSessionsInput = {
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
@@ -1069,6 +1093,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
@@ -1116,6 +1141,7 @@ export type UserUpdateWithoutSessionsInput = {
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
@@ -1147,6 +1173,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -1178,6 +1205,7 @@ export type UserCreateWithoutOwnedCompaniesInput = {
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
@@ -1209,6 +1237,7 @@ export type UserUncheckedCreateWithoutOwnedCompaniesInput = {
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
@@ -1256,6 +1285,7 @@ export type UserUpdateWithoutOwnedCompaniesInput = {
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
@@ -1287,6 +1317,7 @@ export type UserUncheckedUpdateWithoutOwnedCompaniesInput = {
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -1318,6 +1349,7 @@ export type UserCreateWithoutOwnedContactsInput = {
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
@@ -1349,6 +1381,7 @@ export type UserUncheckedCreateWithoutOwnedContactsInput = {
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
@@ -1396,6 +1429,7 @@ export type UserUpdateWithoutOwnedContactsInput = {
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
@@ -1427,6 +1461,7 @@ export type UserUncheckedUpdateWithoutOwnedContactsInput = {
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -1458,6 +1493,7 @@ export type UserCreateWithoutAssignedLeadsInput = {
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
@@ -1489,6 +1525,7 @@ export type UserUncheckedCreateWithoutAssignedLeadsInput = {
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
@@ -1525,6 +1562,7 @@ export type UserCreateWithoutOwnedLeadsInput = {
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
@@ -1556,6 +1594,7 @@ export type UserUncheckedCreateWithoutOwnedLeadsInput = {
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
@@ -1603,6 +1642,7 @@ export type UserUpdateWithoutAssignedLeadsInput = {
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
@@ -1634,6 +1674,7 @@ export type UserUncheckedUpdateWithoutAssignedLeadsInput = {
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -1676,6 +1717,7 @@ export type UserUpdateWithoutOwnedLeadsInput = {
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
@@ -1707,6 +1749,7 @@ export type UserUncheckedUpdateWithoutOwnedLeadsInput = {
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -1738,6 +1781,7 @@ export type UserCreateWithoutOwnedDealsInput = {
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
@@ -1769,6 +1813,7 @@ export type UserUncheckedCreateWithoutOwnedDealsInput = {
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
@@ -1816,6 +1861,7 @@ export type UserUpdateWithoutOwnedDealsInput = {
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
@@ -1847,6 +1893,7 @@ export type UserUncheckedUpdateWithoutOwnedDealsInput = {
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -1878,6 +1925,7 @@ export type UserCreateWithoutCreatedTasksInput = {
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
@@ -1909,6 +1957,7 @@ export type UserUncheckedCreateWithoutCreatedTasksInput = {
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
@@ -1945,6 +1994,7 @@ export type UserCreateWithoutTasksInput = {
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
@@ -1976,6 +2026,7 @@ export type UserUncheckedCreateWithoutTasksInput = {
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
@@ -2023,6 +2074,7 @@ export type UserUpdateWithoutCreatedTasksInput = {
   tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
@@ -2054,6 +2106,7 @@ export type UserUncheckedUpdateWithoutCreatedTasksInput = {
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -2096,6 +2149,7 @@ export type UserUpdateWithoutTasksInput = {
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
@@ -2127,6 +2181,7 @@ export type UserUncheckedUpdateWithoutTasksInput = {
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -2158,6 +2213,7 @@ export type UserCreateWithoutActivitiesInput = {
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
@@ -2189,6 +2245,7 @@ export type UserUncheckedCreateWithoutActivitiesInput = {
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
@@ -2236,6 +2293,7 @@ export type UserUpdateWithoutActivitiesInput = {
   tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
@@ -2267,6 +2325,7 @@ export type UserUncheckedUpdateWithoutActivitiesInput = {
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -2298,6 +2357,7 @@ export type UserCreateWithoutNotesInput = {
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
@@ -2329,6 +2389,7 @@ export type UserUncheckedCreateWithoutNotesInput = {
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
@@ -2376,6 +2437,7 @@ export type UserUpdateWithoutNotesInput = {
   tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
@@ -2407,6 +2469,151 @@ export type UserUncheckedUpdateWithoutNotesInput = {
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+}
+
+export type UserCreateWithoutAttachmentsInput = {
+  id?: string
+  email: string
+  name: string
+  passwordHash: string
+  role?: string
+  title?: string
+  phone?: string
+  avatarColor?: string
+  isActive?: boolean
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
+  ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
+  ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
+  assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
+  ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
+  createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
+  notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
+  createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+}
+
+export type UserUncheckedCreateWithoutAttachmentsInput = {
+  id?: string
+  organizationId: string
+  email: string
+  name: string
+  passwordHash: string
+  role?: string
+  title?: string
+  phone?: string
+  avatarColor?: string
+  isActive?: boolean
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
+  ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
+  ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
+  assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
+  ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
+  createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+}
+
+export type UserCreateOrConnectWithoutAttachmentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAttachmentsInput, Prisma.UserUncheckedCreateWithoutAttachmentsInput>
+}
+
+export type UserUpsertWithoutAttachmentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAttachmentsInput, Prisma.UserUncheckedUpdateWithoutAttachmentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAttachmentsInput, Prisma.UserUncheckedCreateWithoutAttachmentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAttachmentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAttachmentsInput, Prisma.UserUncheckedUpdateWithoutAttachmentsInput>
+}
+
+export type UserUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
+  ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
+  ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
+  assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
+  ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
+  createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
+  createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
+  ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
+  ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
+  assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
+  ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
+  createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -2439,6 +2646,7 @@ export type UserCreateWithoutNotificationsInput = {
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
@@ -2470,6 +2678,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
@@ -2517,6 +2726,7 @@ export type UserUpdateWithoutNotificationsInput = {
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
@@ -2548,6 +2758,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -2579,6 +2790,7 @@ export type UserCreateWithoutSentEmailsInput = {
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
@@ -2610,6 +2822,7 @@ export type UserUncheckedCreateWithoutSentEmailsInput = {
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
@@ -2657,6 +2870,7 @@ export type UserUpdateWithoutSentEmailsInput = {
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
@@ -2688,6 +2902,7 @@ export type UserUncheckedUpdateWithoutSentEmailsInput = {
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -2719,6 +2934,7 @@ export type UserCreateWithoutRemindersInput = {
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
@@ -2750,6 +2966,7 @@ export type UserUncheckedCreateWithoutRemindersInput = {
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
@@ -2797,6 +3014,7 @@ export type UserUpdateWithoutRemindersInput = {
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
@@ -2828,6 +3046,7 @@ export type UserUncheckedUpdateWithoutRemindersInput = {
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -2859,6 +3078,7 @@ export type UserCreateWithoutCreatedApiKeysInput = {
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
@@ -2890,6 +3110,7 @@ export type UserUncheckedCreateWithoutCreatedApiKeysInput = {
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
@@ -2937,6 +3158,7 @@ export type UserUpdateWithoutCreatedApiKeysInput = {
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
@@ -2968,6 +3190,7 @@ export type UserUncheckedUpdateWithoutCreatedApiKeysInput = {
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -2999,6 +3222,7 @@ export type UserCreateWithoutCreatedSequencesInput = {
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
@@ -3030,6 +3254,7 @@ export type UserUncheckedCreateWithoutCreatedSequencesInput = {
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
@@ -3077,6 +3302,7 @@ export type UserUpdateWithoutCreatedSequencesInput = {
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
@@ -3108,6 +3334,7 @@ export type UserUncheckedUpdateWithoutCreatedSequencesInput = {
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -3139,6 +3366,7 @@ export type UserCreateWithoutSequenceEnrollmentsInput = {
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
@@ -3170,6 +3398,7 @@ export type UserUncheckedCreateWithoutSequenceEnrollmentsInput = {
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
@@ -3217,6 +3446,7 @@ export type UserUpdateWithoutSequenceEnrollmentsInput = {
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
@@ -3248,6 +3478,7 @@ export type UserUncheckedUpdateWithoutSequenceEnrollmentsInput = {
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -3293,6 +3524,7 @@ export type UserUpdateWithoutOrganizationInput = {
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
@@ -3324,6 +3556,7 @@ export type UserUncheckedUpdateWithoutOrganizationInput = {
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -3363,6 +3596,7 @@ export type UserCountOutputType = {
   createdTasks: number
   activities: number
   notes: number
+  attachments: number
   notifications: number
   sentEmails: number
   reminders: number
@@ -3382,6 +3616,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   createdTasks?: boolean | UserCountOutputTypeCountCreatedTasksArgs
   activities?: boolean | UserCountOutputTypeCountActivitiesArgs
   notes?: boolean | UserCountOutputTypeCountNotesArgs
+  attachments?: boolean | UserCountOutputTypeCountAttachmentsArgs
   notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
   sentEmails?: boolean | UserCountOutputTypeCountSentEmailsArgs
   reminders?: boolean | UserCountOutputTypeCountRemindersArgs
@@ -3473,6 +3708,13 @@ export type UserCountOutputTypeCountNotesArgs<ExtArgs extends runtime.Types.Exte
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AttachmentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.NotificationWhereInput
 }
@@ -3538,6 +3780,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdTasks?: boolean | Prisma.User$createdTasksArgs<ExtArgs>
   activities?: boolean | Prisma.User$activitiesArgs<ExtArgs>
   notes?: boolean | Prisma.User$notesArgs<ExtArgs>
+  attachments?: boolean | Prisma.User$attachmentsArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   sentEmails?: boolean | Prisma.User$sentEmailsArgs<ExtArgs>
   reminders?: boolean | Prisma.User$remindersArgs<ExtArgs>
@@ -3610,6 +3853,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   createdTasks?: boolean | Prisma.User$createdTasksArgs<ExtArgs>
   activities?: boolean | Prisma.User$activitiesArgs<ExtArgs>
   notes?: boolean | Prisma.User$notesArgs<ExtArgs>
+  attachments?: boolean | Prisma.User$attachmentsArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   sentEmails?: boolean | Prisma.User$sentEmailsArgs<ExtArgs>
   reminders?: boolean | Prisma.User$remindersArgs<ExtArgs>
@@ -3639,6 +3883,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     createdTasks: Prisma.$TaskPayload<ExtArgs>[]
     activities: Prisma.$ActivityPayload<ExtArgs>[]
     notes: Prisma.$NotePayload<ExtArgs>[]
+    attachments: Prisma.$AttachmentPayload<ExtArgs>[]
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
     sentEmails: Prisma.$SentEmailPayload<ExtArgs>[]
     reminders: Prisma.$FollowUpReminderPayload<ExtArgs>[]
@@ -4065,6 +4310,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   createdTasks<T extends Prisma.User$createdTasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdTasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   activities<T extends Prisma.User$activitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notes<T extends Prisma.User$notesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  attachments<T extends Prisma.User$attachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sentEmails<T extends Prisma.User$sentEmailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sentEmailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SentEmailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reminders<T extends Prisma.User$remindersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$remindersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FollowUpReminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4749,6 +4995,30 @@ export type User$notesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   distinct?: Prisma.NoteScalarFieldEnum | Prisma.NoteScalarFieldEnum[]
+}
+
+/**
+ * User.attachments
+ */
+export type User$attachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Attachment
+   */
+  select?: Prisma.AttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Attachment
+   */
+  omit?: Prisma.AttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AttachmentInclude<ExtArgs> | null
+  where?: Prisma.AttachmentWhereInput
+  orderBy?: Prisma.AttachmentOrderByWithRelationInput | Prisma.AttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.AttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AttachmentScalarFieldEnum | Prisma.AttachmentScalarFieldEnum[]
 }
 
 /**

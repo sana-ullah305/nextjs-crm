@@ -38,6 +38,7 @@ model Organization {
   sentEmails          SentEmail[]
   inboundEmails       InboundEmail[]
   reminders           FollowUpReminder[]
+  attachments         Attachment[]
   apiKeys             ApiKey[]
   sequences           Sequence[]
   sequenceEnrollments SequenceEnrollment[]
@@ -70,6 +71,7 @@ model User {
   createdTasks        Task[]               @relation("TaskCreator")
   activities          Activity[]
   notes               Note[]
+  attachments         Attachment[]
   notifications       Notification[]
   sentEmails          SentEmail[]          @relation("SentEmailSender")
   reminders           FollowUpReminder[]   @relation("ReminderRecipient")
@@ -401,6 +403,31 @@ model Note {
   @@index([companyId])
   @@index([dealId])
   @@index([leadId])
+}
+
+
+model Attachment {
+  id          String   @id @default(cuid())
+  filename    String   // name stored on disk
+  originalName String  // original file name as uploaded
+  mimeType    String
+  size        Int      // bytes
+  path        String   // relative storage path, e.g. uploads/{orgId}/{uuid}-{name}
+  storageType String   // LOCAL | S3
+  organizationId String
+  entityType  String   // CONTACT | COMPANY | LEAD | DEAL | ACTIVITY | NOTE | EMAIL
+  entityId    String
+  uploadedById String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?  // soft delete
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  uploadedBy   User         @relation(fields: [uploadedById], references: [id], onDelete: Cascade)
+
+  @@index([organizationId])
+  @@index([entityType, entityId])
+  @@index([uploadedById])
 }
 
 model AuditLog {

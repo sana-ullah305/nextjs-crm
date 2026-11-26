@@ -88,6 +88,11 @@ export type Activity = Prisma.ActivityModel
  */
 export type Note = Prisma.NoteModel
 /**
+ * Model Attachment
+ * 
+ */
+export type Attachment = Prisma.AttachmentModel
+/**
  * Model AuditLog
  * 
  */

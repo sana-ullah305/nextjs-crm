@@ -11,6 +11,7 @@ import {
   Copy,
   Mail,
   MapPin,
+  Paperclip,
   Pencil,
   Phone,
   Plus,
@@ -33,7 +34,7 @@ import { EnrollDialog } from "@/components/enroll-dialog";
 import { MergeDialog } from "@/components/merge-dialog";
 import { findDuplicateCandidatesClient, type DuplicateCandidate } from "@/lib/duplicate-search";
 import { api, ApiError, validationDetails } from "@/lib/api-client";
-import { formatDate, formatDateTime, timeAgo } from "@/lib/format";
+import { formatDate, formatDateTime, formatFileSize, timeAgo } from "@/lib/format";
 
 type Contact = {
   id: string;
@@ -82,6 +83,15 @@ type TaskItem = {
   assignedUser: { id: string; name: string; avatarColor: string } | null;
 };
 
+type AttachmentItem = {
+  id: string;
+  originalName: string;
+  mimeType: string;
+  size: number;
+  createdAt: string;
+  uploadedBy: { id: string; name: string } | null;
+};
+
 type DealItem = { id: string; name: string; value: number; status: string; stage: { name: string } };
 
 export default function ContactDetailPage() {
@@ -93,12 +103,17 @@ export default function ContactDetailPage() {
   const [notes, setNotes] = useState<Note[]>([]);
   const [tasks, setTasks] = useState<TaskItem[]>([]);
   const [deals, setDeals] = useState<DealItem[]>([]);
+  const [attachments, setAttachments] = useState<AttachmentItem[]>([]);
   const [error, setError] = useState("");
   const [notFound, setNotFound] = useState(false);
 
   const [noteBody, setNoteBody] = useState("");
   const [noteError, setNoteError] = useState("");
   const [savingNote, setSavingNote] = useState(false);
+  const [noteFile, setNoteFile] = useState<File | null>(null);
+
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState("");
 
   const [logOpen, setLogOpen] = useState(false);
   const [activityType, setActivityType] = useState("CALL");
@@ -139,13 +154,15 @@ export default function ContactDetailPage() {
     try {
       const c = await api.get<Contact>(`/api/contacts/${id}`);
       setContact(c);
-      const [acts, tks, dls] = await Promise.all([
+      const [acts, tks, dls, atts] = await Promise.all([
         api.get<{ activities: Activity[] }>(`/api/activities?contactId=${id}&pageSize=15`),
         api.get<{ tasks: TaskItem[] }>(`/api/tasks?relatedType=contact&relatedId=${id}&status=PENDING&pageSize=10`),
         api.get<{ deals: DealItem[] }>(`/api/deals?contactId=${id}`),
+        api.get<{ attachments: AttachmentItem[] }>(`/api/attachments?entityType=CONTACT&entityId=${id}`),
       ]);
       setActivities(acts.activities);
       setTasks(tks.tasks);
+      setAttachments(atts.attachments);
       setDeals(
         (dls.deals as unknown as DealItem[]).map((d) => ({
           id: d.id,
@@ -176,17 +193,80 @@ export default function ContactDetailPage() {
     setSavingNote(true);
     setNoteError("");
     try {
+      if (noteFile) {
+        const formData = new FormData();
+        formData.append("entityType", "CONTACT");
+        formData.append("entityId", id);
+        formData.append("file", noteFile);
+        const res = await fetch("/api/attachments", {
+          method: "POST",
+          credentials: "same-origin",
+          body: formData,
+        });
+        if (!res.ok) {
+          const payload = await res.json().catch(() => ({}));
+          throw new Error((payload as { error?: { message?: string } })?.error?.message ?? "Upload failed");
+        }
+      }
       const created = await api.post<Note>("/api/activities/note", {
         body: noteBody,
         contactId: id,
       });
       setNotes((n) => [created, ...n]);
       setNoteBody("");
+      setNoteFile(null);
       await load();
     } catch (e) {
       setNoteError(e instanceof ApiError ? e.message : "Failed to save note");
     } finally {
       setSavingNote(false);
+    }
+  }
+
+  async function uploadFileToEntity(file: File, entityType: string, entityId: string) {
+    const formData = new FormData();
+    formData.append("entityType", entityType);
+    formData.append("entityId", entityId);
+    formData.append("file", file);
+    setUploadError("");
+    const res = await fetch("/api/attachments", {
+      method: "POST",
+      credentials: "same-origin",
+      body: formData,
+    });
+    if (!res.ok) {
+      const payload = await res.json().catch(() => ({}));
+      throw new Error((payload as { error?: { message?: string } })?.error?.message ?? "Upload failed");
+    }
+  }
+
+  async function deleteAttachment(attachmentId: string) {
+    setUploadError("");
+    const res = await fetch(`/api/attachments/${attachmentId}`, {
+      method: "DELETE",
+      credentials: "same-origin",
+    });
+    if (!res.ok) {
+      const payload = await res.json().catch(() => ({}));
+      setUploadError((payload as { error?: { message?: string } })?.error?.message ?? "Delete failed");
+      return;
+    }
+    await load();
+  }
+
+  async function handleUploadFiles(files: FileList | null) {
+    if (!files?.length) return;
+    setUploading(true);
+    setUploadError("");
+    try {
+      for (let i = 0; i < files.length; i++) {
+        await uploadFileToEntity(files[i], "CONTACT", id);
+      }
+      await load();
+    } catch (e) {
+      setUploadError(e instanceof Error ? e.message : "Upload failed");
+    } finally {
+      setUploading(false);
     }
   }
 
@@ -455,6 +535,56 @@ export default function ContactDetailPage() {
               )}
             </CardContent>
           </Card>
+
+          <Card>
+            <CardHeader className="flex items-center justify-between">
+              <CardTitle>Attachments</CardTitle>
+              {uploadError && <span className="text-xs text-destructive" role="alert">{uploadError}</span>}
+            </CardHeader>
+            <CardContent className="space-y-2">
+              <div className="flex gap-2">
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.csv,.txt"
+                  onChange={(e) => void handleUploadFiles(e.target.files)}
+                  disabled={uploading}
+                  className="sr-only"
+                  id="contact-upload"
+                />
+                <label htmlFor="contact-upload" className="flex items-center gap-2 rounded-md border border-input bg-input px-3 py-2 text-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                  <Paperclip className="h-4 w-4" />
+                  {uploading ? "Uploading…" : "Upload files"}
+                </label>
+              </div>
+              {attachments.length === 0 ? (
+                <p className="text-sm text-muted-foreground">No attachments yet.</p>
+              ) : (
+                <ul className="divide-y divide-border">
+                  {attachments.map((a) => (
+                    <li key={a.id} className="flex items-center gap-3 py-2 text-sm">
+                      <a
+                        href={`/api/attachments/${a.id}`}
+                        download
+                        className="min-w-0 flex-1 truncate hover:underline"
+                        title={a.originalName}
+                      >
+                        {a.originalName}
+                      </a>
+                      <span className="text-xs text-muted-foreground">{formatFileSize(a.size)} · {a.mimeType}</span>
+                      <button
+                        onClick={() => void deleteAttachment(a.id)}
+                        className="text-xs text-muted-foreground hover:text-destructive underline"
+                        aria-label={`Delete ${a.originalName}`}
+                      >
+                        <Trash2 className="h-3 w-3" />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </CardContent>
+          </Card>
         </div>
 
         <div className="space-y-4 lg:col-span-2">
@@ -544,6 +674,25 @@ export default function ContactDetailPage() {
                   {noteError}
                 </p>
               )}
+              <div className="flex items-center gap-2">
+                <input
+                  type="file"
+                  accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.csv,.txt"
+                  onChange={(e) => setNoteFile(e.target.files?.[0] ?? null)}
+                  className="border border-input bg-input rounded-md px-2 py-1 text-xs cursor-pointer"
+                />
+                {noteFile && (
+                  <span className="text-xs text-muted-foreground truncate max-w-[14rem]" title={noteFile.name}>
+                    Attached: {noteFile.name} ({formatFileSize(noteFile.size)})
+                    <button
+                      onClick={(e) => { e.stopPropagation(); setNoteFile(null); }}
+                      className="ml-1 text-xs text-destructive hover:underline"
+                    >
+                      Remove
+                    </button>
+                  </span>
+                )}
+              </div>
               <div className="flex justify-end">
                 <Button size="sm" onClick={() => void addNote()} disabled={savingNote}>
                   {savingNote ? "Saving…" : "Add note"}

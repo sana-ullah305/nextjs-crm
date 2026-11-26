@@ -232,6 +232,7 @@ export type OrganizationWhereInput = {
   sentEmails?: Prisma.SentEmailListRelationFilter
   inboundEmails?: Prisma.InboundEmailListRelationFilter
   reminders?: Prisma.FollowUpReminderListRelationFilter
+  attachments?: Prisma.AttachmentListRelationFilter
   apiKeys?: Prisma.ApiKeyListRelationFilter
   sequences?: Prisma.SequenceListRelationFilter
   sequenceEnrollments?: Prisma.SequenceEnrollmentListRelationFilter
@@ -265,6 +266,7 @@ export type OrganizationOrderByWithRelationInput = {
   sentEmails?: Prisma.SentEmailOrderByRelationAggregateInput
   inboundEmails?: Prisma.InboundEmailOrderByRelationAggregateInput
   reminders?: Prisma.FollowUpReminderOrderByRelationAggregateInput
+  attachments?: Prisma.AttachmentOrderByRelationAggregateInput
   apiKeys?: Prisma.ApiKeyOrderByRelationAggregateInput
   sequences?: Prisma.SequenceOrderByRelationAggregateInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentOrderByRelationAggregateInput
@@ -301,6 +303,7 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   sentEmails?: Prisma.SentEmailListRelationFilter
   inboundEmails?: Prisma.InboundEmailListRelationFilter
   reminders?: Prisma.FollowUpReminderListRelationFilter
+  attachments?: Prisma.AttachmentListRelationFilter
   apiKeys?: Prisma.ApiKeyListRelationFilter
   sequences?: Prisma.SequenceListRelationFilter
   sequenceEnrollments?: Prisma.SequenceEnrollmentListRelationFilter
@@ -364,6 +367,7 @@ export type OrganizationCreateInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
@@ -397,6 +401,7 @@ export type OrganizationUncheckedCreateInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
@@ -430,6 +435,7 @@ export type OrganizationUpdateInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
@@ -463,6 +469,7 @@ export type OrganizationUncheckedUpdateInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -707,6 +714,20 @@ export type OrganizationUpdateOneRequiredWithoutNotesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutNotesInput, Prisma.OrganizationUpdateWithoutNotesInput>, Prisma.OrganizationUncheckedUpdateWithoutNotesInput>
 }
 
+export type OrganizationCreateNestedOneWithoutAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutAttachmentsInput, Prisma.OrganizationUncheckedCreateWithoutAttachmentsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutAttachmentsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutAttachmentsInput, Prisma.OrganizationUncheckedCreateWithoutAttachmentsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutAttachmentsInput
+  upsert?: Prisma.OrganizationUpsertWithoutAttachmentsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutAttachmentsInput, Prisma.OrganizationUpdateWithoutAttachmentsInput>, Prisma.OrganizationUncheckedUpdateWithoutAttachmentsInput>
+}
+
 export type OrganizationCreateNestedOneWithoutNotificationsInput = {
   create?: Prisma.XOR<Prisma.OrganizationCreateWithoutNotificationsInput, Prisma.OrganizationUncheckedCreateWithoutNotificationsInput>
   connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutNotificationsInput
@@ -874,6 +895,7 @@ export type OrganizationCreateWithoutUsersInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
@@ -906,6 +928,7 @@ export type OrganizationUncheckedCreateWithoutUsersInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
@@ -954,6 +977,7 @@ export type OrganizationUpdateWithoutUsersInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
@@ -986,6 +1010,7 @@ export type OrganizationUncheckedUpdateWithoutUsersInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1018,6 +1043,7 @@ export type OrganizationCreateWithoutCompaniesInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
@@ -1050,6 +1076,7 @@ export type OrganizationUncheckedCreateWithoutCompaniesInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1098,6 +1125,7 @@ export type OrganizationUpdateWithoutCompaniesInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
@@ -1130,6 +1158,7 @@ export type OrganizationUncheckedUpdateWithoutCompaniesInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1162,6 +1191,7 @@ export type OrganizationCreateWithoutContactsInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
@@ -1194,6 +1224,7 @@ export type OrganizationUncheckedCreateWithoutContactsInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1242,6 +1273,7 @@ export type OrganizationUpdateWithoutContactsInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
@@ -1274,6 +1306,7 @@ export type OrganizationUncheckedUpdateWithoutContactsInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1306,6 +1339,7 @@ export type OrganizationCreateWithoutTagsInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
@@ -1338,6 +1372,7 @@ export type OrganizationUncheckedCreateWithoutTagsInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1386,6 +1421,7 @@ export type OrganizationUpdateWithoutTagsInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
@@ -1418,6 +1454,7 @@ export type OrganizationUncheckedUpdateWithoutTagsInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1450,6 +1487,7 @@ export type OrganizationCreateWithoutLeadSourcesInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
@@ -1482,6 +1520,7 @@ export type OrganizationUncheckedCreateWithoutLeadSourcesInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1530,6 +1569,7 @@ export type OrganizationUpdateWithoutLeadSourcesInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
@@ -1562,6 +1602,7 @@ export type OrganizationUncheckedUpdateWithoutLeadSourcesInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1594,6 +1635,7 @@ export type OrganizationCreateWithoutLeadsInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
@@ -1626,6 +1668,7 @@ export type OrganizationUncheckedCreateWithoutLeadsInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1674,6 +1717,7 @@ export type OrganizationUpdateWithoutLeadsInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
@@ -1706,6 +1750,7 @@ export type OrganizationUncheckedUpdateWithoutLeadsInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1738,6 +1783,7 @@ export type OrganizationCreateWithoutPipelinesInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
@@ -1770,6 +1816,7 @@ export type OrganizationUncheckedCreateWithoutPipelinesInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1818,6 +1865,7 @@ export type OrganizationUpdateWithoutPipelinesInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
@@ -1850,6 +1898,7 @@ export type OrganizationUncheckedUpdateWithoutPipelinesInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1882,6 +1931,7 @@ export type OrganizationCreateWithoutDealsInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
@@ -1914,6 +1964,7 @@ export type OrganizationUncheckedCreateWithoutDealsInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1962,6 +2013,7 @@ export type OrganizationUpdateWithoutDealsInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
@@ -1994,6 +2046,7 @@ export type OrganizationUncheckedUpdateWithoutDealsInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2026,6 +2079,7 @@ export type OrganizationCreateWithoutTasksInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
@@ -2058,6 +2112,7 @@ export type OrganizationUncheckedCreateWithoutTasksInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2106,6 +2161,7 @@ export type OrganizationUpdateWithoutTasksInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
@@ -2138,6 +2194,7 @@ export type OrganizationUncheckedUpdateWithoutTasksInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2170,6 +2227,7 @@ export type OrganizationCreateWithoutActivitiesInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
@@ -2202,6 +2260,7 @@ export type OrganizationUncheckedCreateWithoutActivitiesInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2250,6 +2309,7 @@ export type OrganizationUpdateWithoutActivitiesInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
@@ -2282,6 +2342,7 @@ export type OrganizationUncheckedUpdateWithoutActivitiesInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2314,6 +2375,7 @@ export type OrganizationCreateWithoutNotesInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
@@ -2346,6 +2408,7 @@ export type OrganizationUncheckedCreateWithoutNotesInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2394,6 +2457,7 @@ export type OrganizationUpdateWithoutNotesInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
@@ -2417,6 +2481,155 @@ export type OrganizationUncheckedUpdateWithoutNotesInput = {
   deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutAttachmentsInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutAttachmentsInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutAttachmentsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutAttachmentsInput, Prisma.OrganizationUncheckedCreateWithoutAttachmentsInput>
+}
+
+export type OrganizationUpsertWithoutAttachmentsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutAttachmentsInput, Prisma.OrganizationUncheckedUpdateWithoutAttachmentsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutAttachmentsInput, Prisma.OrganizationUncheckedCreateWithoutAttachmentsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutAttachmentsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutAttachmentsInput, Prisma.OrganizationUncheckedUpdateWithoutAttachmentsInput>
+}
+
+export type OrganizationUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2458,6 +2671,7 @@ export type OrganizationCreateWithoutNotificationsInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
@@ -2490,6 +2704,7 @@ export type OrganizationUncheckedCreateWithoutNotificationsInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2538,6 +2753,7 @@ export type OrganizationUpdateWithoutNotificationsInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
@@ -2570,6 +2786,7 @@ export type OrganizationUncheckedUpdateWithoutNotificationsInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2602,6 +2819,7 @@ export type OrganizationCreateWithoutEmailTemplatesInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
@@ -2634,6 +2852,7 @@ export type OrganizationUncheckedCreateWithoutEmailTemplatesInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2682,6 +2901,7 @@ export type OrganizationUpdateWithoutEmailTemplatesInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
@@ -2714,6 +2934,7 @@ export type OrganizationUncheckedUpdateWithoutEmailTemplatesInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2746,6 +2967,7 @@ export type OrganizationCreateWithoutCustomFieldsInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
@@ -2778,6 +3000,7 @@ export type OrganizationUncheckedCreateWithoutCustomFieldsInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2826,6 +3049,7 @@ export type OrganizationUpdateWithoutCustomFieldsInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
@@ -2858,6 +3082,7 @@ export type OrganizationUncheckedUpdateWithoutCustomFieldsInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2890,6 +3115,7 @@ export type OrganizationCreateWithoutEmailSettingsInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
@@ -2922,6 +3148,7 @@ export type OrganizationUncheckedCreateWithoutEmailSettingsInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2970,6 +3197,7 @@ export type OrganizationUpdateWithoutEmailSettingsInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
@@ -3002,6 +3230,7 @@ export type OrganizationUncheckedUpdateWithoutEmailSettingsInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -3034,6 +3263,7 @@ export type OrganizationCreateWithoutSentEmailsInput = {
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
@@ -3066,6 +3296,7 @@ export type OrganizationUncheckedCreateWithoutSentEmailsInput = {
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
@@ -3114,6 +3345,7 @@ export type OrganizationUpdateWithoutSentEmailsInput = {
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
@@ -3146,6 +3378,7 @@ export type OrganizationUncheckedUpdateWithoutSentEmailsInput = {
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -3178,6 +3411,7 @@ export type OrganizationCreateWithoutRemindersInput = {
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
@@ -3210,6 +3444,7 @@ export type OrganizationUncheckedCreateWithoutRemindersInput = {
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
@@ -3258,6 +3493,7 @@ export type OrganizationUpdateWithoutRemindersInput = {
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
@@ -3290,6 +3526,7 @@ export type OrganizationUncheckedUpdateWithoutRemindersInput = {
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -3322,6 +3559,7 @@ export type OrganizationCreateWithoutInboundEmailsInput = {
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
@@ -3354,6 +3592,7 @@ export type OrganizationUncheckedCreateWithoutInboundEmailsInput = {
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
@@ -3402,6 +3641,7 @@ export type OrganizationUpdateWithoutInboundEmailsInput = {
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
@@ -3434,6 +3674,7 @@ export type OrganizationUncheckedUpdateWithoutInboundEmailsInput = {
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -3467,6 +3708,7 @@ export type OrganizationCreateWithoutApiKeysInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
 }
@@ -3499,6 +3741,7 @@ export type OrganizationUncheckedCreateWithoutApiKeysInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -3547,6 +3790,7 @@ export type OrganizationUpdateWithoutApiKeysInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
 }
@@ -3579,6 +3823,7 @@ export type OrganizationUncheckedUpdateWithoutApiKeysInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -3611,6 +3856,7 @@ export type OrganizationCreateWithoutSequencesInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
 }
@@ -3643,6 +3889,7 @@ export type OrganizationUncheckedCreateWithoutSequencesInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -3691,6 +3938,7 @@ export type OrganizationUpdateWithoutSequencesInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
 }
@@ -3723,6 +3971,7 @@ export type OrganizationUncheckedUpdateWithoutSequencesInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -3755,6 +4004,7 @@ export type OrganizationCreateWithoutSequenceEnrollmentsInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
 }
@@ -3787,6 +4037,7 @@ export type OrganizationUncheckedCreateWithoutSequenceEnrollmentsInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -3835,6 +4086,7 @@ export type OrganizationUpdateWithoutSequenceEnrollmentsInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
 }
@@ -3867,6 +4119,7 @@ export type OrganizationUncheckedUpdateWithoutSequenceEnrollmentsInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -3894,6 +4147,7 @@ export type OrganizationCountOutputType = {
   sentEmails: number
   inboundEmails: number
   reminders: number
+  attachments: number
   apiKeys: number
   sequences: number
   sequenceEnrollments: number
@@ -3917,6 +4171,7 @@ export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   sentEmails?: boolean | OrganizationCountOutputTypeCountSentEmailsArgs
   inboundEmails?: boolean | OrganizationCountOutputTypeCountInboundEmailsArgs
   reminders?: boolean | OrganizationCountOutputTypeCountRemindersArgs
+  attachments?: boolean | OrganizationCountOutputTypeCountAttachmentsArgs
   apiKeys?: boolean | OrganizationCountOutputTypeCountApiKeysArgs
   sequences?: boolean | OrganizationCountOutputTypeCountSequencesArgs
   sequenceEnrollments?: boolean | OrganizationCountOutputTypeCountSequenceEnrollmentsArgs
@@ -4054,6 +4309,13 @@ export type OrganizationCountOutputTypeCountRemindersArgs<ExtArgs extends runtim
 /**
  * OrganizationCountOutputType without action
  */
+export type OrganizationCountOutputTypeCountAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AttachmentWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
 export type OrganizationCountOutputTypeCountApiKeysArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ApiKeyWhereInput
 }
@@ -4101,6 +4363,7 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   sentEmails?: boolean | Prisma.Organization$sentEmailsArgs<ExtArgs>
   inboundEmails?: boolean | Prisma.Organization$inboundEmailsArgs<ExtArgs>
   reminders?: boolean | Prisma.Organization$remindersArgs<ExtArgs>
+  attachments?: boolean | Prisma.Organization$attachmentsArgs<ExtArgs>
   apiKeys?: boolean | Prisma.Organization$apiKeysArgs<ExtArgs>
   sequences?: boolean | Prisma.Organization$sequencesArgs<ExtArgs>
   sequenceEnrollments?: boolean | Prisma.Organization$sequenceEnrollmentsArgs<ExtArgs>
@@ -4163,6 +4426,7 @@ export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   sentEmails?: boolean | Prisma.Organization$sentEmailsArgs<ExtArgs>
   inboundEmails?: boolean | Prisma.Organization$inboundEmailsArgs<ExtArgs>
   reminders?: boolean | Prisma.Organization$remindersArgs<ExtArgs>
+  attachments?: boolean | Prisma.Organization$attachmentsArgs<ExtArgs>
   apiKeys?: boolean | Prisma.Organization$apiKeysArgs<ExtArgs>
   sequences?: boolean | Prisma.Organization$sequencesArgs<ExtArgs>
   sequenceEnrollments?: boolean | Prisma.Organization$sequenceEnrollmentsArgs<ExtArgs>
@@ -4192,6 +4456,7 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     sentEmails: Prisma.$SentEmailPayload<ExtArgs>[]
     inboundEmails: Prisma.$InboundEmailPayload<ExtArgs>[]
     reminders: Prisma.$FollowUpReminderPayload<ExtArgs>[]
+    attachments: Prisma.$AttachmentPayload<ExtArgs>[]
     apiKeys: Prisma.$ApiKeyPayload<ExtArgs>[]
     sequences: Prisma.$SequencePayload<ExtArgs>[]
     sequenceEnrollments: Prisma.$SequenceEnrollmentPayload<ExtArgs>[]
@@ -4618,6 +4883,7 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   sentEmails<T extends Prisma.Organization$sentEmailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$sentEmailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SentEmailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   inboundEmails<T extends Prisma.Organization$inboundEmailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$inboundEmailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InboundEmailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reminders<T extends Prisma.Organization$remindersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$remindersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FollowUpReminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  attachments<T extends Prisma.Organization$attachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   apiKeys<T extends Prisma.Organization$apiKeysArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$apiKeysArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sequences<T extends Prisma.Organization$sequencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$sequencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SequencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sequenceEnrollments<T extends Prisma.Organization$sequenceEnrollmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$sequenceEnrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SequenceEnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -5474,6 +5740,30 @@ export type Organization$remindersArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.FollowUpReminderScalarFieldEnum | Prisma.FollowUpReminderScalarFieldEnum[]
+}
+
+/**
+ * Organization.attachments
+ */
+export type Organization$attachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Attachment
+   */
+  select?: Prisma.AttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Attachment
+   */
+  omit?: Prisma.AttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AttachmentInclude<ExtArgs> | null
+  where?: Prisma.AttachmentWhereInput
+  orderBy?: Prisma.AttachmentOrderByWithRelationInput | Prisma.AttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.AttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AttachmentScalarFieldEnum | Prisma.AttachmentScalarFieldEnum[]
 }
 
 /**

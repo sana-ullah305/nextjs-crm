@@ -65,6 +65,7 @@ export const ModelName = {
   Task: 'Task',
   Activity: 'Activity',
   Note: 'Note',
+  Attachment: 'Attachment',
   AuditLog: 'AuditLog',
   Notification: 'Notification',
   EmailTemplate: 'EmailTemplate',
@@ -353,6 +354,26 @@ export const NoteScalarFieldEnum = {
 } as const
 
 export type NoteScalarFieldEnum = (typeof NoteScalarFieldEnum)[keyof typeof NoteScalarFieldEnum]
+
+
+export const AttachmentScalarFieldEnum = {
+  id: 'id',
+  filename: 'filename',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  size: 'size',
+  path: 'path',
+  storageType: 'storageType',
+  organizationId: 'organizationId',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  uploadedById: 'uploadedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type AttachmentScalarFieldEnum = (typeof AttachmentScalarFieldEnum)[keyof typeof AttachmentScalarFieldEnum]
 
 
 export const AuditLogScalarFieldEnum = {
