@@ -181,3 +181,13 @@ export type SequenceEnrollment = Prisma.SequenceEnrollmentModel
  * 
  */
 export type SequenceStepEnrollment = Prisma.SequenceStepEnrollmentModel
+/**
+ * Model Campaign
+ * 
+ */
+export type Campaign = Prisma.CampaignModel
+/**
+ * Model CampaignMember
+ * 
+ */
+export type CampaignMember = Prisma.CampaignMemberModel

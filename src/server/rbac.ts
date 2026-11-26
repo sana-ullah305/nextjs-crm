@@ -43,6 +43,14 @@ export const PERMISSIONS = [
   "deals:delete",
   "deals:delete_all",
   // pipeline config
+  // campaigns
+  "campaigns:read",
+  "campaigns:read_all",
+  "campaigns:create",
+  "campaigns:update",
+  "campaigns:update_all",
+  "campaigns:delete",
+  "campaigns:delete_all",
   "pipelines:manage",
   // tasks
   "tasks:read",
