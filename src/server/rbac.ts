@@ -1,3 +1,4 @@
+import { db } from "@/server/db";
 import { getSessionUser, type SessionUser } from "@/server/auth";
 
 export const ROLES = {
@@ -70,6 +71,10 @@ export const PERMISSIONS = [
   "inbound:run",
   // sequence mail scan (managers/admins may trigger scans on demand)
   "sequences:run",
+  // sales teams (read/create for admins and managers via MANAGER_PERMS)
+  "salesTeams:read",
+  "salesTeams:create",
+  "salesTeams:manage",
 ] as const;
 
 export type Permission = (typeof PERMISSIONS)[number];
@@ -169,3 +174,37 @@ export function recordScope<T extends { ownerId?: string | null }>(
   if (hasPermission(user, readAllPerm)) return rows;
   return rows.filter((r) => !r.ownerId || r.ownerId === user.id);
 }
+
+// Returns the current user plus every teammate they share a team with, within
+// the user's organization. Used to scope record lists so users can see
+// records owned by their team members.
+export async function canAccessTeamRecord(
+  user: SessionUser,
+  ownerId: string | null | undefined
+): Promise<boolean> {
+  if (canAccessRecord(user, ownerId)) return true;
+  if (!ownerId) return false;
+  return (await teamMemberIds(user)).includes(ownerId);
+}
+
+export async function teamMemberIds(user: Pick<SessionUser, "id" | "organizationId">): Promise<string[]> {
+  const memberships = await db.teamMember.findMany({
+    where: {
+      userId: user.id,
+      team: { organizationId: user.organizationId },
+    },
+    include: {
+      team: {
+        include: { members: { select: { userId: true } } },
+      },
+    },
+  });
+  const ids = new Set<string>([user.id]);
+  for (const membership of memberships) {
+    for (const member of membership.team.members) {
+      ids.add(member.userId);
+    }
+  }
+  return [...ids];
+}
+

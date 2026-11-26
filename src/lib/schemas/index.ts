@@ -326,6 +326,24 @@ export const emailSettingsSchema = z.object({
   notificationsEnabled: z.boolean().optional(),
 });
 
+export const TEAM_ROLES = ["MEMBER", "LEAD"] as const;
+export type TeamRole = (typeof TEAM_ROLES)[number];
+
+export const teamCreateSchema = z.object({
+  name: z.string().trim().min(1, "Team name is required").max(100),
+  description: z.string().trim().max(1000).optional().transform((v) => v ?? ""),
+});
+
+export const teamUpdateSchema = z.object({
+  name: z.string().trim().min(1).max(100).optional(),
+  description: z.string().trim().max(1000).optional(),
+});
+
+export const teamMemberAddSchema = z.object({
+  userId: z.string().trim().min(1, "User is required").max(64),
+  role: z.enum(TEAM_ROLES).default("MEMBER"),
+});
+
 export const searchQuerySchema = z.object({
   q: z.string().trim().min(2, "Search term must be at least 2 characters").max(120),
   limit: z.coerce.number().int().min(1).max(10).default(5),
@@ -356,3 +374,6 @@ export type TaskCreateInput = z.infer<typeof taskCreateSchema>;
 export type ActivityCreateInput = z.infer<typeof activityCreateSchema>;
 export type EmailSendInput = z.infer<typeof emailSendSchema>;
 export type EmailSettingsInput = z.infer<typeof emailSettingsSchema>;
+export type TeamCreateInput = z.infer<typeof teamCreateSchema>;
+export type TeamUpdateInput = z.infer<typeof teamUpdateSchema>;
+export type TeamMemberAddInput = z.infer<typeof teamMemberAddSchema>;

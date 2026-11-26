@@ -41,7 +41,38 @@ model Organization {
   apiKeys             ApiKey[]
   sequences           Sequence[]
   sequenceEnrollments SequenceEnrollment[]
+  teams               Team[]
   currency            String               @default("USD")
+}
+
+model Team {
+  id             String   @id @default(cuid())
+  organizationId String
+  name           String
+  description    String   @default("")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  members      TeamMember[]
+
+  @@index([organizationId])
+  @@index([name])
+}
+
+model TeamMember {
+  id        String   @id @default(cuid())
+  teamId    String
+  userId    String
+  role      String   @default("MEMBER") // MEMBER | LEAD
+  createdAt DateTime @default(now())
+
+  team  Team  @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([teamId])
+  @@index([userId])
+  @@unique([teamId, userId])
 }
 
 model User {
@@ -60,6 +91,7 @@ model User {
   updatedAt      DateTime  @updatedAt
 
   organization        Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  teamMemberships     TeamMember[]
   sessions            Session[]
   ownedCompanies      Company[]            @relation("CompanyOwner")
   ownedContacts       Contact[]            @relation("ContactOwner")
