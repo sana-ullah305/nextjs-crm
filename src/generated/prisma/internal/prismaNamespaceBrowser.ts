@@ -92,7 +92,9 @@ export const ModelName = {
   Quotation: 'Quotation',
   QuotationLineItem: 'QuotationLineItem',
   SalesOrder: 'SalesOrder',
-  SalesOrderLineItem: 'SalesOrderLineItem'
+  SalesOrderLineItem: 'SalesOrderLineItem',
+  Campaign: 'Campaign',
+  CampaignMember: 'CampaignMember'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -800,6 +802,36 @@ export const SalesOrderLineItemScalarFieldEnum = {
 } as const
 
 export type SalesOrderLineItemScalarFieldEnum = (typeof SalesOrderLineItemScalarFieldEnum)[keyof typeof SalesOrderLineItemScalarFieldEnum]
+
+
+export const CampaignScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  description: 'description',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  status: 'status',
+  budget: 'budget',
+  cost: 'cost',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CampaignScalarFieldEnum = (typeof CampaignScalarFieldEnum)[keyof typeof CampaignScalarFieldEnum]
+
+
+export const CampaignMemberScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  leadId: 'leadId',
+  contactId: 'contactId',
+  dealId: 'dealId',
+  status: 'status',
+  createdAt: 'createdAt'
+} as const
+
+export type CampaignMemberScalarFieldEnum = (typeof CampaignMemberScalarFieldEnum)[keyof typeof CampaignMemberScalarFieldEnum]
 
 
 export const SortOrder = {

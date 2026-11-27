@@ -251,3 +251,13 @@ export type SalesOrder = Prisma.SalesOrderModel
  * 
  */
 export type SalesOrderLineItem = Prisma.SalesOrderLineItemModel
+/**
+ * Model Campaign
+ * 
+ */
+export type Campaign = Prisma.CampaignModel
+/**
+ * Model CampaignMember
+ * 
+ */
+export type CampaignMember = Prisma.CampaignMemberModel

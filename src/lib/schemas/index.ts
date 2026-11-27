@@ -541,3 +541,52 @@ export type SalesOrderUpdateInput = z.infer<typeof salesOrderUpdateSchema>;
 export type TeamCreateInput = z.infer<typeof teamCreateSchema>;
 export type TeamUpdateInput = z.infer<typeof teamUpdateSchema>;
 export type TeamMemberAddInput = z.infer<typeof teamMemberAddSchema>;
+
+export const CAMPAIGN_STATUSES = ["PLANNING", "ACTIVE", "COMPLETED", "ON_HOLD"] as const;
+export const CAMPAIGN_MEMBER_STATUSES = ["ADDED", "ENGAGED", "CONVERTED", "LOST"] as const;
+
+const optionalDate = z.string().trim().optional().transform(emptyToUndefined);
+
+export const campaignCreateSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(150),
+  description: optionalTrimmed,
+  startDate: optionalDate,
+  endDate: optionalDate,
+  status: z.enum(CAMPAIGN_STATUSES).default("PLANNING"),
+  budget: z.coerce.number().min(0).max(100_000_000).default(0),
+  cost: z.coerce.number().min(0).max(100_000_000).default(0),
+});
+
+export const campaignUpdateSchema = campaignCreateSchema.partial();
+
+export const campaignListQuerySchema = z.object({
+  q: z.string().trim().max(120).optional(),
+  status: z.string().trim().max(30).optional(),
+  sort: z.enum(["recent", "name", "budget"]).default("recent"),
+  page: z.coerce.number().int().min(1).default(1),
+  pageSize: z.coerce.number().int().min(1).max(100).default(20),
+});
+
+export const campaignMemberCreateSchema = z.object({
+  leadId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  contactId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  dealId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  status: z.enum(CAMPAIGN_MEMBER_STATUSES).default("ADDED"),
+}).refine((v) => Number(Boolean(v.leadId)) + Number(Boolean(v.contactId)) + Number(Boolean(v.dealId)) === 1, {
+  message: "Provide exactly one of leadId, contactId, or dealId",
+});
+
+export const campaignMemberUpdateSchema = z.object({
+  status: z.enum(CAMPAIGN_MEMBER_STATUSES),
+});
+
+export const campaignMemberListQuerySchema = z.object({
+  status: z.string().trim().max(30).optional(),
+  page: z.coerce.number().int().min(1).default(1),
+  pageSize: z.coerce.number().int().min(1).max(100).default(20),
+});
+
+export type CampaignCreateInput = z.infer<typeof campaignCreateSchema>;
+export type CampaignUpdateInput = z.infer<typeof campaignUpdateSchema>;
+export type CampaignMemberCreateInput = z.infer<typeof campaignMemberCreateSchema>;
+export type CampaignMemberUpdateInput = z.infer<typeof campaignMemberUpdateSchema>;

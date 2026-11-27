@@ -438,7 +438,9 @@ export const ModelName = {
   Quotation: 'Quotation',
   QuotationLineItem: 'QuotationLineItem',
   SalesOrder: 'SalesOrder',
-  SalesOrderLineItem: 'SalesOrderLineItem'
+  SalesOrderLineItem: 'SalesOrderLineItem',
+  Campaign: 'Campaign',
+  CampaignMember: 'CampaignMember'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -454,7 +456,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "organization" | "team" | "teamMember" | "user" | "session" | "company" | "contact" | "tag" | "leadSource" | "lead" | "pipeline" | "stage" | "deal" | "task" | "activity" | "note" | "attachment" | "auditLog" | "notification" | "emailTemplate" | "customField" | "customFieldValue" | "emailSettings" | "sentEmail" | "followUpReminder" | "inboundEmail" | "apiKey" | "sequence" | "sequenceStep" | "sequenceEnrollment" | "sequenceStepEnrollment" | "sequenceDeadLetter" | "stageHistory" | "lostReason" | "product" | "priceList" | "priceListItem" | "dealLineItem" | "quotation" | "quotationLineItem" | "salesOrder" | "salesOrderLineItem"
+    modelProps: "organization" | "team" | "teamMember" | "user" | "session" | "company" | "contact" | "tag" | "leadSource" | "lead" | "pipeline" | "stage" | "deal" | "task" | "activity" | "note" | "attachment" | "auditLog" | "notification" | "emailTemplate" | "customField" | "customFieldValue" | "emailSettings" | "sentEmail" | "followUpReminder" | "inboundEmail" | "apiKey" | "sequence" | "sequenceStep" | "sequenceEnrollment" | "sequenceStepEnrollment" | "sequenceDeadLetter" | "stageHistory" | "lostReason" | "product" | "priceList" | "priceListItem" | "dealLineItem" | "quotation" | "quotationLineItem" | "salesOrder" | "salesOrderLineItem" | "campaign" | "campaignMember"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3566,6 +3568,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Campaign: {
+      payload: Prisma.$CampaignPayload<ExtArgs>
+      fields: Prisma.CampaignFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CampaignFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CampaignFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignPayload>
+        }
+        findFirst: {
+          args: Prisma.CampaignFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CampaignFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignPayload>
+        }
+        findMany: {
+          args: Prisma.CampaignFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignPayload>[]
+        }
+        create: {
+          args: Prisma.CampaignCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignPayload>
+        }
+        createMany: {
+          args: Prisma.CampaignCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CampaignCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignPayload>[]
+        }
+        delete: {
+          args: Prisma.CampaignDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignPayload>
+        }
+        update: {
+          args: Prisma.CampaignUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignPayload>
+        }
+        deleteMany: {
+          args: Prisma.CampaignDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CampaignUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CampaignUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignPayload>[]
+        }
+        upsert: {
+          args: Prisma.CampaignUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignPayload>
+        }
+        aggregate: {
+          args: Prisma.CampaignAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCampaign>
+        }
+        groupBy: {
+          args: Prisma.CampaignGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CampaignGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CampaignCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CampaignCountAggregateOutputType> | number
+        }
+      }
+    }
+    CampaignMember: {
+      payload: Prisma.$CampaignMemberPayload<ExtArgs>
+      fields: Prisma.CampaignMemberFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CampaignMemberFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignMemberPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CampaignMemberFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignMemberPayload>
+        }
+        findFirst: {
+          args: Prisma.CampaignMemberFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignMemberPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CampaignMemberFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignMemberPayload>
+        }
+        findMany: {
+          args: Prisma.CampaignMemberFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignMemberPayload>[]
+        }
+        create: {
+          args: Prisma.CampaignMemberCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignMemberPayload>
+        }
+        createMany: {
+          args: Prisma.CampaignMemberCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CampaignMemberCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignMemberPayload>[]
+        }
+        delete: {
+          args: Prisma.CampaignMemberDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignMemberPayload>
+        }
+        update: {
+          args: Prisma.CampaignMemberUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignMemberPayload>
+        }
+        deleteMany: {
+          args: Prisma.CampaignMemberDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CampaignMemberUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CampaignMemberUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignMemberPayload>[]
+        }
+        upsert: {
+          args: Prisma.CampaignMemberUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CampaignMemberPayload>
+        }
+        aggregate: {
+          args: Prisma.CampaignMemberAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCampaignMember>
+        }
+        groupBy: {
+          args: Prisma.CampaignMemberGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CampaignMemberGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CampaignMemberCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CampaignMemberCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -4296,6 +4446,36 @@ export const SalesOrderLineItemScalarFieldEnum = {
 export type SalesOrderLineItemScalarFieldEnum = (typeof SalesOrderLineItemScalarFieldEnum)[keyof typeof SalesOrderLineItemScalarFieldEnum]
 
 
+export const CampaignScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  description: 'description',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  status: 'status',
+  budget: 'budget',
+  cost: 'cost',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CampaignScalarFieldEnum = (typeof CampaignScalarFieldEnum)[keyof typeof CampaignScalarFieldEnum]
+
+
+export const CampaignMemberScalarFieldEnum = {
+  id: 'id',
+  campaignId: 'campaignId',
+  leadId: 'leadId',
+  contactId: 'contactId',
+  dealId: 'dealId',
+  status: 'status',
+  createdAt: 'createdAt'
+} as const
+
+export type CampaignMemberScalarFieldEnum = (typeof CampaignMemberScalarFieldEnum)[keyof typeof CampaignMemberScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -4545,6 +4725,8 @@ export type GlobalOmitConfig = {
   quotationLineItem?: Prisma.QuotationLineItemOmit
   salesOrder?: Prisma.SalesOrderOmit
   salesOrderLineItem?: Prisma.SalesOrderLineItemOmit
+  campaign?: Prisma.CampaignOmit
+  campaignMember?: Prisma.CampaignMemberOmit
 }
 
 /* Types for Logging */

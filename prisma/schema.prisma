@@ -50,6 +50,7 @@ model Organization {
   priceLists          PriceList[]
   teams               Team[]
   currency            String               @default("USD")
+  campaigns           Campaign[]
 }
 
 model Team {
@@ -202,6 +203,7 @@ model Contact {
   sentEmails          SentEmail[]          @relation("SentEmailContact")
   inboundEmails       InboundEmail[]
   sequenceEnrollments SequenceEnrollment[] @relation("SequenceEnrollmentContact")
+  campaignMembers     CampaignMember[]
 
   tags Tag[]
 
@@ -276,6 +278,7 @@ model Lead {
   inboundEmails       InboundEmail[]
   reminders           FollowUpReminder[]   @relation("ReminderLead")
   sequenceEnrollments SequenceEnrollment[] @relation("SequenceEnrollmentLead")
+  campaignMembers     CampaignMember[]
 
   @@index([organizationId, status])
   @@index([organizationId, deletedAt])
@@ -356,6 +359,7 @@ model Deal {
   salesOrders    SalesOrder[]    @relation("SalesOrderDeal")
   sentEmails   SentEmail[]  @relation("SentEmailDeal")
   lineItems    DealLineItem[]
+  campaignMembers     CampaignMember[]
 
   @@index([organizationId, deletedAt])
   @@index([organizationId, status])
@@ -969,4 +973,49 @@ model SalesOrderLineItem {
   product    Product?   @relation("ProductSalesOrderLineItems", fields: [productId], references: [id], onDelete: SetNull)
 
   @@index([salesOrderId])
+}
+
+// Campaign: marketing/sales campaign tracking
+model Campaign {
+  id            String   @id @default(cuid())
+  organizationId String
+  name          String
+  description   String   @default("")
+  startDate     DateTime?
+  endDate       DateTime?
+  status        String   @default("PLANNING") // PLANNING | ACTIVE | COMPLETED | ON_HOLD
+  budget        Float    @default(0)
+  cost          Float    @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  organization Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  members      CampaignMember[]
+
+  @@index([organizationId])
+  @@index([status])
+}
+
+// CampaignMember: links leads/contacts/deals to campaigns with engagement status
+model CampaignMember {
+  id          String   @id @default(cuid())
+  campaignId  String
+  leadId      String?
+  contactId   String?
+  dealId      String?
+  status      String   @default("ADDED") // ADDED | ENGAGED | CONVERTED | LOST
+  createdAt   DateTime @default(now())
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  lead     Lead?     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  contact  Contact?  @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  deal     Deal?     @relation(fields: [dealId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId])
+  @@index([leadId])
+  @@index([contactId])
+  @@index([dealId])
+  @@unique([campaignId, leadId])
+  @@unique([campaignId, contactId])
+  @@unique([campaignId, dealId])
 }
