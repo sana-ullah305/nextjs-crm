@@ -132,6 +132,20 @@ export function Topbar({ user }: { user: SessionUser }) {
     }
   }
 
+  async function markOneRead(id: string) {
+    // Optimistic: flip locally, then persist via PATCH ?action=mark-read.
+    setNotifications((n) => n.map((x) => (x.id === id ? { ...x, isRead: true } : x)));
+    setUnread((u) => {
+      const target = notifications.find((x) => x.id === id);
+      return target && !target.isRead ? Math.max(0, u - 1) : u;
+    });
+    try {
+      await api.patch(`/api/notifications/${id}?action=mark-read`);
+    } catch {
+      /* noop — next poll reconciles */
+    }
+  }
+
   async function logout() {
     try {
       await fetch("/api/auth/logout", { method: "POST" });
@@ -257,17 +271,26 @@ export function Topbar({ user }: { user: SessionUser }) {
               <div className="max-h-72 overflow-y-auto scroll-thin">
                 {notifications.slice(0, 10).map((n) => (
                   <DropdownMenuItem key={n.id} asChild>
-                    <Link
-                      href={n.link || "/dashboard"}
-                      className={cn(
-                        "flex w-full flex-col items-start gap-0.5 py-2",
-                        !n.isRead && "bg-accent/50"
+                    <div className={cn("flex w-full flex-col gap-0.5 py-2 pr-1", !n.isRead && "bg-accent/50")}>
+                      <Link href={n.link || "/dashboard"} className="flex flex-col items-start gap-0.5">
+                        <span className="font-medium">{n.title}</span>
+                        {n.body && <span className="line-clamp-2 text-xs text-muted-foreground">{n.body}</span>}
+                        <span className="text-[10px] text-muted-foreground">{timeAgo(n.createdAt)}</span>
+                      </Link>
+                      {!n.isRead && (
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            void markOneRead(n.id);
+                          }}
+                          className="self-end text-xs font-normal text-primary hover:underline"
+                          aria-label={`Mark notification "${n.title}" as read`}
+                        >
+                          Mark read
+                        </button>
                       )}
-                    >
-                      <span className="font-medium">{n.title}</span>
-                      {n.body && <span className="line-clamp-2 text-xs text-muted-foreground">{n.body}</span>}
-                      <span className="text-[10px] text-muted-foreground">{timeAgo(n.createdAt)}</span>
-                    </Link>
+                    </div>
                   </DropdownMenuItem>
                 ))}
               </div>

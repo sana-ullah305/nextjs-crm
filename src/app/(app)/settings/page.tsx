@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { Building2, FlaskConical, KanbanSquare, KeyRound, Mail, Plus, Repeat, ScrollText, Tag, Trash2, UserPlus, Users, Copy, Check } from "lucide-react";
+import { Bell, Building2, FlaskConical, KanbanSquare, KeyRound, Mail, Plus, Repeat, ScrollText, Tag, Trash2, UserPlus, Users, Copy, Check } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -70,7 +70,51 @@ function newStepRow(): StepRow {
   return { key: nextStepKey(), delayHours: "24", subjectTemplate: "", bodyTemplate: "" };
 }
 
-const TABS = ["organization", "email", "users", "pipelines", "tags", "sources", "templates", "fields", "sequences", "apikeys", "audit"] as const;
+function ToggleRow({
+  label,
+  description,
+  checked,
+  disabled,
+  onChange,
+}: {
+  label: string;
+  description?: string;
+  checked: boolean;
+  disabled?: boolean;
+  onChange: (value: boolean) => void;
+}) {
+  return (
+    <label className="flex items-center justify-between gap-4 rounded-md border border-border px-3 py-2">
+      <span className="min-w-0">
+        <span className="block text-sm font-medium">{label}</span>
+        {description && (
+          <span className="block text-xs text-muted-foreground">{description}</span>
+        )}
+      </span>
+      <button
+        type="button"
+        role="switch"
+        aria-checked={checked}
+        aria-label={label}
+        disabled={disabled}
+        onClick={() => onChange(!checked)}
+        className={cn(
+          "relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors disabled:opacity-50",
+          checked ? "bg-primary" : "bg-secondary"
+        )}
+      >
+        <span
+          className={cn(
+            "inline-block h-4 w-4 transform rounded-full bg-background transition-transform",
+            checked ? "translate-x-4" : "translate-x-0.5"
+          )}
+        />
+      </button>
+    </label>
+  );
+}
+
+const TABS = ["organization", "email", "users", "pipelines", "tags", "sources", "templates", "fields", "sequences", "apikeys", "notifications", "audit"] as const;
 type Tab = (typeof TABS)[number];
 
 const TAB_META: Record<Tab, { label: string; icon: React.ComponentType<{ className?: string }> }> = {
@@ -84,6 +128,7 @@ const TAB_META: Record<Tab, { label: string; icon: React.ComponentType<{ classNa
   fields: { label: "Custom fields", icon: Tag },
   sequences: { label: "Sequences", icon: Repeat },
   apikeys: { label: "API keys", icon: KeyRound },
+  notifications: { label: "Notifications", icon: Bell },
   audit: { label: "Audit log", icon: ScrollText },
 };
 
@@ -581,6 +626,78 @@ export default function SettingsPage() {
         }
       },
     });
+  }
+
+  // Notification preferences
+  type NotificationPrefs = {
+    emailNotifications: boolean;
+    inAppNotifications: boolean;
+    preferences: {
+      taskReminders: boolean;
+      leadFollowUps: boolean;
+      emailReplies: boolean;
+      dealUpdates: boolean;
+      mentions: boolean;
+      systemAnnouncements: boolean;
+    };
+  };
+  const DEFAULT_PREFS: NotificationPrefs = {
+    emailNotifications: true,
+    inAppNotifications: true,
+    preferences: {
+      taskReminders: true,
+      leadFollowUps: true,
+      emailReplies: true,
+      dealUpdates: true,
+      mentions: true,
+      systemAnnouncements: true,
+    },
+  };
+  const [notifPrefs, setNotifPrefs] = useState<NotificationPrefs>(DEFAULT_PREFS);
+  const [notifSaving, setNotifSaving] = useState(false);
+  const loadNotifPrefs = useCallback(async () => {
+    const d = await api.get<NotificationPrefs>("/api/settings/notifications");
+    setNotifPrefs({
+      emailNotifications: d.emailNotifications,
+      inAppNotifications: d.inAppNotifications,
+      preferences: { ...DEFAULT_PREFS.preferences, ...d.preferences },
+    });
+  }, []);
+  useEffect(() => {
+    if (tab === "notifications") void loadNotifPrefs().catch(() => undefined);
+  }, [tab, loadNotifPrefs]);
+
+  async function toggleNotifChannel(channel: "emailNotifications" | "inAppNotifications", value: boolean) {
+    const next = { ...notifPrefs, [channel]: value };
+    setNotifPrefs(next);
+    setNotifSaving(true);
+    try {
+      await api.patch("/api/settings/notifications", { [channel]: value });
+      toastSuccess({ description: "Notification preferences saved" });
+    } catch (e) {
+      toastError({ description: e instanceof ApiError ? e.message : "Failed to save preferences" });
+      void loadNotifPrefs().catch(() => undefined);
+    } finally {
+      setNotifSaving(false);
+    }
+  }
+
+  async function toggleNotifType(key: keyof NotificationPrefs["preferences"], value: boolean) {
+    const next: NotificationPrefs = {
+      ...notifPrefs,
+      preferences: { ...notifPrefs.preferences, [key]: value },
+    };
+    setNotifPrefs(next);
+    setNotifSaving(true);
+    try {
+      await api.patch("/api/settings/notifications", { preferences: { [key]: value } });
+      toastSuccess({ description: "Notification preferences saved" });
+    } catch (e) {
+      toastError({ description: e instanceof ApiError ? e.message : "Failed to save preferences" });
+      void loadNotifPrefs().catch(() => undefined);
+    } finally {
+      setNotifSaving(false);
+    }
   }
 
   // Audit
@@ -1144,6 +1261,82 @@ export default function SettingsPage() {
               {apiKeys.length === 0 && (
                 <p className="text-sm text-muted-foreground">No API keys yet.</p>
               )}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {tab === "notifications" && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Notification preferences</CardTitle>
+            <CardDescription>
+              Choose which channels and event types reach you. Email reminders are
+              only sent when the email channel is on and the matching type is enabled.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="space-y-3">
+              <h3 className="text-sm font-semibold">Channels</h3>
+              <ToggleRow
+                label="Email notifications"
+                description="Receive reminder emails at your account address."
+                checked={notifPrefs.emailNotifications}
+                disabled={notifSaving}
+                onChange={(v) => void toggleNotifChannel("emailNotifications", v)}
+              />
+              <ToggleRow
+                label="In-app notifications"
+                description="Show notifications in the topbar bell menu."
+                checked={notifPrefs.inAppNotifications}
+                disabled={notifSaving}
+                onChange={(v) => void toggleNotifChannel("inAppNotifications", v)}
+              />
+            </div>
+            <div className="space-y-3">
+              <h3 className="text-sm font-semibold">Per-type preferences</h3>
+              <ToggleRow
+                label="Task reminders"
+                description="Due and overdue task reminders."
+                checked={notifPrefs.preferences.taskReminders}
+                disabled={notifSaving}
+                onChange={(v) => void toggleNotifType("taskReminders", v)}
+              />
+              <ToggleRow
+                label="Lead follow-ups"
+                description="Scheduled lead follow-up reminders."
+                checked={notifPrefs.preferences.leadFollowUps}
+                disabled={notifSaving}
+                onChange={(v) => void toggleNotifType("leadFollowUps", v)}
+              />
+              <ToggleRow
+                label="Email replies"
+                description="New inbound replies to your outreach."
+                checked={notifPrefs.preferences.emailReplies}
+                disabled={notifSaving}
+                onChange={(v) => void toggleNotifType("emailReplies", v)}
+              />
+              <ToggleRow
+                label="Deal updates"
+                description="Stage changes and deal activity."
+                checked={notifPrefs.preferences.dealUpdates}
+                disabled={notifSaving}
+                onChange={(v) => void toggleNotifType("dealUpdates", v)}
+              />
+              <ToggleRow
+                label="Mentions"
+                description="When a teammate mentions you in a note."
+                checked={notifPrefs.preferences.mentions}
+                disabled={notifSaving}
+                onChange={(v) => void toggleNotifType("mentions", v)}
+              />
+              <ToggleRow
+                label="System announcements"
+                description="Product and maintenance notices."
+                checked={notifPrefs.preferences.systemAnnouncements}
+                disabled={notifSaving}
+                onChange={(v) => void toggleNotifType("systemAnnouncements", v)}
+              />
             </div>
           </CardContent>
         </Card>
