@@ -6,7 +6,7 @@ import { sessionCookieSecure } from "@/server/config";
 
 export const SESSION_COOKIE = "crm_session";
 const SESSION_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
-const BCRYPT_ROUNDS = 12;
+const BCRYPT_ROUNDS = process.env.NODE_ENV === "test" ? 4 : 12;
 
 export type SessionUser = {
   id: string;
