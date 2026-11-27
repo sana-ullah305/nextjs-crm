@@ -188,6 +188,11 @@ export type StageHistory = Prisma.StageHistoryModel
  */
 export type LostReason = Prisma.LostReasonModel
 /**
+ * Model Role
+ * 
+ */
+export type Role = Prisma.RoleModel
+/**
  * Model Product
  * 
  */
@@ -237,3 +242,18 @@ export type Campaign = Prisma.CampaignModel
  * 
  */
 export type CampaignMember = Prisma.CampaignMemberModel
+/**
+ * Model Permission
+ * 
+ */
+export type Permission = Prisma.PermissionModel
+/**
+ * Model RolePermission
+ * 
+ */
+export type RolePermission = Prisma.RolePermissionModel
+/**
+ * Model UserRole
+ * 
+ */
+export type UserRole = Prisma.UserRoleModel

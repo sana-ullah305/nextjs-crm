@@ -354,3 +354,48 @@ export const salesOrderApi = {
   update: (id: string, body: unknown) => api.patch<SalesOrder>(`/api/sales-orders/${id}`, body),
   remove: (id: string) => api.delete<{ deleted: boolean }>(`/api/sales-orders/${id}`),
 };
+
+export type Role = {
+  id: string;
+  organizationId: string;
+  name: string;
+  description: string;
+  isSystem: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type Permission = {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  createdAt: string;
+};
+
+export type UserRole = {
+  id: string;
+  userId: string;
+  roleId: string;
+  createdAt: string;
+};
+
+export const roleApi = {
+  list: () => api.get<{ roles: Role[] }>("/api/settings/roles"),
+  get: (id: string) => api.get<Role>(`/api/settings/roles/${id}`),
+  create: (body: unknown) => api.post<Role>("/api/settings/roles", body),
+  update: (id: string, body: unknown) => api.patch<Role>(`/api/settings/roles/${id}`, body),
+  remove: (id: string) => api.delete<{ deleted: boolean }>(`/api/settings/roles/${id}`),
+  permissions: (id: string) =>
+    api.get<{ permissions: Permission[] }>(`/api/settings/roles/${id}/permissions`),
+};
+
+export const permissionApi = {
+  list: () => api.get<{ permissions: Permission[] }>("/api/settings/permissions"),
+  create: (body: unknown) => api.post<Permission>("/api/settings/permissions", body),
+};
+
+export const userRoleApi = {
+  assign: (userId: string, body: unknown) =>
+    api.post<{ assigned: boolean }>(`/api/settings/users/${userId}/roles`, body),
+};

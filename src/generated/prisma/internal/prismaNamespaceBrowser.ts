@@ -85,6 +85,7 @@ export const ModelName = {
   SequenceDeadLetter: 'SequenceDeadLetter',
   StageHistory: 'StageHistory',
   LostReason: 'LostReason',
+  Role: 'Role',
   Product: 'Product',
   PriceList: 'PriceList',
   PriceListItem: 'PriceListItem',
@@ -94,7 +95,10 @@ export const ModelName = {
   SalesOrder: 'SalesOrder',
   SalesOrderLineItem: 'SalesOrderLineItem',
   Campaign: 'Campaign',
-  CampaignMember: 'CampaignMember'
+  CampaignMember: 'CampaignMember',
+  Permission: 'Permission',
+  RolePermission: 'RolePermission',
+  UserRole: 'UserRole'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -676,6 +680,19 @@ export const LostReasonScalarFieldEnum = {
 export type LostReasonScalarFieldEnum = (typeof LostReasonScalarFieldEnum)[keyof typeof LostReasonScalarFieldEnum]
 
 
+export const RoleScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  description: 'description',
+  isSystem: 'isSystem',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
+
+
 export const ProductScalarFieldEnum = {
   id: 'id',
   organizationId: 'organizationId',
@@ -832,6 +849,36 @@ export const CampaignMemberScalarFieldEnum = {
 } as const
 
 export type CampaignMemberScalarFieldEnum = (typeof CampaignMemberScalarFieldEnum)[keyof typeof CampaignMemberScalarFieldEnum]
+
+
+export const PermissionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  category: 'category',
+  createdAt: 'createdAt'
+} as const
+
+export type PermissionScalarFieldEnum = (typeof PermissionScalarFieldEnum)[keyof typeof PermissionScalarFieldEnum]
+
+
+export const RolePermissionScalarFieldEnum = {
+  id: 'id',
+  roleId: 'roleId',
+  permissionId: 'permissionId'
+} as const
+
+export type RolePermissionScalarFieldEnum = (typeof RolePermissionScalarFieldEnum)[keyof typeof RolePermissionScalarFieldEnum]
+
+
+export const UserRoleScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  roleId: 'roleId',
+  createdAt: 'createdAt'
+} as const
+
+export type UserRoleScalarFieldEnum = (typeof UserRoleScalarFieldEnum)[keyof typeof UserRoleScalarFieldEnum]
 
 
 export const SortOrder = {

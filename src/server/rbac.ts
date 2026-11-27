@@ -14,6 +14,11 @@ export const PERMISSIONS = [
   "users:manage",
   "settings:manage",
   "settings:read",
+  // roles
+  "roles:read",
+  "roles:create",
+  "roles:manage",
+  // contacts / companies
   "contacts:read",
   "contacts:read_all",
   "contacts:create",
@@ -108,7 +113,8 @@ const MANAGER_PERMS: Permission[] = ALL.filter(function (p) {
   return !p.startsWith("users:") &&
     p !== "settings:manage" &&
     p !== "pipelines:manage" &&
-    p !== "notes:delete_all";
+    p !== "notes:delete_all" &&
+    !p.startsWith("roles:");
 });
 const REP_PERMS: Permission[] = [
   "settings:read",

@@ -590,3 +590,26 @@ export type CampaignCreateInput = z.infer<typeof campaignCreateSchema>;
 export type CampaignUpdateInput = z.infer<typeof campaignUpdateSchema>;
 export type CampaignMemberCreateInput = z.infer<typeof campaignMemberCreateSchema>;
 export type CampaignMemberUpdateInput = z.infer<typeof campaignMemberUpdateSchema>;
+
+// Roles and permissions (custom-roles RBAC system)
+export const roleCreateSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(60),
+  description: z.string().trim().max(200).optional().default(""),
+});
+
+export const roleUpdateSchema = roleCreateSchema.partial();
+
+export const permissionCreateSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(60),
+  description: z.string().trim().max(200).optional().default(""),
+  category: z.string().trim().max(60).optional().default(""),
+});
+
+export const roleAssignmentSchema = z.object({
+  roleId: z.string().trim().min(1, "Role is required"),
+});
+
+export type RoleCreateInput = z.infer<typeof roleCreateSchema>;
+export type RoleUpdateInput = z.infer<typeof roleUpdateSchema>;
+export type PermissionCreateInput = z.infer<typeof permissionCreateSchema>;
+export type RoleAssignmentInput = z.infer<typeof roleAssignmentSchema>;
