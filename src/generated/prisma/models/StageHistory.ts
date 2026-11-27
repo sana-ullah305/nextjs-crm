@@ -292,9 +292,9 @@ export type StageHistoryCreateInput = {
   lostAtSnapshot?: Date | string | null
   actualCloseDateSnapshot?: Date | string | null
   deal: Prisma.DealCreateNestedOneWithoutStageHistoryInput
-  fromStage?: Prisma.StageCreateNestedOneWithoutStageHistoryFromInput
-  toStage: Prisma.StageCreateNestedOneWithoutStageHistoryToInput
-  user: Prisma.UserCreateNestedOneWithoutStageHistoryInput
+  fromStage?: Prisma.StageCreateNestedOneWithoutFromStageHistoryInput
+  toStage: Prisma.StageCreateNestedOneWithoutToStageHistoryInput
+  user: Prisma.UserCreateNestedOneWithoutStageHistoryEntriesInput
 }
 
 export type StageHistoryUncheckedCreateInput = {
@@ -316,9 +316,9 @@ export type StageHistoryUpdateInput = {
   lostAtSnapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   actualCloseDateSnapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deal?: Prisma.DealUpdateOneRequiredWithoutStageHistoryNestedInput
-  fromStage?: Prisma.StageUpdateOneWithoutStageHistoryFromNestedInput
-  toStage?: Prisma.StageUpdateOneRequiredWithoutStageHistoryToNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutStageHistoryNestedInput
+  fromStage?: Prisma.StageUpdateOneWithoutFromStageHistoryNestedInput
+  toStage?: Prisma.StageUpdateOneRequiredWithoutToStageHistoryNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutStageHistoryEntriesNestedInput
 }
 
 export type StageHistoryUncheckedUpdateInput = {
@@ -586,8 +586,8 @@ export type StageHistoryCreateWithoutUserInput = {
   lostAtSnapshot?: Date | string | null
   actualCloseDateSnapshot?: Date | string | null
   deal: Prisma.DealCreateNestedOneWithoutStageHistoryInput
-  fromStage?: Prisma.StageCreateNestedOneWithoutStageHistoryFromInput
-  toStage: Prisma.StageCreateNestedOneWithoutStageHistoryToInput
+  fromStage?: Prisma.StageCreateNestedOneWithoutFromStageHistoryInput
+  toStage: Prisma.StageCreateNestedOneWithoutToStageHistoryInput
 }
 
 export type StageHistoryUncheckedCreateWithoutUserInput = {
@@ -648,8 +648,8 @@ export type StageHistoryCreateWithoutFromStageInput = {
   lostAtSnapshot?: Date | string | null
   actualCloseDateSnapshot?: Date | string | null
   deal: Prisma.DealCreateNestedOneWithoutStageHistoryInput
-  toStage: Prisma.StageCreateNestedOneWithoutStageHistoryToInput
-  user: Prisma.UserCreateNestedOneWithoutStageHistoryInput
+  toStage: Prisma.StageCreateNestedOneWithoutToStageHistoryInput
+  user: Prisma.UserCreateNestedOneWithoutStageHistoryEntriesInput
 }
 
 export type StageHistoryUncheckedCreateWithoutFromStageInput = {
@@ -679,8 +679,8 @@ export type StageHistoryCreateWithoutToStageInput = {
   lostAtSnapshot?: Date | string | null
   actualCloseDateSnapshot?: Date | string | null
   deal: Prisma.DealCreateNestedOneWithoutStageHistoryInput
-  fromStage?: Prisma.StageCreateNestedOneWithoutStageHistoryFromInput
-  user: Prisma.UserCreateNestedOneWithoutStageHistoryInput
+  fromStage?: Prisma.StageCreateNestedOneWithoutFromStageHistoryInput
+  user: Prisma.UserCreateNestedOneWithoutStageHistoryEntriesInput
 }
 
 export type StageHistoryUncheckedCreateWithoutToStageInput = {
@@ -741,9 +741,9 @@ export type StageHistoryCreateWithoutDealInput = {
   wonAtSnapshot?: Date | string | null
   lostAtSnapshot?: Date | string | null
   actualCloseDateSnapshot?: Date | string | null
-  fromStage?: Prisma.StageCreateNestedOneWithoutStageHistoryFromInput
-  toStage: Prisma.StageCreateNestedOneWithoutStageHistoryToInput
-  user: Prisma.UserCreateNestedOneWithoutStageHistoryInput
+  fromStage?: Prisma.StageCreateNestedOneWithoutFromStageHistoryInput
+  toStage: Prisma.StageCreateNestedOneWithoutToStageHistoryInput
+  user: Prisma.UserCreateNestedOneWithoutStageHistoryEntriesInput
 }
 
 export type StageHistoryUncheckedCreateWithoutDealInput = {
@@ -800,8 +800,8 @@ export type StageHistoryUpdateWithoutUserInput = {
   lostAtSnapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   actualCloseDateSnapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deal?: Prisma.DealUpdateOneRequiredWithoutStageHistoryNestedInput
-  fromStage?: Prisma.StageUpdateOneWithoutStageHistoryFromNestedInput
-  toStage?: Prisma.StageUpdateOneRequiredWithoutStageHistoryToNestedInput
+  fromStage?: Prisma.StageUpdateOneWithoutFromStageHistoryNestedInput
+  toStage?: Prisma.StageUpdateOneRequiredWithoutToStageHistoryNestedInput
 }
 
 export type StageHistoryUncheckedUpdateWithoutUserInput = {
@@ -855,8 +855,8 @@ export type StageHistoryUpdateWithoutFromStageInput = {
   lostAtSnapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   actualCloseDateSnapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deal?: Prisma.DealUpdateOneRequiredWithoutStageHistoryNestedInput
-  toStage?: Prisma.StageUpdateOneRequiredWithoutStageHistoryToNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutStageHistoryNestedInput
+  toStage?: Prisma.StageUpdateOneRequiredWithoutToStageHistoryNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutStageHistoryEntriesNestedInput
 }
 
 export type StageHistoryUncheckedUpdateWithoutFromStageInput = {
@@ -888,8 +888,8 @@ export type StageHistoryUpdateWithoutToStageInput = {
   lostAtSnapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   actualCloseDateSnapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deal?: Prisma.DealUpdateOneRequiredWithoutStageHistoryNestedInput
-  fromStage?: Prisma.StageUpdateOneWithoutStageHistoryFromNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutStageHistoryNestedInput
+  fromStage?: Prisma.StageUpdateOneWithoutFromStageHistoryNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutStageHistoryEntriesNestedInput
 }
 
 export type StageHistoryUncheckedUpdateWithoutToStageInput = {
@@ -931,9 +931,9 @@ export type StageHistoryUpdateWithoutDealInput = {
   wonAtSnapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lostAtSnapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   actualCloseDateSnapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  fromStage?: Prisma.StageUpdateOneWithoutStageHistoryFromNestedInput
-  toStage?: Prisma.StageUpdateOneRequiredWithoutStageHistoryToNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutStageHistoryNestedInput
+  fromStage?: Prisma.StageUpdateOneWithoutFromStageHistoryNestedInput
+  toStage?: Prisma.StageUpdateOneRequiredWithoutToStageHistoryNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutStageHistoryEntriesNestedInput
 }
 
 export type StageHistoryUncheckedUpdateWithoutDealInput = {

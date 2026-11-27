@@ -63,6 +63,10 @@ export const PERMISSIONS = [
   "reminders:run",
   "inbound:run",
   "sequences:run",
+  // attachments
+  "attachments:read",
+  "attachments:create",
+  "attachments:delete",
 ] as const;
 
 export type Permission = (typeof PERMISSIONS)[number];
@@ -104,6 +108,9 @@ const REP_PERMS: Permission[] = [
   "activities:create",
   "notes:create",
   "notes:delete",
+  "attachments:read",
+  "attachments:create",
+  "attachments:delete",
   "email:send",
 ];
 

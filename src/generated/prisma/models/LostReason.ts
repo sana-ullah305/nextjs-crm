@@ -251,7 +251,7 @@ export type LostReasonCreateInput = {
   isSystem?: boolean
   createdAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutLostReasonsInput
-  deals?: Prisma.DealCreateNestedManyWithoutLostReasonRelInput
+  deals?: Prisma.DealCreateNestedManyWithoutLostReasonRefInput
 }
 
 export type LostReasonUncheckedCreateInput = {
@@ -261,7 +261,7 @@ export type LostReasonUncheckedCreateInput = {
   description?: string
   isSystem?: boolean
   createdAt?: Date | string
-  deals?: Prisma.DealUncheckedCreateNestedManyWithoutLostReasonRelInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutLostReasonRefInput
 }
 
 export type LostReasonUpdateInput = {
@@ -271,7 +271,7 @@ export type LostReasonUpdateInput = {
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutLostReasonsNestedInput
-  deals?: Prisma.DealUpdateManyWithoutLostReasonRelNestedInput
+  deals?: Prisma.DealUpdateManyWithoutLostReasonRefNestedInput
 }
 
 export type LostReasonUncheckedUpdateInput = {
@@ -281,7 +281,7 @@ export type LostReasonUncheckedUpdateInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deals?: Prisma.DealUncheckedUpdateManyWithoutLostReasonRelNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutLostReasonRefNestedInput
 }
 
 export type LostReasonCreateManyInput = {
@@ -320,6 +320,11 @@ export type LostReasonOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type LostReasonNullableScalarRelationFilter = {
+  is?: Prisma.LostReasonWhereInput | null
+  isNot?: Prisma.LostReasonWhereInput | null
+}
+
 export type LostReasonOrganizationIdNameCompoundUniqueInput = {
   organizationId: string
   name: string
@@ -350,11 +355,6 @@ export type LostReasonMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   isSystem?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-}
-
-export type LostReasonNullableScalarRelationFilter = {
-  is?: Prisma.LostReasonWhereInput | null
-  isNot?: Prisma.LostReasonWhereInput | null
 }
 
 export type LostReasonCreateNestedManyWithoutOrganizationInput = {
@@ -421,7 +421,7 @@ export type LostReasonCreateWithoutOrganizationInput = {
   description?: string
   isSystem?: boolean
   createdAt?: Date | string
-  deals?: Prisma.DealCreateNestedManyWithoutLostReasonRelInput
+  deals?: Prisma.DealCreateNestedManyWithoutLostReasonRefInput
 }
 
 export type LostReasonUncheckedCreateWithoutOrganizationInput = {
@@ -430,7 +430,7 @@ export type LostReasonUncheckedCreateWithoutOrganizationInput = {
   description?: string
   isSystem?: boolean
   createdAt?: Date | string
-  deals?: Prisma.DealUncheckedCreateNestedManyWithoutLostReasonRelInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutLostReasonRefInput
 }
 
 export type LostReasonCreateOrConnectWithoutOrganizationInput = {
@@ -536,7 +536,7 @@ export type LostReasonUpdateWithoutOrganizationInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deals?: Prisma.DealUpdateManyWithoutLostReasonRelNestedInput
+  deals?: Prisma.DealUpdateManyWithoutLostReasonRefNestedInput
 }
 
 export type LostReasonUncheckedUpdateWithoutOrganizationInput = {
@@ -545,7 +545,7 @@ export type LostReasonUncheckedUpdateWithoutOrganizationInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deals?: Prisma.DealUncheckedUpdateManyWithoutLostReasonRelNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutLostReasonRefNestedInput
 }
 
 export type LostReasonUncheckedUpdateManyWithoutOrganizationInput = {

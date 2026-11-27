@@ -387,12 +387,12 @@ export type DealWhereInput = {
   pipeline?: Prisma.XOR<Prisma.PipelineScalarRelationFilter, Prisma.PipelineWhereInput>
   owner?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   source?: Prisma.XOR<Prisma.LeadSourceNullableScalarRelationFilter, Prisma.LeadSourceWhereInput> | null
-  lostReasonRel?: Prisma.XOR<Prisma.LostReasonNullableScalarRelationFilter, Prisma.LostReasonWhereInput> | null
+  lostReasonRef?: Prisma.XOR<Prisma.LostReasonNullableScalarRelationFilter, Prisma.LostReasonWhereInput> | null
+  stageHistory?: Prisma.StageHistoryListRelationFilter
   activities?: Prisma.ActivityListRelationFilter
   notes?: Prisma.NoteListRelationFilter
   lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
   sentEmails?: Prisma.SentEmailListRelationFilter
-  stageHistory?: Prisma.StageHistoryListRelationFilter
 }
 
 export type DealOrderByWithRelationInput = {
@@ -428,12 +428,12 @@ export type DealOrderByWithRelationInput = {
   pipeline?: Prisma.PipelineOrderByWithRelationInput
   owner?: Prisma.UserOrderByWithRelationInput
   source?: Prisma.LeadSourceOrderByWithRelationInput
-  lostReasonRel?: Prisma.LostReasonOrderByWithRelationInput
+  lostReasonRef?: Prisma.LostReasonOrderByWithRelationInput
+  stageHistory?: Prisma.StageHistoryOrderByRelationAggregateInput
   activities?: Prisma.ActivityOrderByRelationAggregateInput
   notes?: Prisma.NoteOrderByRelationAggregateInput
   lead?: Prisma.LeadOrderByWithRelationInput
   sentEmails?: Prisma.SentEmailOrderByRelationAggregateInput
-  stageHistory?: Prisma.StageHistoryOrderByRelationAggregateInput
 }
 
 export type DealWhereUniqueInput = Prisma.AtLeast<{
@@ -472,12 +472,12 @@ export type DealWhereUniqueInput = Prisma.AtLeast<{
   pipeline?: Prisma.XOR<Prisma.PipelineScalarRelationFilter, Prisma.PipelineWhereInput>
   owner?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   source?: Prisma.XOR<Prisma.LeadSourceNullableScalarRelationFilter, Prisma.LeadSourceWhereInput> | null
-  lostReasonRel?: Prisma.XOR<Prisma.LostReasonNullableScalarRelationFilter, Prisma.LostReasonWhereInput> | null
+  lostReasonRef?: Prisma.XOR<Prisma.LostReasonNullableScalarRelationFilter, Prisma.LostReasonWhereInput> | null
+  stageHistory?: Prisma.StageHistoryListRelationFilter
   activities?: Prisma.ActivityListRelationFilter
   notes?: Prisma.NoteListRelationFilter
   lead?: Prisma.XOR<Prisma.LeadNullableScalarRelationFilter, Prisma.LeadWhereInput> | null
   sentEmails?: Prisma.SentEmailListRelationFilter
-  stageHistory?: Prisma.StageHistoryListRelationFilter
 }, "id">
 
 export type DealOrderByWithAggregationInput = {
@@ -568,12 +568,12 @@ export type DealCreateInput = {
   pipeline: Prisma.PipelineCreateNestedOneWithoutDealsInput
   owner?: Prisma.UserCreateNestedOneWithoutOwnedDealsInput
   source?: Prisma.LeadSourceCreateNestedOneWithoutDealsInput
-  lostReasonRel?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  lostReasonRef?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
   activities?: Prisma.ActivityCreateNestedManyWithoutDealInput
   notes?: Prisma.NoteCreateNestedManyWithoutDealInput
   lead?: Prisma.LeadCreateNestedOneWithoutDealsInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateInput = {
@@ -602,10 +602,10 @@ export type DealUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutDealInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutDealInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealUpdateInput = {
@@ -632,12 +632,12 @@ export type DealUpdateInput = {
   pipeline?: Prisma.PipelineUpdateOneRequiredWithoutDealsNestedInput
   owner?: Prisma.UserUpdateOneWithoutOwnedDealsNestedInput
   source?: Prisma.LeadSourceUpdateOneWithoutDealsNestedInput
-  lostReasonRel?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  lostReasonRef?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutDealNestedInput
   notes?: Prisma.NoteUpdateManyWithoutDealNestedInput
   lead?: Prisma.LeadUpdateOneWithoutDealsNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateInput = {
@@ -666,10 +666,10 @@ export type DealUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutDealNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutDealNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealCreateManyInput = {
@@ -755,11 +755,6 @@ export type DealListRelationFilter = {
 
 export type DealOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type DealScalarRelationFilter = {
-  is?: Prisma.DealWhereInput
-  isNot?: Prisma.DealWhereInput
 }
 
 export type DealCountOrderByAggregateInput = {
@@ -859,6 +854,11 @@ export type DealSumOrderByAggregateInput = {
 export type DealNullableScalarRelationFilter = {
   is?: Prisma.DealWhereInput | null
   isNot?: Prisma.DealWhereInput | null
+}
+
+export type DealScalarRelationFilter = {
+  is?: Prisma.DealWhereInput
+  isNot?: Prisma.DealWhereInput
 }
 
 export type DealCreateNestedManyWithoutOrganizationInput = {
@@ -1197,62 +1197,6 @@ export type DealUncheckedUpdateManyWithoutStageNestedInput = {
   deleteMany?: Prisma.DealScalarWhereInput | Prisma.DealScalarWhereInput[]
 }
 
-export type DealCreateNestedOneWithoutStageHistoryInput = {
-  create?: Prisma.XOR<Prisma.DealCreateWithoutStageHistoryInput, Prisma.DealUncheckedCreateWithoutStageHistoryInput>
-  connectOrCreate?: Prisma.DealCreateOrConnectWithoutStageHistoryInput
-  connect?: Prisma.DealWhereUniqueInput
-}
-
-export type DealUpdateOneRequiredWithoutStageHistoryNestedInput = {
-  create?: Prisma.XOR<Prisma.DealCreateWithoutStageHistoryInput, Prisma.DealUncheckedCreateWithoutStageHistoryInput>
-  connectOrCreate?: Prisma.DealCreateOrConnectWithoutStageHistoryInput
-  upsert?: Prisma.DealUpsertWithoutStageHistoryInput
-  connect?: Prisma.DealWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.DealUpdateToOneWithWhereWithoutStageHistoryInput, Prisma.DealUpdateWithoutStageHistoryInput>, Prisma.DealUncheckedUpdateWithoutStageHistoryInput>
-}
-
-export type DealCreateNestedManyWithoutLostReasonRelInput = {
-  create?: Prisma.XOR<Prisma.DealCreateWithoutLostReasonRelInput, Prisma.DealUncheckedCreateWithoutLostReasonRelInput> | Prisma.DealCreateWithoutLostReasonRelInput[] | Prisma.DealUncheckedCreateWithoutLostReasonRelInput[]
-  connectOrCreate?: Prisma.DealCreateOrConnectWithoutLostReasonRelInput | Prisma.DealCreateOrConnectWithoutLostReasonRelInput[]
-  createMany?: Prisma.DealCreateManyLostReasonRelInputEnvelope
-  connect?: Prisma.DealWhereUniqueInput | Prisma.DealWhereUniqueInput[]
-}
-
-export type DealUncheckedCreateNestedManyWithoutLostReasonRelInput = {
-  create?: Prisma.XOR<Prisma.DealCreateWithoutLostReasonRelInput, Prisma.DealUncheckedCreateWithoutLostReasonRelInput> | Prisma.DealCreateWithoutLostReasonRelInput[] | Prisma.DealUncheckedCreateWithoutLostReasonRelInput[]
-  connectOrCreate?: Prisma.DealCreateOrConnectWithoutLostReasonRelInput | Prisma.DealCreateOrConnectWithoutLostReasonRelInput[]
-  createMany?: Prisma.DealCreateManyLostReasonRelInputEnvelope
-  connect?: Prisma.DealWhereUniqueInput | Prisma.DealWhereUniqueInput[]
-}
-
-export type DealUpdateManyWithoutLostReasonRelNestedInput = {
-  create?: Prisma.XOR<Prisma.DealCreateWithoutLostReasonRelInput, Prisma.DealUncheckedCreateWithoutLostReasonRelInput> | Prisma.DealCreateWithoutLostReasonRelInput[] | Prisma.DealUncheckedCreateWithoutLostReasonRelInput[]
-  connectOrCreate?: Prisma.DealCreateOrConnectWithoutLostReasonRelInput | Prisma.DealCreateOrConnectWithoutLostReasonRelInput[]
-  upsert?: Prisma.DealUpsertWithWhereUniqueWithoutLostReasonRelInput | Prisma.DealUpsertWithWhereUniqueWithoutLostReasonRelInput[]
-  createMany?: Prisma.DealCreateManyLostReasonRelInputEnvelope
-  set?: Prisma.DealWhereUniqueInput | Prisma.DealWhereUniqueInput[]
-  disconnect?: Prisma.DealWhereUniqueInput | Prisma.DealWhereUniqueInput[]
-  delete?: Prisma.DealWhereUniqueInput | Prisma.DealWhereUniqueInput[]
-  connect?: Prisma.DealWhereUniqueInput | Prisma.DealWhereUniqueInput[]
-  update?: Prisma.DealUpdateWithWhereUniqueWithoutLostReasonRelInput | Prisma.DealUpdateWithWhereUniqueWithoutLostReasonRelInput[]
-  updateMany?: Prisma.DealUpdateManyWithWhereWithoutLostReasonRelInput | Prisma.DealUpdateManyWithWhereWithoutLostReasonRelInput[]
-  deleteMany?: Prisma.DealScalarWhereInput | Prisma.DealScalarWhereInput[]
-}
-
-export type DealUncheckedUpdateManyWithoutLostReasonRelNestedInput = {
-  create?: Prisma.XOR<Prisma.DealCreateWithoutLostReasonRelInput, Prisma.DealUncheckedCreateWithoutLostReasonRelInput> | Prisma.DealCreateWithoutLostReasonRelInput[] | Prisma.DealUncheckedCreateWithoutLostReasonRelInput[]
-  connectOrCreate?: Prisma.DealCreateOrConnectWithoutLostReasonRelInput | Prisma.DealCreateOrConnectWithoutLostReasonRelInput[]
-  upsert?: Prisma.DealUpsertWithWhereUniqueWithoutLostReasonRelInput | Prisma.DealUpsertWithWhereUniqueWithoutLostReasonRelInput[]
-  createMany?: Prisma.DealCreateManyLostReasonRelInputEnvelope
-  set?: Prisma.DealWhereUniqueInput | Prisma.DealWhereUniqueInput[]
-  disconnect?: Prisma.DealWhereUniqueInput | Prisma.DealWhereUniqueInput[]
-  delete?: Prisma.DealWhereUniqueInput | Prisma.DealWhereUniqueInput[]
-  connect?: Prisma.DealWhereUniqueInput | Prisma.DealWhereUniqueInput[]
-  update?: Prisma.DealUpdateWithWhereUniqueWithoutLostReasonRelInput | Prisma.DealUpdateWithWhereUniqueWithoutLostReasonRelInput[]
-  updateMany?: Prisma.DealUpdateManyWithWhereWithoutLostReasonRelInput | Prisma.DealUpdateManyWithWhereWithoutLostReasonRelInput[]
-  deleteMany?: Prisma.DealScalarWhereInput | Prisma.DealScalarWhereInput[]
-}
-
 export type DealCreateNestedOneWithoutActivitiesInput = {
   create?: Prisma.XOR<Prisma.DealCreateWithoutActivitiesInput, Prisma.DealUncheckedCreateWithoutActivitiesInput>
   connectOrCreate?: Prisma.DealCreateOrConnectWithoutActivitiesInput
@@ -1301,6 +1245,62 @@ export type DealUpdateOneWithoutSentEmailsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DealUpdateToOneWithWhereWithoutSentEmailsInput, Prisma.DealUpdateWithoutSentEmailsInput>, Prisma.DealUncheckedUpdateWithoutSentEmailsInput>
 }
 
+export type DealCreateNestedOneWithoutStageHistoryInput = {
+  create?: Prisma.XOR<Prisma.DealCreateWithoutStageHistoryInput, Prisma.DealUncheckedCreateWithoutStageHistoryInput>
+  connectOrCreate?: Prisma.DealCreateOrConnectWithoutStageHistoryInput
+  connect?: Prisma.DealWhereUniqueInput
+}
+
+export type DealUpdateOneRequiredWithoutStageHistoryNestedInput = {
+  create?: Prisma.XOR<Prisma.DealCreateWithoutStageHistoryInput, Prisma.DealUncheckedCreateWithoutStageHistoryInput>
+  connectOrCreate?: Prisma.DealCreateOrConnectWithoutStageHistoryInput
+  upsert?: Prisma.DealUpsertWithoutStageHistoryInput
+  connect?: Prisma.DealWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DealUpdateToOneWithWhereWithoutStageHistoryInput, Prisma.DealUpdateWithoutStageHistoryInput>, Prisma.DealUncheckedUpdateWithoutStageHistoryInput>
+}
+
+export type DealCreateNestedManyWithoutLostReasonRefInput = {
+  create?: Prisma.XOR<Prisma.DealCreateWithoutLostReasonRefInput, Prisma.DealUncheckedCreateWithoutLostReasonRefInput> | Prisma.DealCreateWithoutLostReasonRefInput[] | Prisma.DealUncheckedCreateWithoutLostReasonRefInput[]
+  connectOrCreate?: Prisma.DealCreateOrConnectWithoutLostReasonRefInput | Prisma.DealCreateOrConnectWithoutLostReasonRefInput[]
+  createMany?: Prisma.DealCreateManyLostReasonRefInputEnvelope
+  connect?: Prisma.DealWhereUniqueInput | Prisma.DealWhereUniqueInput[]
+}
+
+export type DealUncheckedCreateNestedManyWithoutLostReasonRefInput = {
+  create?: Prisma.XOR<Prisma.DealCreateWithoutLostReasonRefInput, Prisma.DealUncheckedCreateWithoutLostReasonRefInput> | Prisma.DealCreateWithoutLostReasonRefInput[] | Prisma.DealUncheckedCreateWithoutLostReasonRefInput[]
+  connectOrCreate?: Prisma.DealCreateOrConnectWithoutLostReasonRefInput | Prisma.DealCreateOrConnectWithoutLostReasonRefInput[]
+  createMany?: Prisma.DealCreateManyLostReasonRefInputEnvelope
+  connect?: Prisma.DealWhereUniqueInput | Prisma.DealWhereUniqueInput[]
+}
+
+export type DealUpdateManyWithoutLostReasonRefNestedInput = {
+  create?: Prisma.XOR<Prisma.DealCreateWithoutLostReasonRefInput, Prisma.DealUncheckedCreateWithoutLostReasonRefInput> | Prisma.DealCreateWithoutLostReasonRefInput[] | Prisma.DealUncheckedCreateWithoutLostReasonRefInput[]
+  connectOrCreate?: Prisma.DealCreateOrConnectWithoutLostReasonRefInput | Prisma.DealCreateOrConnectWithoutLostReasonRefInput[]
+  upsert?: Prisma.DealUpsertWithWhereUniqueWithoutLostReasonRefInput | Prisma.DealUpsertWithWhereUniqueWithoutLostReasonRefInput[]
+  createMany?: Prisma.DealCreateManyLostReasonRefInputEnvelope
+  set?: Prisma.DealWhereUniqueInput | Prisma.DealWhereUniqueInput[]
+  disconnect?: Prisma.DealWhereUniqueInput | Prisma.DealWhereUniqueInput[]
+  delete?: Prisma.DealWhereUniqueInput | Prisma.DealWhereUniqueInput[]
+  connect?: Prisma.DealWhereUniqueInput | Prisma.DealWhereUniqueInput[]
+  update?: Prisma.DealUpdateWithWhereUniqueWithoutLostReasonRefInput | Prisma.DealUpdateWithWhereUniqueWithoutLostReasonRefInput[]
+  updateMany?: Prisma.DealUpdateManyWithWhereWithoutLostReasonRefInput | Prisma.DealUpdateManyWithWhereWithoutLostReasonRefInput[]
+  deleteMany?: Prisma.DealScalarWhereInput | Prisma.DealScalarWhereInput[]
+}
+
+export type DealUncheckedUpdateManyWithoutLostReasonRefNestedInput = {
+  create?: Prisma.XOR<Prisma.DealCreateWithoutLostReasonRefInput, Prisma.DealUncheckedCreateWithoutLostReasonRefInput> | Prisma.DealCreateWithoutLostReasonRefInput[] | Prisma.DealUncheckedCreateWithoutLostReasonRefInput[]
+  connectOrCreate?: Prisma.DealCreateOrConnectWithoutLostReasonRefInput | Prisma.DealCreateOrConnectWithoutLostReasonRefInput[]
+  upsert?: Prisma.DealUpsertWithWhereUniqueWithoutLostReasonRefInput | Prisma.DealUpsertWithWhereUniqueWithoutLostReasonRefInput[]
+  createMany?: Prisma.DealCreateManyLostReasonRefInputEnvelope
+  set?: Prisma.DealWhereUniqueInput | Prisma.DealWhereUniqueInput[]
+  disconnect?: Prisma.DealWhereUniqueInput | Prisma.DealWhereUniqueInput[]
+  delete?: Prisma.DealWhereUniqueInput | Prisma.DealWhereUniqueInput[]
+  connect?: Prisma.DealWhereUniqueInput | Prisma.DealWhereUniqueInput[]
+  update?: Prisma.DealUpdateWithWhereUniqueWithoutLostReasonRefInput | Prisma.DealUpdateWithWhereUniqueWithoutLostReasonRefInput[]
+  updateMany?: Prisma.DealUpdateManyWithWhereWithoutLostReasonRefInput | Prisma.DealUpdateManyWithWhereWithoutLostReasonRefInput[]
+  deleteMany?: Prisma.DealScalarWhereInput | Prisma.DealScalarWhereInput[]
+}
+
 export type DealCreateWithoutOrganizationInput = {
   id?: string
   name: string
@@ -1324,12 +1324,12 @@ export type DealCreateWithoutOrganizationInput = {
   pipeline: Prisma.PipelineCreateNestedOneWithoutDealsInput
   owner?: Prisma.UserCreateNestedOneWithoutOwnedDealsInput
   source?: Prisma.LeadSourceCreateNestedOneWithoutDealsInput
-  lostReasonRel?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  lostReasonRef?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
   activities?: Prisma.ActivityCreateNestedManyWithoutDealInput
   notes?: Prisma.NoteCreateNestedManyWithoutDealInput
   lead?: Prisma.LeadCreateNestedOneWithoutDealsInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutOrganizationInput = {
@@ -1357,10 +1357,10 @@ export type DealUncheckedCreateWithoutOrganizationInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutDealInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutDealInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutOrganizationInput = {
@@ -1442,12 +1442,12 @@ export type DealCreateWithoutOwnerInput = {
   stage: Prisma.StageCreateNestedOneWithoutDealsInput
   pipeline: Prisma.PipelineCreateNestedOneWithoutDealsInput
   source?: Prisma.LeadSourceCreateNestedOneWithoutDealsInput
-  lostReasonRel?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  lostReasonRef?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
   activities?: Prisma.ActivityCreateNestedManyWithoutDealInput
   notes?: Prisma.NoteCreateNestedManyWithoutDealInput
   lead?: Prisma.LeadCreateNestedOneWithoutDealsInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutOwnerInput = {
@@ -1475,10 +1475,10 @@ export type DealUncheckedCreateWithoutOwnerInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutDealInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutDealInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutOwnerInput = {
@@ -1529,12 +1529,12 @@ export type DealCreateWithoutCompanyInput = {
   pipeline: Prisma.PipelineCreateNestedOneWithoutDealsInput
   owner?: Prisma.UserCreateNestedOneWithoutOwnedDealsInput
   source?: Prisma.LeadSourceCreateNestedOneWithoutDealsInput
-  lostReasonRel?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  lostReasonRef?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
   activities?: Prisma.ActivityCreateNestedManyWithoutDealInput
   notes?: Prisma.NoteCreateNestedManyWithoutDealInput
   lead?: Prisma.LeadCreateNestedOneWithoutDealsInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutCompanyInput = {
@@ -1562,10 +1562,10 @@ export type DealUncheckedCreateWithoutCompanyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutDealInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutDealInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutCompanyInput = {
@@ -1616,12 +1616,12 @@ export type DealCreateWithoutContactInput = {
   pipeline: Prisma.PipelineCreateNestedOneWithoutDealsInput
   owner?: Prisma.UserCreateNestedOneWithoutOwnedDealsInput
   source?: Prisma.LeadSourceCreateNestedOneWithoutDealsInput
-  lostReasonRel?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  lostReasonRef?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
   activities?: Prisma.ActivityCreateNestedManyWithoutDealInput
   notes?: Prisma.NoteCreateNestedManyWithoutDealInput
   lead?: Prisma.LeadCreateNestedOneWithoutDealsInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutContactInput = {
@@ -1649,10 +1649,10 @@ export type DealUncheckedCreateWithoutContactInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutDealInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutDealInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutContactInput = {
@@ -1703,12 +1703,12 @@ export type DealCreateWithoutSourceInput = {
   stage: Prisma.StageCreateNestedOneWithoutDealsInput
   pipeline: Prisma.PipelineCreateNestedOneWithoutDealsInput
   owner?: Prisma.UserCreateNestedOneWithoutOwnedDealsInput
-  lostReasonRel?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  lostReasonRef?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
   activities?: Prisma.ActivityCreateNestedManyWithoutDealInput
   notes?: Prisma.NoteCreateNestedManyWithoutDealInput
   lead?: Prisma.LeadCreateNestedOneWithoutDealsInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutSourceInput = {
@@ -1736,10 +1736,10 @@ export type DealUncheckedCreateWithoutSourceInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutDealInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutDealInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutSourceInput = {
@@ -1791,11 +1791,11 @@ export type DealCreateWithoutLeadInput = {
   pipeline: Prisma.PipelineCreateNestedOneWithoutDealsInput
   owner?: Prisma.UserCreateNestedOneWithoutOwnedDealsInput
   source?: Prisma.LeadSourceCreateNestedOneWithoutDealsInput
-  lostReasonRel?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  lostReasonRef?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
   activities?: Prisma.ActivityCreateNestedManyWithoutDealInput
   notes?: Prisma.NoteCreateNestedManyWithoutDealInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutLeadInput = {
@@ -1823,10 +1823,10 @@ export type DealUncheckedCreateWithoutLeadInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutDealInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutDealInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutLeadInput = {
@@ -1877,12 +1877,12 @@ export type DealCreateWithoutPipelineInput = {
   stage: Prisma.StageCreateNestedOneWithoutDealsInput
   owner?: Prisma.UserCreateNestedOneWithoutOwnedDealsInput
   source?: Prisma.LeadSourceCreateNestedOneWithoutDealsInput
-  lostReasonRel?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  lostReasonRef?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
   activities?: Prisma.ActivityCreateNestedManyWithoutDealInput
   notes?: Prisma.NoteCreateNestedManyWithoutDealInput
   lead?: Prisma.LeadCreateNestedOneWithoutDealsInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutPipelineInput = {
@@ -1910,10 +1910,10 @@ export type DealUncheckedCreateWithoutPipelineInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutDealInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutDealInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutPipelineInput = {
@@ -1964,12 +1964,12 @@ export type DealCreateWithoutStageInput = {
   pipeline: Prisma.PipelineCreateNestedOneWithoutDealsInput
   owner?: Prisma.UserCreateNestedOneWithoutOwnedDealsInput
   source?: Prisma.LeadSourceCreateNestedOneWithoutDealsInput
-  lostReasonRel?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  lostReasonRef?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
   activities?: Prisma.ActivityCreateNestedManyWithoutDealInput
   notes?: Prisma.NoteCreateNestedManyWithoutDealInput
   lead?: Prisma.LeadCreateNestedOneWithoutDealsInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutStageInput = {
@@ -1997,10 +1997,10 @@ export type DealUncheckedCreateWithoutStageInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutDealInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutDealInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutStageInput = {
@@ -2028,6 +2028,426 @@ export type DealUpdateManyWithWhereWithoutStageInput = {
   data: Prisma.XOR<Prisma.DealUpdateManyMutationInput, Prisma.DealUncheckedUpdateManyWithoutStageInput>
 }
 
+export type DealCreateWithoutActivitiesInput = {
+  id?: string
+  name: string
+  value?: number
+  currency?: string
+  status?: string
+  probability?: number
+  expectedCloseDate?: Date | string | null
+  actualCloseDate?: Date | string | null
+  wonAt?: Date | string | null
+  lostAt?: Date | string | null
+  lostReason?: string
+  nextStep?: string
+  summary?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  organization: Prisma.OrganizationCreateNestedOneWithoutDealsInput
+  contact?: Prisma.ContactCreateNestedOneWithoutDealsInput
+  company?: Prisma.CompanyCreateNestedOneWithoutDealsInput
+  stage: Prisma.StageCreateNestedOneWithoutDealsInput
+  pipeline: Prisma.PipelineCreateNestedOneWithoutDealsInput
+  owner?: Prisma.UserCreateNestedOneWithoutOwnedDealsInput
+  source?: Prisma.LeadSourceCreateNestedOneWithoutDealsInput
+  lostReasonRef?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
+  notes?: Prisma.NoteCreateNestedManyWithoutDealInput
+  lead?: Prisma.LeadCreateNestedOneWithoutDealsInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
+}
+
+export type DealUncheckedCreateWithoutActivitiesInput = {
+  id?: string
+  organizationId: string
+  name: string
+  contactId?: string | null
+  companyId?: string | null
+  leadId?: string | null
+  stageId: string
+  pipelineId: string
+  ownerId?: string | null
+  sourceId?: string | null
+  lostReasonId?: string | null
+  value?: number
+  currency?: string
+  status?: string
+  probability?: number
+  expectedCloseDate?: Date | string | null
+  actualCloseDate?: Date | string | null
+  wonAt?: Date | string | null
+  lostAt?: Date | string | null
+  lostReason?: string
+  nextStep?: string
+  summary?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutDealInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
+}
+
+export type DealCreateOrConnectWithoutActivitiesInput = {
+  where: Prisma.DealWhereUniqueInput
+  create: Prisma.XOR<Prisma.DealCreateWithoutActivitiesInput, Prisma.DealUncheckedCreateWithoutActivitiesInput>
+}
+
+export type DealUpsertWithoutActivitiesInput = {
+  update: Prisma.XOR<Prisma.DealUpdateWithoutActivitiesInput, Prisma.DealUncheckedUpdateWithoutActivitiesInput>
+  create: Prisma.XOR<Prisma.DealCreateWithoutActivitiesInput, Prisma.DealUncheckedCreateWithoutActivitiesInput>
+  where?: Prisma.DealWhereInput
+}
+
+export type DealUpdateToOneWithWhereWithoutActivitiesInput = {
+  where?: Prisma.DealWhereInput
+  data: Prisma.XOR<Prisma.DealUpdateWithoutActivitiesInput, Prisma.DealUncheckedUpdateWithoutActivitiesInput>
+}
+
+export type DealUpdateWithoutActivitiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  value?: Prisma.FloatFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  probability?: Prisma.IntFieldUpdateOperationsInput | number
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wonAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.StringFieldUpdateOperationsInput | string
+  nextStep?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutDealsNestedInput
+  contact?: Prisma.ContactUpdateOneWithoutDealsNestedInput
+  company?: Prisma.CompanyUpdateOneWithoutDealsNestedInput
+  stage?: Prisma.StageUpdateOneRequiredWithoutDealsNestedInput
+  pipeline?: Prisma.PipelineUpdateOneRequiredWithoutDealsNestedInput
+  owner?: Prisma.UserUpdateOneWithoutOwnedDealsNestedInput
+  source?: Prisma.LeadSourceUpdateOneWithoutDealsNestedInput
+  lostReasonRef?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutDealNestedInput
+  lead?: Prisma.LeadUpdateOneWithoutDealsNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
+}
+
+export type DealUncheckedUpdateWithoutActivitiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stageId?: Prisma.StringFieldUpdateOperationsInput | string
+  pipelineId?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lostReasonId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  value?: Prisma.FloatFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  probability?: Prisma.IntFieldUpdateOperationsInput | number
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wonAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.StringFieldUpdateOperationsInput | string
+  nextStep?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutDealNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
+}
+
+export type DealCreateWithoutNotesInput = {
+  id?: string
+  name: string
+  value?: number
+  currency?: string
+  status?: string
+  probability?: number
+  expectedCloseDate?: Date | string | null
+  actualCloseDate?: Date | string | null
+  wonAt?: Date | string | null
+  lostAt?: Date | string | null
+  lostReason?: string
+  nextStep?: string
+  summary?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  organization: Prisma.OrganizationCreateNestedOneWithoutDealsInput
+  contact?: Prisma.ContactCreateNestedOneWithoutDealsInput
+  company?: Prisma.CompanyCreateNestedOneWithoutDealsInput
+  stage: Prisma.StageCreateNestedOneWithoutDealsInput
+  pipeline: Prisma.PipelineCreateNestedOneWithoutDealsInput
+  owner?: Prisma.UserCreateNestedOneWithoutOwnedDealsInput
+  source?: Prisma.LeadSourceCreateNestedOneWithoutDealsInput
+  lostReasonRef?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutDealInput
+  lead?: Prisma.LeadCreateNestedOneWithoutDealsInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
+}
+
+export type DealUncheckedCreateWithoutNotesInput = {
+  id?: string
+  organizationId: string
+  name: string
+  contactId?: string | null
+  companyId?: string | null
+  leadId?: string | null
+  stageId: string
+  pipelineId: string
+  ownerId?: string | null
+  sourceId?: string | null
+  lostReasonId?: string | null
+  value?: number
+  currency?: string
+  status?: string
+  probability?: number
+  expectedCloseDate?: Date | string | null
+  actualCloseDate?: Date | string | null
+  wonAt?: Date | string | null
+  lostAt?: Date | string | null
+  lostReason?: string
+  nextStep?: string
+  summary?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutDealInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
+}
+
+export type DealCreateOrConnectWithoutNotesInput = {
+  where: Prisma.DealWhereUniqueInput
+  create: Prisma.XOR<Prisma.DealCreateWithoutNotesInput, Prisma.DealUncheckedCreateWithoutNotesInput>
+}
+
+export type DealUpsertWithoutNotesInput = {
+  update: Prisma.XOR<Prisma.DealUpdateWithoutNotesInput, Prisma.DealUncheckedUpdateWithoutNotesInput>
+  create: Prisma.XOR<Prisma.DealCreateWithoutNotesInput, Prisma.DealUncheckedCreateWithoutNotesInput>
+  where?: Prisma.DealWhereInput
+}
+
+export type DealUpdateToOneWithWhereWithoutNotesInput = {
+  where?: Prisma.DealWhereInput
+  data: Prisma.XOR<Prisma.DealUpdateWithoutNotesInput, Prisma.DealUncheckedUpdateWithoutNotesInput>
+}
+
+export type DealUpdateWithoutNotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  value?: Prisma.FloatFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  probability?: Prisma.IntFieldUpdateOperationsInput | number
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wonAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.StringFieldUpdateOperationsInput | string
+  nextStep?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutDealsNestedInput
+  contact?: Prisma.ContactUpdateOneWithoutDealsNestedInput
+  company?: Prisma.CompanyUpdateOneWithoutDealsNestedInput
+  stage?: Prisma.StageUpdateOneRequiredWithoutDealsNestedInput
+  pipeline?: Prisma.PipelineUpdateOneRequiredWithoutDealsNestedInput
+  owner?: Prisma.UserUpdateOneWithoutOwnedDealsNestedInput
+  source?: Prisma.LeadSourceUpdateOneWithoutDealsNestedInput
+  lostReasonRef?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutDealNestedInput
+  lead?: Prisma.LeadUpdateOneWithoutDealsNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
+}
+
+export type DealUncheckedUpdateWithoutNotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stageId?: Prisma.StringFieldUpdateOperationsInput | string
+  pipelineId?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lostReasonId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  value?: Prisma.FloatFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  probability?: Prisma.IntFieldUpdateOperationsInput | number
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wonAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.StringFieldUpdateOperationsInput | string
+  nextStep?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutDealNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
+}
+
+export type DealCreateWithoutSentEmailsInput = {
+  id?: string
+  name: string
+  value?: number
+  currency?: string
+  status?: string
+  probability?: number
+  expectedCloseDate?: Date | string | null
+  actualCloseDate?: Date | string | null
+  wonAt?: Date | string | null
+  lostAt?: Date | string | null
+  lostReason?: string
+  nextStep?: string
+  summary?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  organization: Prisma.OrganizationCreateNestedOneWithoutDealsInput
+  contact?: Prisma.ContactCreateNestedOneWithoutDealsInput
+  company?: Prisma.CompanyCreateNestedOneWithoutDealsInput
+  stage: Prisma.StageCreateNestedOneWithoutDealsInput
+  pipeline: Prisma.PipelineCreateNestedOneWithoutDealsInput
+  owner?: Prisma.UserCreateNestedOneWithoutOwnedDealsInput
+  source?: Prisma.LeadSourceCreateNestedOneWithoutDealsInput
+  lostReasonRef?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutDealInput
+  notes?: Prisma.NoteCreateNestedManyWithoutDealInput
+  lead?: Prisma.LeadCreateNestedOneWithoutDealsInput
+}
+
+export type DealUncheckedCreateWithoutSentEmailsInput = {
+  id?: string
+  organizationId: string
+  name: string
+  contactId?: string | null
+  companyId?: string | null
+  leadId?: string | null
+  stageId: string
+  pipelineId: string
+  ownerId?: string | null
+  sourceId?: string | null
+  lostReasonId?: string | null
+  value?: number
+  currency?: string
+  status?: string
+  probability?: number
+  expectedCloseDate?: Date | string | null
+  actualCloseDate?: Date | string | null
+  wonAt?: Date | string | null
+  lostAt?: Date | string | null
+  lostReason?: string
+  nextStep?: string
+  summary?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutDealInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutDealInput
+}
+
+export type DealCreateOrConnectWithoutSentEmailsInput = {
+  where: Prisma.DealWhereUniqueInput
+  create: Prisma.XOR<Prisma.DealCreateWithoutSentEmailsInput, Prisma.DealUncheckedCreateWithoutSentEmailsInput>
+}
+
+export type DealUpsertWithoutSentEmailsInput = {
+  update: Prisma.XOR<Prisma.DealUpdateWithoutSentEmailsInput, Prisma.DealUncheckedUpdateWithoutSentEmailsInput>
+  create: Prisma.XOR<Prisma.DealCreateWithoutSentEmailsInput, Prisma.DealUncheckedCreateWithoutSentEmailsInput>
+  where?: Prisma.DealWhereInput
+}
+
+export type DealUpdateToOneWithWhereWithoutSentEmailsInput = {
+  where?: Prisma.DealWhereInput
+  data: Prisma.XOR<Prisma.DealUpdateWithoutSentEmailsInput, Prisma.DealUncheckedUpdateWithoutSentEmailsInput>
+}
+
+export type DealUpdateWithoutSentEmailsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  value?: Prisma.FloatFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  probability?: Prisma.IntFieldUpdateOperationsInput | number
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wonAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.StringFieldUpdateOperationsInput | string
+  nextStep?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutDealsNestedInput
+  contact?: Prisma.ContactUpdateOneWithoutDealsNestedInput
+  company?: Prisma.CompanyUpdateOneWithoutDealsNestedInput
+  stage?: Prisma.StageUpdateOneRequiredWithoutDealsNestedInput
+  pipeline?: Prisma.PipelineUpdateOneRequiredWithoutDealsNestedInput
+  owner?: Prisma.UserUpdateOneWithoutOwnedDealsNestedInput
+  source?: Prisma.LeadSourceUpdateOneWithoutDealsNestedInput
+  lostReasonRef?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutDealNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutDealNestedInput
+  lead?: Prisma.LeadUpdateOneWithoutDealsNestedInput
+}
+
+export type DealUncheckedUpdateWithoutSentEmailsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stageId?: Prisma.StringFieldUpdateOperationsInput | string
+  pipelineId?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lostReasonId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  value?: Prisma.FloatFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  probability?: Prisma.IntFieldUpdateOperationsInput | number
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wonAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.StringFieldUpdateOperationsInput | string
+  nextStep?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutDealNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutDealNestedInput
+}
+
 export type DealCreateWithoutStageHistoryInput = {
   id?: string
   name: string
@@ -2052,7 +2472,7 @@ export type DealCreateWithoutStageHistoryInput = {
   pipeline: Prisma.PipelineCreateNestedOneWithoutDealsInput
   owner?: Prisma.UserCreateNestedOneWithoutOwnedDealsInput
   source?: Prisma.LeadSourceCreateNestedOneWithoutDealsInput
-  lostReasonRel?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  lostReasonRef?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
   activities?: Prisma.ActivityCreateNestedManyWithoutDealInput
   notes?: Prisma.NoteCreateNestedManyWithoutDealInput
   lead?: Prisma.LeadCreateNestedOneWithoutDealsInput
@@ -2130,7 +2550,7 @@ export type DealUpdateWithoutStageHistoryInput = {
   pipeline?: Prisma.PipelineUpdateOneRequiredWithoutDealsNestedInput
   owner?: Prisma.UserUpdateOneWithoutOwnedDealsNestedInput
   source?: Prisma.LeadSourceUpdateOneWithoutDealsNestedInput
-  lostReasonRel?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  lostReasonRef?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutDealNestedInput
   notes?: Prisma.NoteUpdateManyWithoutDealNestedInput
   lead?: Prisma.LeadUpdateOneWithoutDealsNestedInput
@@ -2168,7 +2588,7 @@ export type DealUncheckedUpdateWithoutStageHistoryInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
 }
 
-export type DealCreateWithoutLostReasonRelInput = {
+export type DealCreateWithoutLostReasonRefInput = {
   id?: string
   name: string
   value?: number
@@ -2192,14 +2612,14 @@ export type DealCreateWithoutLostReasonRelInput = {
   pipeline: Prisma.PipelineCreateNestedOneWithoutDealsInput
   owner?: Prisma.UserCreateNestedOneWithoutOwnedDealsInput
   source?: Prisma.LeadSourceCreateNestedOneWithoutDealsInput
+  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
   activities?: Prisma.ActivityCreateNestedManyWithoutDealInput
   notes?: Prisma.NoteCreateNestedManyWithoutDealInput
   lead?: Prisma.LeadCreateNestedOneWithoutDealsInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
 }
 
-export type DealUncheckedCreateWithoutLostReasonRelInput = {
+export type DealUncheckedCreateWithoutLostReasonRefInput = {
   id?: string
   organizationId: string
   name: string
@@ -2224,455 +2644,35 @@ export type DealUncheckedCreateWithoutLostReasonRelInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutDealInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutDealInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
 }
 
-export type DealCreateOrConnectWithoutLostReasonRelInput = {
+export type DealCreateOrConnectWithoutLostReasonRefInput = {
   where: Prisma.DealWhereUniqueInput
-  create: Prisma.XOR<Prisma.DealCreateWithoutLostReasonRelInput, Prisma.DealUncheckedCreateWithoutLostReasonRelInput>
+  create: Prisma.XOR<Prisma.DealCreateWithoutLostReasonRefInput, Prisma.DealUncheckedCreateWithoutLostReasonRefInput>
 }
 
-export type DealCreateManyLostReasonRelInputEnvelope = {
-  data: Prisma.DealCreateManyLostReasonRelInput | Prisma.DealCreateManyLostReasonRelInput[]
+export type DealCreateManyLostReasonRefInputEnvelope = {
+  data: Prisma.DealCreateManyLostReasonRefInput | Prisma.DealCreateManyLostReasonRefInput[]
 }
 
-export type DealUpsertWithWhereUniqueWithoutLostReasonRelInput = {
+export type DealUpsertWithWhereUniqueWithoutLostReasonRefInput = {
   where: Prisma.DealWhereUniqueInput
-  update: Prisma.XOR<Prisma.DealUpdateWithoutLostReasonRelInput, Prisma.DealUncheckedUpdateWithoutLostReasonRelInput>
-  create: Prisma.XOR<Prisma.DealCreateWithoutLostReasonRelInput, Prisma.DealUncheckedCreateWithoutLostReasonRelInput>
+  update: Prisma.XOR<Prisma.DealUpdateWithoutLostReasonRefInput, Prisma.DealUncheckedUpdateWithoutLostReasonRefInput>
+  create: Prisma.XOR<Prisma.DealCreateWithoutLostReasonRefInput, Prisma.DealUncheckedCreateWithoutLostReasonRefInput>
 }
 
-export type DealUpdateWithWhereUniqueWithoutLostReasonRelInput = {
+export type DealUpdateWithWhereUniqueWithoutLostReasonRefInput = {
   where: Prisma.DealWhereUniqueInput
-  data: Prisma.XOR<Prisma.DealUpdateWithoutLostReasonRelInput, Prisma.DealUncheckedUpdateWithoutLostReasonRelInput>
+  data: Prisma.XOR<Prisma.DealUpdateWithoutLostReasonRefInput, Prisma.DealUncheckedUpdateWithoutLostReasonRefInput>
 }
 
-export type DealUpdateManyWithWhereWithoutLostReasonRelInput = {
+export type DealUpdateManyWithWhereWithoutLostReasonRefInput = {
   where: Prisma.DealScalarWhereInput
-  data: Prisma.XOR<Prisma.DealUpdateManyMutationInput, Prisma.DealUncheckedUpdateManyWithoutLostReasonRelInput>
-}
-
-export type DealCreateWithoutActivitiesInput = {
-  id?: string
-  name: string
-  value?: number
-  currency?: string
-  status?: string
-  probability?: number
-  expectedCloseDate?: Date | string | null
-  actualCloseDate?: Date | string | null
-  wonAt?: Date | string | null
-  lostAt?: Date | string | null
-  lostReason?: string
-  nextStep?: string
-  summary?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  organization: Prisma.OrganizationCreateNestedOneWithoutDealsInput
-  contact?: Prisma.ContactCreateNestedOneWithoutDealsInput
-  company?: Prisma.CompanyCreateNestedOneWithoutDealsInput
-  stage: Prisma.StageCreateNestedOneWithoutDealsInput
-  pipeline: Prisma.PipelineCreateNestedOneWithoutDealsInput
-  owner?: Prisma.UserCreateNestedOneWithoutOwnedDealsInput
-  source?: Prisma.LeadSourceCreateNestedOneWithoutDealsInput
-  lostReasonRel?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
-  notes?: Prisma.NoteCreateNestedManyWithoutDealInput
-  lead?: Prisma.LeadCreateNestedOneWithoutDealsInput
-  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
-}
-
-export type DealUncheckedCreateWithoutActivitiesInput = {
-  id?: string
-  organizationId: string
-  name: string
-  contactId?: string | null
-  companyId?: string | null
-  leadId?: string | null
-  stageId: string
-  pipelineId: string
-  ownerId?: string | null
-  sourceId?: string | null
-  lostReasonId?: string | null
-  value?: number
-  currency?: string
-  status?: string
-  probability?: number
-  expectedCloseDate?: Date | string | null
-  actualCloseDate?: Date | string | null
-  wonAt?: Date | string | null
-  lostAt?: Date | string | null
-  lostReason?: string
-  nextStep?: string
-  summary?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutDealInput
-  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
-}
-
-export type DealCreateOrConnectWithoutActivitiesInput = {
-  where: Prisma.DealWhereUniqueInput
-  create: Prisma.XOR<Prisma.DealCreateWithoutActivitiesInput, Prisma.DealUncheckedCreateWithoutActivitiesInput>
-}
-
-export type DealUpsertWithoutActivitiesInput = {
-  update: Prisma.XOR<Prisma.DealUpdateWithoutActivitiesInput, Prisma.DealUncheckedUpdateWithoutActivitiesInput>
-  create: Prisma.XOR<Prisma.DealCreateWithoutActivitiesInput, Prisma.DealUncheckedCreateWithoutActivitiesInput>
-  where?: Prisma.DealWhereInput
-}
-
-export type DealUpdateToOneWithWhereWithoutActivitiesInput = {
-  where?: Prisma.DealWhereInput
-  data: Prisma.XOR<Prisma.DealUpdateWithoutActivitiesInput, Prisma.DealUncheckedUpdateWithoutActivitiesInput>
-}
-
-export type DealUpdateWithoutActivitiesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  value?: Prisma.FloatFieldUpdateOperationsInput | number
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  probability?: Prisma.IntFieldUpdateOperationsInput | number
-  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  wonAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lostAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lostReason?: Prisma.StringFieldUpdateOperationsInput | string
-  nextStep?: Prisma.StringFieldUpdateOperationsInput | string
-  summary?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  organization?: Prisma.OrganizationUpdateOneRequiredWithoutDealsNestedInput
-  contact?: Prisma.ContactUpdateOneWithoutDealsNestedInput
-  company?: Prisma.CompanyUpdateOneWithoutDealsNestedInput
-  stage?: Prisma.StageUpdateOneRequiredWithoutDealsNestedInput
-  pipeline?: Prisma.PipelineUpdateOneRequiredWithoutDealsNestedInput
-  owner?: Prisma.UserUpdateOneWithoutOwnedDealsNestedInput
-  source?: Prisma.LeadSourceUpdateOneWithoutDealsNestedInput
-  lostReasonRel?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutDealNestedInput
-  lead?: Prisma.LeadUpdateOneWithoutDealsNestedInput
-  sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
-}
-
-export type DealUncheckedUpdateWithoutActivitiesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  companyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stageId?: Prisma.StringFieldUpdateOperationsInput | string
-  pipelineId?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lostReasonId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  value?: Prisma.FloatFieldUpdateOperationsInput | number
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  probability?: Prisma.IntFieldUpdateOperationsInput | number
-  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  wonAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lostAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lostReason?: Prisma.StringFieldUpdateOperationsInput | string
-  nextStep?: Prisma.StringFieldUpdateOperationsInput | string
-  summary?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutDealNestedInput
-  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
-}
-
-export type DealCreateWithoutNotesInput = {
-  id?: string
-  name: string
-  value?: number
-  currency?: string
-  status?: string
-  probability?: number
-  expectedCloseDate?: Date | string | null
-  actualCloseDate?: Date | string | null
-  wonAt?: Date | string | null
-  lostAt?: Date | string | null
-  lostReason?: string
-  nextStep?: string
-  summary?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  organization: Prisma.OrganizationCreateNestedOneWithoutDealsInput
-  contact?: Prisma.ContactCreateNestedOneWithoutDealsInput
-  company?: Prisma.CompanyCreateNestedOneWithoutDealsInput
-  stage: Prisma.StageCreateNestedOneWithoutDealsInput
-  pipeline: Prisma.PipelineCreateNestedOneWithoutDealsInput
-  owner?: Prisma.UserCreateNestedOneWithoutOwnedDealsInput
-  source?: Prisma.LeadSourceCreateNestedOneWithoutDealsInput
-  lostReasonRel?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
-  activities?: Prisma.ActivityCreateNestedManyWithoutDealInput
-  lead?: Prisma.LeadCreateNestedOneWithoutDealsInput
-  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
-}
-
-export type DealUncheckedCreateWithoutNotesInput = {
-  id?: string
-  organizationId: string
-  name: string
-  contactId?: string | null
-  companyId?: string | null
-  leadId?: string | null
-  stageId: string
-  pipelineId: string
-  ownerId?: string | null
-  sourceId?: string | null
-  lostReasonId?: string | null
-  value?: number
-  currency?: string
-  status?: string
-  probability?: number
-  expectedCloseDate?: Date | string | null
-  actualCloseDate?: Date | string | null
-  wonAt?: Date | string | null
-  lostAt?: Date | string | null
-  lostReason?: string
-  nextStep?: string
-  summary?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutDealInput
-  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
-}
-
-export type DealCreateOrConnectWithoutNotesInput = {
-  where: Prisma.DealWhereUniqueInput
-  create: Prisma.XOR<Prisma.DealCreateWithoutNotesInput, Prisma.DealUncheckedCreateWithoutNotesInput>
-}
-
-export type DealUpsertWithoutNotesInput = {
-  update: Prisma.XOR<Prisma.DealUpdateWithoutNotesInput, Prisma.DealUncheckedUpdateWithoutNotesInput>
-  create: Prisma.XOR<Prisma.DealCreateWithoutNotesInput, Prisma.DealUncheckedCreateWithoutNotesInput>
-  where?: Prisma.DealWhereInput
-}
-
-export type DealUpdateToOneWithWhereWithoutNotesInput = {
-  where?: Prisma.DealWhereInput
-  data: Prisma.XOR<Prisma.DealUpdateWithoutNotesInput, Prisma.DealUncheckedUpdateWithoutNotesInput>
-}
-
-export type DealUpdateWithoutNotesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  value?: Prisma.FloatFieldUpdateOperationsInput | number
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  probability?: Prisma.IntFieldUpdateOperationsInput | number
-  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  wonAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lostAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lostReason?: Prisma.StringFieldUpdateOperationsInput | string
-  nextStep?: Prisma.StringFieldUpdateOperationsInput | string
-  summary?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  organization?: Prisma.OrganizationUpdateOneRequiredWithoutDealsNestedInput
-  contact?: Prisma.ContactUpdateOneWithoutDealsNestedInput
-  company?: Prisma.CompanyUpdateOneWithoutDealsNestedInput
-  stage?: Prisma.StageUpdateOneRequiredWithoutDealsNestedInput
-  pipeline?: Prisma.PipelineUpdateOneRequiredWithoutDealsNestedInput
-  owner?: Prisma.UserUpdateOneWithoutOwnedDealsNestedInput
-  source?: Prisma.LeadSourceUpdateOneWithoutDealsNestedInput
-  lostReasonRel?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
-  activities?: Prisma.ActivityUpdateManyWithoutDealNestedInput
-  lead?: Prisma.LeadUpdateOneWithoutDealsNestedInput
-  sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
-}
-
-export type DealUncheckedUpdateWithoutNotesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  companyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stageId?: Prisma.StringFieldUpdateOperationsInput | string
-  pipelineId?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lostReasonId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  value?: Prisma.FloatFieldUpdateOperationsInput | number
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  probability?: Prisma.IntFieldUpdateOperationsInput | number
-  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  wonAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lostAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lostReason?: Prisma.StringFieldUpdateOperationsInput | string
-  nextStep?: Prisma.StringFieldUpdateOperationsInput | string
-  summary?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  activities?: Prisma.ActivityUncheckedUpdateManyWithoutDealNestedInput
-  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
-}
-
-export type DealCreateWithoutSentEmailsInput = {
-  id?: string
-  name: string
-  value?: number
-  currency?: string
-  status?: string
-  probability?: number
-  expectedCloseDate?: Date | string | null
-  actualCloseDate?: Date | string | null
-  wonAt?: Date | string | null
-  lostAt?: Date | string | null
-  lostReason?: string
-  nextStep?: string
-  summary?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  organization: Prisma.OrganizationCreateNestedOneWithoutDealsInput
-  contact?: Prisma.ContactCreateNestedOneWithoutDealsInput
-  company?: Prisma.CompanyCreateNestedOneWithoutDealsInput
-  stage: Prisma.StageCreateNestedOneWithoutDealsInput
-  pipeline: Prisma.PipelineCreateNestedOneWithoutDealsInput
-  owner?: Prisma.UserCreateNestedOneWithoutOwnedDealsInput
-  source?: Prisma.LeadSourceCreateNestedOneWithoutDealsInput
-  lostReasonRel?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
-  activities?: Prisma.ActivityCreateNestedManyWithoutDealInput
-  notes?: Prisma.NoteCreateNestedManyWithoutDealInput
-  lead?: Prisma.LeadCreateNestedOneWithoutDealsInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
-}
-
-export type DealUncheckedCreateWithoutSentEmailsInput = {
-  id?: string
-  organizationId: string
-  name: string
-  contactId?: string | null
-  companyId?: string | null
-  leadId?: string | null
-  stageId: string
-  pipelineId: string
-  ownerId?: string | null
-  sourceId?: string | null
-  lostReasonId?: string | null
-  value?: number
-  currency?: string
-  status?: string
-  probability?: number
-  expectedCloseDate?: Date | string | null
-  actualCloseDate?: Date | string | null
-  wonAt?: Date | string | null
-  lostAt?: Date | string | null
-  lostReason?: string
-  nextStep?: string
-  summary?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutDealInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutDealInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
-}
-
-export type DealCreateOrConnectWithoutSentEmailsInput = {
-  where: Prisma.DealWhereUniqueInput
-  create: Prisma.XOR<Prisma.DealCreateWithoutSentEmailsInput, Prisma.DealUncheckedCreateWithoutSentEmailsInput>
-}
-
-export type DealUpsertWithoutSentEmailsInput = {
-  update: Prisma.XOR<Prisma.DealUpdateWithoutSentEmailsInput, Prisma.DealUncheckedUpdateWithoutSentEmailsInput>
-  create: Prisma.XOR<Prisma.DealCreateWithoutSentEmailsInput, Prisma.DealUncheckedCreateWithoutSentEmailsInput>
-  where?: Prisma.DealWhereInput
-}
-
-export type DealUpdateToOneWithWhereWithoutSentEmailsInput = {
-  where?: Prisma.DealWhereInput
-  data: Prisma.XOR<Prisma.DealUpdateWithoutSentEmailsInput, Prisma.DealUncheckedUpdateWithoutSentEmailsInput>
-}
-
-export type DealUpdateWithoutSentEmailsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  value?: Prisma.FloatFieldUpdateOperationsInput | number
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  probability?: Prisma.IntFieldUpdateOperationsInput | number
-  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  wonAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lostAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lostReason?: Prisma.StringFieldUpdateOperationsInput | string
-  nextStep?: Prisma.StringFieldUpdateOperationsInput | string
-  summary?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  organization?: Prisma.OrganizationUpdateOneRequiredWithoutDealsNestedInput
-  contact?: Prisma.ContactUpdateOneWithoutDealsNestedInput
-  company?: Prisma.CompanyUpdateOneWithoutDealsNestedInput
-  stage?: Prisma.StageUpdateOneRequiredWithoutDealsNestedInput
-  pipeline?: Prisma.PipelineUpdateOneRequiredWithoutDealsNestedInput
-  owner?: Prisma.UserUpdateOneWithoutOwnedDealsNestedInput
-  source?: Prisma.LeadSourceUpdateOneWithoutDealsNestedInput
-  lostReasonRel?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
-  activities?: Prisma.ActivityUpdateManyWithoutDealNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutDealNestedInput
-  lead?: Prisma.LeadUpdateOneWithoutDealsNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
-}
-
-export type DealUncheckedUpdateWithoutSentEmailsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  companyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stageId?: Prisma.StringFieldUpdateOperationsInput | string
-  pipelineId?: Prisma.StringFieldUpdateOperationsInput | string
-  ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lostReasonId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  value?: Prisma.FloatFieldUpdateOperationsInput | number
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  probability?: Prisma.IntFieldUpdateOperationsInput | number
-  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  wonAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lostAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lostReason?: Prisma.StringFieldUpdateOperationsInput | string
-  nextStep?: Prisma.StringFieldUpdateOperationsInput | string
-  summary?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  activities?: Prisma.ActivityUncheckedUpdateManyWithoutDealNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
+  data: Prisma.XOR<Prisma.DealUpdateManyMutationInput, Prisma.DealUncheckedUpdateManyWithoutLostReasonRefInput>
 }
 
 export type DealCreateManyOrganizationInput = {
@@ -2725,12 +2725,12 @@ export type DealUpdateWithoutOrganizationInput = {
   pipeline?: Prisma.PipelineUpdateOneRequiredWithoutDealsNestedInput
   owner?: Prisma.UserUpdateOneWithoutOwnedDealsNestedInput
   source?: Prisma.LeadSourceUpdateOneWithoutDealsNestedInput
-  lostReasonRel?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  lostReasonRef?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutDealNestedInput
   notes?: Prisma.NoteUpdateManyWithoutDealNestedInput
   lead?: Prisma.LeadUpdateOneWithoutDealsNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutOrganizationInput = {
@@ -2758,10 +2758,10 @@ export type DealUncheckedUpdateWithoutOrganizationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutDealNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutDealNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateManyWithoutOrganizationInput = {
@@ -2841,12 +2841,12 @@ export type DealUpdateWithoutOwnerInput = {
   stage?: Prisma.StageUpdateOneRequiredWithoutDealsNestedInput
   pipeline?: Prisma.PipelineUpdateOneRequiredWithoutDealsNestedInput
   source?: Prisma.LeadSourceUpdateOneWithoutDealsNestedInput
-  lostReasonRel?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  lostReasonRef?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutDealNestedInput
   notes?: Prisma.NoteUpdateManyWithoutDealNestedInput
   lead?: Prisma.LeadUpdateOneWithoutDealsNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutOwnerInput = {
@@ -2874,10 +2874,10 @@ export type DealUncheckedUpdateWithoutOwnerInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutDealNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutDealNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateManyWithoutOwnerInput = {
@@ -2957,12 +2957,12 @@ export type DealUpdateWithoutCompanyInput = {
   pipeline?: Prisma.PipelineUpdateOneRequiredWithoutDealsNestedInput
   owner?: Prisma.UserUpdateOneWithoutOwnedDealsNestedInput
   source?: Prisma.LeadSourceUpdateOneWithoutDealsNestedInput
-  lostReasonRel?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  lostReasonRef?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutDealNestedInput
   notes?: Prisma.NoteUpdateManyWithoutDealNestedInput
   lead?: Prisma.LeadUpdateOneWithoutDealsNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutCompanyInput = {
@@ -2990,10 +2990,10 @@ export type DealUncheckedUpdateWithoutCompanyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutDealNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutDealNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateManyWithoutCompanyInput = {
@@ -3073,12 +3073,12 @@ export type DealUpdateWithoutContactInput = {
   pipeline?: Prisma.PipelineUpdateOneRequiredWithoutDealsNestedInput
   owner?: Prisma.UserUpdateOneWithoutOwnedDealsNestedInput
   source?: Prisma.LeadSourceUpdateOneWithoutDealsNestedInput
-  lostReasonRel?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  lostReasonRef?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutDealNestedInput
   notes?: Prisma.NoteUpdateManyWithoutDealNestedInput
   lead?: Prisma.LeadUpdateOneWithoutDealsNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutContactInput = {
@@ -3106,10 +3106,10 @@ export type DealUncheckedUpdateWithoutContactInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutDealNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutDealNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateManyWithoutContactInput = {
@@ -3189,12 +3189,12 @@ export type DealUpdateWithoutSourceInput = {
   stage?: Prisma.StageUpdateOneRequiredWithoutDealsNestedInput
   pipeline?: Prisma.PipelineUpdateOneRequiredWithoutDealsNestedInput
   owner?: Prisma.UserUpdateOneWithoutOwnedDealsNestedInput
-  lostReasonRel?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  lostReasonRef?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutDealNestedInput
   notes?: Prisma.NoteUpdateManyWithoutDealNestedInput
   lead?: Prisma.LeadUpdateOneWithoutDealsNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutSourceInput = {
@@ -3222,10 +3222,10 @@ export type DealUncheckedUpdateWithoutSourceInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutDealNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutDealNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateManyWithoutSourceInput = {
@@ -3306,11 +3306,11 @@ export type DealUpdateWithoutLeadInput = {
   pipeline?: Prisma.PipelineUpdateOneRequiredWithoutDealsNestedInput
   owner?: Prisma.UserUpdateOneWithoutOwnedDealsNestedInput
   source?: Prisma.LeadSourceUpdateOneWithoutDealsNestedInput
-  lostReasonRel?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  lostReasonRef?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutDealNestedInput
   notes?: Prisma.NoteUpdateManyWithoutDealNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutLeadInput = {
@@ -3338,10 +3338,10 @@ export type DealUncheckedUpdateWithoutLeadInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutDealNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutDealNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateManyWithoutLeadInput = {
@@ -3421,12 +3421,12 @@ export type DealUpdateWithoutPipelineInput = {
   stage?: Prisma.StageUpdateOneRequiredWithoutDealsNestedInput
   owner?: Prisma.UserUpdateOneWithoutOwnedDealsNestedInput
   source?: Prisma.LeadSourceUpdateOneWithoutDealsNestedInput
-  lostReasonRel?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  lostReasonRef?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutDealNestedInput
   notes?: Prisma.NoteUpdateManyWithoutDealNestedInput
   lead?: Prisma.LeadUpdateOneWithoutDealsNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutPipelineInput = {
@@ -3454,10 +3454,10 @@ export type DealUncheckedUpdateWithoutPipelineInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutDealNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutDealNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateManyWithoutPipelineInput = {
@@ -3537,12 +3537,12 @@ export type DealUpdateWithoutStageInput = {
   pipeline?: Prisma.PipelineUpdateOneRequiredWithoutDealsNestedInput
   owner?: Prisma.UserUpdateOneWithoutOwnedDealsNestedInput
   source?: Prisma.LeadSourceUpdateOneWithoutDealsNestedInput
-  lostReasonRel?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  lostReasonRef?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutDealNestedInput
   notes?: Prisma.NoteUpdateManyWithoutDealNestedInput
   lead?: Prisma.LeadUpdateOneWithoutDealsNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutStageInput = {
@@ -3570,10 +3570,10 @@ export type DealUncheckedUpdateWithoutStageInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutDealNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutDealNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateManyWithoutStageInput = {
@@ -3603,7 +3603,7 @@ export type DealUncheckedUpdateManyWithoutStageInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type DealCreateManyLostReasonRelInput = {
+export type DealCreateManyLostReasonRefInput = {
   id?: string
   organizationId: string
   name: string
@@ -3630,7 +3630,7 @@ export type DealCreateManyLostReasonRelInput = {
   deletedAt?: Date | string | null
 }
 
-export type DealUpdateWithoutLostReasonRelInput = {
+export type DealUpdateWithoutLostReasonRefInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   value?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3654,14 +3654,14 @@ export type DealUpdateWithoutLostReasonRelInput = {
   pipeline?: Prisma.PipelineUpdateOneRequiredWithoutDealsNestedInput
   owner?: Prisma.UserUpdateOneWithoutOwnedDealsNestedInput
   source?: Prisma.LeadSourceUpdateOneWithoutDealsNestedInput
+  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutDealNestedInput
   notes?: Prisma.NoteUpdateManyWithoutDealNestedInput
   lead?: Prisma.LeadUpdateOneWithoutDealsNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
 }
 
-export type DealUncheckedUpdateWithoutLostReasonRelInput = {
+export type DealUncheckedUpdateWithoutLostReasonRefInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3686,13 +3686,13 @@ export type DealUncheckedUpdateWithoutLostReasonRelInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutDealNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutDealNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
 }
 
-export type DealUncheckedUpdateManyWithoutLostReasonRelInput = {
+export type DealUncheckedUpdateManyWithoutLostReasonRefInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3725,17 +3725,17 @@ export type DealUncheckedUpdateManyWithoutLostReasonRelInput = {
  */
 
 export type DealCountOutputType = {
+  stageHistory: number
   activities: number
   notes: number
   sentEmails: number
-  stageHistory: number
 }
 
 export type DealCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  stageHistory?: boolean | DealCountOutputTypeCountStageHistoryArgs
   activities?: boolean | DealCountOutputTypeCountActivitiesArgs
   notes?: boolean | DealCountOutputTypeCountNotesArgs
   sentEmails?: boolean | DealCountOutputTypeCountSentEmailsArgs
-  stageHistory?: boolean | DealCountOutputTypeCountStageHistoryArgs
 }
 
 /**
@@ -3746,6 +3746,13 @@ export type DealCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
    * Select specific fields to fetch from the DealCountOutputType
    */
   select?: Prisma.DealCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * DealCountOutputType without action
+ */
+export type DealCountOutputTypeCountStageHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StageHistoryWhereInput
 }
 
 /**
@@ -3767,13 +3774,6 @@ export type DealCountOutputTypeCountNotesArgs<ExtArgs extends runtime.Types.Exte
  */
 export type DealCountOutputTypeCountSentEmailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.SentEmailWhereInput
-}
-
-/**
- * DealCountOutputType without action
- */
-export type DealCountOutputTypeCountStageHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.StageHistoryWhereInput
 }
 
 
@@ -3810,12 +3810,12 @@ export type DealSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   pipeline?: boolean | Prisma.PipelineDefaultArgs<ExtArgs>
   owner?: boolean | Prisma.Deal$ownerArgs<ExtArgs>
   source?: boolean | Prisma.Deal$sourceArgs<ExtArgs>
-  lostReasonRel?: boolean | Prisma.Deal$lostReasonRelArgs<ExtArgs>
+  lostReasonRef?: boolean | Prisma.Deal$lostReasonRefArgs<ExtArgs>
+  stageHistory?: boolean | Prisma.Deal$stageHistoryArgs<ExtArgs>
   activities?: boolean | Prisma.Deal$activitiesArgs<ExtArgs>
   notes?: boolean | Prisma.Deal$notesArgs<ExtArgs>
   lead?: boolean | Prisma.Deal$leadArgs<ExtArgs>
   sentEmails?: boolean | Prisma.Deal$sentEmailsArgs<ExtArgs>
-  stageHistory?: boolean | Prisma.Deal$stageHistoryArgs<ExtArgs>
   _count?: boolean | Prisma.DealCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["deal"]>
 
@@ -3852,7 +3852,7 @@ export type DealSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   pipeline?: boolean | Prisma.PipelineDefaultArgs<ExtArgs>
   owner?: boolean | Prisma.Deal$ownerArgs<ExtArgs>
   source?: boolean | Prisma.Deal$sourceArgs<ExtArgs>
-  lostReasonRel?: boolean | Prisma.Deal$lostReasonRelArgs<ExtArgs>
+  lostReasonRef?: boolean | Prisma.Deal$lostReasonRefArgs<ExtArgs>
   lead?: boolean | Prisma.Deal$leadArgs<ExtArgs>
 }, ExtArgs["result"]["deal"]>
 
@@ -3889,7 +3889,7 @@ export type DealSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   pipeline?: boolean | Prisma.PipelineDefaultArgs<ExtArgs>
   owner?: boolean | Prisma.Deal$ownerArgs<ExtArgs>
   source?: boolean | Prisma.Deal$sourceArgs<ExtArgs>
-  lostReasonRel?: boolean | Prisma.Deal$lostReasonRelArgs<ExtArgs>
+  lostReasonRef?: boolean | Prisma.Deal$lostReasonRefArgs<ExtArgs>
   lead?: boolean | Prisma.Deal$leadArgs<ExtArgs>
 }, ExtArgs["result"]["deal"]>
 
@@ -3930,12 +3930,12 @@ export type DealInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   pipeline?: boolean | Prisma.PipelineDefaultArgs<ExtArgs>
   owner?: boolean | Prisma.Deal$ownerArgs<ExtArgs>
   source?: boolean | Prisma.Deal$sourceArgs<ExtArgs>
-  lostReasonRel?: boolean | Prisma.Deal$lostReasonRelArgs<ExtArgs>
+  lostReasonRef?: boolean | Prisma.Deal$lostReasonRefArgs<ExtArgs>
+  stageHistory?: boolean | Prisma.Deal$stageHistoryArgs<ExtArgs>
   activities?: boolean | Prisma.Deal$activitiesArgs<ExtArgs>
   notes?: boolean | Prisma.Deal$notesArgs<ExtArgs>
   lead?: boolean | Prisma.Deal$leadArgs<ExtArgs>
   sentEmails?: boolean | Prisma.Deal$sentEmailsArgs<ExtArgs>
-  stageHistory?: boolean | Prisma.Deal$stageHistoryArgs<ExtArgs>
   _count?: boolean | Prisma.DealCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DealIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3946,7 +3946,7 @@ export type DealIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   pipeline?: boolean | Prisma.PipelineDefaultArgs<ExtArgs>
   owner?: boolean | Prisma.Deal$ownerArgs<ExtArgs>
   source?: boolean | Prisma.Deal$sourceArgs<ExtArgs>
-  lostReasonRel?: boolean | Prisma.Deal$lostReasonRelArgs<ExtArgs>
+  lostReasonRef?: boolean | Prisma.Deal$lostReasonRefArgs<ExtArgs>
   lead?: boolean | Prisma.Deal$leadArgs<ExtArgs>
 }
 export type DealIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3957,7 +3957,7 @@ export type DealIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   pipeline?: boolean | Prisma.PipelineDefaultArgs<ExtArgs>
   owner?: boolean | Prisma.Deal$ownerArgs<ExtArgs>
   source?: boolean | Prisma.Deal$sourceArgs<ExtArgs>
-  lostReasonRel?: boolean | Prisma.Deal$lostReasonRelArgs<ExtArgs>
+  lostReasonRef?: boolean | Prisma.Deal$lostReasonRefArgs<ExtArgs>
   lead?: boolean | Prisma.Deal$leadArgs<ExtArgs>
 }
 
@@ -3971,12 +3971,12 @@ export type $DealPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     pipeline: Prisma.$PipelinePayload<ExtArgs>
     owner: Prisma.$UserPayload<ExtArgs> | null
     source: Prisma.$LeadSourcePayload<ExtArgs> | null
-    lostReasonRel: Prisma.$LostReasonPayload<ExtArgs> | null
+    lostReasonRef: Prisma.$LostReasonPayload<ExtArgs> | null
+    stageHistory: Prisma.$StageHistoryPayload<ExtArgs>[]
     activities: Prisma.$ActivityPayload<ExtArgs>[]
     notes: Prisma.$NotePayload<ExtArgs>[]
     lead: Prisma.$LeadPayload<ExtArgs> | null
     sentEmails: Prisma.$SentEmailPayload<ExtArgs>[]
-    stageHistory: Prisma.$StageHistoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -4405,12 +4405,12 @@ export interface Prisma__DealClient<T, Null = never, ExtArgs extends runtime.Typ
   pipeline<T extends Prisma.PipelineDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PipelineDefaultArgs<ExtArgs>>): Prisma.Prisma__PipelineClient<runtime.Types.Result.GetResult<Prisma.$PipelinePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   owner<T extends Prisma.Deal$ownerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deal$ownerArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   source<T extends Prisma.Deal$sourceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deal$sourceArgs<ExtArgs>>): Prisma.Prisma__LeadSourceClient<runtime.Types.Result.GetResult<Prisma.$LeadSourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  lostReasonRel<T extends Prisma.Deal$lostReasonRelArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deal$lostReasonRelArgs<ExtArgs>>): Prisma.Prisma__LostReasonClient<runtime.Types.Result.GetResult<Prisma.$LostReasonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  lostReasonRef<T extends Prisma.Deal$lostReasonRefArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deal$lostReasonRefArgs<ExtArgs>>): Prisma.Prisma__LostReasonClient<runtime.Types.Result.GetResult<Prisma.$LostReasonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  stageHistory<T extends Prisma.Deal$stageHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deal$stageHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StageHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   activities<T extends Prisma.Deal$activitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deal$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notes<T extends Prisma.Deal$notesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deal$notesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   lead<T extends Prisma.Deal$leadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deal$leadArgs<ExtArgs>>): Prisma.Prisma__LeadClient<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   sentEmails<T extends Prisma.Deal$sentEmailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deal$sentEmailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SentEmailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  stageHistory<T extends Prisma.Deal$stageHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deal$stageHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StageHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4940,9 +4940,9 @@ export type Deal$sourceArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 }
 
 /**
- * Deal.lostReasonRel
+ * Deal.lostReasonRef
  */
-export type Deal$lostReasonRelArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Deal$lostReasonRefArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the LostReason
    */
@@ -4956,6 +4956,30 @@ export type Deal$lostReasonRelArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   include?: Prisma.LostReasonInclude<ExtArgs> | null
   where?: Prisma.LostReasonWhereInput
+}
+
+/**
+ * Deal.stageHistory
+ */
+export type Deal$stageHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StageHistory
+   */
+  select?: Prisma.StageHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StageHistory
+   */
+  omit?: Prisma.StageHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StageHistoryInclude<ExtArgs> | null
+  where?: Prisma.StageHistoryWhereInput
+  orderBy?: Prisma.StageHistoryOrderByWithRelationInput | Prisma.StageHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.StageHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StageHistoryScalarFieldEnum | Prisma.StageHistoryScalarFieldEnum[]
 }
 
 /**
@@ -5047,30 +5071,6 @@ export type Deal$sentEmailsArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.SentEmailScalarFieldEnum | Prisma.SentEmailScalarFieldEnum[]
-}
-
-/**
- * Deal.stageHistory
- */
-export type Deal$stageHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the StageHistory
-   */
-  select?: Prisma.StageHistorySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the StageHistory
-   */
-  omit?: Prisma.StageHistoryOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.StageHistoryInclude<ExtArgs> | null
-  where?: Prisma.StageHistoryWhereInput
-  orderBy?: Prisma.StageHistoryOrderByWithRelationInput | Prisma.StageHistoryOrderByWithRelationInput[]
-  cursor?: Prisma.StageHistoryWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.StageHistoryScalarFieldEnum | Prisma.StageHistoryScalarFieldEnum[]
 }
 
 /**

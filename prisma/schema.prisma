@@ -32,17 +32,18 @@ model Organization {
   notifications       Notification[]
   tags                Tag[]
   leadSources         LeadSource[]
-  lostReasons         LostReason[]
   emailTemplates      EmailTemplate[]
   customFields        CustomField[]
   emailSettings       EmailSettings?
   sentEmails          SentEmail[]
   inboundEmails       InboundEmail[]
   reminders           FollowUpReminder[]
-  sequenceDeadLetters SequenceDeadLetter[]
+  attachments         Attachment[]
   apiKeys             ApiKey[]
   sequences           Sequence[]
   sequenceEnrollments SequenceEnrollment[]
+  sequenceDeadLetters SequenceDeadLetter[]
+  lostReasons         LostReason[]
   currency            String               @default("USD")
 }
 
@@ -68,17 +69,18 @@ model User {
   ownedLeads          Lead[]               @relation("LeadOwner")
   assignedLeads       Lead[]               @relation("LeadAssignee")
   ownedDeals          Deal[]               @relation("DealOwner")
+  stageHistoryEntries StageHistory[]
   tasks               Task[]               @relation("TaskAssignee")
   createdTasks        Task[]               @relation("TaskCreator")
   activities          Activity[]
   notes               Note[]
+  attachments         Attachment[]
   notifications       Notification[]
   sentEmails          SentEmail[]          @relation("SentEmailSender")
   reminders           FollowUpReminder[]   @relation("ReminderRecipient")
   createdApiKeys      ApiKey[]             @relation("ApiKeyCreator")
   createdSequences    Sequence[]           @relation("SequenceCreator")
   sequenceEnrollments SequenceEnrollment[] @relation("SequenceEnrollmentResponder")
-  stageHistory        StageHistory[]
 
   @@unique([organizationId, email])
   @@index([organizationId])
@@ -268,94 +270,57 @@ model Stage {
 
   pipeline Pipeline @relation(fields: [pipelineId], references: [id], onDelete: Cascade)
   deals    Deal[]
-  stageHistoryFrom StageHistory[] @relation("StageHistoryFrom")
-  stageHistoryTo   StageHistory[] @relation("StageHistoryTo")
+  fromStageHistory StageHistory[] @relation("FromStage")
+  toStageHistory   StageHistory[] @relation("ToStage")
 
   @@unique([pipelineId, position])
 }
 
-model StageHistory {
-  id                       String   @id @default(cuid())
-  dealId                   String
-  fromStageId              String?
-  toStageId                String
-  userId                   String
-  at                       DateTime @default(now())
-  wonAtSnapshot            DateTime?
-  lostAtSnapshot           DateTime?
-  actualCloseDateSnapshot  DateTime?
-
-  deal      Deal   @relation(fields: [dealId], references: [id], onDelete: Cascade)
-  fromStage Stage? @relation("StageHistoryFrom", fields: [fromStageId], references: [id], onDelete: SetNull)
-  toStage   Stage  @relation("StageHistoryTo", fields: [toStageId], references: [id], onDelete: Restrict)
-  user      User   @relation(fields: [userId], references: [id], onDelete: Restrict)
-
-  @@index([dealId, at])
-  @@index([userId])
-}
-
-
-
-model LostReason {
-  id             String   @id @default(cuid())
-  organizationId String
-  name           String
-  description    String   @default("")
-  isSystem       Boolean  @default(false)
-  createdAt      DateTime @default(now())
-
-  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  deals        Deal[]
-
-  @@unique([organizationId, name])
-}
-
 model Deal {
-  id                      String    @id @default(cuid())
-  organizationId          String
-  name                    String
-  contactId               String?
-  companyId               String?
-  leadId                  String?
-  stageId                 String
-  pipelineId              String
-  ownerId                 String?
-  sourceId                String?
-  lostReasonId            String?
-  value                   Float     @default(0)
-  currency                String    @default("USD")
-  status                  String    @default("OPEN") // OPEN | WON | LOST
-  probability             Int       @default(0)
-  expectedCloseDate       DateTime?
-  actualCloseDate         DateTime?
-  wonAt                   DateTime?
-  lostAt                  DateTime?
-  lostReason              String    @default("")
-  nextStep                String    @default("")
-  summary                 String    @default("")
-  createdAt               DateTime  @default(now())
-  updatedAt               DateTime  @updatedAt
-  deletedAt               DateTime?
+  id                String    @id @default(cuid())
+  organizationId    String
+  name              String
+  contactId         String?
+  companyId         String?
+  leadId            String?
+  stageId           String
+  pipelineId        String
+  ownerId           String?
+  sourceId          String?
+  lostReasonId      String?
+  value             Float     @default(0)
+  currency          String    @default("USD")
+  status            String    @default("OPEN") // OPEN | WON | LOST
+  probability       Int       @default(0)
+  expectedCloseDate DateTime?
+  actualCloseDate   DateTime?
+  wonAt             DateTime?
+  lostAt            DateTime?
+  lostReason        String    @default("")
+  nextStep          String    @default("")
+  summary           String    @default("")
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  deletedAt         DateTime?
 
   organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   contact      Contact?     @relation("DealContact", fields: [contactId], references: [id], onDelete: SetNull)
   company      Company?     @relation(fields: [companyId], references: [id], onDelete: SetNull)
-  stage        Stage       @relation(fields: [stageId], references: [id], onDelete: Restrict)
-  pipeline     Pipeline    @relation(fields: [pipelineId], references: [id], onDelete: Restrict)
-  owner        User?       @relation("DealOwner", fields: [ownerId], references: [id], onDelete: SetNull)
-  source       LeadSource? @relation(fields: [sourceId], references: [id], onDelete: SetNull)
-  lostReasonRel LostReason? @relation(fields: [lostReasonId], references: [id], onDelete: SetNull)
+  stage        Stage        @relation(fields: [stageId], references: [id], onDelete: Cascade)
+  pipeline     Pipeline     @relation(fields: [pipelineId], references: [id], onDelete: Cascade)
+  owner        User?        @relation("DealOwner", fields: [ownerId], references: [id], onDelete: SetNull)
+  source       LeadSource?  @relation(fields: [sourceId], references: [id], onDelete: SetNull)
+  lostReasonRef LostReason?  @relation(fields: [lostReasonId], references: [id], onDelete: SetNull)
+  stageHistory StageHistory[]
   activities   Activity[]
   notes        Note[]
-  lead         Lead?       @relation("DealLead", fields: [leadId], references: [id], onDelete: SetNull)
-  sentEmails   SentEmail[] @relation("SentEmailDeal")
-  stageHistory StageHistory[]
+  lead         Lead?        @relation("DealLead", fields: [leadId], references: [id], onDelete: SetNull)
+  sentEmails   SentEmail[]  @relation("SentEmailDeal")
 
   @@index([organizationId, deletedAt])
   @@index([organizationId, status])
   @@index([stageId])
   @@index([ownerId])
-  @@index([lostReasonId])
 }
 
 model Task {
@@ -446,6 +411,31 @@ model Note {
   @@index([companyId])
   @@index([dealId])
   @@index([leadId])
+}
+
+
+model Attachment {
+  id          String   @id @default(cuid())
+  filename    String   // name stored on disk
+  originalName String  // original file name as uploaded
+  mimeType    String
+  size        Int      // bytes
+  path        String   // relative storage path, e.g. uploads/{orgId}/{uuid}-{name}
+  storageType String   // LOCAL | S3
+  organizationId String
+  entityType  String   // CONTACT | COMPANY | LEAD | DEAL | ACTIVITY | NOTE | EMAIL
+  entityId    String
+  uploadedById String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?  // soft delete
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  uploadedBy   User         @relation(fields: [uploadedById], references: [id], onDelete: Cascade)
+
+  @@index([organizationId])
+  @@index([entityType, entityId])
+  @@index([uploadedById])
 }
 
 model AuditLog {
@@ -722,7 +712,7 @@ model SequenceEnrollment {
   lead         Lead?                    @relation("SequenceEnrollmentLead", fields: [leadId], references: [id], onDelete: SetNull)
   responder    User?                    @relation("SequenceEnrollmentResponder", fields: [responderUserId], references: [id], onDelete: SetNull)
   steps        SequenceStepEnrollment[]
-  deadLetters    SequenceDeadLetter[]
+  deadLetters  SequenceDeadLetter[]
 
   @@unique([sequenceId, contactId])
   @@unique([sequenceId, leadId])
@@ -747,27 +737,56 @@ model SequenceStepEnrollment {
   @@index([enrollmentId])
 }
 
-
-// Dead-letter record for a sequence step that failed every send retry.
-// Operators inspect these to diagnose broken sends (SMTP, DNS, bounces, ...)
-// and re-enroll the record once the underlying issue is fixed.
 model SequenceDeadLetter {
-  id            String   @id @default(cuid())
+  id             String   @id @default(cuid())
   organizationId String
-  sequenceId    String
-  enrollmentId  String
-  contactId     String?
-  leadId        String?
-  stepId        String
-  stepPosition  Int
-  attempts      Int      @default(0)
-  lastError     String   @default("")
-  createdAt     DateTime @default(now())
+  sequenceId     String
+  enrollmentId   String
+  contactId      String?
+  leadId         String?
+  stepId         String
+  stepPosition   Int
+  attempts       Int      @default(0)
+  lastError      String   @default("")
+  createdAt      DateTime @default(now())
 
-  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  enrollment   SequenceEnrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+  organization Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  enrollment   SequenceEnrollment   @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
 
   @@index([organizationId, createdAt])
   @@index([enrollmentId])
 }
 
+model StageHistory {
+  id                    String    @id @default(cuid())
+  dealId                String
+  fromStageId           String?
+  toStageId             String
+  userId                String
+  at                    DateTime  @default(now())
+  wonAtSnapshot         DateTime?
+  lostAtSnapshot        DateTime?
+  actualCloseDateSnapshot DateTime?
+
+  deal       Deal   @relation(fields: [dealId], references: [id], onDelete: Cascade)
+  fromStage  Stage? @relation("FromStage", fields: [fromStageId], references: [id], onDelete: SetNull)
+  toStage    Stage  @relation("ToStage", fields: [toStageId], references: [id], onDelete: Restrict)
+  user       User   @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@index([dealId, at])
+  @@index([userId])
+}
+
+model LostReason {
+  id             String   @id @default(cuid())
+  organizationId String
+  name           String
+  description    String   @default("")
+  isSystem       Boolean  @default(false)
+  createdAt      DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  deals        Deal[]
+
+  @@unique([organizationId, name])
+}

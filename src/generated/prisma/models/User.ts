@@ -253,17 +253,18 @@ export type UserWhereInput = {
   ownedLeads?: Prisma.LeadListRelationFilter
   assignedLeads?: Prisma.LeadListRelationFilter
   ownedDeals?: Prisma.DealListRelationFilter
+  stageHistoryEntries?: Prisma.StageHistoryListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
   createdTasks?: Prisma.TaskListRelationFilter
   activities?: Prisma.ActivityListRelationFilter
   notes?: Prisma.NoteListRelationFilter
+  attachments?: Prisma.AttachmentListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   sentEmails?: Prisma.SentEmailListRelationFilter
   reminders?: Prisma.FollowUpReminderListRelationFilter
   createdApiKeys?: Prisma.ApiKeyListRelationFilter
   createdSequences?: Prisma.SequenceListRelationFilter
   sequenceEnrollments?: Prisma.SequenceEnrollmentListRelationFilter
-  stageHistory?: Prisma.StageHistoryListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -287,17 +288,18 @@ export type UserOrderByWithRelationInput = {
   ownedLeads?: Prisma.LeadOrderByRelationAggregateInput
   assignedLeads?: Prisma.LeadOrderByRelationAggregateInput
   ownedDeals?: Prisma.DealOrderByRelationAggregateInput
+  stageHistoryEntries?: Prisma.StageHistoryOrderByRelationAggregateInput
   tasks?: Prisma.TaskOrderByRelationAggregateInput
   createdTasks?: Prisma.TaskOrderByRelationAggregateInput
   activities?: Prisma.ActivityOrderByRelationAggregateInput
   notes?: Prisma.NoteOrderByRelationAggregateInput
+  attachments?: Prisma.AttachmentOrderByRelationAggregateInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
   sentEmails?: Prisma.SentEmailOrderByRelationAggregateInput
   reminders?: Prisma.FollowUpReminderOrderByRelationAggregateInput
   createdApiKeys?: Prisma.ApiKeyOrderByRelationAggregateInput
   createdSequences?: Prisma.SequenceOrderByRelationAggregateInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentOrderByRelationAggregateInput
-  stageHistory?: Prisma.StageHistoryOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -325,17 +327,18 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   ownedLeads?: Prisma.LeadListRelationFilter
   assignedLeads?: Prisma.LeadListRelationFilter
   ownedDeals?: Prisma.DealListRelationFilter
+  stageHistoryEntries?: Prisma.StageHistoryListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
   createdTasks?: Prisma.TaskListRelationFilter
   activities?: Prisma.ActivityListRelationFilter
   notes?: Prisma.NoteListRelationFilter
+  attachments?: Prisma.AttachmentListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   sentEmails?: Prisma.SentEmailListRelationFilter
   reminders?: Prisma.FollowUpReminderListRelationFilter
   createdApiKeys?: Prisma.ApiKeyListRelationFilter
   createdSequences?: Prisma.SequenceListRelationFilter
   sequenceEnrollments?: Prisma.SequenceEnrollmentListRelationFilter
-  stageHistory?: Prisma.StageHistoryListRelationFilter
 }, "id" | "organizationId_email">
 
 export type UserOrderByWithAggregationInput = {
@@ -396,17 +399,18 @@ export type UserCreateInput = {
   ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -429,17 +433,18 @@ export type UserUncheckedCreateInput = {
   ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -462,17 +467,18 @@ export type UserUpdateInput = {
   ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -495,17 +501,18 @@ export type UserUncheckedUpdateInput = {
   ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -756,20 +763,6 @@ export type UserUpdateOneWithoutOwnedLeadsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOwnedLeadsInput, Prisma.UserUpdateWithoutOwnedLeadsInput>, Prisma.UserUncheckedUpdateWithoutOwnedLeadsInput>
 }
 
-export type UserCreateNestedOneWithoutStageHistoryInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutStageHistoryInput, Prisma.UserUncheckedCreateWithoutStageHistoryInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStageHistoryInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutStageHistoryNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutStageHistoryInput, Prisma.UserUncheckedCreateWithoutStageHistoryInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStageHistoryInput
-  upsert?: Prisma.UserUpsertWithoutStageHistoryInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStageHistoryInput, Prisma.UserUpdateWithoutStageHistoryInput>, Prisma.UserUncheckedUpdateWithoutStageHistoryInput>
-}
-
 export type UserCreateNestedOneWithoutOwnedDealsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutOwnedDealsInput, Prisma.UserUncheckedCreateWithoutOwnedDealsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutOwnedDealsInput
@@ -842,6 +835,20 @@ export type UserUpdateOneRequiredWithoutNotesNestedInput = {
   upsert?: Prisma.UserUpsertWithoutNotesInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotesInput, Prisma.UserUpdateWithoutNotesInput>, Prisma.UserUncheckedUpdateWithoutNotesInput>
+}
+
+export type UserCreateNestedOneWithoutAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAttachmentsInput, Prisma.UserUncheckedCreateWithoutAttachmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAttachmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAttachmentsInput, Prisma.UserUncheckedCreateWithoutAttachmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAttachmentsInput
+  upsert?: Prisma.UserUpsertWithoutAttachmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAttachmentsInput, Prisma.UserUpdateWithoutAttachmentsInput>, Prisma.UserUncheckedUpdateWithoutAttachmentsInput>
 }
 
 export type UserCreateNestedOneWithoutNotificationsInput = {
@@ -930,6 +937,20 @@ export type UserUpdateOneWithoutSequenceEnrollmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSequenceEnrollmentsInput, Prisma.UserUpdateWithoutSequenceEnrollmentsInput>, Prisma.UserUncheckedUpdateWithoutSequenceEnrollmentsInput>
 }
 
+export type UserCreateNestedOneWithoutStageHistoryEntriesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStageHistoryEntriesInput, Prisma.UserUncheckedCreateWithoutStageHistoryEntriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStageHistoryEntriesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutStageHistoryEntriesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStageHistoryEntriesInput, Prisma.UserUncheckedCreateWithoutStageHistoryEntriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStageHistoryEntriesInput
+  upsert?: Prisma.UserUpsertWithoutStageHistoryEntriesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStageHistoryEntriesInput, Prisma.UserUpdateWithoutStageHistoryEntriesInput>, Prisma.UserUncheckedUpdateWithoutStageHistoryEntriesInput>
+}
+
 export type UserCreateWithoutOrganizationInput = {
   id?: string
   email: string
@@ -949,17 +970,18 @@ export type UserCreateWithoutOrganizationInput = {
   ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOrganizationInput = {
@@ -981,17 +1003,18 @@ export type UserUncheckedCreateWithoutOrganizationInput = {
   ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOrganizationInput = {
@@ -1057,17 +1080,18 @@ export type UserCreateWithoutSessionsInput = {
   ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1089,17 +1113,18 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1137,17 +1162,18 @@ export type UserUpdateWithoutSessionsInput = {
   ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1169,17 +1195,18 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutOwnedCompaniesInput = {
@@ -1201,17 +1228,18 @@ export type UserCreateWithoutOwnedCompaniesInput = {
   ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOwnedCompaniesInput = {
@@ -1233,17 +1261,18 @@ export type UserUncheckedCreateWithoutOwnedCompaniesInput = {
   ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOwnedCompaniesInput = {
@@ -1281,17 +1310,18 @@ export type UserUpdateWithoutOwnedCompaniesInput = {
   ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedCompaniesInput = {
@@ -1313,17 +1343,18 @@ export type UserUncheckedUpdateWithoutOwnedCompaniesInput = {
   ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutOwnedContactsInput = {
@@ -1345,17 +1376,18 @@ export type UserCreateWithoutOwnedContactsInput = {
   ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOwnedContactsInput = {
@@ -1377,17 +1409,18 @@ export type UserUncheckedCreateWithoutOwnedContactsInput = {
   ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOwnedContactsInput = {
@@ -1425,17 +1458,18 @@ export type UserUpdateWithoutOwnedContactsInput = {
   ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedContactsInput = {
@@ -1457,17 +1491,18 @@ export type UserUncheckedUpdateWithoutOwnedContactsInput = {
   ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAssignedLeadsInput = {
@@ -1489,17 +1524,18 @@ export type UserCreateWithoutAssignedLeadsInput = {
   ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
   ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
   ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAssignedLeadsInput = {
@@ -1521,17 +1557,18 @@ export type UserUncheckedCreateWithoutAssignedLeadsInput = {
   ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
   ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
   ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAssignedLeadsInput = {
@@ -1558,17 +1595,18 @@ export type UserCreateWithoutOwnedLeadsInput = {
   ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOwnedLeadsInput = {
@@ -1590,17 +1628,18 @@ export type UserUncheckedCreateWithoutOwnedLeadsInput = {
   ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOwnedLeadsInput = {
@@ -1638,17 +1677,18 @@ export type UserUpdateWithoutAssignedLeadsInput = {
   ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
   ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
   ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssignedLeadsInput = {
@@ -1670,17 +1710,18 @@ export type UserUncheckedUpdateWithoutAssignedLeadsInput = {
   ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
   ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
   ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutOwnedLeadsInput = {
@@ -1713,17 +1754,18 @@ export type UserUpdateWithoutOwnedLeadsInput = {
   ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedLeadsInput = {
@@ -1745,155 +1787,12 @@ export type UserUncheckedUpdateWithoutOwnedLeadsInput = {
   ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
-  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
-  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
-  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
-  createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateWithoutStageHistoryInput = {
-  id?: string
-  email: string
-  name: string
-  passwordHash: string
-  role?: string
-  title?: string
-  phone?: string
-  avatarColor?: string
-  isActive?: boolean
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
-  ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
-  ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
-  assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
-  ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
-  tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
-  createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
-  activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
-  notes?: Prisma.NoteCreateNestedManyWithoutUserInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
-  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
-  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
-  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
-  createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
-}
-
-export type UserUncheckedCreateWithoutStageHistoryInput = {
-  id?: string
-  organizationId: string
-  email: string
-  name: string
-  passwordHash: string
-  role?: string
-  title?: string
-  phone?: string
-  avatarColor?: string
-  isActive?: boolean
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
-  ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
-  ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
-  assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
-  ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
-  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
-  createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
-  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
-  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
-  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
-  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
-  createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
-}
-
-export type UserCreateOrConnectWithoutStageHistoryInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutStageHistoryInput, Prisma.UserUncheckedCreateWithoutStageHistoryInput>
-}
-
-export type UserUpsertWithoutStageHistoryInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutStageHistoryInput, Prisma.UserUncheckedUpdateWithoutStageHistoryInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutStageHistoryInput, Prisma.UserUncheckedCreateWithoutStageHistoryInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutStageHistoryInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutStageHistoryInput, Prisma.UserUncheckedUpdateWithoutStageHistoryInput>
-}
-
-export type UserUpdateWithoutStageHistoryInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
-  ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
-  ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
-  assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
-  ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
-  tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
-  createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
-  activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
-  sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
-  reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
-  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
-  createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
-}
-
-export type UserUncheckedUpdateWithoutStageHistoryInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
-  ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
-  ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
-  assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
-  ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
-  tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
-  createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
-  activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -1921,17 +1820,18 @@ export type UserCreateWithoutOwnedDealsInput = {
   ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
   ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
+  stageHistoryEntries?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOwnedDealsInput = {
@@ -1953,17 +1853,18 @@ export type UserUncheckedCreateWithoutOwnedDealsInput = {
   ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
   ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOwnedDealsInput = {
@@ -2001,17 +1902,18 @@ export type UserUpdateWithoutOwnedDealsInput = {
   ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
   ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedDealsInput = {
@@ -2033,17 +1935,18 @@ export type UserUncheckedUpdateWithoutOwnedDealsInput = {
   ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
   ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreatedTasksInput = {
@@ -2066,16 +1969,17 @@ export type UserCreateWithoutCreatedTasksInput = {
   ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreatedTasksInput = {
@@ -2098,16 +2002,17 @@ export type UserUncheckedCreateWithoutCreatedTasksInput = {
   ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreatedTasksInput = {
@@ -2135,16 +2040,17 @@ export type UserCreateWithoutTasksInput = {
   ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTasksInput = {
@@ -2167,16 +2073,17 @@ export type UserUncheckedCreateWithoutTasksInput = {
   ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTasksInput = {
@@ -2215,16 +2122,17 @@ export type UserUpdateWithoutCreatedTasksInput = {
   ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedTasksInput = {
@@ -2247,16 +2155,17 @@ export type UserUncheckedUpdateWithoutCreatedTasksInput = {
   ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutTasksInput = {
@@ -2290,16 +2199,17 @@ export type UserUpdateWithoutTasksInput = {
   ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTasksInput = {
@@ -2322,16 +2232,17 @@ export type UserUncheckedUpdateWithoutTasksInput = {
   ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutActivitiesInput = {
@@ -2354,16 +2265,17 @@ export type UserCreateWithoutActivitiesInput = {
   ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutActivitiesInput = {
@@ -2386,16 +2298,17 @@ export type UserUncheckedCreateWithoutActivitiesInput = {
   ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutActivitiesInput = {
@@ -2434,16 +2347,17 @@ export type UserUpdateWithoutActivitiesInput = {
   ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutActivitiesInput = {
@@ -2466,16 +2380,17 @@ export type UserUncheckedUpdateWithoutActivitiesInput = {
   ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutNotesInput = {
@@ -2498,16 +2413,17 @@ export type UserCreateWithoutNotesInput = {
   ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotesInput = {
@@ -2530,16 +2446,17 @@ export type UserUncheckedCreateWithoutNotesInput = {
   ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotesInput = {
@@ -2578,16 +2495,17 @@ export type UserUpdateWithoutNotesInput = {
   ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotesInput = {
@@ -2610,16 +2528,165 @@ export type UserUncheckedUpdateWithoutNotesInput = {
   ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutAttachmentsInput = {
+  id?: string
+  email: string
+  name: string
+  passwordHash: string
+  role?: string
+  title?: string
+  phone?: string
+  avatarColor?: string
+  isActive?: boolean
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
+  ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
+  ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
+  assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
+  ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
+  createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
+  notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
+  createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+}
+
+export type UserUncheckedCreateWithoutAttachmentsInput = {
+  id?: string
+  organizationId: string
+  email: string
+  name: string
+  passwordHash: string
+  role?: string
+  title?: string
+  phone?: string
+  avatarColor?: string
+  isActive?: boolean
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
+  ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
+  ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
+  assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
+  ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
+  createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+}
+
+export type UserCreateOrConnectWithoutAttachmentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAttachmentsInput, Prisma.UserUncheckedCreateWithoutAttachmentsInput>
+}
+
+export type UserUpsertWithoutAttachmentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAttachmentsInput, Prisma.UserUncheckedUpdateWithoutAttachmentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAttachmentsInput, Prisma.UserUncheckedCreateWithoutAttachmentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAttachmentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAttachmentsInput, Prisma.UserUncheckedUpdateWithoutAttachmentsInput>
+}
+
+export type UserUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
+  ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
+  ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
+  assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
+  ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
+  createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
+  createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
+  ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
+  ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
+  assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
+  ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
+  createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -2642,16 +2709,17 @@ export type UserCreateWithoutNotificationsInput = {
   ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -2674,16 +2742,17 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -2722,16 +2791,17 @@ export type UserUpdateWithoutNotificationsInput = {
   ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -2754,16 +2824,17 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSentEmailsInput = {
@@ -2786,16 +2857,17 @@ export type UserCreateWithoutSentEmailsInput = {
   ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSentEmailsInput = {
@@ -2818,16 +2890,17 @@ export type UserUncheckedCreateWithoutSentEmailsInput = {
   ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSentEmailsInput = {
@@ -2866,16 +2939,17 @@ export type UserUpdateWithoutSentEmailsInput = {
   ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSentEmailsInput = {
@@ -2898,16 +2972,17 @@ export type UserUncheckedUpdateWithoutSentEmailsInput = {
   ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRemindersInput = {
@@ -2930,16 +3005,17 @@ export type UserCreateWithoutRemindersInput = {
   ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRemindersInput = {
@@ -2962,16 +3038,17 @@ export type UserUncheckedCreateWithoutRemindersInput = {
   ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRemindersInput = {
@@ -3010,16 +3087,17 @@ export type UserUpdateWithoutRemindersInput = {
   ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRemindersInput = {
@@ -3042,16 +3120,17 @@ export type UserUncheckedUpdateWithoutRemindersInput = {
   ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreatedApiKeysInput = {
@@ -3074,16 +3153,17 @@ export type UserCreateWithoutCreatedApiKeysInput = {
   ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreatedApiKeysInput = {
@@ -3106,16 +3186,17 @@ export type UserUncheckedCreateWithoutCreatedApiKeysInput = {
   ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreatedApiKeysInput = {
@@ -3154,16 +3235,17 @@ export type UserUpdateWithoutCreatedApiKeysInput = {
   ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedApiKeysInput = {
@@ -3186,16 +3268,17 @@ export type UserUncheckedUpdateWithoutCreatedApiKeysInput = {
   ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreatedSequencesInput = {
@@ -3218,16 +3301,17 @@ export type UserCreateWithoutCreatedSequencesInput = {
   ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreatedSequencesInput = {
@@ -3250,16 +3334,17 @@ export type UserUncheckedCreateWithoutCreatedSequencesInput = {
   ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreatedSequencesInput = {
@@ -3298,16 +3383,17 @@ export type UserUpdateWithoutCreatedSequencesInput = {
   ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedSequencesInput = {
@@ -3330,16 +3416,17 @@ export type UserUncheckedUpdateWithoutCreatedSequencesInput = {
   ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSequenceEnrollmentsInput = {
@@ -3362,16 +3449,17 @@ export type UserCreateWithoutSequenceEnrollmentsInput = {
   ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
-  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSequenceEnrollmentsInput = {
@@ -3394,16 +3482,17 @@ export type UserUncheckedCreateWithoutSequenceEnrollmentsInput = {
   ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
   assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
   ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
   createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
-  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSequenceEnrollmentsInput = {
@@ -3442,19 +3531,168 @@ export type UserUpdateWithoutSequenceEnrollmentsInput = {
   ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSequenceEnrollmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
+  ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
+  ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
+  assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
+  ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
+  createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserCreateWithoutStageHistoryEntriesInput = {
+  id?: string
+  email: string
+  name: string
+  passwordHash: string
+  role?: string
+  title?: string
+  phone?: string
+  avatarColor?: string
+  isActive?: boolean
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
+  ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
+  ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
+  assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
+  ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
+  createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
+  notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
+  createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+}
+
+export type UserUncheckedCreateWithoutStageHistoryEntriesInput = {
+  id?: string
+  organizationId: string
+  email: string
+  name: string
+  passwordHash: string
+  role?: string
+  title?: string
+  phone?: string
+  avatarColor?: string
+  isActive?: boolean
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
+  ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
+  ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
+  assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
+  ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
+  createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+}
+
+export type UserCreateOrConnectWithoutStageHistoryEntriesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStageHistoryEntriesInput, Prisma.UserUncheckedCreateWithoutStageHistoryEntriesInput>
+}
+
+export type UserUpsertWithoutStageHistoryEntriesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStageHistoryEntriesInput, Prisma.UserUncheckedUpdateWithoutStageHistoryEntriesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStageHistoryEntriesInput, Prisma.UserUncheckedCreateWithoutStageHistoryEntriesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStageHistoryEntriesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStageHistoryEntriesInput, Prisma.UserUncheckedUpdateWithoutStageHistoryEntriesInput>
+}
+
+export type UserUpdateWithoutStageHistoryEntriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
+  ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
+  ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
+  assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
+  ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
+  createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
+  createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStageHistoryEntriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3478,12 +3716,13 @@ export type UserUncheckedUpdateWithoutSequenceEnrollmentsInput = {
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
 }
 
 export type UserCreateManyOrganizationInput = {
@@ -3520,17 +3759,18 @@ export type UserUpdateWithoutOrganizationInput = {
   ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrganizationInput = {
@@ -3552,17 +3792,18 @@ export type UserUncheckedUpdateWithoutOrganizationInput = {
   ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
   assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
-  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutOrganizationInput = {
@@ -3592,17 +3833,18 @@ export type UserCountOutputType = {
   ownedLeads: number
   assignedLeads: number
   ownedDeals: number
+  stageHistoryEntries: number
   tasks: number
   createdTasks: number
   activities: number
   notes: number
+  attachments: number
   notifications: number
   sentEmails: number
   reminders: number
   createdApiKeys: number
   createdSequences: number
   sequenceEnrollments: number
-  stageHistory: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3612,17 +3854,18 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   ownedLeads?: boolean | UserCountOutputTypeCountOwnedLeadsArgs
   assignedLeads?: boolean | UserCountOutputTypeCountAssignedLeadsArgs
   ownedDeals?: boolean | UserCountOutputTypeCountOwnedDealsArgs
+  stageHistoryEntries?: boolean | UserCountOutputTypeCountStageHistoryEntriesArgs
   tasks?: boolean | UserCountOutputTypeCountTasksArgs
   createdTasks?: boolean | UserCountOutputTypeCountCreatedTasksArgs
   activities?: boolean | UserCountOutputTypeCountActivitiesArgs
   notes?: boolean | UserCountOutputTypeCountNotesArgs
+  attachments?: boolean | UserCountOutputTypeCountAttachmentsArgs
   notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
   sentEmails?: boolean | UserCountOutputTypeCountSentEmailsArgs
   reminders?: boolean | UserCountOutputTypeCountRemindersArgs
   createdApiKeys?: boolean | UserCountOutputTypeCountCreatedApiKeysArgs
   createdSequences?: boolean | UserCountOutputTypeCountCreatedSequencesArgs
   sequenceEnrollments?: boolean | UserCountOutputTypeCountSequenceEnrollmentsArgs
-  stageHistory?: boolean | UserCountOutputTypeCountStageHistoryArgs
 }
 
 /**
@@ -3680,6 +3923,13 @@ export type UserCountOutputTypeCountOwnedDealsArgs<ExtArgs extends runtime.Types
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountStageHistoryEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StageHistoryWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TaskWhereInput
 }
@@ -3703,6 +3953,13 @@ export type UserCountOutputTypeCountActivitiesArgs<ExtArgs extends runtime.Types
  */
 export type UserCountOutputTypeCountNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.NoteWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AttachmentWhereInput
 }
 
 /**
@@ -3747,13 +4004,6 @@ export type UserCountOutputTypeCountSequenceEnrollmentsArgs<ExtArgs extends runt
   where?: Prisma.SequenceEnrollmentWhereInput
 }
 
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountStageHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.StageHistoryWhereInput
-}
-
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3776,17 +4026,18 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   ownedLeads?: boolean | Prisma.User$ownedLeadsArgs<ExtArgs>
   assignedLeads?: boolean | Prisma.User$assignedLeadsArgs<ExtArgs>
   ownedDeals?: boolean | Prisma.User$ownedDealsArgs<ExtArgs>
+  stageHistoryEntries?: boolean | Prisma.User$stageHistoryEntriesArgs<ExtArgs>
   tasks?: boolean | Prisma.User$tasksArgs<ExtArgs>
   createdTasks?: boolean | Prisma.User$createdTasksArgs<ExtArgs>
   activities?: boolean | Prisma.User$activitiesArgs<ExtArgs>
   notes?: boolean | Prisma.User$notesArgs<ExtArgs>
+  attachments?: boolean | Prisma.User$attachmentsArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   sentEmails?: boolean | Prisma.User$sentEmailsArgs<ExtArgs>
   reminders?: boolean | Prisma.User$remindersArgs<ExtArgs>
   createdApiKeys?: boolean | Prisma.User$createdApiKeysArgs<ExtArgs>
   createdSequences?: boolean | Prisma.User$createdSequencesArgs<ExtArgs>
   sequenceEnrollments?: boolean | Prisma.User$sequenceEnrollmentsArgs<ExtArgs>
-  stageHistory?: boolean | Prisma.User$stageHistoryArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -3849,17 +4100,18 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   ownedLeads?: boolean | Prisma.User$ownedLeadsArgs<ExtArgs>
   assignedLeads?: boolean | Prisma.User$assignedLeadsArgs<ExtArgs>
   ownedDeals?: boolean | Prisma.User$ownedDealsArgs<ExtArgs>
+  stageHistoryEntries?: boolean | Prisma.User$stageHistoryEntriesArgs<ExtArgs>
   tasks?: boolean | Prisma.User$tasksArgs<ExtArgs>
   createdTasks?: boolean | Prisma.User$createdTasksArgs<ExtArgs>
   activities?: boolean | Prisma.User$activitiesArgs<ExtArgs>
   notes?: boolean | Prisma.User$notesArgs<ExtArgs>
+  attachments?: boolean | Prisma.User$attachmentsArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   sentEmails?: boolean | Prisma.User$sentEmailsArgs<ExtArgs>
   reminders?: boolean | Prisma.User$remindersArgs<ExtArgs>
   createdApiKeys?: boolean | Prisma.User$createdApiKeysArgs<ExtArgs>
   createdSequences?: boolean | Prisma.User$createdSequencesArgs<ExtArgs>
   sequenceEnrollments?: boolean | Prisma.User$sequenceEnrollmentsArgs<ExtArgs>
-  stageHistory?: boolean | Prisma.User$stageHistoryArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3879,17 +4131,18 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     ownedLeads: Prisma.$LeadPayload<ExtArgs>[]
     assignedLeads: Prisma.$LeadPayload<ExtArgs>[]
     ownedDeals: Prisma.$DealPayload<ExtArgs>[]
+    stageHistoryEntries: Prisma.$StageHistoryPayload<ExtArgs>[]
     tasks: Prisma.$TaskPayload<ExtArgs>[]
     createdTasks: Prisma.$TaskPayload<ExtArgs>[]
     activities: Prisma.$ActivityPayload<ExtArgs>[]
     notes: Prisma.$NotePayload<ExtArgs>[]
+    attachments: Prisma.$AttachmentPayload<ExtArgs>[]
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
     sentEmails: Prisma.$SentEmailPayload<ExtArgs>[]
     reminders: Prisma.$FollowUpReminderPayload<ExtArgs>[]
     createdApiKeys: Prisma.$ApiKeyPayload<ExtArgs>[]
     createdSequences: Prisma.$SequencePayload<ExtArgs>[]
     sequenceEnrollments: Prisma.$SequenceEnrollmentPayload<ExtArgs>[]
-    stageHistory: Prisma.$StageHistoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -4306,17 +4559,18 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   ownedLeads<T extends Prisma.User$ownedLeadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ownedLeadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   assignedLeads<T extends Prisma.User$assignedLeadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assignedLeadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ownedDeals<T extends Prisma.User$ownedDealsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ownedDealsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stageHistoryEntries<T extends Prisma.User$stageHistoryEntriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$stageHistoryEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StageHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tasks<T extends Prisma.User$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdTasks<T extends Prisma.User$createdTasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdTasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   activities<T extends Prisma.User$activitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notes<T extends Prisma.User$notesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  attachments<T extends Prisma.User$attachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sentEmails<T extends Prisma.User$sentEmailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sentEmailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SentEmailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reminders<T extends Prisma.User$remindersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$remindersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FollowUpReminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdApiKeys<T extends Prisma.User$createdApiKeysArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdApiKeysArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdSequences<T extends Prisma.User$createdSequencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdSequencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SequencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sequenceEnrollments<T extends Prisma.User$sequenceEnrollmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sequenceEnrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SequenceEnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  stageHistory<T extends Prisma.User$stageHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$stageHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StageHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4902,6 +5156,30 @@ export type User$ownedDealsArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
+ * User.stageHistoryEntries
+ */
+export type User$stageHistoryEntriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StageHistory
+   */
+  select?: Prisma.StageHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StageHistory
+   */
+  omit?: Prisma.StageHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StageHistoryInclude<ExtArgs> | null
+  where?: Prisma.StageHistoryWhereInput
+  orderBy?: Prisma.StageHistoryOrderByWithRelationInput | Prisma.StageHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.StageHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StageHistoryScalarFieldEnum | Prisma.StageHistoryScalarFieldEnum[]
+}
+
+/**
  * User.tasks
  */
 export type User$tasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4995,6 +5273,30 @@ export type User$notesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   distinct?: Prisma.NoteScalarFieldEnum | Prisma.NoteScalarFieldEnum[]
+}
+
+/**
+ * User.attachments
+ */
+export type User$attachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Attachment
+   */
+  select?: Prisma.AttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Attachment
+   */
+  omit?: Prisma.AttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AttachmentInclude<ExtArgs> | null
+  where?: Prisma.AttachmentWhereInput
+  orderBy?: Prisma.AttachmentOrderByWithRelationInput | Prisma.AttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.AttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AttachmentScalarFieldEnum | Prisma.AttachmentScalarFieldEnum[]
 }
 
 /**
@@ -5139,30 +5441,6 @@ export type User$sequenceEnrollmentsArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.SequenceEnrollmentScalarFieldEnum | Prisma.SequenceEnrollmentScalarFieldEnum[]
-}
-
-/**
- * User.stageHistory
- */
-export type User$stageHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the StageHistory
-   */
-  select?: Prisma.StageHistorySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the StageHistory
-   */
-  omit?: Prisma.StageHistoryOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.StageHistoryInclude<ExtArgs> | null
-  where?: Prisma.StageHistoryWhereInput
-  orderBy?: Prisma.StageHistoryOrderByWithRelationInput | Prisma.StageHistoryOrderByWithRelationInput[]
-  cursor?: Prisma.StageHistoryWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.StageHistoryScalarFieldEnum | Prisma.StageHistoryScalarFieldEnum[]
 }
 
 /**
