@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { apiHandler, ok, parseBody, parseQuery, ApiNotFoundError, clientIp } from "@/server/api";
-import { requireApiUserWith, hasPermission, canAccessRecord, canReassignRecord, canWriteRecord, recordScope, visibilityScope } from "@/server/rbac";
+import { requireApiUserWith, hasPermission, canAccessRecord } from "@/server/rbac";
 import { contactCreateSchema, contactUpdateSchema, contactImportSchema } from "@/lib/schemas";
 import { db } from "@/server/db";
 import { writeAudit } from "@/server/audit";
@@ -14,22 +14,9 @@ async function resolveId(ctx: Ctx): Promise<string | null> {
   return segs && segs.length > 0 && segs[0] ? segs[0] : null;
 }
 
-async function resolveTags(organizationId: string, tagNames: string[]): Promise<string[]> {
-  const ids: string[] = [];
-  for (const name of tagNames) {
-    const tag = await db.tag.upsert({
-      where: { organizationId_name: { organizationId, name } },
-      create: { organizationId, name },
-      update: {},
-    });
-    ids.push(tag.id);
-  }
-  return ids;
-}
-
 const listQuerySchema = z.object({
   q: z.string().trim().max(120).optional(),
-  status: z.string().trim().max(40).optional(),
+  status: z.string().trim().max(30).optional(),
   companyId: z.string().trim().max(64).optional(),
   ownerId: z.string().trim().max(64).optional(),
   sort: z.enum(["recent", "name", "lastContacted"]).default("recent"),
@@ -41,30 +28,31 @@ export const GET = apiHandler<Ctx>(async (req, ctx) => {
   const id = await resolveId(ctx);
   if (id === "export") return exportContacts(req);
   if (!id || id === "list") return listContacts(req);
-  if (id === "import") return importContacts(req);
   return getContact(id);
 });
 
 async function listContacts(req: NextRequest) {
   const user = await requireApiUserWith("contacts:read");
   const q = parseQuery(req, listQuerySchema);
-  const searchClause = q.q
-    ? {
-        OR: [
-          { firstName: { contains: q.q } },
-          { lastName: { contains: q.q } },
-          { email: { contains: q.q } },
-          { phone: { contains: q.q } },
-        ],
-      }
-    : {};
   const where = {
-    ...recordScope(user, "contact", "read"),
+    organizationId: user.organizationId,
     deletedAt: null,
+    ...(hasPermission(user, "contacts:read_all")
+      ? {}
+      : { OR: [{ ownerId: user.id }, { ownerId: null }] }),
     ...(q.status ? { status: q.status } : {}),
     ...(q.companyId ? { companyId: q.companyId } : {}),
     ...(q.ownerId ? { ownerId: q.ownerId } : {}),
-    AND: [visibilityScope(user, "contacts:read_all"), searchClause],
+    ...(q.q
+      ? {
+          OR: [
+            { firstName: { contains: q.q } },
+            { lastName: { contains: q.q } },
+            { email: { contains: q.q } },
+            { phone: { contains: q.q } },
+          ],
+        }
+      : {}),
   };
   const [total, contacts] = await Promise.all([
     db.contact.count({ where }),
@@ -91,7 +79,7 @@ async function listContacts(req: NextRequest) {
 async function getContact(id: string) {
   const user = await requireApiUserWith("contacts:read");
   const contact = await db.contact.findFirst({
-    where: { ...recordScope(user, "contact", "read"), id, deletedAt: null },
+    where: { id, organizationId: user.organizationId, deletedAt: null },
     include: {
       company: true,
       owner: { select: { id: true, name: true, avatarColor: true } },
@@ -103,6 +91,70 @@ async function getContact(id: string) {
     return NextResponse.json({ error: { code: "FORBIDDEN", message: "Forbidden" } }, { status: 403 });
   }
   return ok(contact);
+}
+
+function csvEscape(v: string): string {
+  const cell = /[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v;
+  return /^[=+\-@]/.test(cell) ? `'${cell}` : cell;
+}
+
+async function exportContacts(req: NextRequest) {
+  const user = await requireApiUserWith("contacts:export");
+  const contacts = await db.contact.findMany({
+    where: {
+      organizationId: user.organizationId,
+      deletedAt: null,
+      ...(hasPermission(user, "contacts:read_all")
+        ? {}
+        : { OR: [{ ownerId: user.id }, { ownerId: null }] }),
+    },
+    include: { company: { select: { name: true } }, tags: true },
+    orderBy: { createdAt: "desc" },
+    take: 10000,
+  });
+  const header = "First Name,Last Name,Email,Phone,Title,Company,Status,City,Country,Tags";
+  const rows = contacts.map((c) =>
+    [
+      c.firstName,
+      c.lastName,
+      c.email,
+      c.phone,
+      c.title,
+      c.company?.name ?? "",
+      c.status,
+      c.city,
+      c.country,
+      c.tags.map((t) => t.name).join("; "),
+    ]
+      .map((x) => csvEscape(String(x ?? "")))
+      .join(",")
+  );
+  await writeAudit({
+    organizationId: user.organizationId,
+    userId: user.id,
+    action: "CONTACT_EXPORT",
+    ipAddress: clientIp(req),
+    metadata: { count: contacts.length },
+  });
+  return new NextResponse([header, ...rows].join("\n"), {
+    headers: {
+      "Content-Type": "text/csv; charset=utf-8",
+      "Content-Disposition": `attachment; filename="contacts-${Date.now()}.csv"`,
+    },
+  });
+}
+
+async function resolveTags(organizationId: string, tagNames: string[]): Promise<string[]> {
+  const ids: string[] = [];
+  for (const name of tagNames) {
+    const tag = await db.tag.upsert({
+      where: { organizationId_name: { organizationId, name } },
+      create: { organizationId, name },
+      update: {},
+    });
+    ids.push(tag.id);
+  }
+  return ids;
 }
 
 export const POST = apiHandler<Ctx>(async (req, ctx) => {
@@ -121,16 +173,16 @@ async function createContact(req: NextRequest) {
       firstName: body.firstName,
       lastName: body.lastName,
       email: body.email ?? "",
-      phone: body.phone ?? "",
+      phone: body.phone,
       mobile: body.mobile ?? "",
-      title: body.title ?? "",
+      title: body.title,
       companyId: body.companyId || null,
       ownerId: body.ownerId || user.id,
-      status: body.status ?? "ACTIVE",
-      address: body.address ?? "",
-      city: body.city ?? "",
-      state: body.state ?? "",
-      country: body.country ?? "",
+      status: body.status,
+      address: body.address,
+      city: body.city,
+      state: body.state,
+      country: body.country,
       tags: { connect: tagIds.map((id) => ({ id })) },
     },
     include: { tags: true },
@@ -159,52 +211,64 @@ async function importContacts(req: NextRequest) {
   const user = await requireApiUserWith("contacts:import");
   const body = await parseBody(req, contactImportSchema);
 
-  const { imported, skipped } = await db.$transaction(async (tx) => {
-    let imported = 0;
-    let skipped = 0;
-    for (const row of body.contacts) {
-      if (!row.firstName) {
-        skipped++;
-        continue;
-      }
-      const dup = row.email
-        ? await tx.contact.findFirst({
-            where: { organizationId: user.organizationId, email: row.email, deletedAt: null },
+  // Batch transactions: row-by-row writes are committed in batches of 50 rows
+  // so a failure in one batch rolls back only that batch (previous batches
+  // stay committed) instead of the whole import. Within a batch, reads see
+  // earlier writes, so duplicate emails within one payload are skipped.
+  const IMPORT_BATCH_SIZE = 50;
+  let imported = 0;
+  let skipped = 0;
+  for (let offset = 0; offset < body.contacts.length; offset += IMPORT_BATCH_SIZE) {
+    const batch = body.contacts.slice(offset, offset + IMPORT_BATCH_SIZE);
+    const result = await db.$transaction(async (tx) => {
+      let batchImported = 0;
+      let batchSkipped = 0;
+      for (const row of batch) {
+        if (!row.firstName) {
+          batchSkipped++;
+          continue;
+        }
+        const dup = row.email
+          ? await tx.contact.findFirst({
+              where: { organizationId: user.organizationId, email: row.email, deletedAt: null },
+              select: { id: true },
+            })
+          : null;
+        if (dup) {
+          batchSkipped++;
+          continue;
+        }
+        let companyId: string | null = null;
+        if (row.company) {
+          const company = await tx.company.findFirst({
+            where: { organizationId: user.organizationId, name: row.company, deletedAt: null },
             select: { id: true },
-          })
-        : null;
-      if (dup) {
-        skipped++;
-        continue;
-      }
-      let companyId: string | null = null;
-      if (row.company) {
-        const company = await tx.company.findFirst({
-          where: { organizationId: user.organizationId, name: row.company, deletedAt: null },
-          select: { id: true },
+          });
+          companyId =
+            company?.id ??
+            (await tx.company.create({
+              data: { organizationId: user.organizationId, name: row.company },
+            })).id;
+        }
+        await tx.contact.create({
+          data: {
+            organizationId: user.organizationId,
+            firstName: row.firstName,
+            lastName: row.lastName,
+            email: row.email,
+            phone: row.phone,
+            title: row.title,
+            companyId,
+            ownerId: user.id,
+          },
         });
-        companyId =
-          company?.id ??
-          (await tx.company.create({
-            data: { organizationId: user.organizationId, name: row.company },
-          })).id;
+        batchImported++;
       }
-      await tx.contact.create({
-        data: {
-          organizationId: user.organizationId,
-          firstName: row.firstName,
-          lastName: row.lastName,
-          email: row.email,
-          phone: row.phone,
-          title: row.title,
-          companyId,
-          ownerId: user.id,
-        },
-      });
-      imported++;
-    }
-    return { imported, skipped };
-  });
+      return { imported: batchImported, skipped: batchSkipped };
+    });
+    imported += result.imported;
+    skipped += result.skipped;
+  }
 
   await writeAudit({
     organizationId: user.organizationId,
@@ -227,16 +291,11 @@ export const PATCH = apiHandler<Ctx>(async (req, ctx) => {
     select: { ownerId: true },
   });
   if (!existing) throw new ApiNotFoundError("Contact not found");
-  if (!canWriteRecord(user, existing.ownerId, "contacts:update_all")) {
+  const canUpdate = hasPermission(user, "contacts:update_all") || existing.ownerId === user.id;
+  if (!canUpdate) {
     return NextResponse.json({ error: { code: "FORBIDDEN", message: "Forbidden" } }, { status: 403 });
   }
   const body = await parseBody(req, contactUpdateSchema);
-  if (body.ownerId !== undefined && !canReassignRecord(user, body.ownerId || null, "contacts:update_all")) {
-    return NextResponse.json(
-      { error: { code: "FORBIDDEN", message: "Forbidden" } },
-      { status: 403 }
-    );
-  }
   const tagIds = body.tags ? await resolveTags(user.organizationId, body.tags) : undefined;
   const { tags, email, ...data } = body;
   const contact = await db.contact.update({
@@ -264,7 +323,7 @@ export const PATCH = apiHandler<Ctx>(async (req, ctx) => {
     userId: user.id,
     action: "CONTACT_UPDATE",
     entityType: "contact",
-    entityId: id,
+    entityId: contact.id,
     ipAddress: clientIp(req),
   });
   return ok(contact);
@@ -281,7 +340,8 @@ export const DELETE = apiHandler<Ctx>(async (req, ctx) => {
     select: { ownerId: true },
   });
   if (!existing) throw new ApiNotFoundError("Contact not found");
-  if (!canWriteRecord(user, existing.ownerId, "contacts:delete_all")) {
+  const canDelete = hasPermission(user, "contacts:delete_all") || existing.ownerId === user.id;
+  if (!canDelete) {
     return NextResponse.json({ error: { code: "FORBIDDEN", message: "Forbidden" } }, { status: 403 });
   }
   await db.contact.update({ where: { id }, data: { deletedAt: new Date() } });
@@ -295,49 +355,3 @@ export const DELETE = apiHandler<Ctx>(async (req, ctx) => {
   });
   return ok({ deleted: true });
 });
-
-async function exportContacts(req: NextRequest) {
-  const user = await requireApiUserWith("contacts:export");
-  const q = parseQuery(req, listQuerySchema);
-  const where = {
-    ...recordScope(user, "contact", "read"),
-    deletedAt: null,
-    ...(q.status ? { status: q.status } : {}),
-    ...(q.companyId ? { companyId: q.companyId } : {}),
-    ...(q.ownerId ? { ownerId: q.ownerId } : {}),
-  };
-  const contacts = await db.contact.findMany({
-    where,
-    orderBy: { createdAt: "desc" },
-    include: { company: { select: { name: true } }, owner: { select: { name: true } } },
-  });
-  const header = ["firstName", "lastName", "email", "phone", "mobile", "title", "company", "owner", "status", "address", "city", "state", "country", "createdAt"];
-  const rows = contacts.map((c) => [
-    c.firstName,
-    c.lastName,
-    c.email,
-    c.phone,
-    c.mobile,
-    c.title,
-    c.company?.name ?? "",
-    c.owner?.name ?? "",
-    c.status,
-    c.address,
-    c.city,
-    c.state,
-    c.country,
-    c.createdAt.toISOString(),
-  ]);
-  const csv = [header.join(","), ...rows.map((r) => r.map(escapeCsv).join(","))].join("\n");
-  return new NextResponse(csv, {
-    headers: {
-      "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": "attachment; filename=contacts.csv",
-    },
-  });
-}
-
-function escapeCsv(v: string): string {
-  const cell = /[",\n]/.test(v) ? "\"" + v.replace(/"/g, "\"\"") + "\"" : v;
-  return /^[=+\-@]/.test(cell) ? "'" + cell : cell;
-}
