@@ -37,6 +37,7 @@ export type CandidateRecord = {
   email: string;
   phone: string;
   status: string;
+  company: string;
   createdAt: Date;
   score: number;
   matchReasons: string[];
@@ -225,11 +226,15 @@ function toCandidate(
     phone: string;
     status: string;
     createdAt: Date;
+    company?: { name: string } | null;
+    companyName?: string;
   },
   type: "contact" | "lead",
   score: number,
   reasons: string[]
 ): CandidateRecord {
+  const company =
+    type === "contact" ? row.company?.name ?? "" : row.companyName ?? "";
   return {
     id: row.id,
     type,
@@ -238,6 +243,7 @@ function toCandidate(
     email: row.email,
     phone: row.phone,
     status: row.status,
+    company,
     createdAt: row.createdAt,
     score,
     matchReasons: reasons,

@@ -70,6 +70,8 @@ export const PERMISSIONS = [
   "inbound:run",
   // sequence mail scan (managers/admins may trigger scans on demand)
   "sequences:run",
+  // duplicate-candidates endpoint (any authenticated user)
+  "dedupe:read",
 ] as const;
 
 export type Permission = (typeof PERMISSIONS)[number];
@@ -109,6 +111,7 @@ const REP_PERMS: Permission[] = [
   "notes:create",
   "notes:delete",
   "email:send",
+  "dedupe:read",
 ];
 
 export const ROLE_PERMISSIONS: Record<string, Permission[]> = {
