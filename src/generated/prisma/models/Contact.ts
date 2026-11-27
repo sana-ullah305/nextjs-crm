@@ -317,6 +317,8 @@ export type ContactWhereInput = {
   activities?: Prisma.ActivityListRelationFilter
   notes?: Prisma.NoteListRelationFilter
   deals?: Prisma.DealListRelationFilter
+  quotations?: Prisma.QuotationListRelationFilter
+  salesOrders?: Prisma.SalesOrderListRelationFilter
   sentEmails?: Prisma.SentEmailListRelationFilter
   inboundEmails?: Prisma.InboundEmailListRelationFilter
   sequenceEnrollments?: Prisma.SequenceEnrollmentListRelationFilter
@@ -352,6 +354,8 @@ export type ContactOrderByWithRelationInput = {
   activities?: Prisma.ActivityOrderByRelationAggregateInput
   notes?: Prisma.NoteOrderByRelationAggregateInput
   deals?: Prisma.DealOrderByRelationAggregateInput
+  quotations?: Prisma.QuotationOrderByRelationAggregateInput
+  salesOrders?: Prisma.SalesOrderOrderByRelationAggregateInput
   sentEmails?: Prisma.SentEmailOrderByRelationAggregateInput
   inboundEmails?: Prisma.InboundEmailOrderByRelationAggregateInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentOrderByRelationAggregateInput
@@ -390,6 +394,8 @@ export type ContactWhereUniqueInput = Prisma.AtLeast<{
   activities?: Prisma.ActivityListRelationFilter
   notes?: Prisma.NoteListRelationFilter
   deals?: Prisma.DealListRelationFilter
+  quotations?: Prisma.QuotationListRelationFilter
+  salesOrders?: Prisma.SalesOrderListRelationFilter
   sentEmails?: Prisma.SentEmailListRelationFilter
   inboundEmails?: Prisma.InboundEmailListRelationFilter
   sequenceEnrollments?: Prisma.SequenceEnrollmentListRelationFilter
@@ -476,6 +482,8 @@ export type ContactCreateInput = {
   activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
   notes?: Prisma.NoteCreateNestedManyWithoutContactInput
   deals?: Prisma.DealCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
@@ -508,6 +516,8 @@ export type ContactUncheckedCreateInput = {
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutContactInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
@@ -540,6 +550,8 @@ export type ContactUpdateInput = {
   activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
   notes?: Prisma.NoteUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
@@ -572,6 +584,8 @@ export type ContactUncheckedUpdateInput = {
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
@@ -1010,6 +1024,38 @@ export type ContactUpdateOneWithoutSequenceEnrollmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ContactUpdateToOneWithWhereWithoutSequenceEnrollmentsInput, Prisma.ContactUpdateWithoutSequenceEnrollmentsInput>, Prisma.ContactUncheckedUpdateWithoutSequenceEnrollmentsInput>
 }
 
+export type ContactCreateNestedOneWithoutQuotationsInput = {
+  create?: Prisma.XOR<Prisma.ContactCreateWithoutQuotationsInput, Prisma.ContactUncheckedCreateWithoutQuotationsInput>
+  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutQuotationsInput
+  connect?: Prisma.ContactWhereUniqueInput
+}
+
+export type ContactUpdateOneWithoutQuotationsNestedInput = {
+  create?: Prisma.XOR<Prisma.ContactCreateWithoutQuotationsInput, Prisma.ContactUncheckedCreateWithoutQuotationsInput>
+  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutQuotationsInput
+  upsert?: Prisma.ContactUpsertWithoutQuotationsInput
+  disconnect?: Prisma.ContactWhereInput | boolean
+  delete?: Prisma.ContactWhereInput | boolean
+  connect?: Prisma.ContactWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContactUpdateToOneWithWhereWithoutQuotationsInput, Prisma.ContactUpdateWithoutQuotationsInput>, Prisma.ContactUncheckedUpdateWithoutQuotationsInput>
+}
+
+export type ContactCreateNestedOneWithoutSalesOrdersInput = {
+  create?: Prisma.XOR<Prisma.ContactCreateWithoutSalesOrdersInput, Prisma.ContactUncheckedCreateWithoutSalesOrdersInput>
+  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutSalesOrdersInput
+  connect?: Prisma.ContactWhereUniqueInput
+}
+
+export type ContactUpdateOneWithoutSalesOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.ContactCreateWithoutSalesOrdersInput, Prisma.ContactUncheckedCreateWithoutSalesOrdersInput>
+  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutSalesOrdersInput
+  upsert?: Prisma.ContactUpsertWithoutSalesOrdersInput
+  disconnect?: Prisma.ContactWhereInput | boolean
+  delete?: Prisma.ContactWhereInput | boolean
+  connect?: Prisma.ContactWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContactUpdateToOneWithWhereWithoutSalesOrdersInput, Prisma.ContactUpdateWithoutSalesOrdersInput>, Prisma.ContactUncheckedUpdateWithoutSalesOrdersInput>
+}
+
 export type ContactCreateWithoutOrganizationInput = {
   id?: string
   firstName: string
@@ -1035,6 +1081,8 @@ export type ContactCreateWithoutOrganizationInput = {
   activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
   notes?: Prisma.NoteCreateNestedManyWithoutContactInput
   deals?: Prisma.DealCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
@@ -1066,6 +1114,8 @@ export type ContactUncheckedCreateWithoutOrganizationInput = {
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutContactInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
@@ -1149,6 +1199,8 @@ export type ContactCreateWithoutOwnerInput = {
   activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
   notes?: Prisma.NoteCreateNestedManyWithoutContactInput
   deals?: Prisma.DealCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
@@ -1180,6 +1232,8 @@ export type ContactUncheckedCreateWithoutOwnerInput = {
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutContactInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
@@ -1236,6 +1290,8 @@ export type ContactCreateWithoutCompanyInput = {
   activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
   notes?: Prisma.NoteCreateNestedManyWithoutContactInput
   deals?: Prisma.DealCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
@@ -1267,6 +1323,8 @@ export type ContactUncheckedCreateWithoutCompanyInput = {
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutContactInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
@@ -1324,6 +1382,8 @@ export type ContactCreateWithoutTagsInput = {
   activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
   notes?: Prisma.NoteCreateNestedManyWithoutContactInput
   deals?: Prisma.DealCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
@@ -1355,6 +1415,8 @@ export type ContactUncheckedCreateWithoutTagsInput = {
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutContactInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
@@ -1406,6 +1468,8 @@ export type ContactCreateWithoutLeadsInput = {
   activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
   notes?: Prisma.NoteCreateNestedManyWithoutContactInput
   deals?: Prisma.DealCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
@@ -1437,6 +1501,8 @@ export type ContactUncheckedCreateWithoutLeadsInput = {
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutContactInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
@@ -1484,6 +1550,8 @@ export type ContactUpdateWithoutLeadsInput = {
   activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
   notes?: Prisma.NoteUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
@@ -1515,6 +1583,8 @@ export type ContactUncheckedUpdateWithoutLeadsInput = {
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
@@ -1546,6 +1616,8 @@ export type ContactCreateWithoutDealsInput = {
   leads?: Prisma.LeadCreateNestedManyWithoutContactInput
   activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
   notes?: Prisma.NoteCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
@@ -1577,6 +1649,8 @@ export type ContactUncheckedCreateWithoutDealsInput = {
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutContactInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
@@ -1624,6 +1698,8 @@ export type ContactUpdateWithoutDealsInput = {
   leads?: Prisma.LeadUpdateManyWithoutContactNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
   notes?: Prisma.NoteUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
@@ -1655,6 +1731,8 @@ export type ContactUncheckedUpdateWithoutDealsInput = {
   leads?: Prisma.LeadUncheckedUpdateManyWithoutContactNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
@@ -1686,6 +1764,8 @@ export type ContactCreateWithoutActivitiesInput = {
   leads?: Prisma.LeadCreateNestedManyWithoutContactInput
   notes?: Prisma.NoteCreateNestedManyWithoutContactInput
   deals?: Prisma.DealCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
@@ -1717,6 +1797,8 @@ export type ContactUncheckedCreateWithoutActivitiesInput = {
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutContactInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutContactInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
@@ -1764,6 +1846,8 @@ export type ContactUpdateWithoutActivitiesInput = {
   leads?: Prisma.LeadUpdateManyWithoutContactNestedInput
   notes?: Prisma.NoteUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
@@ -1795,6 +1879,8 @@ export type ContactUncheckedUpdateWithoutActivitiesInput = {
   leads?: Prisma.LeadUncheckedUpdateManyWithoutContactNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
@@ -1826,6 +1912,8 @@ export type ContactCreateWithoutNotesInput = {
   leads?: Prisma.LeadCreateNestedManyWithoutContactInput
   activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
   deals?: Prisma.DealCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
@@ -1857,6 +1945,8 @@ export type ContactUncheckedCreateWithoutNotesInput = {
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutContactInput
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
@@ -1904,6 +1994,8 @@ export type ContactUpdateWithoutNotesInput = {
   leads?: Prisma.LeadUpdateManyWithoutContactNestedInput
   activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
@@ -1935,6 +2027,8 @@ export type ContactUncheckedUpdateWithoutNotesInput = {
   leads?: Prisma.LeadUncheckedUpdateManyWithoutContactNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
@@ -1967,6 +2061,8 @@ export type ContactCreateWithoutSentEmailsInput = {
   activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
   notes?: Prisma.NoteCreateNestedManyWithoutContactInput
   deals?: Prisma.DealCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
   tags?: Prisma.TagCreateNestedManyWithoutContactsInput
@@ -1998,6 +2094,8 @@ export type ContactUncheckedCreateWithoutSentEmailsInput = {
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutContactInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutContactsInput
@@ -2045,6 +2143,8 @@ export type ContactUpdateWithoutSentEmailsInput = {
   activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
   notes?: Prisma.NoteUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUpdateManyWithoutContactsNestedInput
@@ -2076,6 +2176,8 @@ export type ContactUncheckedUpdateWithoutSentEmailsInput = {
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutContactsNestedInput
@@ -2107,6 +2209,8 @@ export type ContactCreateWithoutInboundEmailsInput = {
   activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
   notes?: Prisma.NoteCreateNestedManyWithoutContactInput
   deals?: Prisma.DealCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
   tags?: Prisma.TagCreateNestedManyWithoutContactsInput
@@ -2138,6 +2242,8 @@ export type ContactUncheckedCreateWithoutInboundEmailsInput = {
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutContactInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutContactsInput
@@ -2185,6 +2291,8 @@ export type ContactUpdateWithoutInboundEmailsInput = {
   activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
   notes?: Prisma.NoteUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUpdateManyWithoutContactsNestedInput
@@ -2216,6 +2324,8 @@ export type ContactUncheckedUpdateWithoutInboundEmailsInput = {
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutContactsNestedInput
@@ -2247,6 +2357,8 @@ export type ContactCreateWithoutSequenceEnrollmentsInput = {
   activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
   notes?: Prisma.NoteCreateNestedManyWithoutContactInput
   deals?: Prisma.DealCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
   tags?: Prisma.TagCreateNestedManyWithoutContactsInput
@@ -2278,6 +2390,8 @@ export type ContactUncheckedCreateWithoutSequenceEnrollmentsInput = {
   activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
   notes?: Prisma.NoteUncheckedCreateNestedManyWithoutContactInput
   deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutContactInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
   inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutContactsInput
@@ -2325,6 +2439,8 @@ export type ContactUpdateWithoutSequenceEnrollmentsInput = {
   activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
   notes?: Prisma.NoteUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUpdateManyWithoutContactsNestedInput
@@ -2356,8 +2472,306 @@ export type ContactUncheckedUpdateWithoutSequenceEnrollmentsInput = {
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutContactsNestedInput
+}
+
+export type ContactCreateWithoutQuotationsInput = {
+  id?: string
+  firstName: string
+  lastName: string
+  email: string
+  phone?: string
+  mobile?: string
+  title?: string
+  address?: string
+  city?: string
+  state?: string
+  country?: string
+  status?: string
+  avatarColor?: string
+  summary?: string
+  lastContactedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  organization: Prisma.OrganizationCreateNestedOneWithoutContactsInput
+  company?: Prisma.CompanyCreateNestedOneWithoutContactsInput
+  owner?: Prisma.UserCreateNestedOneWithoutOwnedContactsInput
+  leads?: Prisma.LeadCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
+  notes?: Prisma.NoteCreateNestedManyWithoutContactInput
+  deals?: Prisma.DealCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutContactInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
+  tags?: Prisma.TagCreateNestedManyWithoutContactsInput
+}
+
+export type ContactUncheckedCreateWithoutQuotationsInput = {
+  id?: string
+  organizationId: string
+  companyId?: string | null
+  firstName: string
+  lastName: string
+  email: string
+  phone?: string
+  mobile?: string
+  title?: string
+  address?: string
+  city?: string
+  state?: string
+  country?: string
+  ownerId?: string | null
+  status?: string
+  avatarColor?: string
+  summary?: string
+  lastContactedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutContactInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutContactInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutContactsInput
+}
+
+export type ContactCreateOrConnectWithoutQuotationsInput = {
+  where: Prisma.ContactWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContactCreateWithoutQuotationsInput, Prisma.ContactUncheckedCreateWithoutQuotationsInput>
+}
+
+export type ContactUpsertWithoutQuotationsInput = {
+  update: Prisma.XOR<Prisma.ContactUpdateWithoutQuotationsInput, Prisma.ContactUncheckedUpdateWithoutQuotationsInput>
+  create: Prisma.XOR<Prisma.ContactCreateWithoutQuotationsInput, Prisma.ContactUncheckedCreateWithoutQuotationsInput>
+  where?: Prisma.ContactWhereInput
+}
+
+export type ContactUpdateToOneWithWhereWithoutQuotationsInput = {
+  where?: Prisma.ContactWhereInput
+  data: Prisma.XOR<Prisma.ContactUpdateWithoutQuotationsInput, Prisma.ContactUncheckedUpdateWithoutQuotationsInput>
+}
+
+export type ContactUpdateWithoutQuotationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutContactsNestedInput
+  company?: Prisma.CompanyUpdateOneWithoutContactsNestedInput
+  owner?: Prisma.UserUpdateOneWithoutOwnedContactsNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutContactNestedInput
+  deals?: Prisma.DealUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutContactNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
+  tags?: Prisma.TagUpdateManyWithoutContactsNestedInput
+}
+
+export type ContactUncheckedUpdateWithoutQuotationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  companyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutContactNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutContactNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutContactsNestedInput
+}
+
+export type ContactCreateWithoutSalesOrdersInput = {
+  id?: string
+  firstName: string
+  lastName: string
+  email: string
+  phone?: string
+  mobile?: string
+  title?: string
+  address?: string
+  city?: string
+  state?: string
+  country?: string
+  status?: string
+  avatarColor?: string
+  summary?: string
+  lastContactedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  organization: Prisma.OrganizationCreateNestedOneWithoutContactsInput
+  company?: Prisma.CompanyCreateNestedOneWithoutContactsInput
+  owner?: Prisma.UserCreateNestedOneWithoutOwnedContactsInput
+  leads?: Prisma.LeadCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
+  notes?: Prisma.NoteCreateNestedManyWithoutContactInput
+  deals?: Prisma.DealCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutContactInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutContactInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutContactInput
+  tags?: Prisma.TagCreateNestedManyWithoutContactsInput
+}
+
+export type ContactUncheckedCreateWithoutSalesOrdersInput = {
+  id?: string
+  organizationId: string
+  companyId?: string | null
+  firstName: string
+  lastName: string
+  email: string
+  phone?: string
+  mobile?: string
+  title?: string
+  address?: string
+  city?: string
+  state?: string
+  country?: string
+  ownerId?: string | null
+  status?: string
+  avatarColor?: string
+  summary?: string
+  lastContactedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutContactInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutContactInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutContactInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutContactInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutContactInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutContactInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutContactsInput
+}
+
+export type ContactCreateOrConnectWithoutSalesOrdersInput = {
+  where: Prisma.ContactWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContactCreateWithoutSalesOrdersInput, Prisma.ContactUncheckedCreateWithoutSalesOrdersInput>
+}
+
+export type ContactUpsertWithoutSalesOrdersInput = {
+  update: Prisma.XOR<Prisma.ContactUpdateWithoutSalesOrdersInput, Prisma.ContactUncheckedUpdateWithoutSalesOrdersInput>
+  create: Prisma.XOR<Prisma.ContactCreateWithoutSalesOrdersInput, Prisma.ContactUncheckedCreateWithoutSalesOrdersInput>
+  where?: Prisma.ContactWhereInput
+}
+
+export type ContactUpdateToOneWithWhereWithoutSalesOrdersInput = {
+  where?: Prisma.ContactWhereInput
+  data: Prisma.XOR<Prisma.ContactUpdateWithoutSalesOrdersInput, Prisma.ContactUncheckedUpdateWithoutSalesOrdersInput>
+}
+
+export type ContactUpdateWithoutSalesOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutContactsNestedInput
+  company?: Prisma.CompanyUpdateOneWithoutContactsNestedInput
+  owner?: Prisma.UserUpdateOneWithoutOwnedContactsNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutContactNestedInput
+  deals?: Prisma.DealUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutContactNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
+  tags?: Prisma.TagUpdateManyWithoutContactsNestedInput
+}
+
+export type ContactUncheckedUpdateWithoutSalesOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  companyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  lastContactedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutContactNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutContactNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutContactsNestedInput
 }
 
@@ -2409,6 +2823,8 @@ export type ContactUpdateWithoutOrganizationInput = {
   activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
   notes?: Prisma.NoteUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
@@ -2440,6 +2856,8 @@ export type ContactUncheckedUpdateWithoutOrganizationInput = {
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
@@ -2517,6 +2935,8 @@ export type ContactUpdateWithoutOwnerInput = {
   activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
   notes?: Prisma.NoteUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
@@ -2548,6 +2968,8 @@ export type ContactUncheckedUpdateWithoutOwnerInput = {
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
@@ -2625,6 +3047,8 @@ export type ContactUpdateWithoutCompanyInput = {
   activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
   notes?: Prisma.NoteUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
@@ -2656,6 +3080,8 @@ export type ContactUncheckedUpdateWithoutCompanyInput = {
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
@@ -2711,6 +3137,8 @@ export type ContactUpdateWithoutTagsInput = {
   activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
   notes?: Prisma.NoteUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUpdateManyWithoutContactNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutContactNestedInput
@@ -2742,6 +3170,8 @@ export type ContactUncheckedUpdateWithoutTagsInput = {
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
   notes?: Prisma.NoteUncheckedUpdateManyWithoutContactNestedInput
   deals?: Prisma.DealUncheckedUpdateManyWithoutContactNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutContactNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutContactNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutContactNestedInput
   inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutContactNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutContactNestedInput
@@ -2781,6 +3211,8 @@ export type ContactCountOutputType = {
   activities: number
   notes: number
   deals: number
+  quotations: number
+  salesOrders: number
   sentEmails: number
   inboundEmails: number
   sequenceEnrollments: number
@@ -2792,6 +3224,8 @@ export type ContactCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   activities?: boolean | ContactCountOutputTypeCountActivitiesArgs
   notes?: boolean | ContactCountOutputTypeCountNotesArgs
   deals?: boolean | ContactCountOutputTypeCountDealsArgs
+  quotations?: boolean | ContactCountOutputTypeCountQuotationsArgs
+  salesOrders?: boolean | ContactCountOutputTypeCountSalesOrdersArgs
   sentEmails?: boolean | ContactCountOutputTypeCountSentEmailsArgs
   inboundEmails?: boolean | ContactCountOutputTypeCountInboundEmailsArgs
   sequenceEnrollments?: boolean | ContactCountOutputTypeCountSequenceEnrollmentsArgs
@@ -2834,6 +3268,20 @@ export type ContactCountOutputTypeCountNotesArgs<ExtArgs extends runtime.Types.E
  */
 export type ContactCountOutputTypeCountDealsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.DealWhereInput
+}
+
+/**
+ * ContactCountOutputType without action
+ */
+export type ContactCountOutputTypeCountQuotationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.QuotationWhereInput
+}
+
+/**
+ * ContactCountOutputType without action
+ */
+export type ContactCountOutputTypeCountSalesOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SalesOrderWhereInput
 }
 
 /**
@@ -2894,6 +3342,8 @@ export type ContactSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   activities?: boolean | Prisma.Contact$activitiesArgs<ExtArgs>
   notes?: boolean | Prisma.Contact$notesArgs<ExtArgs>
   deals?: boolean | Prisma.Contact$dealsArgs<ExtArgs>
+  quotations?: boolean | Prisma.Contact$quotationsArgs<ExtArgs>
+  salesOrders?: boolean | Prisma.Contact$salesOrdersArgs<ExtArgs>
   sentEmails?: boolean | Prisma.Contact$sentEmailsArgs<ExtArgs>
   inboundEmails?: boolean | Prisma.Contact$inboundEmailsArgs<ExtArgs>
   sequenceEnrollments?: boolean | Prisma.Contact$sequenceEnrollmentsArgs<ExtArgs>
@@ -2988,6 +3438,8 @@ export type ContactInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   activities?: boolean | Prisma.Contact$activitiesArgs<ExtArgs>
   notes?: boolean | Prisma.Contact$notesArgs<ExtArgs>
   deals?: boolean | Prisma.Contact$dealsArgs<ExtArgs>
+  quotations?: boolean | Prisma.Contact$quotationsArgs<ExtArgs>
+  salesOrders?: boolean | Prisma.Contact$salesOrdersArgs<ExtArgs>
   sentEmails?: boolean | Prisma.Contact$sentEmailsArgs<ExtArgs>
   inboundEmails?: boolean | Prisma.Contact$inboundEmailsArgs<ExtArgs>
   sequenceEnrollments?: boolean | Prisma.Contact$sequenceEnrollmentsArgs<ExtArgs>
@@ -3015,6 +3467,8 @@ export type $ContactPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     activities: Prisma.$ActivityPayload<ExtArgs>[]
     notes: Prisma.$NotePayload<ExtArgs>[]
     deals: Prisma.$DealPayload<ExtArgs>[]
+    quotations: Prisma.$QuotationPayload<ExtArgs>[]
+    salesOrders: Prisma.$SalesOrderPayload<ExtArgs>[]
     sentEmails: Prisma.$SentEmailPayload<ExtArgs>[]
     inboundEmails: Prisma.$InboundEmailPayload<ExtArgs>[]
     sequenceEnrollments: Prisma.$SequenceEnrollmentPayload<ExtArgs>[]
@@ -3443,6 +3897,8 @@ export interface Prisma__ContactClient<T, Null = never, ExtArgs extends runtime.
   activities<T extends Prisma.Contact$activitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notes<T extends Prisma.Contact$notesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$notesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   deals<T extends Prisma.Contact$dealsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$dealsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  quotations<T extends Prisma.Contact$quotationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$quotationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuotationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  salesOrders<T extends Prisma.Contact$salesOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$salesOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalesOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sentEmails<T extends Prisma.Contact$sentEmailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$sentEmailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SentEmailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   inboundEmails<T extends Prisma.Contact$inboundEmailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$inboundEmailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InboundEmailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sequenceEnrollments<T extends Prisma.Contact$sequenceEnrollmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$sequenceEnrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SequenceEnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4027,6 +4483,54 @@ export type Contact$dealsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.DealScalarFieldEnum | Prisma.DealScalarFieldEnum[]
+}
+
+/**
+ * Contact.quotations
+ */
+export type Contact$quotationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Quotation
+   */
+  select?: Prisma.QuotationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Quotation
+   */
+  omit?: Prisma.QuotationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuotationInclude<ExtArgs> | null
+  where?: Prisma.QuotationWhereInput
+  orderBy?: Prisma.QuotationOrderByWithRelationInput | Prisma.QuotationOrderByWithRelationInput[]
+  cursor?: Prisma.QuotationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.QuotationScalarFieldEnum | Prisma.QuotationScalarFieldEnum[]
+}
+
+/**
+ * Contact.salesOrders
+ */
+export type Contact$salesOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SalesOrder
+   */
+  select?: Prisma.SalesOrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SalesOrder
+   */
+  omit?: Prisma.SalesOrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalesOrderInclude<ExtArgs> | null
+  where?: Prisma.SalesOrderWhereInput
+  orderBy?: Prisma.SalesOrderOrderByWithRelationInput | Prisma.SalesOrderOrderByWithRelationInput[]
+  cursor?: Prisma.SalesOrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SalesOrderScalarFieldEnum | Prisma.SalesOrderScalarFieldEnum[]
 }
 
 /**

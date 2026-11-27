@@ -77,6 +77,13 @@ export const PERMISSIONS = [
   "pricelists:create",
   "pricelists:update",
   "pricelists:delete",
+  // quotations / sales orders
+  "quotations:read",
+  "quotations:create",
+  "quotations:manage",
+  "salesOrders:read",
+  "salesOrders:create",
+  "salesOrders:manage",
 ] as const;
 
 export type Permission = (typeof PERMISSIONS)[number];
@@ -130,6 +137,10 @@ const REP_PERMS: Permission[] = [
   "pricelists:create",
   "pricelists:update",
   "pricelists:delete",
+  "quotations:read",
+  "quotations:create",
+  "salesOrders:read",
+  "salesOrders:create",
 ];
 
 export const ROLE_PERMISSIONS: Record<string, Permission[]> = {

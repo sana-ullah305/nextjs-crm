@@ -31,6 +31,9 @@ model Organization {
   notes               Note[]
   notifications       Notification[]
   tags                Tag[]
+  quotations          Quotation[]         @relation("QuotationOrganization")
+  salesOrders         SalesOrder[]        @relation("SalesOrderOrganization")
+  products            Product[]           @relation("ProductOrganization")
   leadSources         LeadSource[]
   emailTemplates      EmailTemplate[]
   customFields        CustomField[]
@@ -44,7 +47,6 @@ model Organization {
   sequenceEnrollments SequenceEnrollment[]
   sequenceDeadLetters SequenceDeadLetter[]
   lostReasons         LostReason[]
-  products            Product[]
   priceLists          PriceList[]
   currency            String               @default("USD")
 }
@@ -124,6 +126,8 @@ model Company {
   contacts     Contact[]
   leads        Lead[]
   deals        Deal[]
+  quotations   Quotation[]   @relation("QuotationCompany")
+  salesOrders  SalesOrder[]  @relation("SalesOrderCompany")
   activities   Activity[]
   notes        Note[]
 
@@ -161,6 +165,8 @@ model Contact {
   activities          Activity[]
   notes               Note[]
   deals               Deal[]               @relation("DealContact")
+  quotations          Quotation[]          @relation("QuotationContact")
+  salesOrders         SalesOrder[]         @relation("SalesOrderContact")
   sentEmails          SentEmail[]          @relation("SentEmailContact")
   inboundEmails       InboundEmail[]
   sequenceEnrollments SequenceEnrollment[] @relation("SequenceEnrollmentContact")
@@ -314,6 +320,8 @@ model Deal {
   activities   Activity[]
   notes        Note[]
   lead         Lead?        @relation("DealLead", fields: [leadId], references: [id], onDelete: SetNull)
+  quotations     Quotation[]     @relation("QuotationDeal")
+  salesOrders    SalesOrder[]    @relation("SalesOrderDeal")
   sentEmails   SentEmail[]  @relation("SentEmailDeal")
   lineItems    DealLineItem[]
 
@@ -709,6 +717,7 @@ model SequenceStepEnrollment {
   @@index([enrollmentId])
 }
 
+
 model SequenceDeadLetter {
   id             String   @id @default(cuid())
   organizationId String
@@ -763,6 +772,8 @@ model LostReason {
   @@unique([organizationId, name])
 }
 
+// Quotations and Sales Orders
+
 model Product {
   id             String   @id @default(cuid())
   organizationId String
@@ -775,9 +786,11 @@ model Product {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
-  organization    Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  priceListItems  PriceListItem[]
-  dealLineItems   DealLineItem[]
+  organization          Organization        @relation("ProductOrganization", fields: [organizationId], references: [id], onDelete: Cascade)
+  priceListItems        PriceListItem[]
+  dealLineItems         DealLineItem[]
+  quotationLineItems    QuotationLineItem[] @relation("ProductQuotationLineItems")
+  salesOrderLineItems   SalesOrderLineItem[] @relation("ProductSalesOrderLineItems")
 
   @@unique([organizationId, sku])
   @@index([organizationId, isActive])
@@ -832,4 +845,96 @@ model DealLineItem {
 
   @@index([dealId])
   @@index([productId])
+}
+
+model Quotation {
+  id          String   @id @default(cuid())
+  organizationId String
+  quotationNumber String
+  dealId      String?
+  contactId   String?
+  companyId   String?
+  status      String   @default("DRAFT") // DRAFT | SENT | ACCEPTED | REJECTED | EXPIRED
+  validUntil  DateTime?
+  subtotal    Float    @default(0)
+  tax         Float    @default(0)
+  total       Float    @default(0)
+  notes       String   @default("")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  organization Organization @relation("QuotationOrganization", fields: [organizationId], references: [id], onDelete: Cascade)
+  deal        Deal?       @relation("QuotationDeal", fields: [dealId], references: [id], onDelete: SetNull)
+  contact     Contact?    @relation("QuotationContact", fields: [contactId], references: [id], onDelete: SetNull)
+  company     Company?    @relation("QuotationCompany", fields: [companyId], references: [id], onDelete: SetNull)
+  lineItems   QuotationLineItem[] @relation("QuotationLineItems")
+  salesOrders SalesOrder[] @relation("SalesOrderQuotation")
+
+  @@index([organizationId])
+  @@index([dealId])
+  @@index([quotationNumber])
+}
+
+model QuotationLineItem {
+  id          String   @id @default(cuid())
+  quotationId String
+  productId   String?
+  name        String
+  description String   @default("")
+  quantity    Float    @default(1)
+  unitPrice   Float
+  total       Float
+  createdAt   DateTime @default(now())
+
+  quotation Quotation @relation("QuotationLineItems", fields: [quotationId], references: [id], onDelete: Cascade)
+  product   Product?  @relation("ProductQuotationLineItems", fields: [productId], references: [id], onDelete: SetNull)
+
+  @@index([quotationId])
+}
+
+model SalesOrder {
+  id           String   @id @default(cuid())
+  organizationId String
+  orderNumber  String
+  quotationId  String?
+  dealId       String?
+  contactId    String?
+  companyId    String?
+  status       String   @default("PENDING") // PENDING | CONFIRMED | COMPLETED | CANCELLED
+  orderDate    DateTime @default(now())
+  subtotal     Float    @default(0)
+  tax          Float    @default(0)
+  total        Float    @default(0)
+  shippingAddress String @default("")
+  notes        String   @default("")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  organization Organization  @relation("SalesOrderOrganization", fields: [organizationId], references: [id], onDelete: Cascade)
+  quotation    Quotation?    @relation("SalesOrderQuotation", fields: [quotationId], references: [id], onDelete: SetNull)
+  deal         Deal?         @relation("SalesOrderDeal", fields: [dealId], references: [id], onDelete: SetNull)
+  contact      Contact?      @relation("SalesOrderContact", fields: [contactId], references: [id], onDelete: SetNull)
+  company      Company?      @relation("SalesOrderCompany", fields: [companyId], references: [id], onDelete: SetNull)
+  lineItems    SalesOrderLineItem[] @relation("SalesOrderLineItems")
+
+  @@index([organizationId])
+  @@index([quotationId])
+  @@index([orderNumber])
+}
+
+model SalesOrderLineItem {
+  id           String   @id @default(cuid())
+  salesOrderId String
+  productId    String?
+  name         String
+  description  String   @default("")
+  quantity     Float    @default(1)
+  unitPrice    Float
+  total        Float
+  createdAt    DateTime @default(now())
+
+  salesOrder SalesOrder @relation("SalesOrderLineItems", fields: [salesOrderId], references: [id], onDelete: Cascade)
+  product    Product?   @relation("ProductSalesOrderLineItems", fields: [productId], references: [id], onDelete: SetNull)
+
+  @@index([salesOrderId])
 }

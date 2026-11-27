@@ -259,6 +259,8 @@ export type ProductWhereInput = {
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
   priceListItems?: Prisma.PriceListItemListRelationFilter
   dealLineItems?: Prisma.DealLineItemListRelationFilter
+  quotationLineItems?: Prisma.QuotationLineItemListRelationFilter
+  salesOrderLineItems?: Prisma.SalesOrderLineItemListRelationFilter
 }
 
 export type ProductOrderByWithRelationInput = {
@@ -275,6 +277,8 @@ export type ProductOrderByWithRelationInput = {
   organization?: Prisma.OrganizationOrderByWithRelationInput
   priceListItems?: Prisma.PriceListItemOrderByRelationAggregateInput
   dealLineItems?: Prisma.DealLineItemOrderByRelationAggregateInput
+  quotationLineItems?: Prisma.QuotationLineItemOrderByRelationAggregateInput
+  salesOrderLineItems?: Prisma.SalesOrderLineItemOrderByRelationAggregateInput
 }
 
 export type ProductWhereUniqueInput = Prisma.AtLeast<{
@@ -295,6 +299,8 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
   priceListItems?: Prisma.PriceListItemListRelationFilter
   dealLineItems?: Prisma.DealLineItemListRelationFilter
+  quotationLineItems?: Prisma.QuotationLineItemListRelationFilter
+  salesOrderLineItems?: Prisma.SalesOrderLineItemListRelationFilter
 }, "id" | "organizationId_sku">
 
 export type ProductOrderByWithAggregationInput = {
@@ -344,6 +350,8 @@ export type ProductCreateInput = {
   organization: Prisma.OrganizationCreateNestedOneWithoutProductsInput
   priceListItems?: Prisma.PriceListItemCreateNestedManyWithoutProductInput
   dealLineItems?: Prisma.DealLineItemCreateNestedManyWithoutProductInput
+  quotationLineItems?: Prisma.QuotationLineItemCreateNestedManyWithoutProductInput
+  salesOrderLineItems?: Prisma.SalesOrderLineItemCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateInput = {
@@ -359,6 +367,8 @@ export type ProductUncheckedCreateInput = {
   updatedAt?: Date | string
   priceListItems?: Prisma.PriceListItemUncheckedCreateNestedManyWithoutProductInput
   dealLineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutProductInput
+  quotationLineItems?: Prisma.QuotationLineItemUncheckedCreateNestedManyWithoutProductInput
+  salesOrderLineItems?: Prisma.SalesOrderLineItemUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductUpdateInput = {
@@ -374,6 +384,8 @@ export type ProductUpdateInput = {
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutProductsNestedInput
   priceListItems?: Prisma.PriceListItemUpdateManyWithoutProductNestedInput
   dealLineItems?: Prisma.DealLineItemUpdateManyWithoutProductNestedInput
+  quotationLineItems?: Prisma.QuotationLineItemUpdateManyWithoutProductNestedInput
+  salesOrderLineItems?: Prisma.SalesOrderLineItemUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateInput = {
@@ -389,6 +401,8 @@ export type ProductUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   priceListItems?: Prisma.PriceListItemUncheckedUpdateManyWithoutProductNestedInput
   dealLineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutProductNestedInput
+  quotationLineItems?: Prisma.QuotationLineItemUncheckedUpdateManyWithoutProductNestedInput
+  salesOrderLineItems?: Prisma.SalesOrderLineItemUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductCreateManyInput = {
@@ -573,6 +587,38 @@ export type ProductUpdateOneWithoutDealLineItemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProductUpdateToOneWithWhereWithoutDealLineItemsInput, Prisma.ProductUpdateWithoutDealLineItemsInput>, Prisma.ProductUncheckedUpdateWithoutDealLineItemsInput>
 }
 
+export type ProductCreateNestedOneWithoutQuotationLineItemsInput = {
+  create?: Prisma.XOR<Prisma.ProductCreateWithoutQuotationLineItemsInput, Prisma.ProductUncheckedCreateWithoutQuotationLineItemsInput>
+  connectOrCreate?: Prisma.ProductCreateOrConnectWithoutQuotationLineItemsInput
+  connect?: Prisma.ProductWhereUniqueInput
+}
+
+export type ProductUpdateOneWithoutQuotationLineItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductCreateWithoutQuotationLineItemsInput, Prisma.ProductUncheckedCreateWithoutQuotationLineItemsInput>
+  connectOrCreate?: Prisma.ProductCreateOrConnectWithoutQuotationLineItemsInput
+  upsert?: Prisma.ProductUpsertWithoutQuotationLineItemsInput
+  disconnect?: Prisma.ProductWhereInput | boolean
+  delete?: Prisma.ProductWhereInput | boolean
+  connect?: Prisma.ProductWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductUpdateToOneWithWhereWithoutQuotationLineItemsInput, Prisma.ProductUpdateWithoutQuotationLineItemsInput>, Prisma.ProductUncheckedUpdateWithoutQuotationLineItemsInput>
+}
+
+export type ProductCreateNestedOneWithoutSalesOrderLineItemsInput = {
+  create?: Prisma.XOR<Prisma.ProductCreateWithoutSalesOrderLineItemsInput, Prisma.ProductUncheckedCreateWithoutSalesOrderLineItemsInput>
+  connectOrCreate?: Prisma.ProductCreateOrConnectWithoutSalesOrderLineItemsInput
+  connect?: Prisma.ProductWhereUniqueInput
+}
+
+export type ProductUpdateOneWithoutSalesOrderLineItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductCreateWithoutSalesOrderLineItemsInput, Prisma.ProductUncheckedCreateWithoutSalesOrderLineItemsInput>
+  connectOrCreate?: Prisma.ProductCreateOrConnectWithoutSalesOrderLineItemsInput
+  upsert?: Prisma.ProductUpsertWithoutSalesOrderLineItemsInput
+  disconnect?: Prisma.ProductWhereInput | boolean
+  delete?: Prisma.ProductWhereInput | boolean
+  connect?: Prisma.ProductWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductUpdateToOneWithWhereWithoutSalesOrderLineItemsInput, Prisma.ProductUpdateWithoutSalesOrderLineItemsInput>, Prisma.ProductUncheckedUpdateWithoutSalesOrderLineItemsInput>
+}
+
 export type ProductCreateWithoutOrganizationInput = {
   id?: string
   name: string
@@ -585,6 +631,8 @@ export type ProductCreateWithoutOrganizationInput = {
   updatedAt?: Date | string
   priceListItems?: Prisma.PriceListItemCreateNestedManyWithoutProductInput
   dealLineItems?: Prisma.DealLineItemCreateNestedManyWithoutProductInput
+  quotationLineItems?: Prisma.QuotationLineItemCreateNestedManyWithoutProductInput
+  salesOrderLineItems?: Prisma.SalesOrderLineItemCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutOrganizationInput = {
@@ -599,6 +647,8 @@ export type ProductUncheckedCreateWithoutOrganizationInput = {
   updatedAt?: Date | string
   priceListItems?: Prisma.PriceListItemUncheckedCreateNestedManyWithoutProductInput
   dealLineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutProductInput
+  quotationLineItems?: Prisma.QuotationLineItemUncheckedCreateNestedManyWithoutProductInput
+  salesOrderLineItems?: Prisma.SalesOrderLineItemUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutOrganizationInput = {
@@ -654,6 +704,8 @@ export type ProductCreateWithoutPriceListItemsInput = {
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutProductsInput
   dealLineItems?: Prisma.DealLineItemCreateNestedManyWithoutProductInput
+  quotationLineItems?: Prisma.QuotationLineItemCreateNestedManyWithoutProductInput
+  salesOrderLineItems?: Prisma.SalesOrderLineItemCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutPriceListItemsInput = {
@@ -668,6 +720,8 @@ export type ProductUncheckedCreateWithoutPriceListItemsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   dealLineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutProductInput
+  quotationLineItems?: Prisma.QuotationLineItemUncheckedCreateNestedManyWithoutProductInput
+  salesOrderLineItems?: Prisma.SalesOrderLineItemUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutPriceListItemsInput = {
@@ -698,6 +752,8 @@ export type ProductUpdateWithoutPriceListItemsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutProductsNestedInput
   dealLineItems?: Prisma.DealLineItemUpdateManyWithoutProductNestedInput
+  quotationLineItems?: Prisma.QuotationLineItemUpdateManyWithoutProductNestedInput
+  salesOrderLineItems?: Prisma.SalesOrderLineItemUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutPriceListItemsInput = {
@@ -712,6 +768,8 @@ export type ProductUncheckedUpdateWithoutPriceListItemsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dealLineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutProductNestedInput
+  quotationLineItems?: Prisma.QuotationLineItemUncheckedUpdateManyWithoutProductNestedInput
+  salesOrderLineItems?: Prisma.SalesOrderLineItemUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductCreateWithoutDealLineItemsInput = {
@@ -726,6 +784,8 @@ export type ProductCreateWithoutDealLineItemsInput = {
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutProductsInput
   priceListItems?: Prisma.PriceListItemCreateNestedManyWithoutProductInput
+  quotationLineItems?: Prisma.QuotationLineItemCreateNestedManyWithoutProductInput
+  salesOrderLineItems?: Prisma.SalesOrderLineItemCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutDealLineItemsInput = {
@@ -740,6 +800,8 @@ export type ProductUncheckedCreateWithoutDealLineItemsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   priceListItems?: Prisma.PriceListItemUncheckedCreateNestedManyWithoutProductInput
+  quotationLineItems?: Prisma.QuotationLineItemUncheckedCreateNestedManyWithoutProductInput
+  salesOrderLineItems?: Prisma.SalesOrderLineItemUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutDealLineItemsInput = {
@@ -770,6 +832,8 @@ export type ProductUpdateWithoutDealLineItemsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutProductsNestedInput
   priceListItems?: Prisma.PriceListItemUpdateManyWithoutProductNestedInput
+  quotationLineItems?: Prisma.QuotationLineItemUpdateManyWithoutProductNestedInput
+  salesOrderLineItems?: Prisma.SalesOrderLineItemUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutDealLineItemsInput = {
@@ -784,6 +848,168 @@ export type ProductUncheckedUpdateWithoutDealLineItemsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   priceListItems?: Prisma.PriceListItemUncheckedUpdateManyWithoutProductNestedInput
+  quotationLineItems?: Prisma.QuotationLineItemUncheckedUpdateManyWithoutProductNestedInput
+  salesOrderLineItems?: Prisma.SalesOrderLineItemUncheckedUpdateManyWithoutProductNestedInput
+}
+
+export type ProductCreateWithoutQuotationLineItemsInput = {
+  id?: string
+  name: string
+  description?: string
+  sku?: string | null
+  unitPrice: number
+  currency?: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutProductsInput
+  priceListItems?: Prisma.PriceListItemCreateNestedManyWithoutProductInput
+  dealLineItems?: Prisma.DealLineItemCreateNestedManyWithoutProductInput
+  salesOrderLineItems?: Prisma.SalesOrderLineItemCreateNestedManyWithoutProductInput
+}
+
+export type ProductUncheckedCreateWithoutQuotationLineItemsInput = {
+  id?: string
+  organizationId: string
+  name: string
+  description?: string
+  sku?: string | null
+  unitPrice: number
+  currency?: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  priceListItems?: Prisma.PriceListItemUncheckedCreateNestedManyWithoutProductInput
+  dealLineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutProductInput
+  salesOrderLineItems?: Prisma.SalesOrderLineItemUncheckedCreateNestedManyWithoutProductInput
+}
+
+export type ProductCreateOrConnectWithoutQuotationLineItemsInput = {
+  where: Prisma.ProductWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductCreateWithoutQuotationLineItemsInput, Prisma.ProductUncheckedCreateWithoutQuotationLineItemsInput>
+}
+
+export type ProductUpsertWithoutQuotationLineItemsInput = {
+  update: Prisma.XOR<Prisma.ProductUpdateWithoutQuotationLineItemsInput, Prisma.ProductUncheckedUpdateWithoutQuotationLineItemsInput>
+  create: Prisma.XOR<Prisma.ProductCreateWithoutQuotationLineItemsInput, Prisma.ProductUncheckedCreateWithoutQuotationLineItemsInput>
+  where?: Prisma.ProductWhereInput
+}
+
+export type ProductUpdateToOneWithWhereWithoutQuotationLineItemsInput = {
+  where?: Prisma.ProductWhereInput
+  data: Prisma.XOR<Prisma.ProductUpdateWithoutQuotationLineItemsInput, Prisma.ProductUncheckedUpdateWithoutQuotationLineItemsInput>
+}
+
+export type ProductUpdateWithoutQuotationLineItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutProductsNestedInput
+  priceListItems?: Prisma.PriceListItemUpdateManyWithoutProductNestedInput
+  dealLineItems?: Prisma.DealLineItemUpdateManyWithoutProductNestedInput
+  salesOrderLineItems?: Prisma.SalesOrderLineItemUpdateManyWithoutProductNestedInput
+}
+
+export type ProductUncheckedUpdateWithoutQuotationLineItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  priceListItems?: Prisma.PriceListItemUncheckedUpdateManyWithoutProductNestedInput
+  dealLineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutProductNestedInput
+  salesOrderLineItems?: Prisma.SalesOrderLineItemUncheckedUpdateManyWithoutProductNestedInput
+}
+
+export type ProductCreateWithoutSalesOrderLineItemsInput = {
+  id?: string
+  name: string
+  description?: string
+  sku?: string | null
+  unitPrice: number
+  currency?: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutProductsInput
+  priceListItems?: Prisma.PriceListItemCreateNestedManyWithoutProductInput
+  dealLineItems?: Prisma.DealLineItemCreateNestedManyWithoutProductInput
+  quotationLineItems?: Prisma.QuotationLineItemCreateNestedManyWithoutProductInput
+}
+
+export type ProductUncheckedCreateWithoutSalesOrderLineItemsInput = {
+  id?: string
+  organizationId: string
+  name: string
+  description?: string
+  sku?: string | null
+  unitPrice: number
+  currency?: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  priceListItems?: Prisma.PriceListItemUncheckedCreateNestedManyWithoutProductInput
+  dealLineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutProductInput
+  quotationLineItems?: Prisma.QuotationLineItemUncheckedCreateNestedManyWithoutProductInput
+}
+
+export type ProductCreateOrConnectWithoutSalesOrderLineItemsInput = {
+  where: Prisma.ProductWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductCreateWithoutSalesOrderLineItemsInput, Prisma.ProductUncheckedCreateWithoutSalesOrderLineItemsInput>
+}
+
+export type ProductUpsertWithoutSalesOrderLineItemsInput = {
+  update: Prisma.XOR<Prisma.ProductUpdateWithoutSalesOrderLineItemsInput, Prisma.ProductUncheckedUpdateWithoutSalesOrderLineItemsInput>
+  create: Prisma.XOR<Prisma.ProductCreateWithoutSalesOrderLineItemsInput, Prisma.ProductUncheckedCreateWithoutSalesOrderLineItemsInput>
+  where?: Prisma.ProductWhereInput
+}
+
+export type ProductUpdateToOneWithWhereWithoutSalesOrderLineItemsInput = {
+  where?: Prisma.ProductWhereInput
+  data: Prisma.XOR<Prisma.ProductUpdateWithoutSalesOrderLineItemsInput, Prisma.ProductUncheckedUpdateWithoutSalesOrderLineItemsInput>
+}
+
+export type ProductUpdateWithoutSalesOrderLineItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutProductsNestedInput
+  priceListItems?: Prisma.PriceListItemUpdateManyWithoutProductNestedInput
+  dealLineItems?: Prisma.DealLineItemUpdateManyWithoutProductNestedInput
+  quotationLineItems?: Prisma.QuotationLineItemUpdateManyWithoutProductNestedInput
+}
+
+export type ProductUncheckedUpdateWithoutSalesOrderLineItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unitPrice?: Prisma.FloatFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  priceListItems?: Prisma.PriceListItemUncheckedUpdateManyWithoutProductNestedInput
+  dealLineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutProductNestedInput
+  quotationLineItems?: Prisma.QuotationLineItemUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductCreateManyOrganizationInput = {
@@ -810,6 +1036,8 @@ export type ProductUpdateWithoutOrganizationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   priceListItems?: Prisma.PriceListItemUpdateManyWithoutProductNestedInput
   dealLineItems?: Prisma.DealLineItemUpdateManyWithoutProductNestedInput
+  quotationLineItems?: Prisma.QuotationLineItemUpdateManyWithoutProductNestedInput
+  salesOrderLineItems?: Prisma.SalesOrderLineItemUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutOrganizationInput = {
@@ -824,6 +1052,8 @@ export type ProductUncheckedUpdateWithoutOrganizationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   priceListItems?: Prisma.PriceListItemUncheckedUpdateManyWithoutProductNestedInput
   dealLineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutProductNestedInput
+  quotationLineItems?: Prisma.QuotationLineItemUncheckedUpdateManyWithoutProductNestedInput
+  salesOrderLineItems?: Prisma.SalesOrderLineItemUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateManyWithoutOrganizationInput = {
@@ -846,11 +1076,15 @@ export type ProductUncheckedUpdateManyWithoutOrganizationInput = {
 export type ProductCountOutputType = {
   priceListItems: number
   dealLineItems: number
+  quotationLineItems: number
+  salesOrderLineItems: number
 }
 
 export type ProductCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   priceListItems?: boolean | ProductCountOutputTypeCountPriceListItemsArgs
   dealLineItems?: boolean | ProductCountOutputTypeCountDealLineItemsArgs
+  quotationLineItems?: boolean | ProductCountOutputTypeCountQuotationLineItemsArgs
+  salesOrderLineItems?: boolean | ProductCountOutputTypeCountSalesOrderLineItemsArgs
 }
 
 /**
@@ -877,6 +1111,20 @@ export type ProductCountOutputTypeCountDealLineItemsArgs<ExtArgs extends runtime
   where?: Prisma.DealLineItemWhereInput
 }
 
+/**
+ * ProductCountOutputType without action
+ */
+export type ProductCountOutputTypeCountQuotationLineItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.QuotationLineItemWhereInput
+}
+
+/**
+ * ProductCountOutputType without action
+ */
+export type ProductCountOutputTypeCountSalesOrderLineItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SalesOrderLineItemWhereInput
+}
+
 
 export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -892,6 +1140,8 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   priceListItems?: boolean | Prisma.Product$priceListItemsArgs<ExtArgs>
   dealLineItems?: boolean | Prisma.Product$dealLineItemsArgs<ExtArgs>
+  quotationLineItems?: boolean | Prisma.Product$quotationLineItemsArgs<ExtArgs>
+  salesOrderLineItems?: boolean | Prisma.Product$salesOrderLineItemsArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["product"]>
 
@@ -941,6 +1191,8 @@ export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   priceListItems?: boolean | Prisma.Product$priceListItemsArgs<ExtArgs>
   dealLineItems?: boolean | Prisma.Product$dealLineItemsArgs<ExtArgs>
+  quotationLineItems?: boolean | Prisma.Product$quotationLineItemsArgs<ExtArgs>
+  salesOrderLineItems?: boolean | Prisma.Product$salesOrderLineItemsArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProductIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -956,6 +1208,8 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     organization: Prisma.$OrganizationPayload<ExtArgs>
     priceListItems: Prisma.$PriceListItemPayload<ExtArgs>[]
     dealLineItems: Prisma.$DealLineItemPayload<ExtArgs>[]
+    quotationLineItems: Prisma.$QuotationLineItemPayload<ExtArgs>[]
+    salesOrderLineItems: Prisma.$SalesOrderLineItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1365,6 +1619,8 @@ export interface Prisma__ProductClient<T, Null = never, ExtArgs extends runtime.
   organization<T extends Prisma.OrganizationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationDefaultArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   priceListItems<T extends Prisma.Product$priceListItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$priceListItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PriceListItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   dealLineItems<T extends Prisma.Product$dealLineItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$dealLineItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealLineItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  quotationLineItems<T extends Prisma.Product$quotationLineItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$quotationLineItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuotationLineItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  salesOrderLineItems<T extends Prisma.Product$salesOrderLineItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$salesOrderLineItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalesOrderLineItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1848,6 +2104,54 @@ export type Product$dealLineItemsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.DealLineItemScalarFieldEnum | Prisma.DealLineItemScalarFieldEnum[]
+}
+
+/**
+ * Product.quotationLineItems
+ */
+export type Product$quotationLineItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the QuotationLineItem
+   */
+  select?: Prisma.QuotationLineItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the QuotationLineItem
+   */
+  omit?: Prisma.QuotationLineItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuotationLineItemInclude<ExtArgs> | null
+  where?: Prisma.QuotationLineItemWhereInput
+  orderBy?: Prisma.QuotationLineItemOrderByWithRelationInput | Prisma.QuotationLineItemOrderByWithRelationInput[]
+  cursor?: Prisma.QuotationLineItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.QuotationLineItemScalarFieldEnum | Prisma.QuotationLineItemScalarFieldEnum[]
+}
+
+/**
+ * Product.salesOrderLineItems
+ */
+export type Product$salesOrderLineItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SalesOrderLineItem
+   */
+  select?: Prisma.SalesOrderLineItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SalesOrderLineItem
+   */
+  omit?: Prisma.SalesOrderLineItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SalesOrderLineItemInclude<ExtArgs> | null
+  where?: Prisma.SalesOrderLineItemWhereInput
+  orderBy?: Prisma.SalesOrderLineItemOrderByWithRelationInput | Prisma.SalesOrderLineItemOrderByWithRelationInput[]
+  cursor?: Prisma.SalesOrderLineItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SalesOrderLineItemScalarFieldEnum | Prisma.SalesOrderLineItemScalarFieldEnum[]
 }
 
 /**

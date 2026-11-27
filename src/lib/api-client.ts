@@ -105,6 +105,77 @@ export type DealLineItem = {
   product?: Product | null;
 };
 
+export type QuotationLineItem = {
+  id: string;
+  quotationId: string;
+  productId: string | null;
+  name: string;
+  description: string;
+  quantity: number;
+  unitPrice: number;
+  total: number;
+  createdAt: string;
+  product?: Product | null;
+};
+
+export type Quotation = {
+  id: string;
+  organizationId: string;
+  quotationNumber: string;
+  dealId: string | null;
+  contactId: string | null;
+  companyId: string | null;
+  status: string; // DRAFT | SENT | ACCEPTED | REJECTED | EXPIRED
+  validUntil: string | null;
+  subtotal: number;
+  tax: number;
+  total: number;
+  notes: string;
+  createdAt: string;
+  updatedAt: string;
+  lineItems?: QuotationLineItem[];
+  contact?: { id: string; firstName: string; lastName: string; email: string } | null;
+  company?: { id: string; name: string } | null;
+  deal?: { id: string; name: string } | null;
+};
+
+export type SalesOrderLineItem = {
+  id: string;
+  salesOrderId: string;
+  productId: string | null;
+  name: string;
+  description: string;
+  quantity: number;
+  unitPrice: number;
+  total: number;
+  createdAt: string;
+  product?: Product | null;
+};
+
+export type SalesOrder = {
+  id: string;
+  organizationId: string;
+  orderNumber: string;
+  quotationId: string | null;
+  dealId: string | null;
+  contactId: string | null;
+  companyId: string | null;
+  status: string; // PENDING | CONFIRMED | COMPLETED | CANCELLED
+  orderDate: string;
+  subtotal: number;
+  tax: number;
+  total: number;
+  shippingAddress: string;
+  notes: string;
+  createdAt: string;
+  updatedAt: string;
+  lineItems?: SalesOrderLineItem[];
+  contact?: { id: string; firstName: string; lastName: string; email: string } | null;
+  company?: { id: string; name: string } | null;
+  deal?: { id: string; name: string } | null;
+  quotation?: { id: string; quotationNumber: string } | null;
+};
+
 export type Deal = {
   id: string;
   name: string;
@@ -242,4 +313,44 @@ export const dealLineItemApi = {
     api.patch<DealLineItem>(`/api/deals/${dealId}/line-items/${lineItemId}`, body),
   remove: (dealId: string, lineItemId: string) =>
     api.delete<{ deleted: boolean }>(`/api/deals/${dealId}/line-items/${lineItemId}`),
+};
+
+export const quotationApi = {
+  list: (params?: { status?: string; dealId?: string; contactId?: string; q?: string; page?: number; pageSize?: number }) => {
+    const searchParams = new URLSearchParams();
+    if (params?.status) searchParams.set("status", params.status);
+    if (params?.dealId) searchParams.set("dealId", params.dealId);
+    if (params?.contactId) searchParams.set("contactId", params.contactId);
+    if (params?.q) searchParams.set("q", params.q);
+    if (params?.page) searchParams.set("page", String(params.page));
+    if (params?.pageSize) searchParams.set("pageSize", String(params.pageSize));
+    return api.get<{ quotations: Quotation[]; total: number; page: number; pageSize: number }>(
+      `/api/quotations?${searchParams.toString()}`
+    );
+  },
+  get: (id: string) => api.get<Quotation>(`/api/quotations/${id}`),
+  create: (body: unknown) => api.post<Quotation>("/api/quotations", body),
+  update: (id: string, body: unknown) => api.patch<Quotation>(`/api/quotations/${id}`, body),
+  remove: (id: string) => api.delete<{ deleted: boolean }>(`/api/quotations/${id}`),
+  pdf: (id: string) => fetch(`/api/quotations/${id}/pdf`, { credentials: "same-origin" }),
+};
+
+export const salesOrderApi = {
+  list: (params?: { status?: string; quotationId?: string; dealId?: string; contactId?: string; q?: string; page?: number; pageSize?: number }) => {
+    const searchParams = new URLSearchParams();
+    if (params?.status) searchParams.set("status", params.status);
+    if (params?.quotationId) searchParams.set("quotationId", params.quotationId);
+    if (params?.dealId) searchParams.set("dealId", params.dealId);
+    if (params?.contactId) searchParams.set("contactId", params.contactId);
+    if (params?.q) searchParams.set("q", params.q);
+    if (params?.page) searchParams.set("page", String(params.page));
+    if (params?.pageSize) searchParams.set("pageSize", String(params.pageSize));
+    return api.get<{ salesOrders: SalesOrder[]; total: number; page: number; pageSize: number }>(
+      `/api/sales-orders?${searchParams.toString()}`
+    );
+  },
+  get: (id: string) => api.get<SalesOrder>(`/api/sales-orders/${id}`),
+  create: (body: unknown) => api.post<SalesOrder>("/api/sales-orders", body),
+  update: (id: string, body: unknown) => api.patch<SalesOrder>(`/api/sales-orders/${id}`, body),
+  remove: (id: string) => api.delete<{ deleted: boolean }>(`/api/sales-orders/${id}`),
 };
