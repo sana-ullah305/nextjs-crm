@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { Copy, Flame, Plus, Repeat, Search, Send, Sparkles, Trash2, TrendingUp, UserCheck } from "lucide-react";
+import { Copy, Flame, Plus, Repeat, Search, Send, Sparkles, Trash, Trash2, TrendingUp, UserCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar } from "@/components/ui/avatar";
@@ -237,16 +237,23 @@ export default function LeadsPage() {
           <h1 className="text-2xl font-bold">Leads</h1>
           <p className="text-sm text-muted-foreground">{total} leads</p>
         </div>
-        <Button
-          size="sm"
-          onClick={() => {
-            setFormValues({ status: "NEW" });
-            setFormErrors({});
-            setFormOpen(true);
-          }}
-        >
-          <Plus className="h-4 w-4" /> Capture lead
-        </Button>
+        <div className="flex items-center gap-2">
+          <Link href="/leads/trash">
+            <Button variant="outline" size="sm">
+              <Trash className="h-4 w-4" /> Trash
+            </Button>
+          </Link>
+          <Button
+            size="sm"
+            onClick={() => {
+              setFormValues({ status: "NEW" });
+              setFormErrors({});
+              setFormOpen(true);
+            }}
+          >
+            <Plus className="h-4 w-4" /> Capture lead
+          </Button>
+        </div>
       </div>
 
       {notice && (

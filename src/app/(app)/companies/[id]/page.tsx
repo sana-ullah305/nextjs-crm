@@ -3,13 +3,14 @@
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Building2, Globe, MapPin, Phone } from "lucide-react";
+import { ArrowLeft, Building2, Copy, Globe, MapPin, Phone } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
 import { api, ApiError } from "@/lib/api-client";
+import { MergeDialog } from "@/components/merge-dialog";
 import { formatDateTime, timeAgo } from "@/lib/format";
 
 type Company = {
@@ -44,6 +45,7 @@ export default function CompanyDetailPage() {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [notFound, setNotFound] = useState(false);
   const [error, setError] = useState("");
+  const [mergeOpen, setMergeOpen] = useState(false);
 
   const load = useCallback(async () => {
     try {
@@ -95,6 +97,11 @@ export default function CompanyDetailPage() {
             {company.industry}
             {company.size ? ` · ${company.size} employees` : ""}
           </p>
+        </div>
+        <div className="ml-auto">
+          <Button variant="outline" size="sm" onClick={() => setMergeOpen(true)}>
+            <Copy className="h-4 w-4" /> Merge
+          </Button>
         </div>
       </div>
 
@@ -180,6 +187,7 @@ export default function CompanyDetailPage() {
           )}
         </CardContent>
       </Card>
+      <MergeDialog open={mergeOpen} onOpenChange={setMergeOpen} sourceType="company" sourceId={id} />
     </div>
   );
 }

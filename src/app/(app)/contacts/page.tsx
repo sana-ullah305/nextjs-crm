@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Users, Plus, Search, Download, Upload, Pencil, Trash2, Building2 } from "lucide-react";
+import { Users, Plus, Search, Download, Upload, Pencil, Trash, Trash2, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar } from "@/components/ui/avatar";
@@ -266,6 +266,11 @@ export default function ContactsPage() {
           >
             <Download className="h-4 w-4" /> Export CSV
           </a>
+          <Link href="/contacts/trash">
+            <Button variant="outline" size="sm">
+              <Trash className="h-4 w-4" /> Trash
+            </Button>
+          </Link>
           <Button size="sm" onClick={openCreate}>
             <Plus className="h-4 w-4" /> New contact
           </Button>

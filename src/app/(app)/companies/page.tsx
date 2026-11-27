@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { Building2, Pencil, Plus, Search, Trash2, Users } from "lucide-react";
+import { Building2, Pencil, Plus, Search, Trash, Trash2, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar } from "@/components/ui/avatar";
@@ -160,9 +160,16 @@ export default function CompaniesPage() {
           <h1 className="text-2xl font-bold">Companies</h1>
           <p className="text-sm text-muted-foreground">{total} companies</p>
         </div>
-        <Button size="sm" onClick={openCreate}>
-          <Plus className="h-4 w-4" /> New company
-        </Button>
+        <div className="flex items-center gap-2">
+          <Link href="/companies/trash">
+            <Button variant="outline" size="sm">
+              <Trash className="h-4 w-4" /> Trash
+            </Button>
+          </Link>
+          <Button size="sm" onClick={openCreate}>
+            <Plus className="h-4 w-4" /> New company
+          </Button>
+        </div>
       </div>
 
       {error && (
