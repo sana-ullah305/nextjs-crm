@@ -34,10 +34,14 @@ const PRIORITY_BADGE: Record<string, "destructive" | "warning" | "default" | "se
 
 export default function TasksPage() {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [filter, setFilter] = useState<"open" | "overdue" | "completed">("open");
   const [users, setUsers] = useState<UserOption[]>([]);
+  const [page, setPage] = useState(1);
+  const pageSize = 20;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
 
   const [formOpen, setFormOpen] = useState(false);
   const [formValues, setFormValues] = useState<Record<string, string>>({});
@@ -47,21 +51,26 @@ export default function TasksPage() {
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const params = new URLSearchParams({ pageSize: "100" });
+      const params = new URLSearchParams({ page: String(page), pageSize: String(pageSize) });
       if (filter === "completed") params.set("status", "COMPLETED");
       if (filter === "overdue") params.set("due", "overdue");
-      const data = await api.get<{ tasks: Task[] }>(`/api/tasks?${params.toString()}`);
+      const data = await api.get<{ tasks: Task[]; total: number }>(`/api/tasks?${params.toString()}`);
       setTasks(data.tasks);
+      setTotal(data.total ?? data.tasks.length);
     } catch (e) {
       setError(e instanceof ApiError ? e.message : "Failed to load tasks");
     } finally {
       setLoading(false);
     }
-  }, [filter]);
+  }, [filter, page]);
 
   useEffect(() => {
     void load();
   }, [load]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [filter]);
 
   useEffect(() => {
     api.get<{ users: UserOption[] }>("/api/settings/users").then((d) => setUsers(d.users)).catch(() => undefined);
@@ -271,6 +280,22 @@ export default function TasksPage() {
                 </CardContent>
               </Card>
             ))}
+        </div>
+      )}
+
+      {totalPages > 1 && (
+        <div className="flex items-center justify-between text-sm text-muted-foreground">
+          <span>
+            Page {page} of {totalPages} · {total} tasks
+          </span>
+          <div className="flex gap-2">
+            <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => setPage((p) => p - 1)}>
+              Previous
+            </Button>
+            <Button variant="outline" size="sm" disabled={page >= totalPages} onClick={() => setPage((p) => p + 1)}>
+              Next
+            </Button>
+          </div>
         </div>
       )}
 

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { apiHandler, ok, parseBody, parseQuery, ApiNotFoundError, ApiValidationError, clientIp } from "@/server/api";
 import { requireApiUserWith, hasPermission } from "@/server/rbac";
-import { leadCreateSchema, leadUpdateSchema, leadConvertSchema } from "@/lib/schemas";
+import { leadCreateSchema, leadUpdateSchema, leadConvertSchema, leadImportSchema } from "@/lib/schemas";
 import { db } from "@/server/db";
 import { writeAudit } from "@/server/audit";
 import { scoreLead } from "@/lib/lead-score";
@@ -149,6 +149,7 @@ export const POST = apiHandler<Ctx>(async (req, ctx) => {
   if (id === "check-duplicate" || id === "list") {
     return NextResponse.json({ error: { code: "NOT_FOUND", message: "Unknown route" } }, { status: 404 });
   }
+  if (id === "import") return importLeads(req);
   if (id) return convertLead(req, id);
   return createLead(req);
 });
@@ -218,6 +219,93 @@ async function createLead(req: NextRequest) {
     ipAddress: clientIp(req),
   });
   return ok(lead, { status: 201 });
+}
+
+async function importLeads(req: NextRequest) {
+  const user = await requireApiUserWith("leads:import");
+  const body = await parseBody(req, leadImportSchema);
+  let imported = 0;
+  let skipped = 0;
+  for (const row of body.leads) {
+    if (!row.firstName) {
+      skipped++;
+      continue;
+    }
+    const email = (row.email ?? "").trim().toLowerCase();
+    const dup = email
+      ? await db.lead.findFirst({
+          where: { organizationId: user.organizationId, email, deletedAt: null },
+          select: { id: true },
+        })
+      : null;
+    if (dup) {
+      skipped++;
+      continue;
+    }
+    let companyId: string | null = null;
+    if (row.company) {
+      const company = await db.company.findFirst({
+        where: { organizationId: user.organizationId, name: row.company, deletedAt: null },
+        select: { id: true },
+      });
+      companyId =
+        company?.id ??
+        (await db.company.create({
+          data: { organizationId: user.organizationId, name: row.company },
+        })).id;
+    }
+    let sourceId: string | null = null;
+    if (row.source) {
+      const source = await db.leadSource.findFirst({
+        where: { organizationId: user.organizationId, name: row.source },
+        select: { id: true },
+      });
+      sourceId = source?.id ?? null;
+    }
+    const score = await computeScore(user.organizationId, {
+      email,
+      phone: row.phone ?? "",
+      companyName: row.company ?? "",
+      sourceId,
+      estimatedValue: row.estimatedValue ?? 0,
+      followUpAt: null,
+    });
+    const lead = await db.lead.create({
+      data: {
+        organizationId: user.organizationId,
+        firstName: row.firstName,
+        lastName: row.lastName,
+        email,
+        phone: row.phone ?? "",
+        companyName: row.company ?? "",
+        companyId,
+        sourceId,
+        status: "NEW",
+        score,
+        estimatedValue: row.estimatedValue ?? 0,
+        ownerId: user.id,
+        assignedUserId: user.id,
+      },
+    });
+    imported++;
+    await db.activity.create({
+      data: {
+        organizationId: user.organizationId,
+        type: "CREATED",
+        title: `Lead imported: ${lead.firstName} ${lead.lastName}`,
+        leadId: lead.id,
+        userId: user.id,
+      },
+    });
+  }
+  await writeAudit({
+    organizationId: user.organizationId,
+    userId: user.id,
+    action: "LEAD_IMPORT",
+    ipAddress: clientIp(req),
+    metadata: { imported, skipped },
+  });
+  return ok({ imported, skipped });
 }
 
 async function convertLead(req: NextRequest, leadId: string) {

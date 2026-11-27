@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { Copy, Flame, Plus, Repeat, Search, Send, Sparkles, Trash2, TrendingUp, UserCheck } from "lucide-react";
+import { Copy, Flame, Plus, Repeat, Search, Send, Sparkles, Trash2, TrendingUp, Upload, UserCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar } from "@/components/ui/avatar";
@@ -11,6 +11,7 @@ import { Card } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { EmptyState } from "@/components/ui/empty-state";
 import { EntityForm, type FieldDef, type FieldErrors } from "@/components/entity-form";
+import { BulkActionBar } from "@/components/bulk-action-bar";
 import { ComposeEmail } from "@/components/compose-email";
 import { EnrollDialog } from "@/components/enroll-dialog";
 import { MergeDialog } from "@/components/merge-dialog";
@@ -78,6 +79,7 @@ export default function LeadsPage() {
   const [users, setUsers] = useState<UserOption[]>([]);
   const [sources, setSources] = useState<SourceOption[]>([]);
   const [notice, setNotice] = useState("");
+  const [selected, setSelected] = useState<Set<string>>(new Set());
 
   const [formOpen, setFormOpen] = useState(false);
   const [formValues, setFormValues] = useState<Record<string, string>>({});
@@ -98,6 +100,21 @@ export default function LeadsPage() {
 
   const pageSize = 20;
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
+
+  function toggle(id: string) {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
+
+  function toggleAll() {
+    setSelected((prev) =>
+      prev.size === leads.length ? new Set() : new Set(leads.map((l) => l.id))
+    );
+  }
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -178,6 +195,43 @@ export default function LeadsPage() {
     }
   }
 
+  async function onImport(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const text = await file.text();
+    const lines = text.split(/\r?\n/).filter(Boolean);
+    const header = lines[0]?.split(",").map((h) => h.trim().toLowerCase());
+    if (!header || !lines[1]) {
+      setError("CSV must have a header row and at least one data row");
+      return;
+    }
+    const idx = (name: string) => header.indexOf(name);
+    const leads = lines.slice(1).map((line) => {
+      const cols = line.split(",").map((c) => c.trim().replace(/^"|"$/g, ""));
+      return {
+        firstName: cols[idx("first name")] ?? cols[idx("firstname")] ?? "",
+        lastName: cols[idx("last name")] ?? cols[idx("lastname")] ?? "",
+        email: cols[idx("email")] ?? "",
+        phone: cols[idx("phone")] ?? "",
+        company: cols[idx("company")] ?? cols[idx("company name")] ?? "",
+        source: cols[idx("source")] ?? "",
+        estimatedValue: Number(cols[idx("estimated value")] ?? cols[idx("estimatedvalue")] ?? 0) || 0,
+      };
+    });
+    try {
+      const result = await api.post<{ imported: number; skipped: number }>(
+        "/api/leads/import",
+        { leads }
+      );
+      setNotice(`Imported ${result.imported}, skipped ${result.skipped} (duplicates/invalid)`);
+      await load();
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : "Import failed");
+    } finally {
+      e.target.value = "";
+    }
+  }
+
   async function onConvert(e: React.FormEvent) {
     e.preventDefault();
     if (!convertTarget) return;
@@ -237,16 +291,30 @@ export default function LeadsPage() {
           <h1 className="text-2xl font-bold">Leads</h1>
           <p className="text-sm text-muted-foreground">{total} leads</p>
         </div>
-        <Button
-          size="sm"
-          onClick={() => {
-            setFormValues({ status: "NEW" });
-            setFormErrors({});
-            setFormOpen(true);
-          }}
-        >
-          <Plus className="h-4 w-4" /> Capture lead
-        </Button>
+        <div className="flex gap-2">
+          <label className="inline-flex">
+            <input
+              type="file"
+              accept=".csv"
+              className="hidden"
+              onChange={onImport}
+              id="csv-import-leads"
+            />
+            <Button variant="outline" size="sm" onClick={() => document.getElementById("csv-import-leads")?.click()}>
+              <Upload className="h-4 w-4" /> Import CSV
+            </Button>
+          </label>
+          <Button
+            size="sm"
+            onClick={() => {
+              setFormValues({ status: "NEW" });
+              setFormErrors({});
+              setFormOpen(true);
+            }}
+          >
+            <Plus className="h-4 w-4" /> Capture lead
+          </Button>
+        </div>
       </div>
 
       {notice && (
@@ -302,6 +370,14 @@ export default function LeadsPage() {
         </select>
       </div>
 
+      <BulkActionBar
+        entityType="leads"
+        selectedIds={Array.from(selected)}
+        users={users}
+        onClear={() => setSelected(new Set())}
+        onChanged={load}
+      />
+
       <Card>
         {loading ? (
           <div className="space-y-2 p-4">
@@ -327,6 +403,15 @@ export default function LeadsPage() {
           <Table>
             <TableHeader>
               <TableRow>
+                <TableHead className="w-10">
+                  <input
+                    type="checkbox"
+                    aria-label="Select all leads"
+                    checked={leads.length > 0 && selected.size === leads.length}
+                    onChange={toggleAll}
+                    className="h-4 w-4 rounded border-input"
+                  />
+                </TableHead>
                 <TableHead>Lead</TableHead>
                 <TableHead className="hidden md:table-cell">Company</TableHead>
                 <TableHead className="hidden lg:table-cell">Source</TableHead>
@@ -341,6 +426,15 @@ export default function LeadsPage() {
             <TableBody>
               {leads.map((l) => (
                 <TableRow key={l.id}>
+                  <TableCell>
+                    <input
+                      type="checkbox"
+                      aria-label={`Select ${l.firstName} ${l.lastName}`}
+                      checked={selected.has(l.id)}
+                      onChange={() => toggle(l.id)}
+                      className="h-4 w-4 rounded border-input"
+                    />
+                  </TableCell>
                   <TableCell>
                     <div>
                       <p className="font-medium">

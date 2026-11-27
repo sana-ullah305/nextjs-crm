@@ -356,3 +356,39 @@ export type TaskCreateInput = z.infer<typeof taskCreateSchema>;
 export type ActivityCreateInput = z.infer<typeof activityCreateSchema>;
 export type EmailSendInput = z.infer<typeof emailSendSchema>;
 export type EmailSettingsInput = z.infer<typeof emailSettingsSchema>;
+
+// Bulk actions payload. entityType + action + ids are required; params is
+// action-specific (e.g. { assigneeId } for assign, { tagNames } for tag).
+export const bulkActionSchema = z.object({
+  entityType: z.enum(["contacts", "leads", "deals"]),
+  ids: z.array(z.string().trim().min(1).max(64)).min(1, "No ids provided").max(200, "Bulk limited to 200 records"),
+  action: z.enum(["delete", "assign", "addTag"]),
+  params: z
+    .object({
+      assigneeId: z.string().trim().max(64).optional(),
+      tagNames: z.array(z.string().trim().min(1).max(60)).max(20).optional(),
+    })
+    .optional(),
+});
+
+export type BulkActionInput = z.infer<typeof bulkActionSchema>;
+
+// CSV import payload for leads. Mirrors contactImportSchema.
+export const leadImportSchema = z.object({
+  leads: z
+    .array(
+      z.object({
+        firstName: z.string().trim().max(80),
+        lastName: z.string().trim().max(80).default(""),
+        email: z.string().trim().max(200).default(""),
+        phone: z.string().trim().max(40).default(""),
+        company: z.string().trim().max(150).default(""),
+        source: z.string().trim().max(60).default(""),
+        estimatedValue: z.coerce.number().min(0).max(100_000_000).default(0),
+      })
+    )
+    .min(1, "No leads in file")
+    .max(500, "Import limited to 500 leads per batch"),
+});
+
+export type LeadImportInput = z.infer<typeof leadImportSchema>;

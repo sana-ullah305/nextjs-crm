@@ -1,13 +1,14 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { KanbanSquare, Plus, Settings2 } from "lucide-react";
+import { Download, KanbanSquare, Plus, Settings2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar } from "@/components/ui/avatar";
 import { EmptyState } from "@/components/ui/empty-state";
 import { EntityForm, type FieldDef, type FieldErrors } from "@/components/entity-form";
+import { BulkActionBar } from "@/components/bulk-action-bar";
 import { api, ApiError, validationDetails } from "@/lib/api-client";
 import { formatCompactCurrency } from "@/lib/format";
 import { cn } from "@/lib/cn";
@@ -39,6 +40,7 @@ export default function PipelinePage() {
   const [deals, setDeals] = useState<Deal[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [selected, setSelected] = useState<Set<string>>(new Set());
 
   const [formOpen, setFormOpen] = useState(false);
   const [formValues, setFormValues] = useState<Record<string, string>>({});
@@ -48,6 +50,21 @@ export default function PipelinePage() {
   const [draggingId, setDraggingId] = useState<string | null>(null);
   const [dragOverStage, setDragOverStage] = useState<string | null>(null);
   const movedRef = useRef(false);
+
+  function toggle(id: string) {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
+
+  function toggleAll() {
+    setSelected((prev) =>
+      prev.size === deals.length ? new Set() : new Set(deals.map((d) => d.id))
+    );
+  }
 
   const activePipeline = pipelines.find((p) => p.id === activePipelineId) ?? pipelines[0];
 
@@ -202,6 +219,13 @@ export default function PipelinePage() {
               </option>
             ))}
           </select>
+          <a
+            href={`/api/deals/export?pipelineId=${activePipelineId}`}
+            download
+            className="inline-flex h-8 items-center justify-center gap-2 rounded-md border border-border bg-card px-3 text-xs font-medium hover:bg-muted"
+          >
+            <Download className="h-4 w-4" /> Export CSV
+          </a>
           <Button size="sm" onClick={() => setFormOpen(true)}>
             <Plus className="h-4 w-4" /> New deal
           </Button>
@@ -213,6 +237,25 @@ export default function PipelinePage() {
           {error}
         </p>
       )}
+
+      <div className="flex items-center gap-2">
+        <input
+          type="checkbox"
+          aria-label="Select all deals"
+          checked={deals.length > 0 && selected.size === deals.length}
+          onChange={toggleAll}
+          className="h-4 w-4 rounded border-input"
+        />
+        <span className="text-xs text-muted-foreground">Select all</span>
+      </div>
+
+      <BulkActionBar
+        entityType="deals"
+        selectedIds={Array.from(selected)}
+        users={[]}
+        onClear={() => setSelected(new Set())}
+        onChanged={loadDeals}
+      />
 
       <div className="flex flex-1 gap-4 overflow-x-auto scroll-thin pb-4">
         {openStages.map((stage) => {
@@ -259,7 +302,17 @@ export default function PipelinePage() {
                     }}
                     className="kanban-card cursor-grab gap-1 p-3 active:cursor-grabbing"
                   >
-                    <p className="text-sm font-medium">{deal.name}</p>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        aria-label={`Select ${deal.name}`}
+                        checked={selected.has(deal.id)}
+                        onClick={(e) => e.stopPropagation()}
+                        onChange={() => toggle(deal.id)}
+                        className="h-4 w-4 rounded border-input"
+                      />
+                      <p className="text-sm font-medium">{deal.name}</p>
+                    </div>
                     <p className="text-sm font-semibold text-primary">{formatCompactCurrency(deal.value)}</p>
                     <div className="flex items-center justify-between text-xs text-muted-foreground">
                       <span>{deal.company?.name ?? "—"}</span>

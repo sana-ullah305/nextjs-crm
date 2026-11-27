@@ -34,6 +34,8 @@ export const PERMISSIONS = [
   "leads:delete",
   "leads:delete_all",
   "leads:convert",
+  "leads:import",
+  "leads:export",
   // deals
   "deals:read",
   "deals:read_all",
@@ -42,6 +44,7 @@ export const PERMISSIONS = [
   "deals:update_all",
   "deals:delete",
   "deals:delete_all",
+  "deals:export",
   // pipeline config
   "pipelines:manage",
   // tasks
@@ -96,10 +99,13 @@ const REP_PERMS: Permission[] = [
   "leads:update",
   "leads:delete",
   "leads:convert",
+  "leads:import",
+  "leads:export",
   "deals:read",
   "deals:create",
   "deals:update",
   "deals:delete",
+  "deals:export",
   "tasks:read",
   "tasks:create",
   "tasks:update",

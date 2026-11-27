@@ -12,6 +12,7 @@ import { Card } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { EmptyState } from "@/components/ui/empty-state";
 import { EntityForm, type FieldDef, type FieldErrors } from "@/components/entity-form";
+import { BulkActionBar } from "@/components/bulk-action-bar";
 import { api, ApiError, validationDetails } from "@/lib/api-client";
 import { formatDate, formatDateTime } from "@/lib/format";
 
@@ -61,9 +62,25 @@ export default function ContactsPage() {
   const [formErrors, setFormErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
   const [notice, setNotice] = useState("");
+  const [selected, setSelected] = useState<Set<string>>(new Set());
 
   const pageSize = 20;
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
+
+  function toggle(id: string) {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
+
+  function toggleAll() {
+    setSelected((prev) =>
+      prev.size === contacts.length ? new Set() : new Set(contacts.map((c) => c.id))
+    );
+  }
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -315,6 +332,15 @@ export default function ContactsPage() {
         </select>
       </div>
 
+      <BulkActionBar
+        entityType="contacts"
+        selectedIds={Array.from(selected)}
+        users={users}
+        supportsTag
+        onClear={() => setSelected(new Set())}
+        onChanged={load}
+      />
+
       <Card>
         {loading ? (
           <div className="space-y-2 p-4">
@@ -340,6 +366,15 @@ export default function ContactsPage() {
           <Table>
             <TableHeader>
               <TableRow>
+                <TableHead className="w-10">
+                  <input
+                    type="checkbox"
+                    aria-label="Select all contacts"
+                    checked={contacts.length > 0 && selected.size === contacts.length}
+                    onChange={toggleAll}
+                    className="h-4 w-4 rounded border-input"
+                  />
+                </TableHead>
                 <TableHead>Name</TableHead>
                 <TableHead className="hidden md:table-cell">Email</TableHead>
                 <TableHead className="hidden lg:table-cell">Company</TableHead>
@@ -352,6 +387,15 @@ export default function ContactsPage() {
             <TableBody>
               {contacts.map((c) => (
                 <TableRow key={c.id}>
+                  <TableCell>
+                    <input
+                      type="checkbox"
+                      aria-label={`Select ${c.firstName} ${c.lastName}`}
+                      checked={selected.has(c.id)}
+                      onChange={() => toggle(c.id)}
+                      className="h-4 w-4 rounded border-input"
+                    />
+                  </TableCell>
                   <TableCell>
                     <Link href={`/contacts/${c.id}`} className="flex items-center gap-2.5 hover:underline">
                       <Avatar name={`${c.firstName} ${c.lastName}`} color={c.avatarColor} size="sm" />
