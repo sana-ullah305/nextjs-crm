@@ -264,7 +264,6 @@ export const dealApi = {
 export const lostReasonApi = {
   list: () => api.get<{ lostReasons: LostReason[] }>("/api/settings/lost-reasons"),
 };
-
 export const productApi = {
   list: (params?: { q?: string; isActive?: boolean; sort?: string; page?: number; pageSize?: number }) => {
     const searchParams = new URLSearchParams();

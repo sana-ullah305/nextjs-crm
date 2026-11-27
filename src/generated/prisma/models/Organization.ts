@@ -229,6 +229,7 @@ export type OrganizationWhereInput = {
   salesOrders?: Prisma.SalesOrderListRelationFilter
   products?: Prisma.ProductListRelationFilter
   leadSources?: Prisma.LeadSourceListRelationFilter
+  lostReasons?: Prisma.LostReasonListRelationFilter
   emailTemplates?: Prisma.EmailTemplateListRelationFilter
   customFields?: Prisma.CustomFieldListRelationFilter
   emailSettings?: Prisma.XOR<Prisma.EmailSettingsNullableScalarRelationFilter, Prisma.EmailSettingsWhereInput> | null
@@ -240,7 +241,6 @@ export type OrganizationWhereInput = {
   sequences?: Prisma.SequenceListRelationFilter
   sequenceEnrollments?: Prisma.SequenceEnrollmentListRelationFilter
   sequenceDeadLetters?: Prisma.SequenceDeadLetterListRelationFilter
-  lostReasons?: Prisma.LostReasonListRelationFilter
   priceLists?: Prisma.PriceListListRelationFilter
   teams?: Prisma.TeamListRelationFilter
   campaigns?: Prisma.CampaignListRelationFilter
@@ -272,6 +272,7 @@ export type OrganizationOrderByWithRelationInput = {
   salesOrders?: Prisma.SalesOrderOrderByRelationAggregateInput
   products?: Prisma.ProductOrderByRelationAggregateInput
   leadSources?: Prisma.LeadSourceOrderByRelationAggregateInput
+  lostReasons?: Prisma.LostReasonOrderByRelationAggregateInput
   emailTemplates?: Prisma.EmailTemplateOrderByRelationAggregateInput
   customFields?: Prisma.CustomFieldOrderByRelationAggregateInput
   emailSettings?: Prisma.EmailSettingsOrderByWithRelationInput
@@ -283,7 +284,6 @@ export type OrganizationOrderByWithRelationInput = {
   sequences?: Prisma.SequenceOrderByRelationAggregateInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentOrderByRelationAggregateInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterOrderByRelationAggregateInput
-  lostReasons?: Prisma.LostReasonOrderByRelationAggregateInput
   priceLists?: Prisma.PriceListOrderByRelationAggregateInput
   teams?: Prisma.TeamOrderByRelationAggregateInput
   campaigns?: Prisma.CampaignOrderByRelationAggregateInput
@@ -318,6 +318,7 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   salesOrders?: Prisma.SalesOrderListRelationFilter
   products?: Prisma.ProductListRelationFilter
   leadSources?: Prisma.LeadSourceListRelationFilter
+  lostReasons?: Prisma.LostReasonListRelationFilter
   emailTemplates?: Prisma.EmailTemplateListRelationFilter
   customFields?: Prisma.CustomFieldListRelationFilter
   emailSettings?: Prisma.XOR<Prisma.EmailSettingsNullableScalarRelationFilter, Prisma.EmailSettingsWhereInput> | null
@@ -329,7 +330,6 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   sequences?: Prisma.SequenceListRelationFilter
   sequenceEnrollments?: Prisma.SequenceEnrollmentListRelationFilter
   sequenceDeadLetters?: Prisma.SequenceDeadLetterListRelationFilter
-  lostReasons?: Prisma.LostReasonListRelationFilter
   priceLists?: Prisma.PriceListListRelationFilter
   teams?: Prisma.TeamListRelationFilter
   campaigns?: Prisma.CampaignListRelationFilter
@@ -391,6 +391,7 @@ export type OrganizationCreateInput = {
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -402,7 +403,6 @@ export type OrganizationCreateInput = {
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
@@ -434,6 +434,7 @@ export type OrganizationUncheckedCreateInput = {
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -445,7 +446,6 @@ export type OrganizationUncheckedCreateInput = {
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
@@ -477,6 +477,7 @@ export type OrganizationUpdateInput = {
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -488,7 +489,6 @@ export type OrganizationUpdateInput = {
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
@@ -520,6 +520,7 @@ export type OrganizationUncheckedUpdateInput = {
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -531,7 +532,6 @@ export type OrganizationUncheckedUpdateInput = {
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -733,6 +733,20 @@ export type OrganizationUpdateOneRequiredWithoutPipelinesNestedInput = {
   upsert?: Prisma.OrganizationUpsertWithoutPipelinesInput
   connect?: Prisma.OrganizationWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutPipelinesInput, Prisma.OrganizationUpdateWithoutPipelinesInput>, Prisma.OrganizationUncheckedUpdateWithoutPipelinesInput>
+}
+
+export type OrganizationCreateNestedOneWithoutLostReasonsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutLostReasonsInput, Prisma.OrganizationUncheckedCreateWithoutLostReasonsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutLostReasonsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutLostReasonsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutLostReasonsInput, Prisma.OrganizationUncheckedCreateWithoutLostReasonsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutLostReasonsInput
+  upsert?: Prisma.OrganizationUpsertWithoutLostReasonsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutLostReasonsInput, Prisma.OrganizationUpdateWithoutLostReasonsInput>, Prisma.OrganizationUncheckedUpdateWithoutLostReasonsInput>
 }
 
 export type OrganizationCreateNestedOneWithoutDealsInput = {
@@ -959,20 +973,6 @@ export type OrganizationUpdateOneRequiredWithoutSequenceDeadLettersNestedInput =
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutSequenceDeadLettersInput, Prisma.OrganizationUpdateWithoutSequenceDeadLettersInput>, Prisma.OrganizationUncheckedUpdateWithoutSequenceDeadLettersInput>
 }
 
-export type OrganizationCreateNestedOneWithoutLostReasonsInput = {
-  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutLostReasonsInput, Prisma.OrganizationUncheckedCreateWithoutLostReasonsInput>
-  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutLostReasonsInput
-  connect?: Prisma.OrganizationWhereUniqueInput
-}
-
-export type OrganizationUpdateOneRequiredWithoutLostReasonsNestedInput = {
-  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutLostReasonsInput, Prisma.OrganizationUncheckedCreateWithoutLostReasonsInput>
-  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutLostReasonsInput
-  upsert?: Prisma.OrganizationUpsertWithoutLostReasonsInput
-  connect?: Prisma.OrganizationWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutLostReasonsInput, Prisma.OrganizationUpdateWithoutLostReasonsInput>, Prisma.OrganizationUncheckedUpdateWithoutLostReasonsInput>
-}
-
 export type OrganizationCreateNestedOneWithoutRolesInput = {
   create?: Prisma.XOR<Prisma.OrganizationCreateWithoutRolesInput, Prisma.OrganizationUncheckedCreateWithoutRolesInput>
   connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutRolesInput
@@ -1082,6 +1082,7 @@ export type OrganizationCreateWithoutTeamsInput = {
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -1093,7 +1094,6 @@ export type OrganizationCreateWithoutTeamsInput = {
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
   roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
@@ -1124,6 +1124,7 @@ export type OrganizationUncheckedCreateWithoutTeamsInput = {
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -1135,7 +1136,6 @@ export type OrganizationUncheckedCreateWithoutTeamsInput = {
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1182,6 +1182,7 @@ export type OrganizationUpdateWithoutTeamsInput = {
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -1193,7 +1194,6 @@ export type OrganizationUpdateWithoutTeamsInput = {
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
   roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
@@ -1224,6 +1224,7 @@ export type OrganizationUncheckedUpdateWithoutTeamsInput = {
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -1235,7 +1236,6 @@ export type OrganizationUncheckedUpdateWithoutTeamsInput = {
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1265,6 +1265,7 @@ export type OrganizationCreateWithoutUsersInput = {
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -1276,7 +1277,6 @@ export type OrganizationCreateWithoutUsersInput = {
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
@@ -1307,6 +1307,7 @@ export type OrganizationUncheckedCreateWithoutUsersInput = {
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -1318,7 +1319,6 @@ export type OrganizationUncheckedCreateWithoutUsersInput = {
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1365,6 +1365,7 @@ export type OrganizationUpdateWithoutUsersInput = {
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -1376,7 +1377,6 @@ export type OrganizationUpdateWithoutUsersInput = {
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
@@ -1407,6 +1407,7 @@ export type OrganizationUncheckedUpdateWithoutUsersInput = {
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -1418,7 +1419,6 @@ export type OrganizationUncheckedUpdateWithoutUsersInput = {
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1449,6 +1449,7 @@ export type OrganizationCreateWithoutCompaniesInput = {
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -1460,7 +1461,6 @@ export type OrganizationCreateWithoutCompaniesInput = {
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
@@ -1491,6 +1491,7 @@ export type OrganizationUncheckedCreateWithoutCompaniesInput = {
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -1502,7 +1503,6 @@ export type OrganizationUncheckedCreateWithoutCompaniesInput = {
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1549,6 +1549,7 @@ export type OrganizationUpdateWithoutCompaniesInput = {
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -1560,7 +1561,6 @@ export type OrganizationUpdateWithoutCompaniesInput = {
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
@@ -1591,6 +1591,7 @@ export type OrganizationUncheckedUpdateWithoutCompaniesInput = {
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -1602,7 +1603,6 @@ export type OrganizationUncheckedUpdateWithoutCompaniesInput = {
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1633,6 +1633,7 @@ export type OrganizationCreateWithoutContactsInput = {
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -1644,7 +1645,6 @@ export type OrganizationCreateWithoutContactsInput = {
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
@@ -1675,6 +1675,7 @@ export type OrganizationUncheckedCreateWithoutContactsInput = {
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -1686,7 +1687,6 @@ export type OrganizationUncheckedCreateWithoutContactsInput = {
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1733,6 +1733,7 @@ export type OrganizationUpdateWithoutContactsInput = {
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -1744,7 +1745,6 @@ export type OrganizationUpdateWithoutContactsInput = {
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
@@ -1775,6 +1775,7 @@ export type OrganizationUncheckedUpdateWithoutContactsInput = {
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -1786,7 +1787,6 @@ export type OrganizationUncheckedUpdateWithoutContactsInput = {
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -1817,6 +1817,7 @@ export type OrganizationCreateWithoutTagsInput = {
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -1828,7 +1829,6 @@ export type OrganizationCreateWithoutTagsInput = {
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
@@ -1859,6 +1859,7 @@ export type OrganizationUncheckedCreateWithoutTagsInput = {
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -1870,7 +1871,6 @@ export type OrganizationUncheckedCreateWithoutTagsInput = {
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
@@ -1917,6 +1917,7 @@ export type OrganizationUpdateWithoutTagsInput = {
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -1928,7 +1929,6 @@ export type OrganizationUpdateWithoutTagsInput = {
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
@@ -1959,6 +1959,7 @@ export type OrganizationUncheckedUpdateWithoutTagsInput = {
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -1970,7 +1971,6 @@ export type OrganizationUncheckedUpdateWithoutTagsInput = {
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2001,6 +2001,7 @@ export type OrganizationCreateWithoutLeadSourcesInput = {
   quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -2012,7 +2013,6 @@ export type OrganizationCreateWithoutLeadSourcesInput = {
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
@@ -2043,6 +2043,7 @@ export type OrganizationUncheckedCreateWithoutLeadSourcesInput = {
   quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -2054,7 +2055,6 @@ export type OrganizationUncheckedCreateWithoutLeadSourcesInput = {
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2101,6 +2101,7 @@ export type OrganizationUpdateWithoutLeadSourcesInput = {
   quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -2112,7 +2113,6 @@ export type OrganizationUpdateWithoutLeadSourcesInput = {
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
@@ -2143,6 +2143,7 @@ export type OrganizationUncheckedUpdateWithoutLeadSourcesInput = {
   quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -2154,7 +2155,6 @@ export type OrganizationUncheckedUpdateWithoutLeadSourcesInput = {
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2185,6 +2185,7 @@ export type OrganizationCreateWithoutLeadsInput = {
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -2196,7 +2197,6 @@ export type OrganizationCreateWithoutLeadsInput = {
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
@@ -2227,6 +2227,7 @@ export type OrganizationUncheckedCreateWithoutLeadsInput = {
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -2238,7 +2239,6 @@ export type OrganizationUncheckedCreateWithoutLeadsInput = {
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2285,6 +2285,7 @@ export type OrganizationUpdateWithoutLeadsInput = {
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -2296,7 +2297,6 @@ export type OrganizationUpdateWithoutLeadsInput = {
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
@@ -2327,6 +2327,7 @@ export type OrganizationUncheckedUpdateWithoutLeadsInput = {
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -2338,7 +2339,6 @@ export type OrganizationUncheckedUpdateWithoutLeadsInput = {
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -2369,6 +2369,7 @@ export type OrganizationCreateWithoutPipelinesInput = {
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -2380,7 +2381,6 @@ export type OrganizationCreateWithoutPipelinesInput = {
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
@@ -2411,6 +2411,7 @@ export type OrganizationUncheckedCreateWithoutPipelinesInput = {
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -2422,7 +2423,6 @@ export type OrganizationUncheckedCreateWithoutPipelinesInput = {
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
@@ -2469,6 +2469,7 @@ export type OrganizationUpdateWithoutPipelinesInput = {
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -2480,7 +2481,6 @@ export type OrganizationUpdateWithoutPipelinesInput = {
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
@@ -2511,6 +2511,7 @@ export type OrganizationUncheckedUpdateWithoutPipelinesInput = {
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -2522,2951 +2523,6 @@ export type OrganizationUncheckedUpdateWithoutPipelinesInput = {
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationCreateWithoutDealsInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationUncheckedCreateWithoutDealsInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationCreateOrConnectWithoutDealsInput = {
-  where: Prisma.OrganizationWhereUniqueInput
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDealsInput, Prisma.OrganizationUncheckedCreateWithoutDealsInput>
-}
-
-export type OrganizationUpsertWithoutDealsInput = {
-  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutDealsInput, Prisma.OrganizationUncheckedUpdateWithoutDealsInput>
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDealsInput, Prisma.OrganizationUncheckedCreateWithoutDealsInput>
-  where?: Prisma.OrganizationWhereInput
-}
-
-export type OrganizationUpdateToOneWithWhereWithoutDealsInput = {
-  where?: Prisma.OrganizationWhereInput
-  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutDealsInput, Prisma.OrganizationUncheckedUpdateWithoutDealsInput>
-}
-
-export type OrganizationUpdateWithoutDealsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationUncheckedUpdateWithoutDealsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationCreateWithoutTasksInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationUncheckedCreateWithoutTasksInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationCreateOrConnectWithoutTasksInput = {
-  where: Prisma.OrganizationWhereUniqueInput
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutTasksInput, Prisma.OrganizationUncheckedCreateWithoutTasksInput>
-}
-
-export type OrganizationUpsertWithoutTasksInput = {
-  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutTasksInput, Prisma.OrganizationUncheckedUpdateWithoutTasksInput>
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutTasksInput, Prisma.OrganizationUncheckedCreateWithoutTasksInput>
-  where?: Prisma.OrganizationWhereInput
-}
-
-export type OrganizationUpdateToOneWithWhereWithoutTasksInput = {
-  where?: Prisma.OrganizationWhereInput
-  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutTasksInput, Prisma.OrganizationUncheckedUpdateWithoutTasksInput>
-}
-
-export type OrganizationUpdateWithoutTasksInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationUncheckedUpdateWithoutTasksInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationCreateWithoutActivitiesInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationUncheckedCreateWithoutActivitiesInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationCreateOrConnectWithoutActivitiesInput = {
-  where: Prisma.OrganizationWhereUniqueInput
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutActivitiesInput, Prisma.OrganizationUncheckedCreateWithoutActivitiesInput>
-}
-
-export type OrganizationUpsertWithoutActivitiesInput = {
-  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutActivitiesInput, Prisma.OrganizationUncheckedUpdateWithoutActivitiesInput>
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutActivitiesInput, Prisma.OrganizationUncheckedCreateWithoutActivitiesInput>
-  where?: Prisma.OrganizationWhereInput
-}
-
-export type OrganizationUpdateToOneWithWhereWithoutActivitiesInput = {
-  where?: Prisma.OrganizationWhereInput
-  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutActivitiesInput, Prisma.OrganizationUncheckedUpdateWithoutActivitiesInput>
-}
-
-export type OrganizationUpdateWithoutActivitiesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationUncheckedUpdateWithoutActivitiesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationCreateWithoutNotesInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationUncheckedCreateWithoutNotesInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationCreateOrConnectWithoutNotesInput = {
-  where: Prisma.OrganizationWhereUniqueInput
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutNotesInput, Prisma.OrganizationUncheckedCreateWithoutNotesInput>
-}
-
-export type OrganizationUpsertWithoutNotesInput = {
-  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutNotesInput, Prisma.OrganizationUncheckedUpdateWithoutNotesInput>
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutNotesInput, Prisma.OrganizationUncheckedCreateWithoutNotesInput>
-  where?: Prisma.OrganizationWhereInput
-}
-
-export type OrganizationUpdateToOneWithWhereWithoutNotesInput = {
-  where?: Prisma.OrganizationWhereInput
-  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutNotesInput, Prisma.OrganizationUncheckedUpdateWithoutNotesInput>
-}
-
-export type OrganizationUpdateWithoutNotesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationUncheckedUpdateWithoutNotesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationCreateWithoutAttachmentsInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationUncheckedCreateWithoutAttachmentsInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationCreateOrConnectWithoutAttachmentsInput = {
-  where: Prisma.OrganizationWhereUniqueInput
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutAttachmentsInput, Prisma.OrganizationUncheckedCreateWithoutAttachmentsInput>
-}
-
-export type OrganizationUpsertWithoutAttachmentsInput = {
-  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutAttachmentsInput, Prisma.OrganizationUncheckedUpdateWithoutAttachmentsInput>
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutAttachmentsInput, Prisma.OrganizationUncheckedCreateWithoutAttachmentsInput>
-  where?: Prisma.OrganizationWhereInput
-}
-
-export type OrganizationUpdateToOneWithWhereWithoutAttachmentsInput = {
-  where?: Prisma.OrganizationWhereInput
-  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutAttachmentsInput, Prisma.OrganizationUncheckedUpdateWithoutAttachmentsInput>
-}
-
-export type OrganizationUpdateWithoutAttachmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationUncheckedUpdateWithoutAttachmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationCreateWithoutNotificationsInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationUncheckedCreateWithoutNotificationsInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationCreateOrConnectWithoutNotificationsInput = {
-  where: Prisma.OrganizationWhereUniqueInput
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutNotificationsInput, Prisma.OrganizationUncheckedCreateWithoutNotificationsInput>
-}
-
-export type OrganizationUpsertWithoutNotificationsInput = {
-  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutNotificationsInput, Prisma.OrganizationUncheckedUpdateWithoutNotificationsInput>
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutNotificationsInput, Prisma.OrganizationUncheckedCreateWithoutNotificationsInput>
-  where?: Prisma.OrganizationWhereInput
-}
-
-export type OrganizationUpdateToOneWithWhereWithoutNotificationsInput = {
-  where?: Prisma.OrganizationWhereInput
-  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutNotificationsInput, Prisma.OrganizationUncheckedUpdateWithoutNotificationsInput>
-}
-
-export type OrganizationUpdateWithoutNotificationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationUncheckedUpdateWithoutNotificationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationCreateWithoutEmailTemplatesInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationUncheckedCreateWithoutEmailTemplatesInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationCreateOrConnectWithoutEmailTemplatesInput = {
-  where: Prisma.OrganizationWhereUniqueInput
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutEmailTemplatesInput, Prisma.OrganizationUncheckedCreateWithoutEmailTemplatesInput>
-}
-
-export type OrganizationUpsertWithoutEmailTemplatesInput = {
-  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutEmailTemplatesInput, Prisma.OrganizationUncheckedUpdateWithoutEmailTemplatesInput>
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutEmailTemplatesInput, Prisma.OrganizationUncheckedCreateWithoutEmailTemplatesInput>
-  where?: Prisma.OrganizationWhereInput
-}
-
-export type OrganizationUpdateToOneWithWhereWithoutEmailTemplatesInput = {
-  where?: Prisma.OrganizationWhereInput
-  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutEmailTemplatesInput, Prisma.OrganizationUncheckedUpdateWithoutEmailTemplatesInput>
-}
-
-export type OrganizationUpdateWithoutEmailTemplatesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationUncheckedUpdateWithoutEmailTemplatesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationCreateWithoutCustomFieldsInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationUncheckedCreateWithoutCustomFieldsInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationCreateOrConnectWithoutCustomFieldsInput = {
-  where: Prisma.OrganizationWhereUniqueInput
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutCustomFieldsInput, Prisma.OrganizationUncheckedCreateWithoutCustomFieldsInput>
-}
-
-export type OrganizationUpsertWithoutCustomFieldsInput = {
-  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutCustomFieldsInput, Prisma.OrganizationUncheckedUpdateWithoutCustomFieldsInput>
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutCustomFieldsInput, Prisma.OrganizationUncheckedCreateWithoutCustomFieldsInput>
-  where?: Prisma.OrganizationWhereInput
-}
-
-export type OrganizationUpdateToOneWithWhereWithoutCustomFieldsInput = {
-  where?: Prisma.OrganizationWhereInput
-  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutCustomFieldsInput, Prisma.OrganizationUncheckedUpdateWithoutCustomFieldsInput>
-}
-
-export type OrganizationUpdateWithoutCustomFieldsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationUncheckedUpdateWithoutCustomFieldsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationCreateWithoutEmailSettingsInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationUncheckedCreateWithoutEmailSettingsInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationCreateOrConnectWithoutEmailSettingsInput = {
-  where: Prisma.OrganizationWhereUniqueInput
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutEmailSettingsInput, Prisma.OrganizationUncheckedCreateWithoutEmailSettingsInput>
-}
-
-export type OrganizationUpsertWithoutEmailSettingsInput = {
-  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutEmailSettingsInput, Prisma.OrganizationUncheckedUpdateWithoutEmailSettingsInput>
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutEmailSettingsInput, Prisma.OrganizationUncheckedCreateWithoutEmailSettingsInput>
-  where?: Prisma.OrganizationWhereInput
-}
-
-export type OrganizationUpdateToOneWithWhereWithoutEmailSettingsInput = {
-  where?: Prisma.OrganizationWhereInput
-  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutEmailSettingsInput, Prisma.OrganizationUncheckedUpdateWithoutEmailSettingsInput>
-}
-
-export type OrganizationUpdateWithoutEmailSettingsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationUncheckedUpdateWithoutEmailSettingsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationCreateWithoutSentEmailsInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationUncheckedCreateWithoutSentEmailsInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationCreateOrConnectWithoutSentEmailsInput = {
-  where: Prisma.OrganizationWhereUniqueInput
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutSentEmailsInput, Prisma.OrganizationUncheckedCreateWithoutSentEmailsInput>
-}
-
-export type OrganizationUpsertWithoutSentEmailsInput = {
-  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutSentEmailsInput, Prisma.OrganizationUncheckedUpdateWithoutSentEmailsInput>
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutSentEmailsInput, Prisma.OrganizationUncheckedCreateWithoutSentEmailsInput>
-  where?: Prisma.OrganizationWhereInput
-}
-
-export type OrganizationUpdateToOneWithWhereWithoutSentEmailsInput = {
-  where?: Prisma.OrganizationWhereInput
-  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutSentEmailsInput, Prisma.OrganizationUncheckedUpdateWithoutSentEmailsInput>
-}
-
-export type OrganizationUpdateWithoutSentEmailsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationUncheckedUpdateWithoutSentEmailsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationCreateWithoutRemindersInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationUncheckedCreateWithoutRemindersInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationCreateOrConnectWithoutRemindersInput = {
-  where: Prisma.OrganizationWhereUniqueInput
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutRemindersInput, Prisma.OrganizationUncheckedCreateWithoutRemindersInput>
-}
-
-export type OrganizationUpsertWithoutRemindersInput = {
-  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutRemindersInput, Prisma.OrganizationUncheckedUpdateWithoutRemindersInput>
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutRemindersInput, Prisma.OrganizationUncheckedCreateWithoutRemindersInput>
-  where?: Prisma.OrganizationWhereInput
-}
-
-export type OrganizationUpdateToOneWithWhereWithoutRemindersInput = {
-  where?: Prisma.OrganizationWhereInput
-  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutRemindersInput, Prisma.OrganizationUncheckedUpdateWithoutRemindersInput>
-}
-
-export type OrganizationUpdateWithoutRemindersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationUncheckedUpdateWithoutRemindersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationCreateWithoutInboundEmailsInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationUncheckedCreateWithoutInboundEmailsInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationCreateOrConnectWithoutInboundEmailsInput = {
-  where: Prisma.OrganizationWhereUniqueInput
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutInboundEmailsInput, Prisma.OrganizationUncheckedCreateWithoutInboundEmailsInput>
-}
-
-export type OrganizationUpsertWithoutInboundEmailsInput = {
-  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutInboundEmailsInput, Prisma.OrganizationUncheckedUpdateWithoutInboundEmailsInput>
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutInboundEmailsInput, Prisma.OrganizationUncheckedCreateWithoutInboundEmailsInput>
-  where?: Prisma.OrganizationWhereInput
-}
-
-export type OrganizationUpdateToOneWithWhereWithoutInboundEmailsInput = {
-  where?: Prisma.OrganizationWhereInput
-  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutInboundEmailsInput, Prisma.OrganizationUncheckedUpdateWithoutInboundEmailsInput>
-}
-
-export type OrganizationUpdateWithoutInboundEmailsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationUncheckedUpdateWithoutInboundEmailsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationCreateWithoutApiKeysInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationUncheckedCreateWithoutApiKeysInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationCreateOrConnectWithoutApiKeysInput = {
-  where: Prisma.OrganizationWhereUniqueInput
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutApiKeysInput, Prisma.OrganizationUncheckedCreateWithoutApiKeysInput>
-}
-
-export type OrganizationUpsertWithoutApiKeysInput = {
-  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutApiKeysInput, Prisma.OrganizationUncheckedUpdateWithoutApiKeysInput>
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutApiKeysInput, Prisma.OrganizationUncheckedCreateWithoutApiKeysInput>
-  where?: Prisma.OrganizationWhereInput
-}
-
-export type OrganizationUpdateToOneWithWhereWithoutApiKeysInput = {
-  where?: Prisma.OrganizationWhereInput
-  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutApiKeysInput, Prisma.OrganizationUncheckedUpdateWithoutApiKeysInput>
-}
-
-export type OrganizationUpdateWithoutApiKeysInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationUncheckedUpdateWithoutApiKeysInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationCreateWithoutSequencesInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationUncheckedCreateWithoutSequencesInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationCreateOrConnectWithoutSequencesInput = {
-  where: Prisma.OrganizationWhereUniqueInput
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutSequencesInput, Prisma.OrganizationUncheckedCreateWithoutSequencesInput>
-}
-
-export type OrganizationUpsertWithoutSequencesInput = {
-  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutSequencesInput, Prisma.OrganizationUncheckedUpdateWithoutSequencesInput>
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutSequencesInput, Prisma.OrganizationUncheckedCreateWithoutSequencesInput>
-  where?: Prisma.OrganizationWhereInput
-}
-
-export type OrganizationUpdateToOneWithWhereWithoutSequencesInput = {
-  where?: Prisma.OrganizationWhereInput
-  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutSequencesInput, Prisma.OrganizationUncheckedUpdateWithoutSequencesInput>
-}
-
-export type OrganizationUpdateWithoutSequencesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationUncheckedUpdateWithoutSequencesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationCreateWithoutSequenceEnrollmentsInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationUncheckedCreateWithoutSequenceEnrollmentsInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationCreateOrConnectWithoutSequenceEnrollmentsInput = {
-  where: Prisma.OrganizationWhereUniqueInput
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutSequenceEnrollmentsInput, Prisma.OrganizationUncheckedCreateWithoutSequenceEnrollmentsInput>
-}
-
-export type OrganizationUpsertWithoutSequenceEnrollmentsInput = {
-  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutSequenceEnrollmentsInput, Prisma.OrganizationUncheckedUpdateWithoutSequenceEnrollmentsInput>
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutSequenceEnrollmentsInput, Prisma.OrganizationUncheckedCreateWithoutSequenceEnrollmentsInput>
-  where?: Prisma.OrganizationWhereInput
-}
-
-export type OrganizationUpdateToOneWithWhereWithoutSequenceEnrollmentsInput = {
-  where?: Prisma.OrganizationWhereInput
-  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutSequenceEnrollmentsInput, Prisma.OrganizationUncheckedUpdateWithoutSequenceEnrollmentsInput>
-}
-
-export type OrganizationUpdateWithoutSequenceEnrollmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationUncheckedUpdateWithoutSequenceEnrollmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationCreateWithoutSequenceDeadLettersInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationUncheckedCreateWithoutSequenceDeadLettersInput = {
-  id?: string
-  name: string
-  industry?: string
-  website?: string
-  phone?: string
-  address?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  currency?: string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
-  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
-  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
-  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
-  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
-  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
-  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
-  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
-  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
-  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
-  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
-  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
-  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
-  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
-  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
-  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
-  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
-  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
-  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
-  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
-  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
-  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
-  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
-  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
-}
-
-export type OrganizationCreateOrConnectWithoutSequenceDeadLettersInput = {
-  where: Prisma.OrganizationWhereUniqueInput
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutSequenceDeadLettersInput, Prisma.OrganizationUncheckedCreateWithoutSequenceDeadLettersInput>
-}
-
-export type OrganizationUpsertWithoutSequenceDeadLettersInput = {
-  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutSequenceDeadLettersInput, Prisma.OrganizationUncheckedUpdateWithoutSequenceDeadLettersInput>
-  create: Prisma.XOR<Prisma.OrganizationCreateWithoutSequenceDeadLettersInput, Prisma.OrganizationUncheckedCreateWithoutSequenceDeadLettersInput>
-  where?: Prisma.OrganizationWhereInput
-}
-
-export type OrganizationUpdateToOneWithWhereWithoutSequenceDeadLettersInput = {
-  where?: Prisma.OrganizationWhereInput
-  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutSequenceDeadLettersInput, Prisma.OrganizationUncheckedUpdateWithoutSequenceDeadLettersInput>
-}
-
-export type OrganizationUpdateWithoutSequenceDeadLettersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
-  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
-  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
-  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
-  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
-}
-
-export type OrganizationUncheckedUpdateWithoutSequenceDeadLettersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  industry?: Prisma.StringFieldUpdateOperationsInput | string
-  website?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  currency?: Prisma.StringFieldUpdateOperationsInput | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
-  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
-  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
-  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
-  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
-  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
-  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
-  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
-  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
-  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
-  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
-  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
-  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
-  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
-  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
-  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
-  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
-  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -5657,6 +2713,2950 @@ export type OrganizationUncheckedUpdateWithoutLostReasonsInput = {
   roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
+export type OrganizationCreateWithoutDealsInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutDealsInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutDealsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDealsInput, Prisma.OrganizationUncheckedCreateWithoutDealsInput>
+}
+
+export type OrganizationUpsertWithoutDealsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutDealsInput, Prisma.OrganizationUncheckedUpdateWithoutDealsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutDealsInput, Prisma.OrganizationUncheckedCreateWithoutDealsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutDealsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutDealsInput, Prisma.OrganizationUncheckedUpdateWithoutDealsInput>
+}
+
+export type OrganizationUpdateWithoutDealsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutDealsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutTasksInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutTasksInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutTasksInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutTasksInput, Prisma.OrganizationUncheckedCreateWithoutTasksInput>
+}
+
+export type OrganizationUpsertWithoutTasksInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutTasksInput, Prisma.OrganizationUncheckedUpdateWithoutTasksInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutTasksInput, Prisma.OrganizationUncheckedCreateWithoutTasksInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutTasksInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutTasksInput, Prisma.OrganizationUncheckedUpdateWithoutTasksInput>
+}
+
+export type OrganizationUpdateWithoutTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutActivitiesInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutActivitiesInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutActivitiesInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutActivitiesInput, Prisma.OrganizationUncheckedCreateWithoutActivitiesInput>
+}
+
+export type OrganizationUpsertWithoutActivitiesInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutActivitiesInput, Prisma.OrganizationUncheckedUpdateWithoutActivitiesInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutActivitiesInput, Prisma.OrganizationUncheckedCreateWithoutActivitiesInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutActivitiesInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutActivitiesInput, Prisma.OrganizationUncheckedUpdateWithoutActivitiesInput>
+}
+
+export type OrganizationUpdateWithoutActivitiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutActivitiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutNotesInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutNotesInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutNotesInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutNotesInput, Prisma.OrganizationUncheckedCreateWithoutNotesInput>
+}
+
+export type OrganizationUpsertWithoutNotesInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutNotesInput, Prisma.OrganizationUncheckedUpdateWithoutNotesInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutNotesInput, Prisma.OrganizationUncheckedCreateWithoutNotesInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutNotesInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutNotesInput, Prisma.OrganizationUncheckedUpdateWithoutNotesInput>
+}
+
+export type OrganizationUpdateWithoutNotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutNotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutAttachmentsInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutAttachmentsInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutAttachmentsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutAttachmentsInput, Prisma.OrganizationUncheckedCreateWithoutAttachmentsInput>
+}
+
+export type OrganizationUpsertWithoutAttachmentsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutAttachmentsInput, Prisma.OrganizationUncheckedUpdateWithoutAttachmentsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutAttachmentsInput, Prisma.OrganizationUncheckedCreateWithoutAttachmentsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutAttachmentsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutAttachmentsInput, Prisma.OrganizationUncheckedUpdateWithoutAttachmentsInput>
+}
+
+export type OrganizationUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutNotificationsInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutNotificationsInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutNotificationsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutNotificationsInput, Prisma.OrganizationUncheckedCreateWithoutNotificationsInput>
+}
+
+export type OrganizationUpsertWithoutNotificationsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutNotificationsInput, Prisma.OrganizationUncheckedUpdateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutNotificationsInput, Prisma.OrganizationUncheckedCreateWithoutNotificationsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutNotificationsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutNotificationsInput, Prisma.OrganizationUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type OrganizationUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutEmailTemplatesInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutEmailTemplatesInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutEmailTemplatesInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutEmailTemplatesInput, Prisma.OrganizationUncheckedCreateWithoutEmailTemplatesInput>
+}
+
+export type OrganizationUpsertWithoutEmailTemplatesInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutEmailTemplatesInput, Prisma.OrganizationUncheckedUpdateWithoutEmailTemplatesInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutEmailTemplatesInput, Prisma.OrganizationUncheckedCreateWithoutEmailTemplatesInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutEmailTemplatesInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutEmailTemplatesInput, Prisma.OrganizationUncheckedUpdateWithoutEmailTemplatesInput>
+}
+
+export type OrganizationUpdateWithoutEmailTemplatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutEmailTemplatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutCustomFieldsInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutCustomFieldsInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutCustomFieldsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutCustomFieldsInput, Prisma.OrganizationUncheckedCreateWithoutCustomFieldsInput>
+}
+
+export type OrganizationUpsertWithoutCustomFieldsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutCustomFieldsInput, Prisma.OrganizationUncheckedUpdateWithoutCustomFieldsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutCustomFieldsInput, Prisma.OrganizationUncheckedCreateWithoutCustomFieldsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutCustomFieldsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutCustomFieldsInput, Prisma.OrganizationUncheckedUpdateWithoutCustomFieldsInput>
+}
+
+export type OrganizationUpdateWithoutCustomFieldsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutCustomFieldsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutEmailSettingsInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutEmailSettingsInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutEmailSettingsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutEmailSettingsInput, Prisma.OrganizationUncheckedCreateWithoutEmailSettingsInput>
+}
+
+export type OrganizationUpsertWithoutEmailSettingsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutEmailSettingsInput, Prisma.OrganizationUncheckedUpdateWithoutEmailSettingsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutEmailSettingsInput, Prisma.OrganizationUncheckedCreateWithoutEmailSettingsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutEmailSettingsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutEmailSettingsInput, Prisma.OrganizationUncheckedUpdateWithoutEmailSettingsInput>
+}
+
+export type OrganizationUpdateWithoutEmailSettingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutEmailSettingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutSentEmailsInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutSentEmailsInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutSentEmailsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutSentEmailsInput, Prisma.OrganizationUncheckedCreateWithoutSentEmailsInput>
+}
+
+export type OrganizationUpsertWithoutSentEmailsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutSentEmailsInput, Prisma.OrganizationUncheckedUpdateWithoutSentEmailsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutSentEmailsInput, Prisma.OrganizationUncheckedCreateWithoutSentEmailsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutSentEmailsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutSentEmailsInput, Prisma.OrganizationUncheckedUpdateWithoutSentEmailsInput>
+}
+
+export type OrganizationUpdateWithoutSentEmailsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutSentEmailsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutRemindersInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutRemindersInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutRemindersInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutRemindersInput, Prisma.OrganizationUncheckedCreateWithoutRemindersInput>
+}
+
+export type OrganizationUpsertWithoutRemindersInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutRemindersInput, Prisma.OrganizationUncheckedUpdateWithoutRemindersInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutRemindersInput, Prisma.OrganizationUncheckedCreateWithoutRemindersInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutRemindersInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutRemindersInput, Prisma.OrganizationUncheckedUpdateWithoutRemindersInput>
+}
+
+export type OrganizationUpdateWithoutRemindersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutRemindersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutInboundEmailsInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutInboundEmailsInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutInboundEmailsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutInboundEmailsInput, Prisma.OrganizationUncheckedCreateWithoutInboundEmailsInput>
+}
+
+export type OrganizationUpsertWithoutInboundEmailsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutInboundEmailsInput, Prisma.OrganizationUncheckedUpdateWithoutInboundEmailsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutInboundEmailsInput, Prisma.OrganizationUncheckedCreateWithoutInboundEmailsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutInboundEmailsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutInboundEmailsInput, Prisma.OrganizationUncheckedUpdateWithoutInboundEmailsInput>
+}
+
+export type OrganizationUpdateWithoutInboundEmailsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutInboundEmailsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutApiKeysInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutApiKeysInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutApiKeysInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutApiKeysInput, Prisma.OrganizationUncheckedCreateWithoutApiKeysInput>
+}
+
+export type OrganizationUpsertWithoutApiKeysInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutApiKeysInput, Prisma.OrganizationUncheckedUpdateWithoutApiKeysInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutApiKeysInput, Prisma.OrganizationUncheckedCreateWithoutApiKeysInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutApiKeysInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutApiKeysInput, Prisma.OrganizationUncheckedUpdateWithoutApiKeysInput>
+}
+
+export type OrganizationUpdateWithoutApiKeysInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutApiKeysInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutSequencesInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutSequencesInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutSequencesInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutSequencesInput, Prisma.OrganizationUncheckedCreateWithoutSequencesInput>
+}
+
+export type OrganizationUpsertWithoutSequencesInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutSequencesInput, Prisma.OrganizationUncheckedUpdateWithoutSequencesInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutSequencesInput, Prisma.OrganizationUncheckedCreateWithoutSequencesInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutSequencesInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutSequencesInput, Prisma.OrganizationUncheckedUpdateWithoutSequencesInput>
+}
+
+export type OrganizationUpdateWithoutSequencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutSequencesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutSequenceEnrollmentsInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutSequenceEnrollmentsInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutSequenceEnrollmentsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutSequenceEnrollmentsInput, Prisma.OrganizationUncheckedCreateWithoutSequenceEnrollmentsInput>
+}
+
+export type OrganizationUpsertWithoutSequenceEnrollmentsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutSequenceEnrollmentsInput, Prisma.OrganizationUncheckedUpdateWithoutSequenceEnrollmentsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutSequenceEnrollmentsInput, Prisma.OrganizationUncheckedCreateWithoutSequenceEnrollmentsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutSequenceEnrollmentsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutSequenceEnrollmentsInput, Prisma.OrganizationUncheckedUpdateWithoutSequenceEnrollmentsInput>
+}
+
+export type OrganizationUpdateWithoutSequenceEnrollmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutSequenceEnrollmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutSequenceDeadLettersInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutSequenceDeadLettersInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutSequenceDeadLettersInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutSequenceDeadLettersInput, Prisma.OrganizationUncheckedCreateWithoutSequenceDeadLettersInput>
+}
+
+export type OrganizationUpsertWithoutSequenceDeadLettersInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutSequenceDeadLettersInput, Prisma.OrganizationUncheckedUpdateWithoutSequenceDeadLettersInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutSequenceDeadLettersInput, Prisma.OrganizationUncheckedCreateWithoutSequenceDeadLettersInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutSequenceDeadLettersInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutSequenceDeadLettersInput, Prisma.OrganizationUncheckedUpdateWithoutSequenceDeadLettersInput>
+}
+
+export type OrganizationUpdateWithoutSequenceDeadLettersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutSequenceDeadLettersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
 export type OrganizationCreateWithoutRolesInput = {
   id?: string
   name: string
@@ -5682,6 +5682,7 @@ export type OrganizationCreateWithoutRolesInput = {
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -5693,7 +5694,6 @@ export type OrganizationCreateWithoutRolesInput = {
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
@@ -5724,6 +5724,7 @@ export type OrganizationUncheckedCreateWithoutRolesInput = {
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -5735,7 +5736,6 @@ export type OrganizationUncheckedCreateWithoutRolesInput = {
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
@@ -5782,6 +5782,7 @@ export type OrganizationUpdateWithoutRolesInput = {
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -5793,7 +5794,6 @@ export type OrganizationUpdateWithoutRolesInput = {
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
@@ -5824,6 +5824,7 @@ export type OrganizationUncheckedUpdateWithoutRolesInput = {
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -5835,7 +5836,6 @@ export type OrganizationUncheckedUpdateWithoutRolesInput = {
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -5865,6 +5865,7 @@ export type OrganizationCreateWithoutProductsInput = {
   quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -5876,7 +5877,6 @@ export type OrganizationCreateWithoutProductsInput = {
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
@@ -5907,6 +5907,7 @@ export type OrganizationUncheckedCreateWithoutProductsInput = {
   quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -5918,7 +5919,6 @@ export type OrganizationUncheckedCreateWithoutProductsInput = {
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
@@ -5965,6 +5965,7 @@ export type OrganizationUpdateWithoutProductsInput = {
   quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -5976,7 +5977,6 @@ export type OrganizationUpdateWithoutProductsInput = {
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
@@ -6007,6 +6007,7 @@ export type OrganizationUncheckedUpdateWithoutProductsInput = {
   quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -6018,7 +6019,6 @@ export type OrganizationUncheckedUpdateWithoutProductsInput = {
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -6050,6 +6050,7 @@ export type OrganizationCreateWithoutPriceListsInput = {
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -6061,7 +6062,6 @@ export type OrganizationCreateWithoutPriceListsInput = {
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
   roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
@@ -6092,6 +6092,7 @@ export type OrganizationUncheckedCreateWithoutPriceListsInput = {
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -6103,7 +6104,6 @@ export type OrganizationUncheckedCreateWithoutPriceListsInput = {
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -6150,6 +6150,7 @@ export type OrganizationUpdateWithoutPriceListsInput = {
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -6161,7 +6162,6 @@ export type OrganizationUpdateWithoutPriceListsInput = {
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
   roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
@@ -6192,6 +6192,7 @@ export type OrganizationUncheckedUpdateWithoutPriceListsInput = {
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -6203,7 +6204,6 @@ export type OrganizationUncheckedUpdateWithoutPriceListsInput = {
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -6233,6 +6233,7 @@ export type OrganizationCreateWithoutQuotationsInput = {
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -6244,7 +6245,6 @@ export type OrganizationCreateWithoutQuotationsInput = {
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
@@ -6275,6 +6275,7 @@ export type OrganizationUncheckedCreateWithoutQuotationsInput = {
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -6286,7 +6287,6 @@ export type OrganizationUncheckedCreateWithoutQuotationsInput = {
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
@@ -6333,6 +6333,7 @@ export type OrganizationUpdateWithoutQuotationsInput = {
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -6344,7 +6345,6 @@ export type OrganizationUpdateWithoutQuotationsInput = {
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
@@ -6375,6 +6375,7 @@ export type OrganizationUncheckedUpdateWithoutQuotationsInput = {
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -6386,7 +6387,6 @@ export type OrganizationUncheckedUpdateWithoutQuotationsInput = {
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -6417,6 +6417,7 @@ export type OrganizationCreateWithoutSalesOrdersInput = {
   quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -6428,7 +6429,6 @@ export type OrganizationCreateWithoutSalesOrdersInput = {
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignCreateNestedManyWithoutOrganizationInput
@@ -6459,6 +6459,7 @@ export type OrganizationUncheckedCreateWithoutSalesOrdersInput = {
   quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -6470,7 +6471,6 @@ export type OrganizationUncheckedCreateWithoutSalesOrdersInput = {
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
   campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutOrganizationInput
@@ -6517,6 +6517,7 @@ export type OrganizationUpdateWithoutSalesOrdersInput = {
   quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -6528,7 +6529,6 @@ export type OrganizationUpdateWithoutSalesOrdersInput = {
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUpdateManyWithoutOrganizationNestedInput
@@ -6559,6 +6559,7 @@ export type OrganizationUncheckedUpdateWithoutSalesOrdersInput = {
   quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -6570,7 +6571,6 @@ export type OrganizationUncheckedUpdateWithoutSalesOrdersInput = {
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
   campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -6602,6 +6602,7 @@ export type OrganizationCreateWithoutCampaignsInput = {
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
@@ -6613,7 +6614,6 @@ export type OrganizationCreateWithoutCampaignsInput = {
   sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
   roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
@@ -6644,6 +6644,7 @@ export type OrganizationUncheckedCreateWithoutCampaignsInput = {
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
   products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
   leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
   customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
   emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
@@ -6655,7 +6656,6 @@ export type OrganizationUncheckedCreateWithoutCampaignsInput = {
   sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
-  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
   teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
   roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
@@ -6702,6 +6702,7 @@ export type OrganizationUpdateWithoutCampaignsInput = {
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
@@ -6713,7 +6714,6 @@ export type OrganizationUpdateWithoutCampaignsInput = {
   sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
   roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
@@ -6744,6 +6744,7 @@ export type OrganizationUncheckedUpdateWithoutCampaignsInput = {
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
   products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
   leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
   customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
   emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
@@ -6755,7 +6756,6 @@ export type OrganizationUncheckedUpdateWithoutCampaignsInput = {
   sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
-  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
   teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -6782,6 +6782,7 @@ export type OrganizationCountOutputType = {
   salesOrders: number
   products: number
   leadSources: number
+  lostReasons: number
   emailTemplates: number
   customFields: number
   sentEmails: number
@@ -6792,7 +6793,6 @@ export type OrganizationCountOutputType = {
   sequences: number
   sequenceEnrollments: number
   sequenceDeadLetters: number
-  lostReasons: number
   priceLists: number
   teams: number
   campaigns: number
@@ -6815,6 +6815,7 @@ export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   salesOrders?: boolean | OrganizationCountOutputTypeCountSalesOrdersArgs
   products?: boolean | OrganizationCountOutputTypeCountProductsArgs
   leadSources?: boolean | OrganizationCountOutputTypeCountLeadSourcesArgs
+  lostReasons?: boolean | OrganizationCountOutputTypeCountLostReasonsArgs
   emailTemplates?: boolean | OrganizationCountOutputTypeCountEmailTemplatesArgs
   customFields?: boolean | OrganizationCountOutputTypeCountCustomFieldsArgs
   sentEmails?: boolean | OrganizationCountOutputTypeCountSentEmailsArgs
@@ -6825,7 +6826,6 @@ export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   sequences?: boolean | OrganizationCountOutputTypeCountSequencesArgs
   sequenceEnrollments?: boolean | OrganizationCountOutputTypeCountSequenceEnrollmentsArgs
   sequenceDeadLetters?: boolean | OrganizationCountOutputTypeCountSequenceDeadLettersArgs
-  lostReasons?: boolean | OrganizationCountOutputTypeCountLostReasonsArgs
   priceLists?: boolean | OrganizationCountOutputTypeCountPriceListsArgs
   teams?: boolean | OrganizationCountOutputTypeCountTeamsArgs
   campaigns?: boolean | OrganizationCountOutputTypeCountCampaignsArgs
@@ -6950,6 +6950,13 @@ export type OrganizationCountOutputTypeCountLeadSourcesArgs<ExtArgs extends runt
 /**
  * OrganizationCountOutputType without action
  */
+export type OrganizationCountOutputTypeCountLostReasonsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LostReasonWhereInput
+}
+
+/**
+ * OrganizationCountOutputType without action
+ */
 export type OrganizationCountOutputTypeCountEmailTemplatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.EmailTemplateWhereInput
 }
@@ -7020,13 +7027,6 @@ export type OrganizationCountOutputTypeCountSequenceDeadLettersArgs<ExtArgs exte
 /**
  * OrganizationCountOutputType without action
  */
-export type OrganizationCountOutputTypeCountLostReasonsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LostReasonWhereInput
-}
-
-/**
- * OrganizationCountOutputType without action
- */
 export type OrganizationCountOutputTypeCountPriceListsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.PriceListWhereInput
 }
@@ -7078,6 +7078,7 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   salesOrders?: boolean | Prisma.Organization$salesOrdersArgs<ExtArgs>
   products?: boolean | Prisma.Organization$productsArgs<ExtArgs>
   leadSources?: boolean | Prisma.Organization$leadSourcesArgs<ExtArgs>
+  lostReasons?: boolean | Prisma.Organization$lostReasonsArgs<ExtArgs>
   emailTemplates?: boolean | Prisma.Organization$emailTemplatesArgs<ExtArgs>
   customFields?: boolean | Prisma.Organization$customFieldsArgs<ExtArgs>
   emailSettings?: boolean | Prisma.Organization$emailSettingsArgs<ExtArgs>
@@ -7089,7 +7090,6 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   sequences?: boolean | Prisma.Organization$sequencesArgs<ExtArgs>
   sequenceEnrollments?: boolean | Prisma.Organization$sequenceEnrollmentsArgs<ExtArgs>
   sequenceDeadLetters?: boolean | Prisma.Organization$sequenceDeadLettersArgs<ExtArgs>
-  lostReasons?: boolean | Prisma.Organization$lostReasonsArgs<ExtArgs>
   priceLists?: boolean | Prisma.Organization$priceListsArgs<ExtArgs>
   teams?: boolean | Prisma.Organization$teamsArgs<ExtArgs>
   campaigns?: boolean | Prisma.Organization$campaignsArgs<ExtArgs>
@@ -7150,6 +7150,7 @@ export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   salesOrders?: boolean | Prisma.Organization$salesOrdersArgs<ExtArgs>
   products?: boolean | Prisma.Organization$productsArgs<ExtArgs>
   leadSources?: boolean | Prisma.Organization$leadSourcesArgs<ExtArgs>
+  lostReasons?: boolean | Prisma.Organization$lostReasonsArgs<ExtArgs>
   emailTemplates?: boolean | Prisma.Organization$emailTemplatesArgs<ExtArgs>
   customFields?: boolean | Prisma.Organization$customFieldsArgs<ExtArgs>
   emailSettings?: boolean | Prisma.Organization$emailSettingsArgs<ExtArgs>
@@ -7161,7 +7162,6 @@ export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   sequences?: boolean | Prisma.Organization$sequencesArgs<ExtArgs>
   sequenceEnrollments?: boolean | Prisma.Organization$sequenceEnrollmentsArgs<ExtArgs>
   sequenceDeadLetters?: boolean | Prisma.Organization$sequenceDeadLettersArgs<ExtArgs>
-  lostReasons?: boolean | Prisma.Organization$lostReasonsArgs<ExtArgs>
   priceLists?: boolean | Prisma.Organization$priceListsArgs<ExtArgs>
   teams?: boolean | Prisma.Organization$teamsArgs<ExtArgs>
   campaigns?: boolean | Prisma.Organization$campaignsArgs<ExtArgs>
@@ -7189,6 +7189,7 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     salesOrders: Prisma.$SalesOrderPayload<ExtArgs>[]
     products: Prisma.$ProductPayload<ExtArgs>[]
     leadSources: Prisma.$LeadSourcePayload<ExtArgs>[]
+    lostReasons: Prisma.$LostReasonPayload<ExtArgs>[]
     emailTemplates: Prisma.$EmailTemplatePayload<ExtArgs>[]
     customFields: Prisma.$CustomFieldPayload<ExtArgs>[]
     emailSettings: Prisma.$EmailSettingsPayload<ExtArgs> | null
@@ -7200,7 +7201,6 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     sequences: Prisma.$SequencePayload<ExtArgs>[]
     sequenceEnrollments: Prisma.$SequenceEnrollmentPayload<ExtArgs>[]
     sequenceDeadLetters: Prisma.$SequenceDeadLetterPayload<ExtArgs>[]
-    lostReasons: Prisma.$LostReasonPayload<ExtArgs>[]
     priceLists: Prisma.$PriceListPayload<ExtArgs>[]
     teams: Prisma.$TeamPayload<ExtArgs>[]
     campaigns: Prisma.$CampaignPayload<ExtArgs>[]
@@ -7625,6 +7625,7 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   salesOrders<T extends Prisma.Organization$salesOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$salesOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalesOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   products<T extends Prisma.Organization$productsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$productsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadSources<T extends Prisma.Organization$leadSourcesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$leadSourcesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadSourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  lostReasons<T extends Prisma.Organization$lostReasonsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$lostReasonsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LostReasonPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   emailTemplates<T extends Prisma.Organization$emailTemplatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$emailTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   customFields<T extends Prisma.Organization$customFieldsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$customFieldsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CustomFieldPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   emailSettings<T extends Prisma.Organization$emailSettingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$emailSettingsArgs<ExtArgs>>): Prisma.Prisma__EmailSettingsClient<runtime.Types.Result.GetResult<Prisma.$EmailSettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -7636,7 +7637,6 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   sequences<T extends Prisma.Organization$sequencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$sequencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SequencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sequenceEnrollments<T extends Prisma.Organization$sequenceEnrollmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$sequenceEnrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SequenceEnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sequenceDeadLetters<T extends Prisma.Organization$sequenceDeadLettersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$sequenceDeadLettersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SequenceDeadLetterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  lostReasons<T extends Prisma.Organization$lostReasonsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$lostReasonsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LostReasonPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   priceLists<T extends Prisma.Organization$priceListsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$priceListsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PriceListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   teams<T extends Prisma.Organization$teamsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$teamsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   campaigns<T extends Prisma.Organization$campaignsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$campaignsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -8430,6 +8430,30 @@ export type Organization$leadSourcesArgs<ExtArgs extends runtime.Types.Extension
 }
 
 /**
+ * Organization.lostReasons
+ */
+export type Organization$lostReasonsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LostReason
+   */
+  select?: Prisma.LostReasonSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LostReason
+   */
+  omit?: Prisma.LostReasonOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LostReasonInclude<ExtArgs> | null
+  where?: Prisma.LostReasonWhereInput
+  orderBy?: Prisma.LostReasonOrderByWithRelationInput | Prisma.LostReasonOrderByWithRelationInput[]
+  cursor?: Prisma.LostReasonWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LostReasonScalarFieldEnum | Prisma.LostReasonScalarFieldEnum[]
+}
+
+/**
  * Organization.emailTemplates
  */
 export type Organization$emailTemplatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -8686,30 +8710,6 @@ export type Organization$sequenceDeadLettersArgs<ExtArgs extends runtime.Types.E
   take?: number
   skip?: number
   distinct?: Prisma.SequenceDeadLetterScalarFieldEnum | Prisma.SequenceDeadLetterScalarFieldEnum[]
-}
-
-/**
- * Organization.lostReasons
- */
-export type Organization$lostReasonsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the LostReason
-   */
-  select?: Prisma.LostReasonSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the LostReason
-   */
-  omit?: Prisma.LostReasonOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LostReasonInclude<ExtArgs> | null
-  where?: Prisma.LostReasonWhereInput
-  orderBy?: Prisma.LostReasonOrderByWithRelationInput | Prisma.LostReasonOrderByWithRelationInput[]
-  cursor?: Prisma.LostReasonWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.LostReasonScalarFieldEnum | Prisma.LostReasonScalarFieldEnum[]
 }
 
 /**

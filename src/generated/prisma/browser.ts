@@ -78,6 +78,16 @@ export type Pipeline = Prisma.PipelineModel
  */
 export type Stage = Prisma.StageModel
 /**
+ * Model StageHistory
+ * 
+ */
+export type StageHistory = Prisma.StageHistoryModel
+/**
+ * Model LostReason
+ * 
+ */
+export type LostReason = Prisma.LostReasonModel
+/**
  * Model Deal
  * 
  */
@@ -177,16 +187,6 @@ export type SequenceStepEnrollment = Prisma.SequenceStepEnrollmentModel
  * 
  */
 export type SequenceDeadLetter = Prisma.SequenceDeadLetterModel
-/**
- * Model StageHistory
- * 
- */
-export type StageHistory = Prisma.StageHistoryModel
-/**
- * Model LostReason
- * 
- */
-export type LostReason = Prisma.LostReasonModel
 /**
  * Model Role
  * 

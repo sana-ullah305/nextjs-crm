@@ -19,7 +19,7 @@ Supervisor: Crush (orchestrator). Implementation delegated to specialized subage
 |-------|--------|
 | 1 Discovery | COMPLETE |
 | 2 Architecture & backlog | COMPLETE |
-| 3 Core CRM completion | IN PROGRESS (10 implementation agents launched) |
+| 3 Core CRM completion | IN PROGRESS (5/10 agents COMPLETE) |
 | 4 Advanced features | PENDING |
 | 5 Integration | PENDING |
 | 6 QA & optimization | PENDING |

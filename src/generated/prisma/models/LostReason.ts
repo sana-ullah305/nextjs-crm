@@ -320,11 +320,6 @@ export type LostReasonOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type LostReasonNullableScalarRelationFilter = {
-  is?: Prisma.LostReasonWhereInput | null
-  isNot?: Prisma.LostReasonWhereInput | null
-}
-
 export type LostReasonOrganizationIdNameCompoundUniqueInput = {
   organizationId: string
   name: string
@@ -355,6 +350,11 @@ export type LostReasonMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   isSystem?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type LostReasonNullableScalarRelationFilter = {
+  is?: Prisma.LostReasonWhereInput | null
+  isNot?: Prisma.LostReasonWhereInput | null
 }
 
 export type LostReasonCreateNestedManyWithoutOrganizationInput = {

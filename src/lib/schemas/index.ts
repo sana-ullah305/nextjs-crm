@@ -206,6 +206,8 @@ export const dealCreateSchema = z.object({
 
 export const dealUpdateSchema = dealCreateSchema.partial().extend({
   status: z.enum(DEAL_STATUSES).optional(),
+  currency: z.string().trim().length(3).optional(),
+  probability: z.coerce.number().min(0).max(100).optional(),
   lostReason: z.string().max(500).optional(),
   lostReasonId: z.string().trim().max(64).optional(),
 });

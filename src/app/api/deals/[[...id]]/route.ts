@@ -75,6 +75,14 @@ async function getDeal(id: string) {
       company: true,
       owner: { select: { id: true, name: true, avatarColor: true } },
       source: true,
+      stageHistory: {
+        orderBy: { at: "asc" },
+        include: {
+          fromStage: { select: { id: true, name: true } },
+          toStage: { select: { id: true, name: true, type: true } },
+          user: { select: { id: true, name: true, avatarColor: true } },
+        },
+      },
     },
   });
   if (!deal) throw new ApiNotFoundError("Deal not found");
@@ -238,7 +246,7 @@ async function moveDeal(req: NextRequest, dealId: string) {
           ? `Deal won: ${deal.name}`
           : isLost
             ? `Deal lost: ${deal.name}`
-            : `${deal.name}: ${deal.stage.name} → ${stage.name}`,
+          : `${deal.name}: ${deal.stage.name} \u2192 ${stage.name}`,
         dealId: deal.id,
         userId: user.id,
       },
@@ -354,6 +362,8 @@ async function updateDeal(req: NextRequest, dealId: string) {
     where: { id: dealId },
     data: {
       ...(body.name !== undefined ? { name: body.name } : {}),
+      ...(body.currency !== undefined ? { currency: body.currency } : {}),
+      ...(body.probability !== undefined ? { probability: body.probability } : {}),
       ...(body.contactId !== undefined ? { contactId: body.contactId || null } : {}),
       ...(body.companyId !== undefined ? { companyId: body.companyId || null } : {}),
       ...(body.ownerId !== undefined ? { ownerId: body.ownerId || null } : {}),

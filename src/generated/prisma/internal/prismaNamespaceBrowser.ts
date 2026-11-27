@@ -63,6 +63,8 @@ export const ModelName = {
   Lead: 'Lead',
   Pipeline: 'Pipeline',
   Stage: 'Stage',
+  StageHistory: 'StageHistory',
+  LostReason: 'LostReason',
   Deal: 'Deal',
   Task: 'Task',
   Activity: 'Activity',
@@ -83,8 +85,6 @@ export const ModelName = {
   SequenceEnrollment: 'SequenceEnrollment',
   SequenceStepEnrollment: 'SequenceStepEnrollment',
   SequenceDeadLetter: 'SequenceDeadLetter',
-  StageHistory: 'StageHistory',
-  LostReason: 'LostReason',
   Role: 'Role',
   Product: 'Product',
   PriceList: 'PriceList',
@@ -307,6 +307,33 @@ export const StageScalarFieldEnum = {
 } as const
 
 export type StageScalarFieldEnum = (typeof StageScalarFieldEnum)[keyof typeof StageScalarFieldEnum]
+
+
+export const StageHistoryScalarFieldEnum = {
+  id: 'id',
+  dealId: 'dealId',
+  fromStageId: 'fromStageId',
+  toStageId: 'toStageId',
+  userId: 'userId',
+  at: 'at',
+  wonAtSnapshot: 'wonAtSnapshot',
+  lostAtSnapshot: 'lostAtSnapshot',
+  actualCloseDateSnapshot: 'actualCloseDateSnapshot'
+} as const
+
+export type StageHistoryScalarFieldEnum = (typeof StageHistoryScalarFieldEnum)[keyof typeof StageHistoryScalarFieldEnum]
+
+
+export const LostReasonScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  description: 'description',
+  isSystem: 'isSystem',
+  createdAt: 'createdAt'
+} as const
+
+export type LostReasonScalarFieldEnum = (typeof LostReasonScalarFieldEnum)[keyof typeof LostReasonScalarFieldEnum]
 
 
 export const DealScalarFieldEnum = {
@@ -651,33 +678,6 @@ export const SequenceDeadLetterScalarFieldEnum = {
 } as const
 
 export type SequenceDeadLetterScalarFieldEnum = (typeof SequenceDeadLetterScalarFieldEnum)[keyof typeof SequenceDeadLetterScalarFieldEnum]
-
-
-export const StageHistoryScalarFieldEnum = {
-  id: 'id',
-  dealId: 'dealId',
-  fromStageId: 'fromStageId',
-  toStageId: 'toStageId',
-  userId: 'userId',
-  at: 'at',
-  wonAtSnapshot: 'wonAtSnapshot',
-  lostAtSnapshot: 'lostAtSnapshot',
-  actualCloseDateSnapshot: 'actualCloseDateSnapshot'
-} as const
-
-export type StageHistoryScalarFieldEnum = (typeof StageHistoryScalarFieldEnum)[keyof typeof StageHistoryScalarFieldEnum]
-
-
-export const LostReasonScalarFieldEnum = {
-  id: 'id',
-  organizationId: 'organizationId',
-  name: 'name',
-  description: 'description',
-  isSystem: 'isSystem',
-  createdAt: 'createdAt'
-} as const
-
-export type LostReasonScalarFieldEnum = (typeof LostReasonScalarFieldEnum)[keyof typeof LostReasonScalarFieldEnum]
 
 
 export const RoleScalarFieldEnum = {

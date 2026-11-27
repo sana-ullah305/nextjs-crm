@@ -791,6 +791,20 @@ export type UserUpdateOneWithoutOwnedLeadsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOwnedLeadsInput, Prisma.UserUpdateWithoutOwnedLeadsInput>, Prisma.UserUncheckedUpdateWithoutOwnedLeadsInput>
 }
 
+export type UserCreateNestedOneWithoutStageHistoryEntriesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStageHistoryEntriesInput, Prisma.UserUncheckedCreateWithoutStageHistoryEntriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStageHistoryEntriesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutStageHistoryEntriesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStageHistoryEntriesInput, Prisma.UserUncheckedCreateWithoutStageHistoryEntriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStageHistoryEntriesInput
+  upsert?: Prisma.UserUpsertWithoutStageHistoryEntriesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStageHistoryEntriesInput, Prisma.UserUpdateWithoutStageHistoryEntriesInput>, Prisma.UserUncheckedUpdateWithoutStageHistoryEntriesInput>
+}
+
 export type UserCreateNestedOneWithoutOwnedDealsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutOwnedDealsInput, Prisma.UserUncheckedCreateWithoutOwnedDealsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutOwnedDealsInput
@@ -963,20 +977,6 @@ export type UserUpdateOneWithoutSequenceEnrollmentsNestedInput = {
   delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSequenceEnrollmentsInput, Prisma.UserUpdateWithoutSequenceEnrollmentsInput>, Prisma.UserUncheckedUpdateWithoutSequenceEnrollmentsInput>
-}
-
-export type UserCreateNestedOneWithoutStageHistoryEntriesInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutStageHistoryEntriesInput, Prisma.UserUncheckedCreateWithoutStageHistoryEntriesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStageHistoryEntriesInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutStageHistoryEntriesNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutStageHistoryEntriesInput, Prisma.UserUncheckedCreateWithoutStageHistoryEntriesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStageHistoryEntriesInput
-  upsert?: Prisma.UserUpsertWithoutStageHistoryEntriesInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStageHistoryEntriesInput, Prisma.UserUpdateWithoutStageHistoryEntriesInput>, Prisma.UserUncheckedUpdateWithoutStageHistoryEntriesInput>
 }
 
 export type UserCreateNestedOneWithoutUserRolesInput = {
@@ -2029,6 +2029,162 @@ export type UserUncheckedUpdateWithoutOwnedLeadsInput = {
   assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
   ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
   stageHistoryEntries?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
+  createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutStageHistoryEntriesInput = {
+  id?: string
+  email: string
+  name: string
+  passwordHash: string
+  role?: string
+  title?: string
+  phone?: string
+  avatarColor?: string
+  isActive?: boolean
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
+  ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
+  ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
+  assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
+  ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
+  createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
+  notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
+  createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutStageHistoryEntriesInput = {
+  id?: string
+  organizationId: string
+  email: string
+  name: string
+  passwordHash: string
+  role?: string
+  title?: string
+  phone?: string
+  avatarColor?: string
+  isActive?: boolean
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
+  ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
+  ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
+  assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
+  ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
+  createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutStageHistoryEntriesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStageHistoryEntriesInput, Prisma.UserUncheckedCreateWithoutStageHistoryEntriesInput>
+}
+
+export type UserUpsertWithoutStageHistoryEntriesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStageHistoryEntriesInput, Prisma.UserUncheckedUpdateWithoutStageHistoryEntriesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStageHistoryEntriesInput, Prisma.UserUncheckedCreateWithoutStageHistoryEntriesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStageHistoryEntriesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStageHistoryEntriesInput, Prisma.UserUncheckedUpdateWithoutStageHistoryEntriesInput>
+}
+
+export type UserUpdateWithoutStageHistoryEntriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
+  ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
+  ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
+  assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
+  ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
+  createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
+  createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStageHistoryEntriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
+  ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
+  ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
+  assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
+  ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
   createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
   activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
@@ -3912,162 +4068,6 @@ export type UserUncheckedUpdateWithoutSequenceEnrollmentsInput = {
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
-  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateWithoutStageHistoryEntriesInput = {
-  id?: string
-  email: string
-  name: string
-  passwordHash: string
-  role?: string
-  title?: string
-  phone?: string
-  avatarColor?: string
-  isActive?: boolean
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
-  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
-  ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
-  ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
-  assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
-  ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
-  tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
-  createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
-  activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
-  notes?: Prisma.NoteCreateNestedManyWithoutUserInput
-  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
-  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
-  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
-  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
-  createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
-  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutStageHistoryEntriesInput = {
-  id?: string
-  organizationId: string
-  email: string
-  name: string
-  passwordHash: string
-  role?: string
-  title?: string
-  phone?: string
-  avatarColor?: string
-  isActive?: boolean
-  lastLoginAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
-  ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
-  ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
-  assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
-  ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
-  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
-  createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
-  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
-  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
-  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
-  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
-  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
-  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
-  createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
-  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutStageHistoryEntriesInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutStageHistoryEntriesInput, Prisma.UserUncheckedCreateWithoutStageHistoryEntriesInput>
-}
-
-export type UserUpsertWithoutStageHistoryEntriesInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutStageHistoryEntriesInput, Prisma.UserUncheckedUpdateWithoutStageHistoryEntriesInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutStageHistoryEntriesInput, Prisma.UserUncheckedCreateWithoutStageHistoryEntriesInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutStageHistoryEntriesInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutStageHistoryEntriesInput, Prisma.UserUncheckedUpdateWithoutStageHistoryEntriesInput>
-}
-
-export type UserUpdateWithoutStageHistoryEntriesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
-  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
-  ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
-  ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
-  assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
-  ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
-  tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
-  createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
-  activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
-  notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
-  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
-  sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
-  reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
-  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
-  createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
-  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutStageHistoryEntriesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
-  ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
-  ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
-  assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
-  ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
-  tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
-  createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
-  activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
-  notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
-  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
-  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
-  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
-  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
-  createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
-  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
   userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
 }
 

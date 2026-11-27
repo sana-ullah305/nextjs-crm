@@ -35,6 +35,7 @@ model Organization {
   salesOrders         SalesOrder[]        @relation("SalesOrderOrganization")
   products            Product[]           @relation("ProductOrganization")
   leadSources         LeadSource[]
+  lostReasons         LostReason[]
   emailTemplates      EmailTemplate[]
   customFields        CustomField[]
   emailSettings       EmailSettings?
@@ -46,7 +47,6 @@ model Organization {
   sequences           Sequence[]
   sequenceEnrollments SequenceEnrollment[]
   sequenceDeadLetters SequenceDeadLetter[]
-  lostReasons         LostReason[]
   priceLists          PriceList[]
   teams               Team[]
   currency            String               @default("USD")
@@ -312,10 +312,46 @@ model Stage {
 
   pipeline Pipeline @relation(fields: [pipelineId], references: [id], onDelete: Cascade)
   deals    Deal[]
-  fromStageHistory StageHistory[] @relation("FromStage")
-  toStageHistory   StageHistory[] @relation("ToStage")
+  stageHistoryFrom StageHistory[] @relation("StageHistoryFrom")
+  stageHistoryTo   StageHistory[] @relation("StageHistoryTo")
 
   @@unique([pipelineId, position])
+}
+
+model StageHistory {
+  id                       String   @id @default(cuid())
+  dealId                   String
+  fromStageId              String?
+  toStageId                String
+  userId                   String
+  at                       DateTime @default(now())
+  wonAtSnapshot            DateTime?
+  lostAtSnapshot           DateTime?
+  actualCloseDateSnapshot  DateTime?
+
+  deal      Deal   @relation(fields: [dealId], references: [id], onDelete: Cascade)
+  fromStage Stage? @relation("StageHistoryFrom", fields: [fromStageId], references: [id], onDelete: SetNull)
+  toStage   Stage  @relation("StageHistoryTo", fields: [toStageId], references: [id], onDelete: Restrict)
+  user      User   @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@index([dealId, at])
+  @@index([userId])
+}
+
+
+
+model LostReason {
+  id             String   @id @default(cuid())
+  organizationId String
+  name           String
+  description    String   @default("")
+  isSystem       Boolean  @default(false)
+  createdAt      DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  deals        Deal[]
+
+  @@unique([organizationId, name])
 }
 
 model Deal {
@@ -367,6 +403,7 @@ model Deal {
   @@index([organizationId, status])
   @@index([stageId])
   @@index([ownerId])
+  @@index([lostReasonId])
 }
 
 model Task {
@@ -774,40 +811,6 @@ model SequenceDeadLetter {
 
   @@index([organizationId, createdAt])
   @@index([enrollmentId])
-}
-
-model StageHistory {
-  id                    String    @id @default(cuid())
-  dealId                String
-  fromStageId           String?
-  toStageId             String
-  userId                String
-  at                    DateTime  @default(now())
-  wonAtSnapshot         DateTime?
-  lostAtSnapshot        DateTime?
-  actualCloseDateSnapshot DateTime?
-
-  deal       Deal   @relation(fields: [dealId], references: [id], onDelete: Cascade)
-  fromStage  Stage? @relation("FromStage", fields: [fromStageId], references: [id], onDelete: SetNull)
-  toStage    Stage  @relation("ToStage", fields: [toStageId], references: [id], onDelete: Restrict)
-  user       User   @relation(fields: [userId], references: [id], onDelete: Restrict)
-
-  @@index([dealId, at])
-  @@index([userId])
-}
-
-model LostReason {
-  id             String   @id @default(cuid())
-  organizationId String
-  name           String
-  description    String   @default("")
-  isSystem       Boolean  @default(false)
-  createdAt      DateTime @default(now())
-
-  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  deals        Deal[]
-
-  @@unique([organizationId, name])
 }
 
 // A custom role defined within an organization. `isSystem` marks built-in
