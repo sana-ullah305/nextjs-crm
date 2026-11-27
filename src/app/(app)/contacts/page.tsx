@@ -14,6 +14,8 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { EntityForm, type FieldDef, type FieldErrors } from "@/components/entity-form";
 import { api, ApiError, validationDetails } from "@/lib/api-client";
 import { formatDate, formatDateTime } from "@/lib/format";
+import { useToast } from "@/components/ui/toast";
+import { useConfirm } from "@/components/ui/confirm-dialog";
 
 type ContactRow = {
   id: string;
@@ -45,6 +47,8 @@ const STATUS_BADGES: Record<string, "default" | "success" | "warning" | "seconda
 
 export default function ContactsPage() {
   const router = useRouter();
+  const { success: toastSuccess, error: toastError } = useToast();
+  const { confirm } = useConfirm();
   const [contacts, setContacts] = useState<ContactRow[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -60,7 +64,6 @@ export default function ContactsPage() {
   const [formValues, setFormValues] = useState<Record<string, string>>({});
   const [formErrors, setFormErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
-  const [notice, setNotice] = useState("");
 
   const pageSize = 20;
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
@@ -138,32 +141,38 @@ export default function ContactsPage() {
     try {
       if (editing) {
         await api.patch(`/api/contacts/${editing.id}`, payload);
-        setNotice("Contact updated");
+        toastSuccess({ description: "Contact updated" });
       } else {
         await api.post("/api/contacts", payload);
-        setNotice("Contact created");
+        toastSuccess({ description: "Contact created" });
       }
       setFormOpen(false);
       await load();
       router.refresh();
     } catch (e) {
       setFormErrors(validationDetails(e));
+      toastError({ description: e instanceof ApiError ? e.message : "Save failed" });
     } finally {
       setSubmitting(false);
     }
   }
 
   async function onDelete(c: ContactRow) {
-    if (!confirm(`Delete ${c.firstName} ${c.lastName}? This keeps history but removes them from views.`)) {
-      return;
-    }
-    try {
-      await api.delete(`/api/contacts/${c.id}`);
-      setNotice("Contact deleted");
-      await load();
-    } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Delete failed");
-    }
+    confirm({
+      title: "Delete contact",
+      description: `Delete ${c.firstName} ${c.lastName}? This keeps history but removes them from views.`,
+      variant: "destructive",
+      confirmText: "Delete",
+      onConfirm: async () => {
+        try {
+          await api.delete(`/api/contacts/${c.id}`);
+          toastSuccess({ description: "Contact deleted" });
+          await load();
+        } catch (e) {
+          toastError({ description: e instanceof ApiError ? e.message : "Delete failed" });
+        }
+      },
+    });
   }
 
   async function onImport(e: React.ChangeEvent<HTMLInputElement>) {
@@ -173,7 +182,7 @@ export default function ContactsPage() {
     const lines = text.split(/\r?\n/).filter(Boolean);
     const header = lines[0]?.split(",").map((h) => h.trim().toLowerCase());
     if (!header || !lines[1]) {
-      setError("CSV must have a header row and at least one data row");
+      toastError({ description: "CSV must have a header row and at least one data row" });
       return;
     }
     const idx = (name: string) => header.indexOf(name);
@@ -193,10 +202,10 @@ export default function ContactsPage() {
         "/api/contacts/import",
         { contacts }
       );
-      setNotice(`Imported ${result.imported}, skipped ${result.skipped} (duplicates/invalid)`);
+      toastSuccess({ description: `Imported ${result.imported}, skipped ${result.skipped} (duplicates/invalid)` });
       await load();
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : "Import failed");
+      toastError({ description: err instanceof ApiError ? err.message : "Import failed" });
     } finally {
       e.target.value = "";
     }
@@ -271,17 +280,6 @@ export default function ContactsPage() {
           </Button>
         </div>
       </div>
-
-      {notice && (
-        <p className="rounded-md border border-success/30 bg-success/10 px-3 py-2 text-sm text-success" role="status">
-          {notice}
-        </p>
-      )}
-      {error && (
-        <p className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive" role="alert">
-          {error}
-        </p>
-      )}
 
       <div className="flex flex-wrap gap-2">
         <div className="relative min-w-56 flex-1 max-w-md">
@@ -398,7 +396,7 @@ export default function ContactsPage() {
                       <Button variant="ghost" size="icon" aria-label={`Edit ${c.firstName} ${c.lastName}`} onClick={() => openEdit(c)}>
                         <Pencil className="h-3.5 w-3.5" />
                       </Button>
-                      <Button variant="ghost" size="icon" aria-label={`Delete ${c.firstName} ${c.lastName}`} onClick={() => void onDelete(c)}>
+                      <Button variant="ghost" size="icon" aria-label={`Delete ${c.firstName} ${c.lastName}`} onClick={() => onDelete(c)}>
                         <Trash2 className="h-3.5 w-3.5 text-destructive" />
                       </Button>
                     </div>
@@ -408,29 +406,39 @@ export default function ContactsPage() {
             </TableBody>
           </Table>
         )}
-      </Card>
 
-      {totalPages > 1 && (
-        <div className="flex items-center justify-between text-sm text-muted-foreground">
-          <span>
-            Page {page} of {totalPages}
-          </span>
-          <div className="flex gap-2">
-            <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => setPage((p) => p - 1)}>
-              Previous
-            </Button>
-            <Button variant="outline" size="sm" disabled={page >= totalPages} onClick={() => setPage((p) => p + 1)}>
-              Next
-            </Button>
+        {!loading && total > pageSize && (
+          <div className="flex items-center justify-between border-t border-border p-4">
+            <p className="text-sm text-muted-foreground">
+              Page {page} of {totalPages} · {total} total
+            </p>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={page === 1}
+                onClick={() => setPage((p) => p - 1)}
+              >
+                Previous
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={page === totalPages}
+                onClick={() => setPage((p) => p + 1)}
+              >
+                Next
+              </Button>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </Card>
 
       <EntityForm
         open={formOpen}
         onOpenChange={setFormOpen}
         title={editing ? "Edit contact" : "New contact"}
-        description={editing ? `Editing ${editing.firstName} ${editing.lastName}` : "Add a person to your workspace"}
+        description={editing ? `Editing ${editing.firstName} ${editing.lastName}` : "Create a new contact record"}
         fields={fields}
         values={formValues}
         errors={formErrors}

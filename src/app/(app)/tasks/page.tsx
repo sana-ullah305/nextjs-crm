@@ -11,6 +11,8 @@ import { EntityForm, type FieldDef, type FieldErrors } from "@/components/entity
 import { api, ApiError, validationDetails } from "@/lib/api-client";
 import { formatDateTime, relativeDue } from "@/lib/format";
 import { cn } from "@/lib/cn";
+import { useToast } from "@/components/ui/toast";
+import { useConfirm } from "@/components/ui/confirm-dialog";
 
 type Task = {
   id: string;
@@ -33,6 +35,8 @@ const PRIORITY_BADGE: Record<string, "destructive" | "warning" | "default" | "se
 };
 
 export default function TasksPage() {
+  const { success: toastSuccess, error: toastError } = useToast();
+  const { confirm } = useConfirm();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -79,9 +83,11 @@ export default function TasksPage() {
       });
       setFormOpen(false);
       setFormValues({});
+      toastSuccess({ description: "Task created" });
       await load();
     } catch (e) {
       setFormErrors(validationDetails(e));
+      toastError({ description: e instanceof ApiError ? e.message : "Save failed" });
     } finally {
       setSubmitting(false);
     }
@@ -91,20 +97,29 @@ export default function TasksPage() {
     setTasks((ts) => ts.map((t) => (t.id === id ? { ...t, status } : t)));
     try {
       await api.patch(`/api/tasks/${id}`, { status });
+      toastSuccess({ description: `Task marked as ${status}` });
     } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Update failed");
+      toastError({ description: e instanceof ApiError ? e.message : "Update failed" });
       await load();
     }
   }
 
   async function onDelete(t: Task) {
-    if (!confirm(`Delete task "${t.title}"?`)) return;
-    try {
-      await api.delete(`/api/tasks/${t.id}`);
-      await load();
-    } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Delete failed");
-    }
+    confirm({
+      title: "Delete task",
+      description: `Delete task "${t.title}"?`,
+      variant: "destructive",
+      confirmText: "Delete",
+      onConfirm: async () => {
+        try {
+          await api.delete(`/api/tasks/${t.id}`);
+          toastSuccess({ description: "Task deleted" });
+          await load();
+        } catch (e) {
+          toastError({ description: e instanceof ApiError ? e.message : "Delete failed" });
+        }
+      },
+    });
   }
 
   const fields: FieldDef[] = [
@@ -185,99 +200,92 @@ export default function TasksPage() {
         </div>
       </div>
 
-      {error && (
-        <p className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive" role="alert">
-          {error}
-        </p>
-      )}
-
-      {loading ? (
-        <Card>
-          <div className="space-y-2 p-4">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <div key={i} className="h-14 animate-pulse rounded-md bg-muted" />
-            ))}
-          </div>
-        </Card>
-      ) : tasks.length === 0 ? (
-        <EmptyState
-          icon={CheckCircle2}
-          title="No tasks here"
-          description={filter === "completed" ? "Nothing completed yet." : "Create a task to keep work on track."}
-          action={
-            <Button size="sm" onClick={() => setFormOpen(true)}>
-              <Plus className="h-4 w-4" /> New task
-            </Button>
-          }
-        />
-      ) : (
-        <div className="space-y-4">
-          {groups
-            .filter((g) => g.items.length > 0)
-            .map((group) => (
-              <Card key={group.label}>
-                <CardHeader>
-                  <CardTitle>{group.label} ({group.items.length})</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  {group.items.map((t) => {
-                    const overdue = t.dueAt && new Date(t.dueAt) < new Date() && t.status !== "COMPLETED";
-                    return (
-                      <div
-                        key={t.id}
-                        className="flex flex-wrap items-center gap-3 rounded-md border border-border p-3"
-                      >
-                        {t.status === "COMPLETED" ? (
-                          <CheckCircle2 className="h-5 w-5 shrink-0 text-success" />
-                        ) : (
-                          <button
-                            aria-label={`Complete ${t.title}`}
-                            onClick={() => void setStatus(t.id, "COMPLETED")}
-                            className="rounded-full border-2 border-muted-foreground/40 p-1 hover:border-success hover:text-success"
-                          >
-                            <span className="block h-2.5 w-2.5" />
-                          </button>
-                        )}
-                        <div className="min-w-0 flex-1">
-                          <p className={cn("text-sm font-medium", t.status === "COMPLETED" && "text-muted-foreground line-through")}>
-                            {t.title}
-                          </p>
-                          <p className="truncate text-xs text-muted-foreground">{t.description}</p>
-                        </div>
-                        <Badge variant="outline">{t.type}</Badge>
-                        <Badge variant={PRIORITY_BADGE[t.priority] ?? "secondary"}>{t.priority}</Badge>
-                        {t.dueAt && (
-                          <span className={cn("flex items-center gap-1 text-xs", overdue ? "font-semibold text-destructive" : "text-muted-foreground")}>
-                            <CalendarClock className="h-3.5 w-3.5" />
-                            {relativeDue(t.dueAt)}
+      <div className="grid gap-4 md:grid-cols-3">
+        {groups.map((group) => (
+          <Card key={group.label}>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-lg flex items-center justify-between">
+                {group.label}
+                <Badge variant="outline">{group.items.length}</Badge>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-0">
+              {group.items.length === 0 ? (
+                <p className="py-6 text-center text-sm text-muted-foreground">No tasks</p>
+              ) : (
+                <ul className="space-y-2 p-4">
+                  {group.items.map((task) => (
+                    <li
+                      key={task.id}
+                      className="flex items-start gap-3 p-3 rounded-lg border border-border hover:bg-muted/50"
+                    >
+                      <div className="flex flex-col items-center gap-1 shrink-0">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 p-0"
+                          onClick={() => setStatus(task.id, task.status === "COMPLETED" ? "PENDING" : "COMPLETED")}
+                          aria-label={task.status === "COMPLETED" ? "Mark pending" : "Mark complete"}
+                        >
+                          {task.status === "COMPLETED" ? (
+                            <SkipForward className="h-4 w-4" />
+                          ) : (
+                            <CheckCircle2 className="h-4 w-4" />
+                          )}
+                        </Button>
+                        {task.dueAt && (
+                          <span className={cn("text-xs", new Date(task.dueAt) < new Date() && task.status !== "COMPLETED" ? "text-destructive" : "text-muted-foreground")}>
+                            {relativeDue(task.dueAt)}
                           </span>
                         )}
-                        {t.assignedUser && (
-                          <Avatar name={t.assignedUser.name} color={t.assignedUser.avatarColor} size="sm" />
-                        )}
-                        {t.status !== "COMPLETED" && t.status !== "SKIPPED" && (
-                          <div className="flex gap-1">
-                            <Button variant="ghost" size="sm" onClick={() => void setStatus(t.id, "SKIPPED")}>
-                              <SkipForward className="h-3.5 w-3.5" /> Skip
-                            </Button>
-                            <Button variant="ghost" size="icon" aria-label={`Delete ${t.title}`} onClick={() => void onDelete(t)}>
-                              <Trash2 className="h-3.5 w-3.5 text-destructive" />
-                            </Button>
-                          </div>
-                        )}
                       </div>
-                    );
-                  })}
-                </CardContent>
-              </Card>
-            ))}
-        </div>
-      )}
+                      <div className="flex-1 min-w-0">
+                        <p className={cn("font-medium", task.status === "COMPLETED" && "line-through text-muted-foreground")}>
+                          {task.title}
+                        </p>
+                        {task.description && (
+                          <p className="text-sm text-muted-foreground line-clamp-1">{task.description}</p>
+                        )}
+                        <div className="flex flex-wrap items-center gap-2 mt-1.5 text-xs">
+                          <Badge variant={PRIORITY_BADGE[task.priority] ?? "default"}>{task.priority}</Badge>
+                          <Badge variant="outline">{task.type}</Badge>
+                          {task.assignedUser && (
+                            <span className="flex items-center gap-1 text-muted-foreground">
+                              <Avatar name={task.assignedUser.name} color={task.assignedUser.avatarColor} size="sm" />
+                              {task.assignedUser.name}
+                            </span>
+                          )}
+                          {task.dueAt && (
+                            <span className={cn("flex items-center gap-1", new Date(task.dueAt) < new Date() && task.status !== "COMPLETED" ? "text-destructive" : "text-muted-foreground")}>
+                              <CalendarClock className="h-3 w-3" />
+                              {formatDateTime(task.dueAt)}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="text-destructive hover:bg-destructive/10"
+                        onClick={() => onDelete(task)}
+                        aria-label={`Delete ${task.title}`}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </CardContent>
+          </Card>
+        ))}
+      </div>
 
       <EntityForm
         open={formOpen}
         onOpenChange={setFormOpen}
         title="New task"
+        description="Create a new task, call, or meeting"
         fields={fields}
         values={formValues}
         errors={formErrors}

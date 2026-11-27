@@ -34,6 +34,7 @@ import { EnrollDialog } from "@/components/enroll-dialog";
 import { MergeDialog } from "@/components/merge-dialog";
 import { findDuplicateCandidatesClient, type DuplicateCandidate } from "@/lib/duplicate-search";
 import { api, ApiError, validationDetails } from "@/lib/api-client";
+import { useToast } from "@/components/ui/toast";
 import { formatDate, formatDateTime, formatFileSize, timeAgo } from "@/lib/format";
 
 type Contact = {
@@ -105,10 +106,10 @@ export default function ContactDetailPage() {
   const [deals, setDeals] = useState<DealItem[]>([]);
   const [attachments, setAttachments] = useState<AttachmentItem[]>([]);
   const [error, setError] = useState("");
+  const { success: toastSuccess, error: toastError, warning: toastWarning } = useToast();
   const [notFound, setNotFound] = useState(false);
 
   const [noteBody, setNoteBody] = useState("");
-  const [noteError, setNoteError] = useState("");
   const [savingNote, setSavingNote] = useState(false);
   const [noteFile, setNoteFile] = useState<File | null>(null);
 
@@ -142,13 +143,21 @@ export default function ContactDetailPage() {
       companyName: contact.company?.name ?? "",
     })
       .then((found) => {
-        if (!cancelled) setDupes(found);
+        if (!cancelled) {
+          setDupes(found);
+          if (found.length > 0) {
+            toastWarning({
+              title: "Potential duplicates found",
+              description: found.length + " record" + (found.length === 1 ? "" : "s") + " may be the same person (best match: " + found[0].score + "%" + (found[0].email ? ", " + found[0].email : "") + ").",
+            });
+          }
+        }
       })
       .catch(() => undefined);
     return () => {
       cancelled = true;
     };
-  }, [contact]);
+  }, [contact, toastWarning]);
 
   const load = useCallback(async () => {
     try {
@@ -177,7 +186,7 @@ export default function ContactDetailPage() {
       void actsWithNotes;
     } catch (e) {
       if (e instanceof ApiError && e.status === 404) setNotFound(true);
-      else setError(e instanceof ApiError ? e.message : "Failed to load contact");
+      else toastError({ description: e instanceof ApiError ? e.message : "Failed to load contact" });
     }
   }, [id]);
 
@@ -187,11 +196,10 @@ export default function ContactDetailPage() {
 
   async function addNote() {
     if (!noteBody.trim()) {
-      setNoteError("Note cannot be empty");
+      toastError({ description: "Note cannot be empty" });
       return;
     }
     setSavingNote(true);
-    setNoteError("");
     try {
       if (noteFile) {
         const formData = new FormData();
@@ -216,8 +224,9 @@ export default function ContactDetailPage() {
       setNoteBody("");
       setNoteFile(null);
       await load();
+      toastSuccess({ description: "Note added" });
     } catch (e) {
-      setNoteError(e instanceof ApiError ? e.message : "Failed to save note");
+      toastError({ description: e instanceof ApiError ? e.message : "Failed to save note" });
     } finally {
       setSavingNote(false);
     }
@@ -283,8 +292,9 @@ export default function ContactDetailPage() {
       setActivityTitle("");
       setActivityDuration("");
       await load();
+      toastSuccess({ description: "Activity logged" });
     } catch (e) {
-      setNoteError(e instanceof ApiError ? e.message : "Failed to log activity");
+      toastError({ description: e instanceof ApiError ? e.message : "Failed to log activity" });
     } finally {
       setSubmitting(false);
     }
@@ -304,8 +314,10 @@ export default function ContactDetailPage() {
       });
       setEditOpen(false);
       await load();
+      toastSuccess({ description: "Contact updated" });
     } catch (e) {
       setFormErrors(validationDetails(e));
+      toastError({ description: e instanceof ApiError ? e.message : "Update failed" });
     } finally {
       setSubmitting(false);
     }
@@ -388,6 +400,16 @@ export default function ContactDetailPage() {
           >
             <Send className="h-4 w-4" /> Email
           </Button>
+          {dupes.length > 0 && (
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => setMergeOpen(true)}
+              className="border-warning/40 text-warning hover:bg-warning/10"
+            >
+              <Copy className="h-4 w-4 mr-1" /> Review duplicates ({dupes.length})
+            </Button>
+          )}
           <Button
             variant="outline"
             size="sm"
@@ -425,25 +447,8 @@ export default function ContactDetailPage() {
         onSent={() => void load()}
       />
 
-      {error && <p className="text-sm text-destructive" role="alert">{error}</p>}
 
-      {dupes.length > 0 && (
-        <div
-          className="flex flex-wrap items-center gap-3 rounded-md border border-warning/40 bg-warning/10 px-3 py-2"
-          role="status"
-        >
-          <Copy className="h-4 w-4 shrink-0 text-warning" />
-          <p className="min-w-0 flex-1 text-sm text-warning">
-            <strong>Duplicates found.</strong> {dupes.length} record
-            {dupes.length === 1 ? "" : "s"} may be the same person (best match:
-            {" "}{dupes[0].score}%
-            {dupes[0].email ? `, ${dupes[0].email}` : ""}).
-          </p>
-          <Button size="sm" variant="outline" onClick={() => setMergeOpen(true)}>
-            Review & merge
-          </Button>
-        </div>
-      )}
+
 
       <div className="grid gap-4 lg:grid-cols-3">
         <div className="space-y-4">
@@ -600,14 +605,18 @@ export default function ContactDetailPage() {
                 size="sm"
                 variant="outline"
                 onClick={async () => {
-                  await api.post("/api/tasks", {
-                    title: `Follow up with ${contact.firstName}`,
-                    type: "FOLLOW_UP",
-                    relatedType: "contact",
-                    relatedId: id,
-                  });
-                  setNoteError("");
-                  await load();
+                  try {
+                    await api.post("/api/tasks", {
+                      title: `Follow up with ${contact.firstName}`,
+                      type: "FOLLOW_UP",
+                      relatedType: "contact",
+                      relatedId: id,
+                    });
+                    await load();
+                    toastSuccess({ description: "Follow-up scheduled" });
+                  } catch (e) {
+                    toastError({ description: e instanceof ApiError ? e.message : "Failed to create task" });
+                  }
                 }}
               >
                 <Plus className="h-4 w-4" /> Schedule follow-up
@@ -669,11 +678,6 @@ export default function ContactDetailPage() {
                 onChange={(e) => setNoteBody(e.target.value)}
                 aria-label="Note body"
               />
-              {noteError && (
-                <p className="text-xs text-destructive" role="alert">
-                  {noteError}
-                </p>
-              )}
               <div className="flex items-center gap-2">
                 <input
                   type="file"
@@ -765,3 +769,4 @@ export default function ContactDetailPage() {
     </div>
   );
 }
+

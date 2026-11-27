@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
 import { api, ApiError } from "@/lib/api-client";
+import { useToast } from "@/components/ui/toast";
 import { formatDateTime, timeAgo } from "@/lib/format";
 
 type Company = {
@@ -43,7 +44,7 @@ export default function CompanyDetailPage() {
   const [company, setCompany] = useState<Company | null>(null);
   const [activities, setActivities] = useState<Activity[]>([]);
   const [notFound, setNotFound] = useState(false);
-  const [error, setError] = useState("");
+  const { error: toastError } = useToast();
 
   const load = useCallback(async () => {
     try {
@@ -53,7 +54,7 @@ export default function CompanyDetailPage() {
       setActivities(acts.activities);
     } catch (e) {
       if (e instanceof ApiError && e.status === 404) setNotFound(true);
-      else setError(e instanceof ApiError ? e.message : "Failed to load company");
+      else toastError({ description: e instanceof ApiError ? e.message : "Failed to load company" });
     }
   }, [id]);
 
@@ -98,7 +99,6 @@ export default function CompanyDetailPage() {
         </div>
       </div>
 
-      {error && <p className="text-sm text-destructive" role="alert">{error}</p>}
 
       <div className="grid gap-4 lg:grid-cols-3">
         <Card>
@@ -183,3 +183,4 @@ export default function CompanyDetailPage() {
     </div>
   );
 }
+

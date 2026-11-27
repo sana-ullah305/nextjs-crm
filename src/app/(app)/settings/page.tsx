@@ -14,6 +14,8 @@ import { EntityForm, type FieldDef, type FieldErrors } from "@/components/entity
 import { api, ApiError, validationDetails } from "@/lib/api-client";
 import { formatDateTime } from "@/lib/format";
 import { cn } from "@/lib/cn";
+import { useToast } from "@/components/ui/toast";
+import { useConfirmDialog } from "@/components/ui/confirm-dialog";
 
 type Org = { id: string; name: string; industry: string; website: string; phone: string; address: string; currency: string };
 type UserRow = {
@@ -87,8 +89,8 @@ const TAB_META: Record<Tab, { label: string; icon: React.ComponentType<{ classNa
 
 export default function SettingsPage() {
   const [tab, setTab] = useState<Tab>("organization");
-  const [error, setError] = useState("");
-  const [notice, setNotice] = useState("");
+  const { success: toastSuccess, error: toastError } = useToast();
+  const { confirm, ConfirmDialog } = useConfirmDialog();
   const [me, setMe] = useState<{ role: string } | null>(null);
 
   useEffect(() => {
@@ -119,9 +121,9 @@ export default function SettingsPage() {
         phone: org.phone,
         address: org.address,
       });
-      setNotice("Organization updated");
+      toastSuccess({ description: "Organization updated" });
     } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Save failed");
+      toastError({ description: e instanceof ApiError ? e.message : "Save failed" });
     } finally {
       setOrgSaving(false);
     }
@@ -150,9 +152,9 @@ export default function SettingsPage() {
         smtpUser: emailSettings.smtpUser,
         fromAddress: emailSettings.fromAddress,
       });
-      setNotice("Email settings updated");
+      toastSuccess({ description: "Email settings updated" });
     } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Save failed");
+      toastError({ description: e instanceof ApiError ? e.message : "Save failed" });
     } finally {
       setEmailSaving(false);
     }
@@ -182,25 +184,40 @@ export default function SettingsPage() {
       setUserFormOpen(false);
       setUserValues({});
       await loadUsers();
-      setNotice("User created");
+      toastSuccess({ description: "User created" });
     } catch (e) {
       setUserErrors(validationDetails(e));
+      toastError({ description: e instanceof ApiError ? e.message : "Update failed" });
     } finally {
       setUserSubmitting(false);
     }
   }
 
   async function toggleUser(u: UserRow) {
+    if (u.isActive) {
+      confirm({
+        title: "Deactivate user",
+        description: `Deactivate ${u.name}? They will lose access immediately.`,
+        variant: "destructive",
+        confirmText: "Deactivate",
+        onConfirm: async () => {
+          try {
+            await api.delete(`/api/users/${u.id}`);
+            toastSuccess({ description: `${u.name} deactivated` });
+            await loadUsers();
+          } catch (e) {
+            toastError({ description: e instanceof ApiError ? e.message : "Update failed" });
+          }
+        },
+      });
+      return;
+    }
     try {
-      if (u.isActive) {
-        if (!confirm(`Deactivate ${u.name}? They will lose access immediately.`)) return;
-        await api.delete(`/api/users/${u.id}`);
-      } else {
-        await api.patch(`/api/users/${u.id}`, { isActive: true });
-      }
+      await api.patch(`/api/users/${u.id}`, { isActive: true });
+      toastSuccess({ description: `${u.name} activated` });
       await loadUsers();
     } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Update failed");
+      toastError({ description: e instanceof ApiError ? e.message : "Update failed" });
     }
   }
 
@@ -208,9 +225,9 @@ export default function SettingsPage() {
     try {
       await api.patch(`/api/users/${u.id}`, { role });
       await loadUsers();
-      setNotice(`${u.name} is now ${role.replace("_", " ")}`);
+      toastSuccess({ description: `${u.name} is now ${role.replace("_", " ")}` });
     } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Role change failed");
+      toastError({ description: e instanceof ApiError ? e.message : "Role change failed" });
     }
   }
 
@@ -232,17 +249,19 @@ export default function SettingsPage() {
       await api.post("/api/settings/tags", { name: tagName.trim() });
       setTagName("");
       await loadTags();
+      toastSuccess({ description: "Tag added" });
     } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Failed to add tag");
+      toastError({ description: e instanceof ApiError ? e.message : "Failed to add tag" });
     }
   }
 
   async function deleteTag(id: string) {
     try {
       await api.delete(`/api/settings/tags/${id}`);
+      toastSuccess({ description: "Tag deleted" });
       await loadTags();
     } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Delete failed");
+      toastError({ description: e instanceof ApiError ? e.message : "Delete failed" });
     }
   }
 
@@ -264,17 +283,19 @@ export default function SettingsPage() {
       await api.post("/api/settings/lead-sources", { name: sourceName.trim() });
       setSourceName("");
       await loadSources();
+      toastSuccess({ description: "Source added" });
     } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Failed to add source");
+      toastError({ description: e instanceof ApiError ? e.message : "Failed to add source" });
     }
   }
 
   async function deleteSource(id: string) {
     try {
       await api.delete(`/api/settings/lead-sources/${id}`);
+      toastSuccess({ description: "Source deleted" });
       await loadSources();
     } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Cannot delete: source is in use");
+      toastError({ description: e instanceof ApiError ? e.message : "Cannot delete: source is in use" });
     }
   }
 
@@ -309,9 +330,9 @@ export default function SettingsPage() {
       setPipeFormOpen(false);
       setPipeValues({});
       await loadPipelines();
-      setNotice("Pipeline created");
+      toastSuccess({ description: "Pipeline created" });
     } catch (e) {
-      if (e instanceof ApiError) setError(e.message);
+      toastError({ description: e instanceof ApiError ? e.message : "Failed to create pipeline" });
     }
   }
 
@@ -319,8 +340,9 @@ export default function SettingsPage() {
     try {
       await api.patch(`/api/settings/pipelines/${id}`, { isDefault: true });
       await loadPipelines();
+      toastSuccess({ description: "Default pipeline updated" });
     } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Update failed");
+      toastError({ description: e instanceof ApiError ? e.message : "Update failed" });
     }
   }
 
@@ -335,13 +357,21 @@ export default function SettingsPage() {
   }, [tab, loadTemplates]);
 
   async function deleteTemplate(id: string) {
-    if (!confirm("Delete this template?")) return;
-    try {
-      await api.delete(`/api/settings/email-templates/${id}`);
-      await loadTemplates();
-    } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Delete failed");
-    }
+    confirm({
+      title: "Delete template",
+      description: "Delete this template?",
+      variant: "destructive",
+      confirmText: "Delete",
+      onConfirm: async () => {
+        try {
+          await api.delete(`/api/settings/email-templates/${id}`);
+          toastSuccess({ description: "Template deleted" });
+          await loadTemplates();
+        } catch (e) {
+          toastError({ description: e instanceof ApiError ? e.message : "Delete failed" });
+        }
+      },
+    });
   }
 
   // Custom fields
@@ -369,17 +399,20 @@ export default function SettingsPage() {
       setFieldOpen(false);
       setFieldValues({});
       await loadFields();
+      toastSuccess({ description: "Field created" });
     } catch (e) {
       setFieldErrors(validationDetails(e));
+      toastError({ description: e instanceof ApiError ? e.message : "Failed to create field" });
     }
   }
 
   async function deleteField(id: string) {
     try {
       await api.delete(`/api/settings/custom-fields/${id}`);
+      toastSuccess({ description: "Field deleted" });
       await loadFields();
     } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Delete failed");
+      toastError({ description: e instanceof ApiError ? e.message : "Delete failed" });
     }
   }
 
@@ -425,9 +458,10 @@ export default function SettingsPage() {
       setSeqName("");
       setSeqSteps([newStepRow()]);
       await loadSequences();
-      setNotice("Sequence created");
+      toastSuccess({ description: "Sequence created" });
     } catch (e) {
       setSeqErrors(validationDetails(e));
+      toastError({ description: e instanceof ApiError ? e.message : "Failed to create sequence" });
     } finally {
       setSeqSubmitting(false);
     }
@@ -437,24 +471,33 @@ export default function SettingsPage() {
     try {
       await api.patch(`/api/sequences/${s.id}`, { isActive: !s.isActive });
       await loadSequences();
+      toastSuccess({ description: `${s.name} ${!s.isActive ? "activated" : "deactivated"}` });
     } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Update failed");
+      toastError({ description: e instanceof ApiError ? e.message : "Update failed" });
     }
   }
 
   async function deleteSequence(s: Sequence) {
-    if (!confirm(`Delete sequence "${s.name}"?`)) return;
-    try {
-      const d = await api.delete<{ archived: boolean; deleted?: boolean }>(`/api/sequences/${s.id}`);
-      await loadSequences();
-      setNotice(
-        d.archived
-          ? `"${s.name}" has enrollments, so it was deactivated instead of deleted.`
-          : "Sequence deleted"
-      );
-    } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Delete failed");
-    }
+    confirm({
+      title: "Delete sequence",
+      description: `Delete sequence "${s.name}"?`,
+      variant: "destructive",
+      confirmText: "Delete",
+      onConfirm: async () => {
+        try {
+          const d = await api.delete<{ archived: boolean; deleted?: boolean }>(`/api/sequences/${s.id}`);
+          await loadSequences();
+          toastSuccess({
+            description:
+              d.archived
+                ? `"${s.name}" has enrollments, so it was deactivated instead of deleted.`
+                : "Sequence deleted",
+          });
+        } catch (e) {
+          toastError({ description: e instanceof ApiError ? e.message : "Delete failed" });
+        }
+      },
+    });
   }
 
   function openStepsEditor(s: Sequence) {
@@ -479,9 +522,10 @@ export default function SettingsPage() {
       await api.patch(`/api/sequences/${editingSteps.id}/steps`, { steps: stepsPayload(editSteps) });
       setEditingSteps(null);
       await loadSequences();
-      setNotice("Steps updated");
+      toastSuccess({ description: "Steps updated" });
     } catch (e) {
       setSeqErrors(validationDetails(e));
+      toastError({ description: e instanceof ApiError ? e.message : "Failed to update steps" });
     } finally {
       setSeqSubmitting(false);
     }
@@ -513,22 +557,30 @@ export default function SettingsPage() {
       setNewKey(d.key);
       setKeyName("");
       await loadApiKeys();
+      toastSuccess({ description: "API key created" });
     } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Failed to create key");
+      toastError({ description: e instanceof ApiError ? e.message : "Failed to create key" });
     } finally {
       setKeySubmitting(false);
     }
   }
 
   async function revokeApiKey(k: ApiKeyRow) {
-    if (!confirm(`Revoke key "${k.name}" (${k.prefix}…)? Leads submitted with it will be rejected.`)) return;
-    try {
-      await api.delete(`/api/settings/api-keys/${k.id}`);
-      await loadApiKeys();
-      setNotice("Key revoked");
-    } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Revoke failed");
-    }
+    confirm({
+      title: "Revoke API key",
+      description: `Revoke key "${k.name}" (${k.prefix}…)? Leads submitted with it will be rejected.`,
+      variant: "destructive",
+      confirmText: "Revoke",
+      onConfirm: async () => {
+        try {
+          await api.delete(`/api/settings/api-keys/${k.id}`);
+          await loadApiKeys();
+          toastSuccess({ description: "Key revoked" });
+        } catch (e) {
+          toastError({ description: e instanceof ApiError ? e.message : "Revoke failed" });
+        }
+      },
+    });
   }
 
   // Audit
@@ -563,21 +615,11 @@ export default function SettingsPage() {
 
   return (
     <div className="space-y-4">
+      {ConfirmDialog}
       <div>
         <h1 className="text-2xl font-bold">Settings</h1>
         <p className="text-sm text-muted-foreground">Workspace configuration</p>
       </div>
-
-      {notice && (
-        <p className="rounded-md border border-success/30 bg-success/10 px-3 py-2 text-sm text-success" role="status">
-          {notice}
-        </p>
-      )}
-      {error && (
-        <p className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive" role="alert">
-          {error}
-        </p>
-      )}
 
       <div className="flex flex-wrap gap-1.5" role="tablist" aria-label="Settings sections">
         {TABS.filter((t) => t !== "audit" || isAdmin || me?.role === "MANAGER").map((t) => {
@@ -587,11 +629,7 @@ export default function SettingsPage() {
               key={t}
               role="tab"
               aria-selected={tab === t}
-              onClick={() => {
-                setTab(t);
-                setNotice("");
-                setError("");
-              }}
+              onClick={() => setTab(t)}
               className={cn(
                 "inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium",
                 tab === t ? "bg-primary text-primary-foreground" : "bg-secondary text-secondary-foreground hover:bg-secondary/70"
@@ -1446,3 +1484,4 @@ export default function SettingsPage() {
     </div>
   );
 }
+

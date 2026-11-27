@@ -13,6 +13,8 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { EntityForm, type FieldDef, type FieldErrors } from "@/components/entity-form";
 import { api, ApiError, validationDetails } from "@/lib/api-client";
 import { formatDate } from "@/lib/format";
+import { useToast } from "@/components/ui/toast";
+import { useConfirm } from "@/components/ui/confirm-dialog";
 
 type Company = {
   id: string;
@@ -34,6 +36,8 @@ type Company = {
 type UserOption = { id: string; name: string };
 
 export default function CompaniesPage() {
+  const { success: toastSuccess, error: toastError } = useToast();
+  const { confirm } = useConfirm();
   const [companies, setCompanies] = useState<Company[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -110,26 +114,37 @@ export default function CompaniesPage() {
     try {
       if (editing) {
         await api.patch(`/api/companies/${editing.id}`, formValues);
+        toastSuccess({ description: "Company updated" });
       } else {
         await api.post("/api/companies", formValues);
+        toastSuccess({ description: "Company created" });
       }
       setFormOpen(false);
       await load();
     } catch (e) {
       setFormErrors(validationDetails(e));
+      toastError({ description: e instanceof ApiError ? e.message : "Save failed" });
     } finally {
       setSubmitting(false);
     }
   }
 
   async function onDelete(c: Company) {
-    if (!confirm(`Delete ${c.name}?`)) return;
-    try {
-      await api.delete(`/api/companies/${c.id}`);
-      await load();
-    } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Delete failed");
-    }
+    confirm({
+      title: "Delete company",
+      description: `Delete ${c.name}?`,
+      variant: "destructive",
+      confirmText: "Delete",
+      onConfirm: async () => {
+        try {
+          await api.delete(`/api/companies/${c.id}`);
+          toastSuccess({ description: "Company deleted" });
+          await load();
+        } catch (e) {
+          toastError({ description: e instanceof ApiError ? e.message : "Delete failed" });
+        }
+      },
+    });
   }
 
   const fields = useMemo<FieldDef[]>(
@@ -165,12 +180,6 @@ export default function CompaniesPage() {
         </Button>
       </div>
 
-      {error && (
-        <p className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive" role="alert">
-          {error}
-        </p>
-      )}
-
       <div className="relative max-w-md">
         <Search className="absolute top-1/2 left-2.5 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
@@ -201,97 +210,98 @@ export default function CompaniesPage() {
             action={
               !q ? (
                 <Button size="sm" onClick={openCreate}>
-                  <Plus className="h-4 w-4" /> New company
+                  <Plus className="h-4 w-4" /> Add company
                 </Button>
               ) : undefined
             }
           />
         ) : (
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Company</TableHead>
-                <TableHead className="hidden md:table-cell">Industry</TableHead>
-                <TableHead className="hidden lg:table-cell">Location</TableHead>
-                <TableHead>Contacts</TableHead>
-                <TableHead className="hidden md:table-cell">Owner</TableHead>
-                <TableHead className="hidden xl:table-cell">Created</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {companies.map((c) => (
-                <TableRow key={c.id}>
-                  <TableCell>
-                    <Link href={`/companies/${c.id}`} className="flex items-center gap-2.5 font-medium hover:underline">
-                      <span className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/10">
-                        <Building2 className="h-4 w-4 text-primary" />
-                      </span>
-                      <span>
-                        {c.name}
-                        <span className="block text-xs font-normal text-muted-foreground">{c.domain}</span>
-                      </span>
-                    </Link>
-                  </TableCell>
-                  <TableCell className="hidden text-sm md:table-cell">{c.industry || "—"}</TableCell>
-                  <TableCell className="hidden text-sm text-muted-foreground lg:table-cell">
-                    {[c.city, c.country].filter(Boolean).join(", ") || "—"}
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant="outline">
-                      <Users className="mr-1 h-3 w-3" /> {c.contactCount}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    {c.owner ? (
-                      <span className="flex items-center gap-1.5 text-sm">
-                        <Avatar name={c.owner.name} color={c.owner.avatarColor} size="sm" />
-                        {c.owner.name}
-                      </span>
-                    ) : (
-                      "—"
-                    )}
-                  </TableCell>
-                  <TableCell className="hidden text-sm text-muted-foreground xl:table-cell">
-                    {formatDate(c.createdAt)}
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <div className="flex justify-end gap-1">
-                      <Button variant="ghost" size="icon" aria-label={`Edit ${c.name}`} onClick={() => openEdit(c)}>
-                        <Pencil className="h-3.5 w-3.5" />
-                      </Button>
-                      <Button variant="ghost" size="icon" aria-label={`Delete ${c.name}`} onClick={() => void onDelete(c)}>
-                        <Trash2 className="h-3.5 w-3.5 text-destructive" />
-                      </Button>
-                    </div>
-                  </TableCell>
+          <>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Name</TableHead>
+                  <TableHead className="hidden md:table-cell">Domain</TableHead>
+                  <TableHead className="hidden lg:table-cell">Industry</TableHead>
+                  <TableHead className="hidden xl:table-cell">Contacts</TableHead>
+                  <TableHead className="hidden xl:table-cell">Deals</TableHead>
+                  <TableHead className="hidden lg:table-cell">Owner</TableHead>
+                  <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {companies.map((c) => (
+                  <TableRow key={c.id}>
+                    <TableCell>
+                      <Link href={`/companies/${c.id}`} className="font-medium hover:underline">
+                        {c.name}
+                      </Link>
+                    </TableCell>
+                    <TableCell className="hidden text-sm text-muted-foreground md:table-cell">
+                      {c.domain || "—"}
+                    </TableCell>
+                    <TableCell className="hidden lg:table-cell">{c.industry || "—"}</TableCell>
+                    <TableCell className="hidden text-sm xl:table-cell">{c.contactCount}</TableCell>
+                    <TableCell className="hidden text-sm xl:table-cell">{c.dealCount}</TableCell>
+                    <TableCell className="hidden lg:table-cell">
+                      {c.owner ? (
+                        <span className="flex items-center gap-1.5 text-sm">
+                          <Avatar name={c.owner.name} color={c.owner.avatarColor} size="sm" />
+                          {c.owner.name}
+                        </span>
+                      ) : (
+                        "—"
+                      )}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <div className="flex justify-end gap-1">
+                        <Button variant="ghost" size="icon" aria-label={`Edit ${c.name}`} onClick={() => openEdit(c)}>
+                          <Pencil className="h-3.5 w-3.5" />
+                        </Button>
+                        <Button variant="ghost" size="icon" aria-label={`Delete ${c.name}`} onClick={() => onDelete(c)}>
+                          <Trash2 className="h-3.5 w-3.5 text-destructive" />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+
+            {total > pageSize && (
+              <div className="flex items-center justify-between border-t border-border p-4">
+                <p className="text-sm text-muted-foreground">
+                  Page {page} of {totalPages} · {total} total
+                </p>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    disabled={page === 1}
+                    onClick={() => setPage((p) => p - 1)}
+                  >
+                    Previous
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    disabled={page === totalPages}
+                    onClick={() => setPage((p) => p + 1)}
+                  >
+                    Next
+                  </Button>
+                </div>
+              </div>
+            )}
+          </>
         )}
       </Card>
-
-      {totalPages > 1 && (
-        <div className="flex items-center justify-between text-sm text-muted-foreground">
-          <span>
-            Page {page} of {totalPages}
-          </span>
-          <div className="flex gap-2">
-            <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => setPage((p) => p - 1)}>
-              Previous
-            </Button>
-            <Button variant="outline" size="sm" disabled={page >= totalPages} onClick={() => setPage((p) => p + 1)}>
-              Next
-            </Button>
-          </div>
-        </div>
-      )}
 
       <EntityForm
         open={formOpen}
         onOpenChange={setFormOpen}
         title={editing ? "Edit company" : "New company"}
+        description={editing ? `Editing ${editing.name}` : "Create a new company record"}
         fields={fields}
         values={formValues}
         errors={formErrors}

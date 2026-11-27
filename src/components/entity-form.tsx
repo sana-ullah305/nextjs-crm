@@ -1,4 +1,5 @@
 import { cn } from "@/lib/cn";
+import { AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -103,6 +104,7 @@ export type EntityFormProps = {
   errors?: FieldErrors;
   submitting?: boolean;
   submitLabel?: string;
+  warning?: string;
   onChange: (name: string, value: string) => void;
   onSubmit: (e: React.FormEvent) => void;
 };
@@ -117,6 +119,7 @@ export function EntityForm({
   errors = {},
   submitting = false,
   submitLabel = "Save",
+  warning,
   onChange,
   onSubmit,
 }: EntityFormProps) {
@@ -128,6 +131,12 @@ export function EntityForm({
             <DialogTitle>{title}</DialogTitle>
             {description && <DialogDescription>{description}</DialogDescription>}
           </DialogHeader>
+          {warning && (
+            <div className="flex gap-3 rounded-md border border-warning/40 bg-warning/10 p-3" role="alert">
+              <AlertTriangle className="h-5 w-5 shrink-0 text-warning mt-0.5" />
+              <p className="text-sm text-warning">{warning}</p>
+            </div>
+          )}
           <div className="grid gap-4 sm:grid-cols-2">
             {fields.map((f) => (
               <FormField

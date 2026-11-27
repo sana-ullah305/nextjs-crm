@@ -10,6 +10,7 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { api, ApiError } from "@/lib/api-client";
 import { formatDateTime, timeAgo } from "@/lib/format";
 import { cn } from "@/lib/cn";
+import { useToast } from "@/components/ui/toast";
 
 type InboundRow = {
   id: string;
@@ -32,6 +33,7 @@ const FILTERS: { label: string; value: Filter }[] = [
 ];
 
 export default function InboxPage() {
+  const { error: toastError } = useToast();
   const [rows, setRows] = useState<InboundRow[]>([]);
   const [total, setTotal] = useState(0);
   const [filter, setFilter] = useState<Filter>("UNREAD");
@@ -42,18 +44,20 @@ export default function InboxPage() {
     setLoading(true);
     setError("");
     try {
-      const query = filter === "ALL" ? "" : `status=${filter}&`;
+      const query = filter === "ALL" ? "" : "status=" + filter + "&";
       const data = await api.get<{ emails: InboundRow[]; total: number }>(
-        `/api/inbound?${query}pageSize=50`
+        "/api/inbound?" + query + "pageSize=50"
       );
       setRows(data.emails);
       setTotal(data.total);
     } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Failed to load replies");
+      const message = e instanceof ApiError ? e.message : "Failed to load replies";
+      setError(message);
+      toastError({ description: message });
     } finally {
       setLoading(false);
     }
-  }, [filter]);
+  }, [filter, toastError]);
 
   useEffect(() => {
     void load();
@@ -64,7 +68,9 @@ export default function InboxPage() {
       await api.post("/api/inbound", { ids: [id] });
       await load();
     } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Failed to mark as read");
+      const message = e instanceof ApiError ? e.message : "Failed to mark as read";
+      setError(message);
+      toastError({ description: message });
     }
   }
 
@@ -97,15 +103,6 @@ export default function InboxPage() {
         </div>
       </div>
 
-      {error && (
-        <p
-          className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive"
-          role="alert"
-        >
-          {error}
-        </p>
-      )}
-
       <Card>
         {loading ? (
           <div className="space-y-2 p-4">
@@ -124,11 +121,11 @@ export default function InboxPage() {
           <ul className="divide-y divide-border">
             {rows.map((r) => {
               const linked = r.contact
-                ? { href: `/contacts/${r.contact.id}`, label: `${r.contact.firstName} ${r.contact.lastName}` }
+                ? { href: "/contacts/" + r.contact.id, label: r.contact.firstName + " " + r.contact.lastName }
                 : r.lead
                   ? {
-                      href: `/leads?q=${encodeURIComponent(`${r.lead.firstName} ${r.lead.lastName}`)}`,
-                      label: `${r.lead.firstName} ${r.lead.lastName}`,
+                      href: "/leads?q=" + encodeURIComponent(r.lead.firstName + " " + r.lead.lastName),
+                      label: r.lead.firstName + " " + r.lead.lastName,
                     }
                   : null;
               return (
