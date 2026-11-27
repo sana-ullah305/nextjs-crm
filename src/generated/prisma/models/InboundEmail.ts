@@ -734,6 +734,7 @@ export type InboundEmailCreateOrConnectWithoutOrganizationInput = {
 
 export type InboundEmailCreateManyOrganizationInputEnvelope = {
   data: Prisma.InboundEmailCreateManyOrganizationInput | Prisma.InboundEmailCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type InboundEmailUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -811,6 +812,7 @@ export type InboundEmailCreateOrConnectWithoutContactInput = {
 
 export type InboundEmailCreateManyContactInputEnvelope = {
   data: Prisma.InboundEmailCreateManyContactInput | Prisma.InboundEmailCreateManyContactInput[]
+  skipDuplicates?: boolean
 }
 
 export type InboundEmailUpsertWithWhereUniqueWithoutContactInput = {
@@ -868,6 +870,7 @@ export type InboundEmailCreateOrConnectWithoutLeadInput = {
 
 export type InboundEmailCreateManyLeadInputEnvelope = {
   data: Prisma.InboundEmailCreateManyLeadInput | Prisma.InboundEmailCreateManyLeadInput[]
+  skipDuplicates?: boolean
 }
 
 export type InboundEmailUpsertWithWhereUniqueWithoutLeadInput = {
@@ -925,6 +928,7 @@ export type InboundEmailCreateOrConnectWithoutSentEmailInput = {
 
 export type InboundEmailCreateManySentEmailInputEnvelope = {
   data: Prisma.InboundEmailCreateManySentEmailInput | Prisma.InboundEmailCreateManySentEmailInput[]
+  skipDuplicates?: boolean
 }
 
 export type InboundEmailUpsertWithWhereUniqueWithoutSentEmailInput = {
@@ -1999,6 +2003,7 @@ export type InboundEmailCreateManyArgs<ExtArgs extends runtime.Types.Extensions.
    * The data used to create many InboundEmails.
    */
   data: Prisma.InboundEmailCreateManyInput | Prisma.InboundEmailCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -2017,6 +2022,7 @@ export type InboundEmailCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ex
    * The data used to create many InboundEmails.
    */
   data: Prisma.InboundEmailCreateManyInput | Prisma.InboundEmailCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

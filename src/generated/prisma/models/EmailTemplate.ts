@@ -482,6 +482,7 @@ export type EmailTemplateCreateOrConnectWithoutOrganizationInput = {
 
 export type EmailTemplateCreateManyOrganizationInputEnvelope = {
   data: Prisma.EmailTemplateCreateManyOrganizationInput | Prisma.EmailTemplateCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type EmailTemplateUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -1391,6 +1392,7 @@ export type EmailTemplateCreateManyArgs<ExtArgs extends runtime.Types.Extensions
    * The data used to create many EmailTemplates.
    */
   data: Prisma.EmailTemplateCreateManyInput | Prisma.EmailTemplateCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1409,6 +1411,7 @@ export type EmailTemplateCreateManyAndReturnArgs<ExtArgs extends runtime.Types.E
    * The data used to create many EmailTemplates.
    */
   data: Prisma.EmailTemplateCreateManyInput | Prisma.EmailTemplateCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

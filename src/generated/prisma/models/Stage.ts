@@ -512,6 +512,7 @@ export type StageCreateOrConnectWithoutPipelineInput = {
 
 export type StageCreateManyPipelineInputEnvelope = {
   data: Prisma.StageCreateManyPipelineInput | Prisma.StageCreateManyPipelineInput[]
+  skipDuplicates?: boolean
 }
 
 export type StageUpsertWithWhereUniqueWithoutPipelineInput = {
@@ -1406,6 +1407,7 @@ export type StageCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * The data used to create many Stages.
    */
   data: Prisma.StageCreateManyInput | Prisma.StageCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1424,6 +1426,7 @@ export type StageCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extension
    * The data used to create many Stages.
    */
   data: Prisma.StageCreateManyInput | Prisma.StageCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

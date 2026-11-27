@@ -788,6 +788,7 @@ export type NoteCreateOrConnectWithoutOrganizationInput = {
 
 export type NoteCreateManyOrganizationInputEnvelope = {
   data: Prisma.NoteCreateManyOrganizationInput | Prisma.NoteCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type NoteUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -856,6 +857,7 @@ export type NoteCreateOrConnectWithoutUserInput = {
 
 export type NoteCreateManyUserInputEnvelope = {
   data: Prisma.NoteCreateManyUserInput | Prisma.NoteCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type NoteUpsertWithWhereUniqueWithoutUserInput = {
@@ -907,6 +909,7 @@ export type NoteCreateOrConnectWithoutCompanyInput = {
 
 export type NoteCreateManyCompanyInputEnvelope = {
   data: Prisma.NoteCreateManyCompanyInput | Prisma.NoteCreateManyCompanyInput[]
+  skipDuplicates?: boolean
 }
 
 export type NoteUpsertWithWhereUniqueWithoutCompanyInput = {
@@ -958,6 +961,7 @@ export type NoteCreateOrConnectWithoutContactInput = {
 
 export type NoteCreateManyContactInputEnvelope = {
   data: Prisma.NoteCreateManyContactInput | Prisma.NoteCreateManyContactInput[]
+  skipDuplicates?: boolean
 }
 
 export type NoteUpsertWithWhereUniqueWithoutContactInput = {
@@ -1009,6 +1013,7 @@ export type NoteCreateOrConnectWithoutLeadInput = {
 
 export type NoteCreateManyLeadInputEnvelope = {
   data: Prisma.NoteCreateManyLeadInput | Prisma.NoteCreateManyLeadInput[]
+  skipDuplicates?: boolean
 }
 
 export type NoteUpsertWithWhereUniqueWithoutLeadInput = {
@@ -1060,6 +1065,7 @@ export type NoteCreateOrConnectWithoutDealInput = {
 
 export type NoteCreateManyDealInputEnvelope = {
   data: Prisma.NoteCreateManyDealInput | Prisma.NoteCreateManyDealInput[]
+  skipDuplicates?: boolean
 }
 
 export type NoteUpsertWithWhereUniqueWithoutDealInput = {
@@ -1111,6 +1117,7 @@ export type NoteCreateOrConnectWithoutTaskInput = {
 
 export type NoteCreateManyTaskInputEnvelope = {
   data: Prisma.NoteCreateManyTaskInput | Prisma.NoteCreateManyTaskInput[]
+  skipDuplicates?: boolean
 }
 
 export type NoteUpsertWithWhereUniqueWithoutTaskInput = {
@@ -2299,6 +2306,7 @@ export type NoteCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * The data used to create many Notes.
    */
   data: Prisma.NoteCreateManyInput | Prisma.NoteCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -2317,6 +2325,7 @@ export type NoteCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * The data used to create many Notes.
    */
   data: Prisma.NoteCreateManyInput | Prisma.NoteCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

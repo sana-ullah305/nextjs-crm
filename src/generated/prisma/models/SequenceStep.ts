@@ -512,6 +512,7 @@ export type SequenceStepCreateOrConnectWithoutSequenceInput = {
 
 export type SequenceStepCreateManySequenceInputEnvelope = {
   data: Prisma.SequenceStepCreateManySequenceInput | Prisma.SequenceStepCreateManySequenceInput[]
+  skipDuplicates?: boolean
 }
 
 export type SequenceStepUpsertWithWhereUniqueWithoutSequenceInput = {
@@ -1406,6 +1407,7 @@ export type SequenceStepCreateManyArgs<ExtArgs extends runtime.Types.Extensions.
    * The data used to create many SequenceSteps.
    */
   data: Prisma.SequenceStepCreateManyInput | Prisma.SequenceStepCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1424,6 +1426,7 @@ export type SequenceStepCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ex
    * The data used to create many SequenceSteps.
    */
   data: Prisma.SequenceStepCreateManyInput | Prisma.SequenceStepCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

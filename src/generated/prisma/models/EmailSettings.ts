@@ -1218,6 +1218,7 @@ export type EmailSettingsCreateManyArgs<ExtArgs extends runtime.Types.Extensions
    * The data used to create many EmailSettings.
    */
   data: Prisma.EmailSettingsCreateManyInput | Prisma.EmailSettingsCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1236,6 +1237,7 @@ export type EmailSettingsCreateManyAndReturnArgs<ExtArgs extends runtime.Types.E
    * The data used to create many EmailSettings.
    */
   data: Prisma.EmailSettingsCreateManyInput | Prisma.EmailSettingsCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

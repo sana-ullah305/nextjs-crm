@@ -544,6 +544,7 @@ export type ApiKeyCreateOrConnectWithoutOrganizationInput = {
 
 export type ApiKeyCreateManyOrganizationInputEnvelope = {
   data: Prisma.ApiKeyCreateManyOrganizationInput | Prisma.ApiKeyCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type ApiKeyUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -609,6 +610,7 @@ export type ApiKeyCreateOrConnectWithoutCreatedByInput = {
 
 export type ApiKeyCreateManyCreatedByInputEnvelope = {
   data: Prisma.ApiKeyCreateManyCreatedByInput | Prisma.ApiKeyCreateManyCreatedByInput[]
+  skipDuplicates?: boolean
 }
 
 export type ApiKeyUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -1483,6 +1485,7 @@ export type ApiKeyCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * The data used to create many ApiKeys.
    */
   data: Prisma.ApiKeyCreateManyInput | Prisma.ApiKeyCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1501,6 +1504,7 @@ export type ApiKeyCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    * The data used to create many ApiKeys.
    */
   data: Prisma.ApiKeyCreateManyInput | Prisma.ApiKeyCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

@@ -856,6 +856,7 @@ export type SequenceEnrollmentCreateOrConnectWithoutOrganizationInput = {
 
 export type SequenceEnrollmentCreateManyOrganizationInputEnvelope = {
   data: Prisma.SequenceEnrollmentCreateManyOrganizationInput | Prisma.SequenceEnrollmentCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type SequenceEnrollmentUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -935,6 +936,7 @@ export type SequenceEnrollmentCreateOrConnectWithoutResponderInput = {
 
 export type SequenceEnrollmentCreateManyResponderInputEnvelope = {
   data: Prisma.SequenceEnrollmentCreateManyResponderInput | Prisma.SequenceEnrollmentCreateManyResponderInput[]
+  skipDuplicates?: boolean
 }
 
 export type SequenceEnrollmentUpsertWithWhereUniqueWithoutResponderInput = {
@@ -994,6 +996,7 @@ export type SequenceEnrollmentCreateOrConnectWithoutContactInput = {
 
 export type SequenceEnrollmentCreateManyContactInputEnvelope = {
   data: Prisma.SequenceEnrollmentCreateManyContactInput | Prisma.SequenceEnrollmentCreateManyContactInput[]
+  skipDuplicates?: boolean
 }
 
 export type SequenceEnrollmentUpsertWithWhereUniqueWithoutContactInput = {
@@ -1053,6 +1056,7 @@ export type SequenceEnrollmentCreateOrConnectWithoutLeadInput = {
 
 export type SequenceEnrollmentCreateManyLeadInputEnvelope = {
   data: Prisma.SequenceEnrollmentCreateManyLeadInput | Prisma.SequenceEnrollmentCreateManyLeadInput[]
+  skipDuplicates?: boolean
 }
 
 export type SequenceEnrollmentUpsertWithWhereUniqueWithoutLeadInput = {
@@ -1112,6 +1116,7 @@ export type SequenceEnrollmentCreateOrConnectWithoutSequenceInput = {
 
 export type SequenceEnrollmentCreateManySequenceInputEnvelope = {
   data: Prisma.SequenceEnrollmentCreateManySequenceInput | Prisma.SequenceEnrollmentCreateManySequenceInput[]
+  skipDuplicates?: boolean
 }
 
 export type SequenceEnrollmentUpsertWithWhereUniqueWithoutSequenceInput = {
@@ -2387,6 +2392,7 @@ export type SequenceEnrollmentCreateManyArgs<ExtArgs extends runtime.Types.Exten
    * The data used to create many SequenceEnrollments.
    */
   data: Prisma.SequenceEnrollmentCreateManyInput | Prisma.SequenceEnrollmentCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -2405,6 +2411,7 @@ export type SequenceEnrollmentCreateManyAndReturnArgs<ExtArgs extends runtime.Ty
    * The data used to create many SequenceEnrollments.
    */
   data: Prisma.SequenceEnrollmentCreateManyInput | Prisma.SequenceEnrollmentCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

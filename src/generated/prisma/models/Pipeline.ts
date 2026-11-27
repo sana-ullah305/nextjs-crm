@@ -431,6 +431,7 @@ export type PipelineCreateOrConnectWithoutOrganizationInput = {
 
 export type PipelineCreateManyOrganizationInputEnvelope = {
   data: Prisma.PipelineCreateManyOrganizationInput | Prisma.PipelineCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type PipelineUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -1366,6 +1367,7 @@ export type PipelineCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * The data used to create many Pipelines.
    */
   data: Prisma.PipelineCreateManyInput | Prisma.PipelineCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1384,6 +1386,7 @@ export type PipelineCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extens
    * The data used to create many Pipelines.
    */
   data: Prisma.PipelineCreateManyInput | Prisma.PipelineCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

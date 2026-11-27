@@ -382,6 +382,7 @@ export type SequenceStepEnrollmentCreateOrConnectWithoutStepInput = {
 
 export type SequenceStepEnrollmentCreateManyStepInputEnvelope = {
   data: Prisma.SequenceStepEnrollmentCreateManyStepInput | Prisma.SequenceStepEnrollmentCreateManyStepInput[]
+  skipDuplicates?: boolean
 }
 
 export type SequenceStepEnrollmentUpsertWithWhereUniqueWithoutStepInput = {
@@ -426,6 +427,7 @@ export type SequenceStepEnrollmentCreateOrConnectWithoutEnrollmentInput = {
 
 export type SequenceStepEnrollmentCreateManyEnrollmentInputEnvelope = {
   data: Prisma.SequenceStepEnrollmentCreateManyEnrollmentInput | Prisma.SequenceStepEnrollmentCreateManyEnrollmentInput[]
+  skipDuplicates?: boolean
 }
 
 export type SequenceStepEnrollmentUpsertWithWhereUniqueWithoutEnrollmentInput = {
@@ -1202,6 +1204,7 @@ export type SequenceStepEnrollmentCreateManyArgs<ExtArgs extends runtime.Types.E
    * The data used to create many SequenceStepEnrollments.
    */
   data: Prisma.SequenceStepEnrollmentCreateManyInput | Prisma.SequenceStepEnrollmentCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1220,6 +1223,7 @@ export type SequenceStepEnrollmentCreateManyAndReturnArgs<ExtArgs extends runtim
    * The data used to create many SequenceStepEnrollments.
    */
   data: Prisma.SequenceStepEnrollmentCreateManyInput | Prisma.SequenceStepEnrollmentCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

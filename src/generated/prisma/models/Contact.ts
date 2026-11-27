@@ -1079,6 +1079,7 @@ export type ContactCreateOrConnectWithoutOrganizationInput = {
 
 export type ContactCreateManyOrganizationInputEnvelope = {
   data: Prisma.ContactCreateManyOrganizationInput | Prisma.ContactCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type ContactUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -1193,6 +1194,7 @@ export type ContactCreateOrConnectWithoutOwnerInput = {
 
 export type ContactCreateManyOwnerInputEnvelope = {
   data: Prisma.ContactCreateManyOwnerInput | Prisma.ContactCreateManyOwnerInput[]
+  skipDuplicates?: boolean
 }
 
 export type ContactUpsertWithWhereUniqueWithoutOwnerInput = {
@@ -1280,6 +1282,7 @@ export type ContactCreateOrConnectWithoutCompanyInput = {
 
 export type ContactCreateManyCompanyInputEnvelope = {
   data: Prisma.ContactCreateManyCompanyInput | Prisma.ContactCreateManyCompanyInput[]
+  skipDuplicates?: boolean
 }
 
 export type ContactUpsertWithWhereUniqueWithoutCompanyInput = {
@@ -3731,6 +3734,7 @@ export type ContactCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * The data used to create many Contacts.
    */
   data: Prisma.ContactCreateManyInput | Prisma.ContactCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -3749,6 +3753,7 @@ export type ContactCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensi
    * The data used to create many Contacts.
    */
   data: Prisma.ContactCreateManyInput | Prisma.ContactCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

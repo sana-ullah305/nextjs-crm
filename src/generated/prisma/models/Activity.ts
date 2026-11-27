@@ -912,6 +912,7 @@ export type ActivityCreateOrConnectWithoutOrganizationInput = {
 
 export type ActivityCreateManyOrganizationInputEnvelope = {
   data: Prisma.ActivityCreateManyOrganizationInput | Prisma.ActivityCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type ActivityUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -989,6 +990,7 @@ export type ActivityCreateOrConnectWithoutUserInput = {
 
 export type ActivityCreateManyUserInputEnvelope = {
   data: Prisma.ActivityCreateManyUserInput | Prisma.ActivityCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type ActivityUpsertWithWhereUniqueWithoutUserInput = {
@@ -1046,6 +1048,7 @@ export type ActivityCreateOrConnectWithoutCompanyInput = {
 
 export type ActivityCreateManyCompanyInputEnvelope = {
   data: Prisma.ActivityCreateManyCompanyInput | Prisma.ActivityCreateManyCompanyInput[]
+  skipDuplicates?: boolean
 }
 
 export type ActivityUpsertWithWhereUniqueWithoutCompanyInput = {
@@ -1103,6 +1106,7 @@ export type ActivityCreateOrConnectWithoutContactInput = {
 
 export type ActivityCreateManyContactInputEnvelope = {
   data: Prisma.ActivityCreateManyContactInput | Prisma.ActivityCreateManyContactInput[]
+  skipDuplicates?: boolean
 }
 
 export type ActivityUpsertWithWhereUniqueWithoutContactInput = {
@@ -1160,6 +1164,7 @@ export type ActivityCreateOrConnectWithoutLeadInput = {
 
 export type ActivityCreateManyLeadInputEnvelope = {
   data: Prisma.ActivityCreateManyLeadInput | Prisma.ActivityCreateManyLeadInput[]
+  skipDuplicates?: boolean
 }
 
 export type ActivityUpsertWithWhereUniqueWithoutLeadInput = {
@@ -1217,6 +1222,7 @@ export type ActivityCreateOrConnectWithoutDealInput = {
 
 export type ActivityCreateManyDealInputEnvelope = {
   data: Prisma.ActivityCreateManyDealInput | Prisma.ActivityCreateManyDealInput[]
+  skipDuplicates?: boolean
 }
 
 export type ActivityUpsertWithWhereUniqueWithoutDealInput = {
@@ -1274,6 +1280,7 @@ export type ActivityCreateOrConnectWithoutTaskInput = {
 
 export type ActivityCreateManyTaskInputEnvelope = {
   data: Prisma.ActivityCreateManyTaskInput | Prisma.ActivityCreateManyTaskInput[]
+  skipDuplicates?: boolean
 }
 
 export type ActivityUpsertWithWhereUniqueWithoutTaskInput = {
@@ -2564,6 +2571,7 @@ export type ActivityCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * The data used to create many Activities.
    */
   data: Prisma.ActivityCreateManyInput | Prisma.ActivityCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -2582,6 +2590,7 @@ export type ActivityCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extens
    * The data used to create many Activities.
    */
   data: Prisma.ActivityCreateManyInput | Prisma.ActivityCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */
