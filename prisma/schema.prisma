@@ -38,6 +38,7 @@ model Organization {
   sentEmails          SentEmail[]
   inboundEmails       InboundEmail[]
   reminders           FollowUpReminder[]
+  sequenceDeadLetters SequenceDeadLetter[]
   apiKeys             ApiKey[]
   sequences           Sequence[]
   sequenceEnrollments SequenceEnrollment[]
@@ -676,6 +677,7 @@ model SequenceEnrollment {
   lead         Lead?                    @relation("SequenceEnrollmentLead", fields: [leadId], references: [id], onDelete: SetNull)
   responder    User?                    @relation("SequenceEnrollmentResponder", fields: [responderUserId], references: [id], onDelete: SetNull)
   steps        SequenceStepEnrollment[]
+  deadLetters    SequenceDeadLetter[]
 
   @@unique([sequenceId, contactId])
   @@unique([sequenceId, leadId])
@@ -699,3 +701,28 @@ model SequenceStepEnrollment {
   @@unique([stepId, enrollmentId])
   @@index([enrollmentId])
 }
+
+
+// Dead-letter record for a sequence step that failed every send retry.
+// Operators inspect these to diagnose broken sends (SMTP, DNS, bounces, ...)
+// and re-enroll the record once the underlying issue is fixed.
+model SequenceDeadLetter {
+  id            String   @id @default(cuid())
+  organizationId String
+  sequenceId    String
+  enrollmentId  String
+  contactId     String?
+  leadId        String?
+  stepId        String
+  stepPosition  Int
+  attempts      Int      @default(0)
+  lastError     String   @default("")
+  createdAt     DateTime @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  enrollment   SequenceEnrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, createdAt])
+  @@index([enrollmentId])
+}
+

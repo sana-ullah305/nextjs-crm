@@ -543,7 +543,7 @@ describe("sequence scan scheduler", () => {
     expect(after2?.nextSendAt).toBeNull();
   });
 
-  it("marks the enrollment STOPPED with reason send_failed on mailer failure (no retry)", async () => {
+  it("marks the enrollment STOPPED and dead-letters the step after send retries exhaust", async () => {
     // Point the transporter at a closed port to force a real send failure.
     const seqOrgSettings = await db.emailSettings.findUnique({ where: { organizationId: orgId } });
     await db.emailSettings.update({
@@ -570,10 +570,18 @@ describe("sequence scan scheduler", () => {
 
     const run = await runSequenceScan();
     expect(run.stopped).toBeGreaterThanOrEqual(1);
+    expect(run.deadLettered).toBeGreaterThanOrEqual(1);
     const stored = await db.sequenceEnrollment.findUnique({ where: { id: enrollment.id } });
     expect(stored?.status).toBe("STOPPED");
     expect(stored?.stoppedReason).toMatch(/^send_failed: /);
     expect(stored?.nextSendAt).toBeNull();
+
+    const deadLetters = await db.sequenceDeadLetter.findMany({
+      where: { enrollmentId: enrollment.id },
+    });
+    expect(deadLetters).toHaveLength(1);
+    expect(deadLetters[0].attempts).toBe(1 + 3); // 1 initial + 3 retries
+    expect(deadLetters[0].lastError.length).toBeGreaterThan(0);
 
     // Restore settings for later tests.
     await db.emailSettings.update({
@@ -581,7 +589,7 @@ describe("sequence scan scheduler", () => {
       data: { smtpHost: seqOrgSettings!.smtpHost, smtpPort: seqOrgSettings!.smtpPort },
     });
     invalidateTransporterCache(orgId);
-  });
+  }, 15000);
 
   it("stops with 'step missing' when the enrolled step no longer exists", async () => {
     const sequence = await createSequence();

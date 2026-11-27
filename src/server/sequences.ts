@@ -1,5 +1,5 @@
 import { db } from "@/server/db";
-import { sendEmail, renderTemplate, EmailConfigError, EmailSendError } from "@/server/mailer";
+import { sendEmail, renderTemplate } from "@/server/mailer";
 import type { SessionUser } from "@/server/auth";
 
 /**
@@ -39,10 +39,61 @@ const SCAN_BATCH_LIMIT = 500;
 // invisible to concurrent scans until its owner finishes the step.
 const CLAIMED_SENTINEL = new Date("9999-12-31T23:59:59.999Z");
 
+/***************************************************************
+ * Send retries + dead letters
+ *
+ * A step send that fails is retried with exponential backoff (up to
+ * MAX_SEND_RETRIES retries). When every attempt is exhausted the step is
+ * recorded in SequenceDeadLetter for operator review and the enrollment is
+ * stopped — the scan never crashes or silently drops a single bad step.
+ ***************************************************************/
+
+/** One initial attempt plus this many retries (max 3 retries total). */
+export const MAX_SEND_RETRIES = 3;
+/** Base delay (ms) for exponential backoff: base, base*2, base*4, ... */
+export const SEND_BACKOFF_BASE_MS = 1_000;
+
+export function computeBackoffMs(attempt: number): number {
+  return SEND_BACKOFF_BASE_MS * 2 ** (attempt - 1);
+}
+
+export async function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+type SendOutcome =
+  | { ok: true }
+  | { ok: false; attempts: number; lastError: string };
+
+/**
+ * Send with exponential backoff. Every send failure is retried up to
+ * MAX_SEND_RETRIES times — a transient SMTP outage shouldn't kill an
+ * enrollment, and an operator may fix SMTP mid-scan. When all attempts are
+ * exhausted the caller dead-letters the step and stops the enrollment.
+ */
+async function sendWithRetry(
+  params: Parameters<typeof sendEmail>[0]
+): Promise<SendOutcome> {
+  let lastError = "unknown send error";
+  const maxAttempts = 1 + MAX_SEND_RETRIES;
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      await sendEmail(params);
+      return { ok: true };
+    } catch (err) {
+      lastError = err instanceof Error ? err.message : String(err);
+      if (attempt === maxAttempts) break;
+      await sleep(computeBackoffMs(attempt));
+    }
+  }
+  return { ok: false, attempts: maxAttempts, lastError };
+}
+
 export type SequenceRunResult = {
   sent: number;
   completed: number;
   stopped: number;
+  deadLettered: number;
   scannedAt: string;
 };
 
@@ -183,6 +234,7 @@ export async function runSequenceScan(now: Date = new Date()): Promise<SequenceR
   let sent = 0;
   let completed = 0;
   let stopped = 0;
+  let deadLettered = 0;
 
   for (const org of orgs) {
     const due = await db.sequenceEnrollment.findMany({
@@ -270,35 +322,42 @@ export async function runSequenceScan(now: Date = new Date()): Promise<SequenceR
         continue;
       }
 
-      try {
-        await sendEmail({
-          user: systemUser,
-          to: { email: vars.email, name: `${vars.firstName} ${vars.lastName}`.trim() },
-          subject,
-          body,
-          // templateId NOT set for sequence sends (rows must be distinguishable
-          // from template sends in history).
-          templateId: null,
-          contactId: vars.contactId,
-          leadId: vars.leadId,
-          headers: {
-            "List-Unsubscribe": `<${unsubscribeUrl}>`,
-            "List-Unsubscribe-Post": "One-Click",
+      const outcome = await sendWithRetry({
+        user: systemUser,
+        to: { email: vars.email, name: `${vars.firstName} ${vars.lastName}`.trim() },
+        subject,
+        body,
+        // templateId NOT set for sequence sends (rows must be distinguishable
+        // from template sends in history).
+        templateId: null,
+        contactId: vars.contactId,
+        leadId: vars.leadId,
+        headers: {
+          "List-Unsubscribe": `<${unsubscribeUrl}>`,
+          "List-Unsubscribe-Post": "One-Click",
+        },
+      });
+      if (!outcome.ok) {
+        // Every retry was exhausted: dead-letter the step for operator
+        // review and stop the enrollment. Re-enroll once the underlying
+        // issue (SMTP, DNS, ...) is fixed.
+        await db.sequenceDeadLetter.create({
+          data: {
+            organizationId: org.id,
+            sequenceId: enrollment.sequenceId,
+            enrollmentId: enrollment.id,
+            contactId: enrollment.contactId,
+            leadId: enrollment.leadId,
+            stepId: step.id,
+            stepPosition: step.position,
+            attempts: outcome.attempts,
+            lastError: outcome.lastError,
           },
         });
-      } catch (err) {
-        const message = err instanceof Error ? err.message : "unknown send error";
-        if (err instanceof EmailConfigError || err instanceof EmailSendError) {
-          await stopEnrollment(enrollment.id, `send_failed: ${message}`);
-          stopped++;
-          continue;
-        }
-        // Unexpected errors release the claim so the next scan retries.
-        await db.sequenceEnrollment.update({
-          where: { id: enrollment.id },
-          data: { nextSendAt: now },
-        });
-        throw err;
+        await stopEnrollment(enrollment.id, `send_failed: ${outcome.lastError}`);
+        stopped++;
+        deadLettered++;
+        continue;
       }
 
       await db.sequenceStepEnrollment.upsert({
@@ -344,5 +403,5 @@ export async function runSequenceScan(now: Date = new Date()): Promise<SequenceR
     }
   }
 
-  return { sent, completed, stopped, scannedAt: now.toISOString() };
+  return { sent, completed, stopped, deadLettered, scannedAt: now.toISOString() };
 }
