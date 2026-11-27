@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { Copy, Flame, Plus, Repeat, Search, Send, Sparkles, Trash2, TrendingUp, Upload, UserCheck } from "lucide-react";
+import { Copy, Flame, Plus, Repeat, Search, Send, Sparkles, Trash, Trash2, TrendingUp, Upload, UserCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar } from "@/components/ui/avatar";
@@ -317,7 +317,12 @@ export default function LeadsPage() {
           <h1 className="text-2xl font-bold">Leads</h1>
           <p className="text-sm text-muted-foreground">{total} leads</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
+          <Link href="/leads/trash">
+            <Button variant="outline" size="sm">
+              <Trash className="h-4 w-4" /> Trash
+            </Button>
+          </Link>
           <label className="inline-flex">
             <input
               type="file"

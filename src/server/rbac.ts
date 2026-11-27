@@ -35,6 +35,13 @@ export const PERMISSIONS = [
   "companies:update_all",
   "companies:delete",
   "companies:delete_all",
+  // company merge (manager/admin only)
+  "companies:merge",
+  // restore soft-deleted records (manager/admin only)
+  "record:restore",
+  // hard-delete soft-deleted records (admin only)
+  "record:hard_delete",
+  // leads
   "leads:read",
   "leads:read_all",
   "leads:create",
@@ -128,7 +135,8 @@ const MANAGER_PERMS: Permission[] = ALL.filter(function (p) {
     p !== "settings:manage" &&
     p !== "pipelines:manage" &&
     p !== "notes:delete_all" &&
-    !p.startsWith("roles:");
+    !p.startsWith("roles:") &&
+    p !== "record:hard_delete"
 });
 const REP_PERMS: Permission[] = [
   "settings:read",
