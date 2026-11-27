@@ -257,3 +257,18 @@ export type RolePermission = Prisma.RolePermissionModel
  * 
  */
 export type UserRole = Prisma.UserRoleModel
+/**
+ * Model Meeting
+ * 
+ */
+export type Meeting = Prisma.MeetingModel
+/**
+ * Model MeetingAttendee
+ * 
+ */
+export type MeetingAttendee = Prisma.MeetingAttendeeModel
+/**
+ * Model Call
+ * 
+ */
+export type Call = Prisma.CallModel

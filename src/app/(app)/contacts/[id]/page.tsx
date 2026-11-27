@@ -32,6 +32,7 @@ import { EntityForm, type FieldDef, type FieldErrors } from "@/components/entity
 import { ComposeEmail } from "@/components/compose-email";
 import { EnrollDialog } from "@/components/enroll-dialog";
 import { MergeDialog } from "@/components/merge-dialog";
+import { MeetingsSection, CallsSection } from "@/components/meetings-section";
 import { findDuplicateCandidatesClient, type DuplicateCandidate } from "@/lib/duplicate-search";
 import { api, ApiError, validationDetails } from "@/lib/api-client";
 import { useToast } from "@/components/ui/toast";
@@ -623,6 +624,9 @@ export default function ContactDetailPage() {
               </Button>
             </CardContent>
           </Card>
+
+          <MeetingsSection contactId={contact.id} />
+          <CallsSection contactId={contact.id} />
 
           {logOpen && (
             <Card>

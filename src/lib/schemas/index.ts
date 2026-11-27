@@ -22,6 +22,9 @@ export const ACTIVITY_TYPES = [
 export const STAGE_TYPES = ["OPEN", "WON", "LOST"] as const;
 export const DEAL_STATUSES = ["OPEN", "WON", "LOST"] as const;
 export const CUSTOM_FIELD_TYPES = ["TEXT", "NUMBER", "DATE", "BOOLEAN", "SELECT"] as const;
+export const MEETING_STATUSES = ["SCHEDULED", "COMPLETED", "CANCELLED"] as const;
+export const MEETING_ATTENDEE_STATUSES = ["INVITED", "ACCEPTED", "DECLINED", "ATTENDED"] as const;
+export const CALL_DIRECTIONS = ["INBOUND", "OUTBOUND"] as const;
 
 const emptyToUndefined = (v: string | undefined) =>
   (v === "" || v === undefined ? undefined : v);
@@ -468,6 +471,47 @@ export const salesOrderUpdateSchema = z.object({
   shippingAddress: z.string().max(2000).optional(),
   notes: z.string().max(5000).optional(),
 });
+export const meetingCreateSchema = z.object({
+  title: z.string().trim().min(1, "Title is required").max(200),
+  description: z.string().max(5000).optional().default(""),
+  startTime: z.string().trim().min(1, "Start time is required"),
+  endTime: z.string().trim().optional().transform(emptyToUndefined),
+  location: optionalTrimmed,
+  meetingUrl: optionalTrimmed,
+  status: z.enum(MEETING_STATUSES).default("SCHEDULED"),
+  outcome: optionalTrimmed,
+  recordingUrl: optionalTrimmed,
+  attendeeUserIds: z.array(z.string().trim().max(64)).max(50).optional().default([]),
+  attendeeContactIds: z.array(z.string().trim().max(64)).max(50).optional().default([]),
+});
+
+export const meetingUpdateSchema = meetingCreateSchema.partial();
+
+export const meetingAttendeeCreateSchema = z.object({
+  userId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  contactId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  status: z.enum(MEETING_ATTENDEE_STATUSES).default("INVITED"),
+});
+
+export const meetingAttendeeUpdateSchema = z.object({
+  status: z.enum(MEETING_ATTENDEE_STATUSES).optional(),
+});
+
+export const callCreateSchema = z.object({
+  title: z.string().trim().min(1, "Title is required").max(200),
+  contactId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  leadId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  dealId: z.string().trim().max(64).optional().transform(emptyToUndefined),
+  direction: z.enum(CALL_DIRECTIONS).default("OUTBOUND"),
+  duration: z.coerce.number().int().min(0).max(24 * 60 * 60).default(0),
+  outcome: optionalTrimmed,
+  recordingUrl: optionalTrimmed,
+  notes: z.string().max(5000).optional().default(""),
+  calledAt: z.string().trim().optional().transform(emptyToUndefined),
+});
+
+export const callUpdateSchema = callCreateSchema.partial();
+
 export type LoginInput = z.infer<typeof loginSchema>;
 export type ContactCreateInput = z.infer<typeof contactCreateSchema>;
 export type LeadCreateInput = z.infer<typeof leadCreateSchema>;
@@ -651,4 +695,6 @@ export const leadImportSchema = z.object({
 });
 
 export type LeadImportInput = z.infer<typeof leadImportSchema>;
+export type MeetingCreateInput = z.infer<typeof meetingCreateSchema>;
+export type CallCreateInput = z.infer<typeof callCreateSchema>;
 

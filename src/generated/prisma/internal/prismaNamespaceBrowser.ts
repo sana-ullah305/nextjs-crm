@@ -98,7 +98,10 @@ export const ModelName = {
   CampaignMember: 'CampaignMember',
   Permission: 'Permission',
   RolePermission: 'RolePermission',
-  UserRole: 'UserRole'
+  UserRole: 'UserRole',
+  Meeting: 'Meeting',
+  MeetingAttendee: 'MeetingAttendee',
+  Call: 'Call'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -879,6 +882,58 @@ export const UserRoleScalarFieldEnum = {
 } as const
 
 export type UserRoleScalarFieldEnum = (typeof UserRoleScalarFieldEnum)[keyof typeof UserRoleScalarFieldEnum]
+
+
+export const MeetingScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  title: 'title',
+  description: 'description',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  location: 'location',
+  meetingUrl: 'meetingUrl',
+  status: 'status',
+  outcome: 'outcome',
+  recordingUrl: 'recordingUrl',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MeetingScalarFieldEnum = (typeof MeetingScalarFieldEnum)[keyof typeof MeetingScalarFieldEnum]
+
+
+export const MeetingAttendeeScalarFieldEnum = {
+  id: 'id',
+  meetingId: 'meetingId',
+  userId: 'userId',
+  contactId: 'contactId',
+  status: 'status',
+  createdAt: 'createdAt'
+} as const
+
+export type MeetingAttendeeScalarFieldEnum = (typeof MeetingAttendeeScalarFieldEnum)[keyof typeof MeetingAttendeeScalarFieldEnum]
+
+
+export const CallScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  title: 'title',
+  contactId: 'contactId',
+  leadId: 'leadId',
+  dealId: 'dealId',
+  direction: 'direction',
+  duration: 'duration',
+  outcome: 'outcome',
+  recordingUrl: 'recordingUrl',
+  notes: 'notes',
+  calledAt: 'calledAt',
+  createdById: 'createdById',
+  createdAt: 'createdAt'
+} as const
+
+export type CallScalarFieldEnum = (typeof CallScalarFieldEnum)[keyof typeof CallScalarFieldEnum]
 
 
 export const SortOrder = {

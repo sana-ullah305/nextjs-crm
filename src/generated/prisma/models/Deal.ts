@@ -397,6 +397,7 @@ export type DealWhereInput = {
   sentEmails?: Prisma.SentEmailListRelationFilter
   lineItems?: Prisma.DealLineItemListRelationFilter
   campaignMembers?: Prisma.CampaignMemberListRelationFilter
+  calls?: Prisma.CallListRelationFilter
 }
 
 export type DealOrderByWithRelationInput = {
@@ -442,6 +443,7 @@ export type DealOrderByWithRelationInput = {
   sentEmails?: Prisma.SentEmailOrderByRelationAggregateInput
   lineItems?: Prisma.DealLineItemOrderByRelationAggregateInput
   campaignMembers?: Prisma.CampaignMemberOrderByRelationAggregateInput
+  calls?: Prisma.CallOrderByRelationAggregateInput
 }
 
 export type DealWhereUniqueInput = Prisma.AtLeast<{
@@ -490,6 +492,7 @@ export type DealWhereUniqueInput = Prisma.AtLeast<{
   sentEmails?: Prisma.SentEmailListRelationFilter
   lineItems?: Prisma.DealLineItemListRelationFilter
   campaignMembers?: Prisma.CampaignMemberListRelationFilter
+  calls?: Prisma.CallListRelationFilter
 }, "id">
 
 export type DealOrderByWithAggregationInput = {
@@ -590,6 +593,7 @@ export type DealCreateInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateInput = {
@@ -626,6 +630,7 @@ export type DealUncheckedCreateInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberUncheckedCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealUpdateInput = {
@@ -662,6 +667,7 @@ export type DealUpdateInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateInput = {
@@ -698,6 +704,7 @@ export type DealUncheckedUpdateInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUncheckedUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealCreateManyInput = {
@@ -1391,6 +1398,22 @@ export type DealUpdateOneWithoutCampaignMembersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DealUpdateToOneWithWhereWithoutCampaignMembersInput, Prisma.DealUpdateWithoutCampaignMembersInput>, Prisma.DealUncheckedUpdateWithoutCampaignMembersInput>
 }
 
+export type DealCreateNestedOneWithoutCallsInput = {
+  create?: Prisma.XOR<Prisma.DealCreateWithoutCallsInput, Prisma.DealUncheckedCreateWithoutCallsInput>
+  connectOrCreate?: Prisma.DealCreateOrConnectWithoutCallsInput
+  connect?: Prisma.DealWhereUniqueInput
+}
+
+export type DealUpdateOneWithoutCallsNestedInput = {
+  create?: Prisma.XOR<Prisma.DealCreateWithoutCallsInput, Prisma.DealUncheckedCreateWithoutCallsInput>
+  connectOrCreate?: Prisma.DealCreateOrConnectWithoutCallsInput
+  upsert?: Prisma.DealUpsertWithoutCallsInput
+  disconnect?: Prisma.DealWhereInput | boolean
+  delete?: Prisma.DealWhereInput | boolean
+  connect?: Prisma.DealWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DealUpdateToOneWithWhereWithoutCallsInput, Prisma.DealUpdateWithoutCallsInput>, Prisma.DealUncheckedUpdateWithoutCallsInput>
+}
+
 export type DealCreateWithoutOrganizationInput = {
   id?: string
   name: string
@@ -1424,6 +1447,7 @@ export type DealCreateWithoutOrganizationInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutOrganizationInput = {
@@ -1459,6 +1483,7 @@ export type DealUncheckedCreateWithoutOrganizationInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberUncheckedCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutOrganizationInput = {
@@ -1550,6 +1575,7 @@ export type DealCreateWithoutOwnerInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutOwnerInput = {
@@ -1585,6 +1611,7 @@ export type DealUncheckedCreateWithoutOwnerInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberUncheckedCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutOwnerInput = {
@@ -1645,6 +1672,7 @@ export type DealCreateWithoutCompanyInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutCompanyInput = {
@@ -1680,6 +1708,7 @@ export type DealUncheckedCreateWithoutCompanyInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberUncheckedCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutCompanyInput = {
@@ -1740,6 +1769,7 @@ export type DealCreateWithoutContactInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutContactInput = {
@@ -1775,6 +1805,7 @@ export type DealUncheckedCreateWithoutContactInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberUncheckedCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutContactInput = {
@@ -1835,6 +1866,7 @@ export type DealCreateWithoutSourceInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutSourceInput = {
@@ -1870,6 +1902,7 @@ export type DealUncheckedCreateWithoutSourceInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberUncheckedCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutSourceInput = {
@@ -1930,6 +1963,7 @@ export type DealCreateWithoutLeadInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutLeadInput = {
@@ -1965,6 +1999,7 @@ export type DealUncheckedCreateWithoutLeadInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberUncheckedCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutLeadInput = {
@@ -2025,6 +2060,7 @@ export type DealCreateWithoutPipelineInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutPipelineInput = {
@@ -2060,6 +2096,7 @@ export type DealUncheckedCreateWithoutPipelineInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberUncheckedCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutPipelineInput = {
@@ -2120,6 +2157,7 @@ export type DealCreateWithoutStageInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutStageInput = {
@@ -2155,6 +2193,7 @@ export type DealUncheckedCreateWithoutStageInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberUncheckedCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutStageInput = {
@@ -2215,6 +2254,7 @@ export type DealCreateWithoutStageHistoryInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutStageHistoryInput = {
@@ -2250,6 +2290,7 @@ export type DealUncheckedCreateWithoutStageHistoryInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberUncheckedCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutStageHistoryInput = {
@@ -2301,6 +2342,7 @@ export type DealUpdateWithoutStageHistoryInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutStageHistoryInput = {
@@ -2336,6 +2378,7 @@ export type DealUncheckedUpdateWithoutStageHistoryInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUncheckedUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealCreateWithoutLostReasonRefInput = {
@@ -2371,6 +2414,7 @@ export type DealCreateWithoutLostReasonRefInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutLostReasonRefInput = {
@@ -2406,6 +2450,7 @@ export type DealUncheckedCreateWithoutLostReasonRefInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberUncheckedCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutLostReasonRefInput = {
@@ -2466,6 +2511,7 @@ export type DealCreateWithoutActivitiesInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutActivitiesInput = {
@@ -2501,6 +2547,7 @@ export type DealUncheckedCreateWithoutActivitiesInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberUncheckedCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutActivitiesInput = {
@@ -2552,6 +2599,7 @@ export type DealUpdateWithoutActivitiesInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutActivitiesInput = {
@@ -2587,6 +2635,7 @@ export type DealUncheckedUpdateWithoutActivitiesInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUncheckedUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealCreateWithoutNotesInput = {
@@ -2622,6 +2671,7 @@ export type DealCreateWithoutNotesInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutNotesInput = {
@@ -2657,6 +2707,7 @@ export type DealUncheckedCreateWithoutNotesInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberUncheckedCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutNotesInput = {
@@ -2708,6 +2759,7 @@ export type DealUpdateWithoutNotesInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutNotesInput = {
@@ -2743,6 +2795,7 @@ export type DealUncheckedUpdateWithoutNotesInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUncheckedUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealCreateWithoutSentEmailsInput = {
@@ -2778,6 +2831,7 @@ export type DealCreateWithoutSentEmailsInput = {
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutSentEmailsInput = {
@@ -2813,6 +2867,7 @@ export type DealUncheckedCreateWithoutSentEmailsInput = {
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberUncheckedCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutSentEmailsInput = {
@@ -2864,6 +2919,7 @@ export type DealUpdateWithoutSentEmailsInput = {
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutSentEmailsInput = {
@@ -2899,6 +2955,7 @@ export type DealUncheckedUpdateWithoutSentEmailsInput = {
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUncheckedUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealCreateWithoutLineItemsInput = {
@@ -2934,6 +2991,7 @@ export type DealCreateWithoutLineItemsInput = {
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutDealInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutLineItemsInput = {
@@ -2969,6 +3027,7 @@ export type DealUncheckedCreateWithoutLineItemsInput = {
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutDealInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberUncheckedCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutLineItemsInput = {
@@ -3020,6 +3079,7 @@ export type DealUpdateWithoutLineItemsInput = {
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutDealNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutLineItemsInput = {
@@ -3055,6 +3115,7 @@ export type DealUncheckedUpdateWithoutLineItemsInput = {
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutDealNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUncheckedUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealCreateWithoutQuotationsInput = {
@@ -3090,6 +3151,7 @@ export type DealCreateWithoutQuotationsInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutQuotationsInput = {
@@ -3125,6 +3187,7 @@ export type DealUncheckedCreateWithoutQuotationsInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberUncheckedCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutQuotationsInput = {
@@ -3176,6 +3239,7 @@ export type DealUpdateWithoutQuotationsInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutQuotationsInput = {
@@ -3211,6 +3275,7 @@ export type DealUncheckedUpdateWithoutQuotationsInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUncheckedUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealCreateWithoutSalesOrdersInput = {
@@ -3246,6 +3311,7 @@ export type DealCreateWithoutSalesOrdersInput = {
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutSalesOrdersInput = {
@@ -3281,6 +3347,7 @@ export type DealUncheckedCreateWithoutSalesOrdersInput = {
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutDealInput
   campaignMembers?: Prisma.CampaignMemberUncheckedCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutSalesOrdersInput = {
@@ -3332,6 +3399,7 @@ export type DealUpdateWithoutSalesOrdersInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutSalesOrdersInput = {
@@ -3367,6 +3435,7 @@ export type DealUncheckedUpdateWithoutSalesOrdersInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUncheckedUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealCreateWithoutCampaignMembersInput = {
@@ -3402,6 +3471,7 @@ export type DealCreateWithoutCampaignMembersInput = {
   salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutDealInput
   sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallCreateNestedManyWithoutDealInput
 }
 
 export type DealUncheckedCreateWithoutCampaignMembersInput = {
@@ -3437,6 +3507,7 @@ export type DealUncheckedCreateWithoutCampaignMembersInput = {
   salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutDealInput
   sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
   lineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutDealInput
+  calls?: Prisma.CallUncheckedCreateNestedManyWithoutDealInput
 }
 
 export type DealCreateOrConnectWithoutCampaignMembersInput = {
@@ -3488,6 +3559,7 @@ export type DealUpdateWithoutCampaignMembersInput = {
   salesOrders?: Prisma.SalesOrderUpdateManyWithoutDealNestedInput
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutCampaignMembersInput = {
@@ -3523,6 +3595,167 @@ export type DealUncheckedUpdateWithoutCampaignMembersInput = {
   salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutDealNestedInput
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUncheckedUpdateManyWithoutDealNestedInput
+}
+
+export type DealCreateWithoutCallsInput = {
+  id?: string
+  name: string
+  value?: number
+  currency?: string
+  status?: string
+  probability?: number
+  expectedCloseDate?: Date | string | null
+  actualCloseDate?: Date | string | null
+  wonAt?: Date | string | null
+  lostAt?: Date | string | null
+  lostReason?: string
+  nextStep?: string
+  summary?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  organization: Prisma.OrganizationCreateNestedOneWithoutDealsInput
+  contact?: Prisma.ContactCreateNestedOneWithoutDealsInput
+  company?: Prisma.CompanyCreateNestedOneWithoutDealsInput
+  stage: Prisma.StageCreateNestedOneWithoutDealsInput
+  pipeline: Prisma.PipelineCreateNestedOneWithoutDealsInput
+  owner?: Prisma.UserCreateNestedOneWithoutOwnedDealsInput
+  source?: Prisma.LeadSourceCreateNestedOneWithoutDealsInput
+  lostReasonRef?: Prisma.LostReasonCreateNestedOneWithoutDealsInput
+  stageHistory?: Prisma.StageHistoryCreateNestedManyWithoutDealInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutDealInput
+  notes?: Prisma.NoteCreateNestedManyWithoutDealInput
+  lead?: Prisma.LeadCreateNestedOneWithoutDealsInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutDealInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutDealInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutDealInput
+  lineItems?: Prisma.DealLineItemCreateNestedManyWithoutDealInput
+  campaignMembers?: Prisma.CampaignMemberCreateNestedManyWithoutDealInput
+}
+
+export type DealUncheckedCreateWithoutCallsInput = {
+  id?: string
+  organizationId: string
+  name: string
+  contactId?: string | null
+  companyId?: string | null
+  leadId?: string | null
+  stageId: string
+  pipelineId: string
+  ownerId?: string | null
+  sourceId?: string | null
+  lostReasonId?: string | null
+  value?: number
+  currency?: string
+  status?: string
+  probability?: number
+  expectedCloseDate?: Date | string | null
+  actualCloseDate?: Date | string | null
+  wonAt?: Date | string | null
+  lostAt?: Date | string | null
+  lostReason?: string
+  nextStep?: string
+  summary?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutDealInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutDealInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutDealInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutDealInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutDealInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutDealInput
+  lineItems?: Prisma.DealLineItemUncheckedCreateNestedManyWithoutDealInput
+  campaignMembers?: Prisma.CampaignMemberUncheckedCreateNestedManyWithoutDealInput
+}
+
+export type DealCreateOrConnectWithoutCallsInput = {
+  where: Prisma.DealWhereUniqueInput
+  create: Prisma.XOR<Prisma.DealCreateWithoutCallsInput, Prisma.DealUncheckedCreateWithoutCallsInput>
+}
+
+export type DealUpsertWithoutCallsInput = {
+  update: Prisma.XOR<Prisma.DealUpdateWithoutCallsInput, Prisma.DealUncheckedUpdateWithoutCallsInput>
+  create: Prisma.XOR<Prisma.DealCreateWithoutCallsInput, Prisma.DealUncheckedCreateWithoutCallsInput>
+  where?: Prisma.DealWhereInput
+}
+
+export type DealUpdateToOneWithWhereWithoutCallsInput = {
+  where?: Prisma.DealWhereInput
+  data: Prisma.XOR<Prisma.DealUpdateWithoutCallsInput, Prisma.DealUncheckedUpdateWithoutCallsInput>
+}
+
+export type DealUpdateWithoutCallsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  value?: Prisma.FloatFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  probability?: Prisma.IntFieldUpdateOperationsInput | number
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wonAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.StringFieldUpdateOperationsInput | string
+  nextStep?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutDealsNestedInput
+  contact?: Prisma.ContactUpdateOneWithoutDealsNestedInput
+  company?: Prisma.CompanyUpdateOneWithoutDealsNestedInput
+  stage?: Prisma.StageUpdateOneRequiredWithoutDealsNestedInput
+  pipeline?: Prisma.PipelineUpdateOneRequiredWithoutDealsNestedInput
+  owner?: Prisma.UserUpdateOneWithoutOwnedDealsNestedInput
+  source?: Prisma.LeadSourceUpdateOneWithoutDealsNestedInput
+  lostReasonRef?: Prisma.LostReasonUpdateOneWithoutDealsNestedInput
+  stageHistory?: Prisma.StageHistoryUpdateManyWithoutDealNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutDealNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutDealNestedInput
+  lead?: Prisma.LeadUpdateOneWithoutDealsNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutDealNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutDealNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
+  lineItems?: Prisma.DealLineItemUpdateManyWithoutDealNestedInput
+  campaignMembers?: Prisma.CampaignMemberUpdateManyWithoutDealNestedInput
+}
+
+export type DealUncheckedUpdateWithoutCallsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stageId?: Prisma.StringFieldUpdateOperationsInput | string
+  pipelineId?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lostReasonId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  value?: Prisma.FloatFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  probability?: Prisma.IntFieldUpdateOperationsInput | number
+  expectedCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actualCloseDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  wonAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lostReason?: Prisma.StringFieldUpdateOperationsInput | string
+  nextStep?: Prisma.StringFieldUpdateOperationsInput | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  stageHistory?: Prisma.StageHistoryUncheckedUpdateManyWithoutDealNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutDealNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutDealNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutDealNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutDealNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
+  lineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutDealNestedInput
+  campaignMembers?: Prisma.CampaignMemberUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealCreateManyOrganizationInput = {
@@ -3585,6 +3818,7 @@ export type DealUpdateWithoutOrganizationInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutOrganizationInput = {
@@ -3620,6 +3854,7 @@ export type DealUncheckedUpdateWithoutOrganizationInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUncheckedUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateManyWithoutOrganizationInput = {
@@ -3709,6 +3944,7 @@ export type DealUpdateWithoutOwnerInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutOwnerInput = {
@@ -3744,6 +3980,7 @@ export type DealUncheckedUpdateWithoutOwnerInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUncheckedUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateManyWithoutOwnerInput = {
@@ -3833,6 +4070,7 @@ export type DealUpdateWithoutCompanyInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutCompanyInput = {
@@ -3868,6 +4106,7 @@ export type DealUncheckedUpdateWithoutCompanyInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUncheckedUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateManyWithoutCompanyInput = {
@@ -3957,6 +4196,7 @@ export type DealUpdateWithoutContactInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutContactInput = {
@@ -3992,6 +4232,7 @@ export type DealUncheckedUpdateWithoutContactInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUncheckedUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateManyWithoutContactInput = {
@@ -4081,6 +4322,7 @@ export type DealUpdateWithoutSourceInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutSourceInput = {
@@ -4116,6 +4358,7 @@ export type DealUncheckedUpdateWithoutSourceInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUncheckedUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateManyWithoutSourceInput = {
@@ -4205,6 +4448,7 @@ export type DealUpdateWithoutLeadInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutLeadInput = {
@@ -4240,6 +4484,7 @@ export type DealUncheckedUpdateWithoutLeadInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUncheckedUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateManyWithoutLeadInput = {
@@ -4329,6 +4574,7 @@ export type DealUpdateWithoutPipelineInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutPipelineInput = {
@@ -4364,6 +4610,7 @@ export type DealUncheckedUpdateWithoutPipelineInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUncheckedUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateManyWithoutPipelineInput = {
@@ -4453,6 +4700,7 @@ export type DealUpdateWithoutStageInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutStageInput = {
@@ -4488,6 +4736,7 @@ export type DealUncheckedUpdateWithoutStageInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUncheckedUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateManyWithoutStageInput = {
@@ -4577,6 +4826,7 @@ export type DealUpdateWithoutLostReasonRefInput = {
   sentEmails?: Prisma.SentEmailUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateWithoutLostReasonRefInput = {
@@ -4612,6 +4862,7 @@ export type DealUncheckedUpdateWithoutLostReasonRefInput = {
   sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutDealNestedInput
   lineItems?: Prisma.DealLineItemUncheckedUpdateManyWithoutDealNestedInput
   campaignMembers?: Prisma.CampaignMemberUncheckedUpdateManyWithoutDealNestedInput
+  calls?: Prisma.CallUncheckedUpdateManyWithoutDealNestedInput
 }
 
 export type DealUncheckedUpdateManyWithoutLostReasonRefInput = {
@@ -4655,6 +4906,7 @@ export type DealCountOutputType = {
   sentEmails: number
   lineItems: number
   campaignMembers: number
+  calls: number
 }
 
 export type DealCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4666,6 +4918,7 @@ export type DealCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   sentEmails?: boolean | DealCountOutputTypeCountSentEmailsArgs
   lineItems?: boolean | DealCountOutputTypeCountLineItemsArgs
   campaignMembers?: boolean | DealCountOutputTypeCountCampaignMembersArgs
+  calls?: boolean | DealCountOutputTypeCountCallsArgs
 }
 
 /**
@@ -4734,6 +4987,13 @@ export type DealCountOutputTypeCountCampaignMembersArgs<ExtArgs extends runtime.
   where?: Prisma.CampaignMemberWhereInput
 }
 
+/**
+ * DealCountOutputType without action
+ */
+export type DealCountOutputTypeCountCallsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CallWhereInput
+}
+
 
 export type DealSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -4778,6 +5038,7 @@ export type DealSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   sentEmails?: boolean | Prisma.Deal$sentEmailsArgs<ExtArgs>
   lineItems?: boolean | Prisma.Deal$lineItemsArgs<ExtArgs>
   campaignMembers?: boolean | Prisma.Deal$campaignMembersArgs<ExtArgs>
+  calls?: boolean | Prisma.Deal$callsArgs<ExtArgs>
   _count?: boolean | Prisma.DealCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["deal"]>
 
@@ -4902,6 +5163,7 @@ export type DealInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   sentEmails?: boolean | Prisma.Deal$sentEmailsArgs<ExtArgs>
   lineItems?: boolean | Prisma.Deal$lineItemsArgs<ExtArgs>
   campaignMembers?: boolean | Prisma.Deal$campaignMembersArgs<ExtArgs>
+  calls?: boolean | Prisma.Deal$callsArgs<ExtArgs>
   _count?: boolean | Prisma.DealCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DealIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4947,6 +5209,7 @@ export type $DealPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     sentEmails: Prisma.$SentEmailPayload<ExtArgs>[]
     lineItems: Prisma.$DealLineItemPayload<ExtArgs>[]
     campaignMembers: Prisma.$CampaignMemberPayload<ExtArgs>[]
+    calls: Prisma.$CallPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -5385,6 +5648,7 @@ export interface Prisma__DealClient<T, Null = never, ExtArgs extends runtime.Typ
   sentEmails<T extends Prisma.Deal$sentEmailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deal$sentEmailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SentEmailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   lineItems<T extends Prisma.Deal$lineItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deal$lineItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DealLineItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   campaignMembers<T extends Prisma.Deal$campaignMembersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deal$campaignMembersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CampaignMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  calls<T extends Prisma.Deal$callsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deal$callsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CallPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6141,6 +6405,30 @@ export type Deal$campaignMembersArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.CampaignMemberScalarFieldEnum | Prisma.CampaignMemberScalarFieldEnum[]
+}
+
+/**
+ * Deal.calls
+ */
+export type Deal$callsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Call
+   */
+  select?: Prisma.CallSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Call
+   */
+  omit?: Prisma.CallOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CallInclude<ExtArgs> | null
+  where?: Prisma.CallWhereInput
+  orderBy?: Prisma.CallOrderByWithRelationInput | Prisma.CallOrderByWithRelationInput[]
+  cursor?: Prisma.CallWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CallScalarFieldEnum | Prisma.CallScalarFieldEnum[]
 }
 
 /**
