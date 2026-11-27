@@ -407,6 +407,8 @@ export const ModelName = {
   Lead: 'Lead',
   Pipeline: 'Pipeline',
   Stage: 'Stage',
+  StageHistory: 'StageHistory',
+  LostReason: 'LostReason',
   Deal: 'Deal',
   Task: 'Task',
   Activity: 'Activity',
@@ -441,7 +443,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "organization" | "user" | "session" | "company" | "contact" | "tag" | "leadSource" | "lead" | "pipeline" | "stage" | "deal" | "task" | "activity" | "note" | "auditLog" | "notification" | "emailTemplate" | "customField" | "customFieldValue" | "emailSettings" | "sentEmail" | "followUpReminder" | "inboundEmail" | "apiKey" | "sequence" | "sequenceStep" | "sequenceEnrollment" | "sequenceStepEnrollment" | "sequenceDeadLetter"
+    modelProps: "organization" | "user" | "session" | "company" | "contact" | "tag" | "leadSource" | "lead" | "pipeline" | "stage" | "stageHistory" | "lostReason" | "deal" | "task" | "activity" | "note" | "auditLog" | "notification" | "emailTemplate" | "customField" | "customFieldValue" | "emailSettings" | "sentEmail" | "followUpReminder" | "inboundEmail" | "apiKey" | "sequence" | "sequenceStep" | "sequenceEnrollment" | "sequenceStepEnrollment" | "sequenceDeadLetter"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1182,6 +1184,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.StageCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.StageCountAggregateOutputType> | number
+        }
+      }
+    }
+    StageHistory: {
+      payload: Prisma.$StageHistoryPayload<ExtArgs>
+      fields: Prisma.StageHistoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StageHistoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StageHistoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StageHistoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StageHistoryPayload>
+        }
+        findFirst: {
+          args: Prisma.StageHistoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StageHistoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StageHistoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StageHistoryPayload>
+        }
+        findMany: {
+          args: Prisma.StageHistoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StageHistoryPayload>[]
+        }
+        create: {
+          args: Prisma.StageHistoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StageHistoryPayload>
+        }
+        createMany: {
+          args: Prisma.StageHistoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StageHistoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StageHistoryPayload>[]
+        }
+        delete: {
+          args: Prisma.StageHistoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StageHistoryPayload>
+        }
+        update: {
+          args: Prisma.StageHistoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StageHistoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.StageHistoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StageHistoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StageHistoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StageHistoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.StageHistoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StageHistoryPayload>
+        }
+        aggregate: {
+          args: Prisma.StageHistoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStageHistory>
+        }
+        groupBy: {
+          args: Prisma.StageHistoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StageHistoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StageHistoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StageHistoryCountAggregateOutputType> | number
+        }
+      }
+    }
+    LostReason: {
+      payload: Prisma.$LostReasonPayload<ExtArgs>
+      fields: Prisma.LostReasonFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LostReasonFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LostReasonPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LostReasonFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LostReasonPayload>
+        }
+        findFirst: {
+          args: Prisma.LostReasonFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LostReasonPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LostReasonFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LostReasonPayload>
+        }
+        findMany: {
+          args: Prisma.LostReasonFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LostReasonPayload>[]
+        }
+        create: {
+          args: Prisma.LostReasonCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LostReasonPayload>
+        }
+        createMany: {
+          args: Prisma.LostReasonCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LostReasonCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LostReasonPayload>[]
+        }
+        delete: {
+          args: Prisma.LostReasonDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LostReasonPayload>
+        }
+        update: {
+          args: Prisma.LostReasonUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LostReasonPayload>
+        }
+        deleteMany: {
+          args: Prisma.LostReasonDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LostReasonUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LostReasonUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LostReasonPayload>[]
+        }
+        upsert: {
+          args: Prisma.LostReasonUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LostReasonPayload>
+        }
+        aggregate: {
+          args: Prisma.LostReasonAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLostReason>
+        }
+        groupBy: {
+          args: Prisma.LostReasonGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LostReasonGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LostReasonCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LostReasonCountAggregateOutputType> | number
         }
       }
     }
@@ -2799,6 +2949,33 @@ export const StageScalarFieldEnum = {
 export type StageScalarFieldEnum = (typeof StageScalarFieldEnum)[keyof typeof StageScalarFieldEnum]
 
 
+export const StageHistoryScalarFieldEnum = {
+  id: 'id',
+  dealId: 'dealId',
+  fromStageId: 'fromStageId',
+  toStageId: 'toStageId',
+  userId: 'userId',
+  at: 'at',
+  wonAtSnapshot: 'wonAtSnapshot',
+  lostAtSnapshot: 'lostAtSnapshot',
+  actualCloseDateSnapshot: 'actualCloseDateSnapshot'
+} as const
+
+export type StageHistoryScalarFieldEnum = (typeof StageHistoryScalarFieldEnum)[keyof typeof StageHistoryScalarFieldEnum]
+
+
+export const LostReasonScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  description: 'description',
+  isSystem: 'isSystem',
+  createdAt: 'createdAt'
+} as const
+
+export type LostReasonScalarFieldEnum = (typeof LostReasonScalarFieldEnum)[keyof typeof LostReasonScalarFieldEnum]
+
+
 export const DealScalarFieldEnum = {
   id: 'id',
   organizationId: 'organizationId',
@@ -2810,6 +2987,7 @@ export const DealScalarFieldEnum = {
   pipelineId: 'pipelineId',
   ownerId: 'ownerId',
   sourceId: 'sourceId',
+  lostReasonId: 'lostReasonId',
   value: 'value',
   currency: 'currency',
   status: 'status',
@@ -3339,6 +3517,8 @@ export type GlobalOmitConfig = {
   lead?: Prisma.LeadOmit
   pipeline?: Prisma.PipelineOmit
   stage?: Prisma.StageOmit
+  stageHistory?: Prisma.StageHistoryOmit
+  lostReason?: Prisma.LostReasonOmit
   deal?: Prisma.DealOmit
   task?: Prisma.TaskOmit
   activity?: Prisma.ActivityOmit

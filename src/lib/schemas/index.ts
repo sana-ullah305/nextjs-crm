@@ -207,11 +207,13 @@ export const dealCreateSchema = z.object({
 export const dealUpdateSchema = dealCreateSchema.partial().extend({
   status: z.enum(DEAL_STATUSES).optional(),
   lostReason: z.string().max(500).optional(),
+  lostReasonId: z.string().trim().max(64).optional(),
 });
 
 export const stageMoveSchema = z.object({
   stageId: z.string().trim().min(1).max(64),
   position: z.coerce.number().int().min(0).optional(),
+  lostReasonId: z.string().trim().max(64).optional(),
 });
 
 export const taskCreateSchema = z.object({
@@ -277,6 +279,25 @@ export const pipelineCreateSchema = z.object({
     .min(1)
     .max(15)
     .default([]),
+});
+
+export const stageCreateSchema = z.object({
+  pipelineId: z.string().trim().min(1).max(64),
+  name: z.string().trim().min(1).max(80),
+  position: z.coerce.number().int().min(0).default(0),
+  probability: z.coerce.number().int().min(0).max(100).default(0),
+  type: z.enum(STAGE_TYPES).default("OPEN"),
+});
+
+export const stageUpdateSchema = z.object({
+  name: z.string().trim().min(1).max(80).optional(),
+  position: z.coerce.number().int().min(0).optional(),
+  probability: z.coerce.number().int().min(0).max(100).optional(),
+  type: z.enum(STAGE_TYPES).optional(),
+});
+
+export const stageReorderSchema = z.object({
+  stageIds: z.array(z.string().trim().min(1).max(64)).min(1),
 });
 
 export const emailTemplateCreateSchema = z.object({
@@ -357,3 +378,5 @@ export type TaskCreateInput = z.infer<typeof taskCreateSchema>;
 export type ActivityCreateInput = z.infer<typeof activityCreateSchema>;
 export type EmailSendInput = z.infer<typeof emailSendSchema>;
 export type EmailSettingsInput = z.infer<typeof emailSettingsSchema>;
+export type StageCreateInput = z.infer<typeof stageCreateSchema>;
+export type StageUpdateInput = z.infer<typeof stageUpdateSchema>;

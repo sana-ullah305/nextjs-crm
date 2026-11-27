@@ -10,6 +10,9 @@ import {
   emailTemplateCreateSchema,
   customFieldCreateSchema,
   apiKeyCreateSchema,
+  stageCreateSchema,
+  stageUpdateSchema,
+  stageReorderSchema,
 } from "@/lib/schemas";
 import { db } from "@/server/db";
 import { writeAudit } from "@/server/audit";
@@ -61,6 +64,24 @@ export const GET = apiHandler<Ctx>(async (req, ctx) => {
       });
       return ok({ pipelines });
     }
+    case "stages": {
+      const url = new URL(req.url);
+      const pipelineId = url.searchParams.get("pipelineId") ?? undefined;
+      const where = pipelineId ? { pipelineId } : { pipeline: { organizationId: orgId } };
+      const stages = await db.stage.findMany({
+        where,
+        include: { pipeline: { select: { id: true, name: true } } },
+        orderBy: { position: "asc" },
+      });
+      return ok({ stages });
+    }
+    case "lost-reasons": {
+      const reasons = await db.lostReason.findMany({
+        where: { organizationId: orgId },
+        orderBy: [{ isSystem: "desc" }, { name: "asc" }],
+      });
+      return ok({ lostReasons: reasons });
+    }
     case "email-templates": {
       const templates = await db.emailTemplate.findMany({
         where: { organizationId: orgId },
@@ -84,8 +105,6 @@ export const GET = apiHandler<Ctx>(async (req, ctx) => {
       return ok({ users });
     }
     case "api-keys": {
-      // List never exposes the hash (or the full key — undisplayable after
-      // creation by design).
       const keys = await db.apiKey.findMany({
         where: { organizationId: orgId },
         select: {
@@ -193,6 +212,74 @@ export const POST = apiHandler<Ctx>(async (req, ctx) => {
         });
         return ok(result, { status: 201 });
       }
+      case "stages": {
+        const user = await requireApiUserWith("pipelines:manage");
+        const body = await parseBody(req, stageCreateSchema);
+        const pipeline = await db.pipeline.findFirst({
+          where: { id: body.pipelineId, organizationId: user.organizationId },
+        });
+        if (!pipeline) throw new ApiNotFoundError("Pipeline not found");
+
+        let position = body.position;
+        if (position === undefined || position === 0) {
+          const maxPos = await db.stage.aggregate({
+            where: { pipelineId: body.pipelineId },
+            _max: { position: true },
+          });
+          position = (maxPos._max.position ?? -1) + 1;
+        }
+
+        const stage = await db.stage.create({
+          data: {
+            pipelineId: body.pipelineId,
+            name: body.name,
+            position,
+            probability: body.probability,
+            type: body.type,
+          },
+        });
+        await writeAudit({
+          organizationId: user.organizationId,
+          userId: user.id,
+          action: "STAGE_CREATE",
+          entityType: "stage",
+          entityId: stage.id,
+          ipAddress: clientIp(req),
+        });
+        return ok(stage, { status: 201 });
+      }
+      case "lost-reasons": {
+        const user = await requireApiUserWith("settings:manage");
+        const body = await parseBody(
+          req,
+          z.object({
+            name: z.string().trim().min(1).max(80),
+            description: z.string().optional().default(""),
+            isSystem: z.boolean().optional().default(false),
+          })
+        );
+        const exists = await db.lostReason.findFirst({
+          where: { organizationId: user.organizationId, name: body.name },
+        });
+        if (exists) throw new ApiValidationError([{ path: ["name"], message: "Lost reason already exists" }]);
+        const reason = await db.lostReason.create({
+          data: {
+            organizationId: user.organizationId,
+            name: body.name,
+            description: body.description,
+            isSystem: body.isSystem,
+          },
+        });
+        await writeAudit({
+          organizationId: user.organizationId,
+          userId: user.id,
+          action: "LOST_REASON_CREATE",
+          entityType: "lostReason",
+          entityId: reason.id,
+          ipAddress: clientIp(req),
+        });
+        return ok(reason, { status: 201 });
+      }
       case "email-templates": {
         const user = await requireApiUserWith("settings:manage");
         const body = await parseBody(req, emailTemplateCreateSchema);
@@ -243,8 +330,6 @@ export const POST = apiHandler<Ctx>(async (req, ctx) => {
         return ok(field, { status: 201 });
       }
       case "api-keys": {
-        // POST /settings/api-keys: create a key. The full key value is
-        // returned exactly once; only the SHA-256 hash is persisted.
         const user = await requireApiUserWith("settings:manage");
         const body = await parseBody(req, apiKeyCreateSchema);
         const { key, keyHash, prefix } = generateApiKey();
@@ -304,7 +389,6 @@ export const PATCH = apiHandler<Ctx>(async (req, ctx) => {
 
   switch (section) {
     case "pipelines": {
-      // PATCH /settings/pipelines/:id — rename pipeline, or set default.
       const user = await requireApiUserWith("pipelines:manage");
       const pipeline = await db.pipeline.findFirst({
         where: { id, organizationId: user.organizationId },
@@ -342,16 +426,79 @@ export const PATCH = apiHandler<Ctx>(async (req, ctx) => {
       });
       return ok(updated);
     }
+    case "stages": {
+      const user = await requireApiUserWith("pipelines:manage");
+      const stage = await db.stage.findFirst({
+        where: { id, pipeline: { organizationId: user.organizationId } },
+      });
+      if (!stage) throw new ApiNotFoundError("Stage not found");
+      const body = await parseBody(req, stageUpdateSchema.partial());
+
+      const updated = await db.stage.update({
+        where: { id },
+        data: {
+          ...(body.name !== undefined ? { name: body.name } : {}),
+          ...(body.position !== undefined ? { position: body.position } : {}),
+          ...(body.probability !== undefined ? { probability: body.probability } : {}),
+          ...(body.type !== undefined ? { type: body.type } : {}),
+        },
+        include: { pipeline: { select: { id: true, name: true } } },
+      });
+      await writeAudit({
+        organizationId: user.organizationId,
+        userId: user.id,
+        action: "STAGE_UPDATE",
+        entityType: "stage",
+        entityId: id,
+        ipAddress: clientIp(req),
+      });
+      return ok(updated);
+    }
+    case "lost-reasons": {
+      const user = await requireApiUserWith("settings:manage");
+      const reason = await db.lostReason.findFirst({
+        where: { id, organizationId: user.organizationId },
+      });
+      if (!reason) throw new ApiNotFoundError("Lost reason not found");
+      const body = await parseBody(
+        req,
+        z.object({
+          name: z.string().trim().min(1).max(80).optional(),
+          description: z.string().optional(),
+          isSystem: z.boolean().optional(),
+        })
+      );
+      if (body.name !== undefined) {
+        const exists = await db.lostReason.findFirst({
+          where: { organizationId: user.organizationId, name: body.name, id: { not: id } },
+        });
+        if (exists) throw new ApiValidationError([{ path: ["name"], message: "Lost reason already exists" }]);
+      }
+      const updated = await db.lostReason.update({
+        where: { id },
+        data: {
+          ...(body.name !== undefined ? { name: body.name } : {}),
+          ...(body.description !== undefined ? { description: body.description } : {}),
+          ...(body.isSystem !== undefined ? { isSystem: body.isSystem } : {}),
+        },
+      });
+      await writeAudit({
+        organizationId: user.organizationId,
+        userId: user.id,
+        action: "LOST_REASON_UPDATE",
+        entityType: "lostReason",
+        entityId: id,
+        ipAddress: clientIp(req),
+      });
+      return ok(updated);
+    }
     case "email-templates": {
       const user = await requireApiUserWith("settings:manage");
       const template = await db.emailTemplate.findFirst({
         where: { id, organizationId: user.organizationId },
       });
       if (!template) throw new ApiNotFoundError("Template not found");
-      const body = await parseBody(
-        req,
-        emailTemplateCreateSchema.partial()
-      );
+      const body = await parseBody(req, emailTemplateCreateSchema.partial());
       const updated = await db.emailTemplate.update({
         where: { id },
         data: {
@@ -416,6 +563,52 @@ export const DELETE = apiHandler<Ctx>(async (req, ctx) => {
         userId: user.id,
         action: "LEAD_SOURCE_DELETE",
         entityType: "leadSource",
+        entityId: id,
+        ipAddress: clientIp(req),
+      });
+      return ok({ deleted: true });
+    }
+    case "stages": {
+      const user = await requireApiUserWith("pipelines:manage");
+      const stage = await db.stage.findFirst({
+        where: { id, pipeline: { organizationId: user.organizationId } },
+        include: { _count: { select: { deals: true } } },
+      });
+      if (!stage) throw new ApiNotFoundError("Stage not found");
+      if (stage._count.deals > 0) {
+        throw new ApiValidationError([
+          { path: ["id"], message: "Cannot delete a stage that contains deals" },
+        ]);
+      }
+      await db.stage.delete({ where: { id } });
+      await writeAudit({
+        organizationId: user.organizationId,
+        userId: user.id,
+        action: "STAGE_DELETE",
+        entityType: "stage",
+        entityId: id,
+        ipAddress: clientIp(req),
+      });
+      return ok({ deleted: true });
+    }
+    case "lost-reasons": {
+      const user = await requireApiUserWith("settings:manage");
+      const reason = await db.lostReason.findFirst({
+        where: { id, organizationId: user.organizationId },
+        include: { _count: { select: { deals: true } } },
+      });
+      if (!reason) throw new ApiNotFoundError("Lost reason not found");
+      if (reason._count.deals > 0 && !reason.isSystem) {
+        throw new ApiValidationError([
+          { path: ["id"], message: "Cannot delete a lost reason that is used by deals" },
+        ]);
+      }
+      await db.lostReason.delete({ where: { id } });
+      await writeAudit({
+        organizationId: user.organizationId,
+        userId: user.id,
+        action: "LOST_REASON_DELETE",
+        entityType: "lostReason",
         entityId: id,
         ipAddress: clientIp(req),
       });
@@ -489,8 +682,6 @@ export const DELETE = apiHandler<Ctx>(async (req, ctx) => {
       return ok({ deleted: true });
     }
     case "api-keys": {
-      // DELETE /settings/api-keys/:id — soft revoke (isActive=false +
-      // revokedAt) so the key's history and audit trail are preserved.
       const user = await requireApiUserWith("settings:manage");
       const key = await db.apiKey.findFirst({
         where: { id, organizationId: user.organizationId },
