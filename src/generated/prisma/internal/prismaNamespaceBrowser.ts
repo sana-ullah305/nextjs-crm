@@ -82,7 +82,11 @@ export const ModelName = {
   SequenceStepEnrollment: 'SequenceStepEnrollment',
   SequenceDeadLetter: 'SequenceDeadLetter',
   StageHistory: 'StageHistory',
-  LostReason: 'LostReason'
+  LostReason: 'LostReason',
+  Product: 'Product',
+  PriceList: 'PriceList',
+  PriceListItem: 'PriceListItem',
+  DealLineItem: 'DealLineItem'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -639,6 +643,62 @@ export const LostReasonScalarFieldEnum = {
 } as const
 
 export type LostReasonScalarFieldEnum = (typeof LostReasonScalarFieldEnum)[keyof typeof LostReasonScalarFieldEnum]
+
+
+export const ProductScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  description: 'description',
+  sku: 'sku',
+  unitPrice: 'unitPrice',
+  currency: 'currency',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+export const PriceListScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  description: 'description',
+  isDefault: 'isDefault',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PriceListScalarFieldEnum = (typeof PriceListScalarFieldEnum)[keyof typeof PriceListScalarFieldEnum]
+
+
+export const PriceListItemScalarFieldEnum = {
+  id: 'id',
+  priceListId: 'priceListId',
+  productId: 'productId',
+  price: 'price',
+  currency: 'currency',
+  createdAt: 'createdAt'
+} as const
+
+export type PriceListItemScalarFieldEnum = (typeof PriceListItemScalarFieldEnum)[keyof typeof PriceListItemScalarFieldEnum]
+
+
+export const DealLineItemScalarFieldEnum = {
+  id: 'id',
+  dealId: 'dealId',
+  productId: 'productId',
+  name: 'name',
+  description: 'description',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  total: 'total',
+  createdAt: 'createdAt'
+} as const
+
+export type DealLineItemScalarFieldEnum = (typeof DealLineItemScalarFieldEnum)[keyof typeof DealLineItemScalarFieldEnum]
 
 
 export const SortOrder = {

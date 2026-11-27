@@ -177,3 +177,23 @@ export type StageHistory = Prisma.StageHistoryModel
  * 
  */
 export type LostReason = Prisma.LostReasonModel
+/**
+ * Model Product
+ * 
+ */
+export type Product = Prisma.ProductModel
+/**
+ * Model PriceList
+ * 
+ */
+export type PriceList = Prisma.PriceListModel
+/**
+ * Model PriceListItem
+ * 
+ */
+export type PriceListItem = Prisma.PriceListItemModel
+/**
+ * Model DealLineItem
+ * 
+ */
+export type DealLineItem = Prisma.DealLineItemModel

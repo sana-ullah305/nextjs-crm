@@ -67,6 +67,16 @@ export const PERMISSIONS = [
   "attachments:read",
   "attachments:create",
   "attachments:delete",
+  // products
+  "products:read",
+  "products:create",
+  "products:update",
+  "products:delete",
+  // price lists
+  "pricelists:read",
+  "pricelists:create",
+  "pricelists:update",
+  "pricelists:delete",
 ] as const;
 
 export type Permission = (typeof PERMISSIONS)[number];
@@ -112,6 +122,14 @@ const REP_PERMS: Permission[] = [
   "attachments:create",
   "attachments:delete",
   "email:send",
+  "products:read",
+  "products:create",
+  "products:update",
+  "products:delete",
+  "pricelists:read",
+  "pricelists:create",
+  "pricelists:update",
+  "pricelists:delete",
 ];
 
 export const ROLE_PERMISSIONS: Record<string, Permission[]> = {
