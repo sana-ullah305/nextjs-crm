@@ -115,6 +115,8 @@ export const PERMISSIONS = [
   "calls:read",
   "calls:create",
   "calls:manage",
+  // duplicate-candidates endpoint (any authenticated user)
+  "dedupe:read",
 ] as const;
 
 export type Permission = (typeof PERMISSIONS)[number];
@@ -180,6 +182,7 @@ const REP_PERMS: Permission[] = [
   "meetings:create",
   "calls:read",
   "calls:create",
+  "dedupe:read",
 ];
 
 export const ROLE_PERMISSIONS: Record<string, Permission[]> = {
