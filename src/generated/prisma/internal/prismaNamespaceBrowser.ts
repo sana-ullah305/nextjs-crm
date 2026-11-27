@@ -78,7 +78,10 @@ export const ModelName = {
   Sequence: 'Sequence',
   SequenceStep: 'SequenceStep',
   SequenceEnrollment: 'SequenceEnrollment',
-  SequenceStepEnrollment: 'SequenceStepEnrollment'
+  SequenceStepEnrollment: 'SequenceStepEnrollment',
+  Meeting: 'Meeting',
+  MeetingAttendee: 'MeetingAttendee',
+  Call: 'Call'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -569,6 +572,58 @@ export const SequenceStepEnrollmentScalarFieldEnum = {
 } as const
 
 export type SequenceStepEnrollmentScalarFieldEnum = (typeof SequenceStepEnrollmentScalarFieldEnum)[keyof typeof SequenceStepEnrollmentScalarFieldEnum]
+
+
+export const MeetingScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  title: 'title',
+  description: 'description',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  location: 'location',
+  meetingUrl: 'meetingUrl',
+  status: 'status',
+  outcome: 'outcome',
+  recordingUrl: 'recordingUrl',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MeetingScalarFieldEnum = (typeof MeetingScalarFieldEnum)[keyof typeof MeetingScalarFieldEnum]
+
+
+export const MeetingAttendeeScalarFieldEnum = {
+  id: 'id',
+  meetingId: 'meetingId',
+  userId: 'userId',
+  contactId: 'contactId',
+  status: 'status',
+  createdAt: 'createdAt'
+} as const
+
+export type MeetingAttendeeScalarFieldEnum = (typeof MeetingAttendeeScalarFieldEnum)[keyof typeof MeetingAttendeeScalarFieldEnum]
+
+
+export const CallScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  title: 'title',
+  contactId: 'contactId',
+  leadId: 'leadId',
+  dealId: 'dealId',
+  direction: 'direction',
+  duration: 'duration',
+  outcome: 'outcome',
+  recordingUrl: 'recordingUrl',
+  notes: 'notes',
+  calledAt: 'calledAt',
+  createdById: 'createdById',
+  createdAt: 'createdAt'
+} as const
+
+export type CallScalarFieldEnum = (typeof CallScalarFieldEnum)[keyof typeof CallScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -263,6 +263,9 @@ export type UserWhereInput = {
   createdApiKeys?: Prisma.ApiKeyListRelationFilter
   createdSequences?: Prisma.SequenceListRelationFilter
   sequenceEnrollments?: Prisma.SequenceEnrollmentListRelationFilter
+  createdMeetings?: Prisma.MeetingListRelationFilter
+  meetingAttendees?: Prisma.MeetingAttendeeListRelationFilter
+  createdCalls?: Prisma.CallListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -296,6 +299,9 @@ export type UserOrderByWithRelationInput = {
   createdApiKeys?: Prisma.ApiKeyOrderByRelationAggregateInput
   createdSequences?: Prisma.SequenceOrderByRelationAggregateInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentOrderByRelationAggregateInput
+  createdMeetings?: Prisma.MeetingOrderByRelationAggregateInput
+  meetingAttendees?: Prisma.MeetingAttendeeOrderByRelationAggregateInput
+  createdCalls?: Prisma.CallOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -333,6 +339,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdApiKeys?: Prisma.ApiKeyListRelationFilter
   createdSequences?: Prisma.SequenceListRelationFilter
   sequenceEnrollments?: Prisma.SequenceEnrollmentListRelationFilter
+  createdMeetings?: Prisma.MeetingListRelationFilter
+  meetingAttendees?: Prisma.MeetingAttendeeListRelationFilter
+  createdCalls?: Prisma.CallListRelationFilter
 }, "id" | "organizationId_email">
 
 export type UserOrderByWithAggregationInput = {
@@ -403,6 +412,9 @@ export type UserCreateInput = {
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -435,6 +447,9 @@ export type UserUncheckedCreateInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUpdateInput = {
@@ -467,6 +482,9 @@ export type UserUpdateInput = {
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -499,6 +517,9 @@ export type UserUncheckedUpdateInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -909,6 +930,50 @@ export type UserUpdateOneWithoutSequenceEnrollmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSequenceEnrollmentsInput, Prisma.UserUpdateWithoutSequenceEnrollmentsInput>, Prisma.UserUncheckedUpdateWithoutSequenceEnrollmentsInput>
 }
 
+export type UserCreateNestedOneWithoutCreatedMeetingsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedMeetingsInput, Prisma.UserUncheckedCreateWithoutCreatedMeetingsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedMeetingsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCreatedMeetingsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedMeetingsInput, Prisma.UserUncheckedCreateWithoutCreatedMeetingsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedMeetingsInput
+  upsert?: Prisma.UserUpsertWithoutCreatedMeetingsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedMeetingsInput, Prisma.UserUpdateWithoutCreatedMeetingsInput>, Prisma.UserUncheckedUpdateWithoutCreatedMeetingsInput>
+}
+
+export type UserCreateNestedOneWithoutMeetingAttendeesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMeetingAttendeesInput, Prisma.UserUncheckedCreateWithoutMeetingAttendeesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMeetingAttendeesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutMeetingAttendeesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMeetingAttendeesInput, Prisma.UserUncheckedCreateWithoutMeetingAttendeesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMeetingAttendeesInput
+  upsert?: Prisma.UserUpsertWithoutMeetingAttendeesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMeetingAttendeesInput, Prisma.UserUpdateWithoutMeetingAttendeesInput>, Prisma.UserUncheckedUpdateWithoutMeetingAttendeesInput>
+}
+
+export type UserCreateNestedOneWithoutCreatedCallsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedCallsInput, Prisma.UserUncheckedCreateWithoutCreatedCallsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedCallsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCreatedCallsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedCallsInput, Prisma.UserUncheckedCreateWithoutCreatedCallsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedCallsInput
+  upsert?: Prisma.UserUpsertWithoutCreatedCallsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedCallsInput, Prisma.UserUpdateWithoutCreatedCallsInput>, Prisma.UserUncheckedUpdateWithoutCreatedCallsInput>
+}
+
 export type UserCreateWithoutOrganizationInput = {
   id?: string
   email: string
@@ -938,6 +1003,9 @@ export type UserCreateWithoutOrganizationInput = {
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutOrganizationInput = {
@@ -969,6 +1037,9 @@ export type UserUncheckedCreateWithoutOrganizationInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutOrganizationInput = {
@@ -1044,6 +1115,9 @@ export type UserCreateWithoutSessionsInput = {
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1075,6 +1149,9 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1122,6 +1199,9 @@ export type UserUpdateWithoutSessionsInput = {
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1153,6 +1233,9 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutOwnedCompaniesInput = {
@@ -1184,6 +1267,9 @@ export type UserCreateWithoutOwnedCompaniesInput = {
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutOwnedCompaniesInput = {
@@ -1215,6 +1301,9 @@ export type UserUncheckedCreateWithoutOwnedCompaniesInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutOwnedCompaniesInput = {
@@ -1262,6 +1351,9 @@ export type UserUpdateWithoutOwnedCompaniesInput = {
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedCompaniesInput = {
@@ -1293,6 +1385,9 @@ export type UserUncheckedUpdateWithoutOwnedCompaniesInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutOwnedContactsInput = {
@@ -1324,6 +1419,9 @@ export type UserCreateWithoutOwnedContactsInput = {
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutOwnedContactsInput = {
@@ -1355,6 +1453,9 @@ export type UserUncheckedCreateWithoutOwnedContactsInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutOwnedContactsInput = {
@@ -1402,6 +1503,9 @@ export type UserUpdateWithoutOwnedContactsInput = {
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedContactsInput = {
@@ -1433,6 +1537,9 @@ export type UserUncheckedUpdateWithoutOwnedContactsInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutAssignedLeadsInput = {
@@ -1464,6 +1571,9 @@ export type UserCreateWithoutAssignedLeadsInput = {
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutAssignedLeadsInput = {
@@ -1495,6 +1605,9 @@ export type UserUncheckedCreateWithoutAssignedLeadsInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutAssignedLeadsInput = {
@@ -1531,6 +1644,9 @@ export type UserCreateWithoutOwnedLeadsInput = {
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutOwnedLeadsInput = {
@@ -1562,6 +1678,9 @@ export type UserUncheckedCreateWithoutOwnedLeadsInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutOwnedLeadsInput = {
@@ -1609,6 +1728,9 @@ export type UserUpdateWithoutAssignedLeadsInput = {
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssignedLeadsInput = {
@@ -1640,6 +1762,9 @@ export type UserUncheckedUpdateWithoutAssignedLeadsInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUpsertWithoutOwnedLeadsInput = {
@@ -1682,6 +1807,9 @@ export type UserUpdateWithoutOwnedLeadsInput = {
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedLeadsInput = {
@@ -1713,6 +1841,9 @@ export type UserUncheckedUpdateWithoutOwnedLeadsInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutOwnedDealsInput = {
@@ -1744,6 +1875,9 @@ export type UserCreateWithoutOwnedDealsInput = {
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutOwnedDealsInput = {
@@ -1775,6 +1909,9 @@ export type UserUncheckedCreateWithoutOwnedDealsInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutOwnedDealsInput = {
@@ -1822,6 +1959,9 @@ export type UserUpdateWithoutOwnedDealsInput = {
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedDealsInput = {
@@ -1853,6 +1993,9 @@ export type UserUncheckedUpdateWithoutOwnedDealsInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutCreatedTasksInput = {
@@ -1884,6 +2027,9 @@ export type UserCreateWithoutCreatedTasksInput = {
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutCreatedTasksInput = {
@@ -1915,6 +2061,9 @@ export type UserUncheckedCreateWithoutCreatedTasksInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutCreatedTasksInput = {
@@ -1951,6 +2100,9 @@ export type UserCreateWithoutTasksInput = {
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutTasksInput = {
@@ -1982,6 +2134,9 @@ export type UserUncheckedCreateWithoutTasksInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutTasksInput = {
@@ -2029,6 +2184,9 @@ export type UserUpdateWithoutCreatedTasksInput = {
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedTasksInput = {
@@ -2060,6 +2218,9 @@ export type UserUncheckedUpdateWithoutCreatedTasksInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUpsertWithoutTasksInput = {
@@ -2102,6 +2263,9 @@ export type UserUpdateWithoutTasksInput = {
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTasksInput = {
@@ -2133,6 +2297,9 @@ export type UserUncheckedUpdateWithoutTasksInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutActivitiesInput = {
@@ -2164,6 +2331,9 @@ export type UserCreateWithoutActivitiesInput = {
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutActivitiesInput = {
@@ -2195,6 +2365,9 @@ export type UserUncheckedCreateWithoutActivitiesInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutActivitiesInput = {
@@ -2242,6 +2415,9 @@ export type UserUpdateWithoutActivitiesInput = {
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutActivitiesInput = {
@@ -2273,6 +2449,9 @@ export type UserUncheckedUpdateWithoutActivitiesInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutNotesInput = {
@@ -2304,6 +2483,9 @@ export type UserCreateWithoutNotesInput = {
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutNotesInput = {
@@ -2335,6 +2517,9 @@ export type UserUncheckedCreateWithoutNotesInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutNotesInput = {
@@ -2382,6 +2567,9 @@ export type UserUpdateWithoutNotesInput = {
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotesInput = {
@@ -2413,6 +2601,9 @@ export type UserUncheckedUpdateWithoutNotesInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -2444,6 +2635,9 @@ export type UserCreateWithoutNotificationsInput = {
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -2475,6 +2669,9 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -2522,6 +2719,9 @@ export type UserUpdateWithoutNotificationsInput = {
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -2553,6 +2753,9 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutSentEmailsInput = {
@@ -2584,6 +2787,9 @@ export type UserCreateWithoutSentEmailsInput = {
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutSentEmailsInput = {
@@ -2615,6 +2821,9 @@ export type UserUncheckedCreateWithoutSentEmailsInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutSentEmailsInput = {
@@ -2662,6 +2871,9 @@ export type UserUpdateWithoutSentEmailsInput = {
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSentEmailsInput = {
@@ -2693,6 +2905,9 @@ export type UserUncheckedUpdateWithoutSentEmailsInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutRemindersInput = {
@@ -2724,6 +2939,9 @@ export type UserCreateWithoutRemindersInput = {
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutRemindersInput = {
@@ -2755,6 +2973,9 @@ export type UserUncheckedCreateWithoutRemindersInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutRemindersInput = {
@@ -2802,6 +3023,9 @@ export type UserUpdateWithoutRemindersInput = {
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRemindersInput = {
@@ -2833,6 +3057,9 @@ export type UserUncheckedUpdateWithoutRemindersInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutCreatedApiKeysInput = {
@@ -2864,6 +3091,9 @@ export type UserCreateWithoutCreatedApiKeysInput = {
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutCreatedApiKeysInput = {
@@ -2895,6 +3125,9 @@ export type UserUncheckedCreateWithoutCreatedApiKeysInput = {
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutCreatedApiKeysInput = {
@@ -2942,6 +3175,9 @@ export type UserUpdateWithoutCreatedApiKeysInput = {
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedApiKeysInput = {
@@ -2973,6 +3209,9 @@ export type UserUncheckedUpdateWithoutCreatedApiKeysInput = {
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutCreatedSequencesInput = {
@@ -3004,6 +3243,9 @@ export type UserCreateWithoutCreatedSequencesInput = {
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutCreatedSequencesInput = {
@@ -3035,6 +3277,9 @@ export type UserUncheckedCreateWithoutCreatedSequencesInput = {
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutCreatedSequencesInput = {
@@ -3082,6 +3327,9 @@ export type UserUpdateWithoutCreatedSequencesInput = {
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreatedSequencesInput = {
@@ -3113,6 +3361,9 @@ export type UserUncheckedUpdateWithoutCreatedSequencesInput = {
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutSequenceEnrollmentsInput = {
@@ -3144,6 +3395,9 @@ export type UserCreateWithoutSequenceEnrollmentsInput = {
   reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
+  createdMeetings?: Prisma.MeetingCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutSequenceEnrollmentsInput = {
@@ -3175,6 +3429,9 @@ export type UserUncheckedCreateWithoutSequenceEnrollmentsInput = {
   reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
   createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
   createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
+  createdMeetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutSequenceEnrollmentsInput = {
@@ -3222,6 +3479,9 @@ export type UserUpdateWithoutSequenceEnrollmentsInput = {
   reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
+  createdMeetings?: Prisma.MeetingUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSequenceEnrollmentsInput = {
@@ -3253,6 +3513,465 @@ export type UserUncheckedUpdateWithoutSequenceEnrollmentsInput = {
   reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdMeetings?: Prisma.MeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUncheckedUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserCreateWithoutCreatedMeetingsInput = {
+  id?: string
+  email: string
+  name: string
+  passwordHash: string
+  role?: string
+  title?: string
+  phone?: string
+  avatarColor?: string
+  isActive?: boolean
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
+  ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
+  ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
+  assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
+  ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
+  createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
+  notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
+  createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+  meetingAttendees?: Prisma.MeetingAttendeeCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserUncheckedCreateWithoutCreatedMeetingsInput = {
+  id?: string
+  organizationId: string
+  email: string
+  name: string
+  passwordHash: string
+  role?: string
+  title?: string
+  phone?: string
+  avatarColor?: string
+  isActive?: boolean
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
+  ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
+  ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
+  assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
+  ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
+  createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedCreateNestedManyWithoutUserInput
+  createdCalls?: Prisma.CallUncheckedCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserCreateOrConnectWithoutCreatedMeetingsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedMeetingsInput, Prisma.UserUncheckedCreateWithoutCreatedMeetingsInput>
+}
+
+export type UserUpsertWithoutCreatedMeetingsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedMeetingsInput, Prisma.UserUncheckedUpdateWithoutCreatedMeetingsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedMeetingsInput, Prisma.UserUncheckedCreateWithoutCreatedMeetingsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedMeetingsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedMeetingsInput, Prisma.UserUncheckedUpdateWithoutCreatedMeetingsInput>
+}
+
+export type UserUpdateWithoutCreatedMeetingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
+  ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
+  ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
+  assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
+  ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
+  createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
+  createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedMeetingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
+  ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
+  ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
+  assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
+  ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
+  createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUncheckedUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserCreateWithoutMeetingAttendeesInput = {
+  id?: string
+  email: string
+  name: string
+  passwordHash: string
+  role?: string
+  title?: string
+  phone?: string
+  avatarColor?: string
+  isActive?: boolean
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
+  ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
+  ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
+  assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
+  ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
+  createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
+  notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
+  createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingCreateNestedManyWithoutCreatedByInput
+  createdCalls?: Prisma.CallCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserUncheckedCreateWithoutMeetingAttendeesInput = {
+  id?: string
+  organizationId: string
+  email: string
+  name: string
+  passwordHash: string
+  role?: string
+  title?: string
+  phone?: string
+  avatarColor?: string
+  isActive?: boolean
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
+  ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
+  ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
+  assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
+  ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
+  createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  createdCalls?: Prisma.CallUncheckedCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserCreateOrConnectWithoutMeetingAttendeesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMeetingAttendeesInput, Prisma.UserUncheckedCreateWithoutMeetingAttendeesInput>
+}
+
+export type UserUpsertWithoutMeetingAttendeesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMeetingAttendeesInput, Prisma.UserUncheckedUpdateWithoutMeetingAttendeesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMeetingAttendeesInput, Prisma.UserUncheckedCreateWithoutMeetingAttendeesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMeetingAttendeesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMeetingAttendeesInput, Prisma.UserUncheckedUpdateWithoutMeetingAttendeesInput>
+}
+
+export type UserUpdateWithoutMeetingAttendeesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
+  ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
+  ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
+  assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
+  ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
+  createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
+  createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUpdateManyWithoutCreatedByNestedInput
+  createdCalls?: Prisma.CallUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMeetingAttendeesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
+  ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
+  ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
+  assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
+  ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
+  createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdCalls?: Prisma.CallUncheckedUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserCreateWithoutCreatedCallsInput = {
+  id?: string
+  email: string
+  name: string
+  passwordHash: string
+  role?: string
+  title?: string
+  phone?: string
+  avatarColor?: string
+  isActive?: boolean
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
+  ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
+  ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
+  assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
+  ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
+  createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
+  notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
+  createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutCreatedCallsInput = {
+  id?: string
+  organizationId: string
+  email: string
+  name: string
+  passwordHash: string
+  role?: string
+  title?: string
+  phone?: string
+  avatarColor?: string
+  isActive?: boolean
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
+  ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
+  ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
+  assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
+  ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
+  createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+  createdMeetings?: Prisma.MeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutCreatedCallsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedCallsInput, Prisma.UserUncheckedCreateWithoutCreatedCallsInput>
+}
+
+export type UserUpsertWithoutCreatedCallsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedCallsInput, Prisma.UserUncheckedUpdateWithoutCreatedCallsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedCallsInput, Prisma.UserUncheckedCreateWithoutCreatedCallsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedCallsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedCallsInput, Prisma.UserUncheckedUpdateWithoutCreatedCallsInput>
+}
+
+export type UserUpdateWithoutCreatedCallsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
+  ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
+  ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
+  assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
+  ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
+  createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
+  createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedCallsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
+  ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
+  ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
+  assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
+  ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
+  createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyOrganizationInput = {
@@ -3299,6 +4018,9 @@ export type UserUpdateWithoutOrganizationInput = {
   createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrganizationInput = {
@@ -3330,6 +4052,9 @@ export type UserUncheckedUpdateWithoutOrganizationInput = {
   createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
   createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+  createdMeetings?: Prisma.MeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  meetingAttendees?: Prisma.MeetingAttendeeUncheckedUpdateManyWithoutUserNestedInput
+  createdCalls?: Prisma.CallUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutOrganizationInput = {
@@ -3369,6 +4094,9 @@ export type UserCountOutputType = {
   createdApiKeys: number
   createdSequences: number
   sequenceEnrollments: number
+  createdMeetings: number
+  meetingAttendees: number
+  createdCalls: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3388,6 +4116,9 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   createdApiKeys?: boolean | UserCountOutputTypeCountCreatedApiKeysArgs
   createdSequences?: boolean | UserCountOutputTypeCountCreatedSequencesArgs
   sequenceEnrollments?: boolean | UserCountOutputTypeCountSequenceEnrollmentsArgs
+  createdMeetings?: boolean | UserCountOutputTypeCountCreatedMeetingsArgs
+  meetingAttendees?: boolean | UserCountOutputTypeCountMeetingAttendeesArgs
+  createdCalls?: boolean | UserCountOutputTypeCountCreatedCallsArgs
 }
 
 /**
@@ -3512,6 +4243,27 @@ export type UserCountOutputTypeCountSequenceEnrollmentsArgs<ExtArgs extends runt
   where?: Prisma.SequenceEnrollmentWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedMeetingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MeetingWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMeetingAttendeesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MeetingAttendeeWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedCallsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CallWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3544,6 +4296,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdApiKeys?: boolean | Prisma.User$createdApiKeysArgs<ExtArgs>
   createdSequences?: boolean | Prisma.User$createdSequencesArgs<ExtArgs>
   sequenceEnrollments?: boolean | Prisma.User$sequenceEnrollmentsArgs<ExtArgs>
+  createdMeetings?: boolean | Prisma.User$createdMeetingsArgs<ExtArgs>
+  meetingAttendees?: boolean | Prisma.User$meetingAttendeesArgs<ExtArgs>
+  createdCalls?: boolean | Prisma.User$createdCallsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -3616,6 +4371,9 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   createdApiKeys?: boolean | Prisma.User$createdApiKeysArgs<ExtArgs>
   createdSequences?: boolean | Prisma.User$createdSequencesArgs<ExtArgs>
   sequenceEnrollments?: boolean | Prisma.User$sequenceEnrollmentsArgs<ExtArgs>
+  createdMeetings?: boolean | Prisma.User$createdMeetingsArgs<ExtArgs>
+  meetingAttendees?: boolean | Prisma.User$meetingAttendeesArgs<ExtArgs>
+  createdCalls?: boolean | Prisma.User$createdCallsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3645,6 +4403,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     createdApiKeys: Prisma.$ApiKeyPayload<ExtArgs>[]
     createdSequences: Prisma.$SequencePayload<ExtArgs>[]
     sequenceEnrollments: Prisma.$SequenceEnrollmentPayload<ExtArgs>[]
+    createdMeetings: Prisma.$MeetingPayload<ExtArgs>[]
+    meetingAttendees: Prisma.$MeetingAttendeePayload<ExtArgs>[]
+    createdCalls: Prisma.$CallPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -4071,6 +4832,9 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   createdApiKeys<T extends Prisma.User$createdApiKeysArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdApiKeysArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdSequences<T extends Prisma.User$createdSequencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdSequencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SequencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sequenceEnrollments<T extends Prisma.User$sequenceEnrollmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sequenceEnrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SequenceEnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdMeetings<T extends Prisma.User$createdMeetingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdMeetingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MeetingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  meetingAttendees<T extends Prisma.User$meetingAttendeesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$meetingAttendeesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MeetingAttendeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdCalls<T extends Prisma.User$createdCallsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdCallsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CallPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4893,6 +5657,78 @@ export type User$sequenceEnrollmentsArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.SequenceEnrollmentScalarFieldEnum | Prisma.SequenceEnrollmentScalarFieldEnum[]
+}
+
+/**
+ * User.createdMeetings
+ */
+export type User$createdMeetingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Meeting
+   */
+  select?: Prisma.MeetingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Meeting
+   */
+  omit?: Prisma.MeetingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MeetingInclude<ExtArgs> | null
+  where?: Prisma.MeetingWhereInput
+  orderBy?: Prisma.MeetingOrderByWithRelationInput | Prisma.MeetingOrderByWithRelationInput[]
+  cursor?: Prisma.MeetingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MeetingScalarFieldEnum | Prisma.MeetingScalarFieldEnum[]
+}
+
+/**
+ * User.meetingAttendees
+ */
+export type User$meetingAttendeesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MeetingAttendee
+   */
+  select?: Prisma.MeetingAttendeeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MeetingAttendee
+   */
+  omit?: Prisma.MeetingAttendeeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MeetingAttendeeInclude<ExtArgs> | null
+  where?: Prisma.MeetingAttendeeWhereInput
+  orderBy?: Prisma.MeetingAttendeeOrderByWithRelationInput | Prisma.MeetingAttendeeOrderByWithRelationInput[]
+  cursor?: Prisma.MeetingAttendeeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MeetingAttendeeScalarFieldEnum | Prisma.MeetingAttendeeScalarFieldEnum[]
+}
+
+/**
+ * User.createdCalls
+ */
+export type User$createdCallsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Call
+   */
+  select?: Prisma.CallSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Call
+   */
+  omit?: Prisma.CallOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CallInclude<ExtArgs> | null
+  where?: Prisma.CallWhereInput
+  orderBy?: Prisma.CallOrderByWithRelationInput | Prisma.CallOrderByWithRelationInput[]
+  cursor?: Prisma.CallWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CallScalarFieldEnum | Prisma.CallScalarFieldEnum[]
 }
 
 /**

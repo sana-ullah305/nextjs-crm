@@ -181,3 +181,18 @@ export type SequenceEnrollment = Prisma.SequenceEnrollmentModel
  * 
  */
 export type SequenceStepEnrollment = Prisma.SequenceStepEnrollmentModel
+/**
+ * Model Meeting
+ * 
+ */
+export type Meeting = Prisma.MeetingModel
+/**
+ * Model MeetingAttendee
+ * 
+ */
+export type MeetingAttendee = Prisma.MeetingAttendeeModel
+/**
+ * Model Call
+ * 
+ */
+export type Call = Prisma.CallModel

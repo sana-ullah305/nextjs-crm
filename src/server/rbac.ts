@@ -70,6 +70,14 @@ export const PERMISSIONS = [
   "inbound:run",
   // sequence mail scan (managers/admins may trigger scans on demand)
   "sequences:run",
+  // meetings
+  "meetings:read",
+  "meetings:create",
+  "meetings:manage",
+  // calls
+  "calls:read",
+  "calls:create",
+  "calls:manage",
 ] as const;
 
 export type Permission = (typeof PERMISSIONS)[number];
@@ -109,6 +117,10 @@ const REP_PERMS: Permission[] = [
   "notes:create",
   "notes:delete",
   "email:send",
+  "meetings:read",
+  "meetings:create",
+  "calls:read",
+  "calls:create",
 ];
 
 export const ROLE_PERMISSIONS: Record<string, Permission[]> = {
