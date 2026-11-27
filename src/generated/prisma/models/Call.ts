@@ -816,6 +816,7 @@ export type CallCreateOrConnectWithoutOrganizationInput = {
 
 export type CallCreateManyOrganizationInputEnvelope = {
   data: Prisma.CallCreateManyOrganizationInput | Prisma.CallCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type CallUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -893,6 +894,7 @@ export type CallCreateOrConnectWithoutCreatedByInput = {
 
 export type CallCreateManyCreatedByInputEnvelope = {
   data: Prisma.CallCreateManyCreatedByInput | Prisma.CallCreateManyCreatedByInput[]
+  skipDuplicates?: boolean
 }
 
 export type CallUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -950,6 +952,7 @@ export type CallCreateOrConnectWithoutContactInput = {
 
 export type CallCreateManyContactInputEnvelope = {
   data: Prisma.CallCreateManyContactInput | Prisma.CallCreateManyContactInput[]
+  skipDuplicates?: boolean
 }
 
 export type CallUpsertWithWhereUniqueWithoutContactInput = {
@@ -1007,6 +1010,7 @@ export type CallCreateOrConnectWithoutLeadInput = {
 
 export type CallCreateManyLeadInputEnvelope = {
   data: Prisma.CallCreateManyLeadInput | Prisma.CallCreateManyLeadInput[]
+  skipDuplicates?: boolean
 }
 
 export type CallUpsertWithWhereUniqueWithoutLeadInput = {
@@ -1064,6 +1068,7 @@ export type CallCreateOrConnectWithoutDealInput = {
 
 export type CallCreateManyDealInputEnvelope = {
   data: Prisma.CallCreateManyDealInput | Prisma.CallCreateManyDealInput[]
+  skipDuplicates?: boolean
 }
 
 export type CallUpsertWithWhereUniqueWithoutDealInput = {
@@ -2210,6 +2215,7 @@ export type CallCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * The data used to create many Calls.
    */
   data: Prisma.CallCreateManyInput | Prisma.CallCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -2228,6 +2234,7 @@ export type CallCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * The data used to create many Calls.
    */
   data: Prisma.CallCreateManyInput | Prisma.CallCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

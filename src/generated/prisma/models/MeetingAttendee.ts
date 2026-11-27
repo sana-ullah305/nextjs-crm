@@ -492,6 +492,7 @@ export type MeetingAttendeeCreateOrConnectWithoutUserInput = {
 
 export type MeetingAttendeeCreateManyUserInputEnvelope = {
   data: Prisma.MeetingAttendeeCreateManyUserInput | Prisma.MeetingAttendeeCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type MeetingAttendeeUpsertWithWhereUniqueWithoutUserInput = {
@@ -545,6 +546,7 @@ export type MeetingAttendeeCreateOrConnectWithoutContactInput = {
 
 export type MeetingAttendeeCreateManyContactInputEnvelope = {
   data: Prisma.MeetingAttendeeCreateManyContactInput | Prisma.MeetingAttendeeCreateManyContactInput[]
+  skipDuplicates?: boolean
 }
 
 export type MeetingAttendeeUpsertWithWhereUniqueWithoutContactInput = {
@@ -586,6 +588,7 @@ export type MeetingAttendeeCreateOrConnectWithoutMeetingInput = {
 
 export type MeetingAttendeeCreateManyMeetingInputEnvelope = {
   data: Prisma.MeetingAttendeeCreateManyMeetingInput | Prisma.MeetingAttendeeCreateManyMeetingInput[]
+  skipDuplicates?: boolean
 }
 
 export type MeetingAttendeeUpsertWithWhereUniqueWithoutMeetingInput = {
@@ -1444,6 +1447,7 @@ export type MeetingAttendeeCreateManyArgs<ExtArgs extends runtime.Types.Extensio
    * The data used to create many MeetingAttendees.
    */
   data: Prisma.MeetingAttendeeCreateManyInput | Prisma.MeetingAttendeeCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1462,6 +1466,7 @@ export type MeetingAttendeeCreateManyAndReturnArgs<ExtArgs extends runtime.Types
    * The data used to create many MeetingAttendees.
    */
   data: Prisma.MeetingAttendeeCreateManyInput | Prisma.MeetingAttendeeCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

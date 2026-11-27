@@ -1493,6 +1493,7 @@ export type DealCreateOrConnectWithoutOrganizationInput = {
 
 export type DealCreateManyOrganizationInputEnvelope = {
   data: Prisma.DealCreateManyOrganizationInput | Prisma.DealCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type DealUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -1621,6 +1622,7 @@ export type DealCreateOrConnectWithoutOwnerInput = {
 
 export type DealCreateManyOwnerInputEnvelope = {
   data: Prisma.DealCreateManyOwnerInput | Prisma.DealCreateManyOwnerInput[]
+  skipDuplicates?: boolean
 }
 
 export type DealUpsertWithWhereUniqueWithoutOwnerInput = {
@@ -1718,6 +1720,7 @@ export type DealCreateOrConnectWithoutCompanyInput = {
 
 export type DealCreateManyCompanyInputEnvelope = {
   data: Prisma.DealCreateManyCompanyInput | Prisma.DealCreateManyCompanyInput[]
+  skipDuplicates?: boolean
 }
 
 export type DealUpsertWithWhereUniqueWithoutCompanyInput = {
@@ -1815,6 +1818,7 @@ export type DealCreateOrConnectWithoutContactInput = {
 
 export type DealCreateManyContactInputEnvelope = {
   data: Prisma.DealCreateManyContactInput | Prisma.DealCreateManyContactInput[]
+  skipDuplicates?: boolean
 }
 
 export type DealUpsertWithWhereUniqueWithoutContactInput = {
@@ -1912,6 +1916,7 @@ export type DealCreateOrConnectWithoutSourceInput = {
 
 export type DealCreateManySourceInputEnvelope = {
   data: Prisma.DealCreateManySourceInput | Prisma.DealCreateManySourceInput[]
+  skipDuplicates?: boolean
 }
 
 export type DealUpsertWithWhereUniqueWithoutSourceInput = {
@@ -2009,6 +2014,7 @@ export type DealCreateOrConnectWithoutLeadInput = {
 
 export type DealCreateManyLeadInputEnvelope = {
   data: Prisma.DealCreateManyLeadInput | Prisma.DealCreateManyLeadInput[]
+  skipDuplicates?: boolean
 }
 
 export type DealUpsertWithWhereUniqueWithoutLeadInput = {
@@ -2106,6 +2112,7 @@ export type DealCreateOrConnectWithoutPipelineInput = {
 
 export type DealCreateManyPipelineInputEnvelope = {
   data: Prisma.DealCreateManyPipelineInput | Prisma.DealCreateManyPipelineInput[]
+  skipDuplicates?: boolean
 }
 
 export type DealUpsertWithWhereUniqueWithoutPipelineInput = {
@@ -2203,6 +2210,7 @@ export type DealCreateOrConnectWithoutStageInput = {
 
 export type DealCreateManyStageInputEnvelope = {
   data: Prisma.DealCreateManyStageInput | Prisma.DealCreateManyStageInput[]
+  skipDuplicates?: boolean
 }
 
 export type DealUpsertWithWhereUniqueWithoutStageInput = {
@@ -2460,6 +2468,7 @@ export type DealCreateOrConnectWithoutLostReasonRefInput = {
 
 export type DealCreateManyLostReasonRefInputEnvelope = {
   data: Prisma.DealCreateManyLostReasonRefInput | Prisma.DealCreateManyLostReasonRefInput[]
+  skipDuplicates?: boolean
 }
 
 export type DealUpsertWithWhereUniqueWithoutLostReasonRefInput = {
@@ -5937,6 +5946,7 @@ export type DealCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * The data used to create many Deals.
    */
   data: Prisma.DealCreateManyInput | Prisma.DealCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -5955,6 +5965,7 @@ export type DealCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * The data used to create many Deals.
    */
   data: Prisma.DealCreateManyInput | Prisma.DealCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

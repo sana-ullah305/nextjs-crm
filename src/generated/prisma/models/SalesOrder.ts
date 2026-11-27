@@ -904,6 +904,7 @@ export type SalesOrderCreateOrConnectWithoutOrganizationInput = {
 
 export type SalesOrderCreateManyOrganizationInputEnvelope = {
   data: Prisma.SalesOrderCreateManyOrganizationInput | Prisma.SalesOrderCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type SalesOrderUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -989,6 +990,7 @@ export type SalesOrderCreateOrConnectWithoutCompanyInput = {
 
 export type SalesOrderCreateManyCompanyInputEnvelope = {
   data: Prisma.SalesOrderCreateManyCompanyInput | Prisma.SalesOrderCreateManyCompanyInput[]
+  skipDuplicates?: boolean
 }
 
 export type SalesOrderUpsertWithWhereUniqueWithoutCompanyInput = {
@@ -1052,6 +1054,7 @@ export type SalesOrderCreateOrConnectWithoutContactInput = {
 
 export type SalesOrderCreateManyContactInputEnvelope = {
   data: Prisma.SalesOrderCreateManyContactInput | Prisma.SalesOrderCreateManyContactInput[]
+  skipDuplicates?: boolean
 }
 
 export type SalesOrderUpsertWithWhereUniqueWithoutContactInput = {
@@ -1115,6 +1118,7 @@ export type SalesOrderCreateOrConnectWithoutDealInput = {
 
 export type SalesOrderCreateManyDealInputEnvelope = {
   data: Prisma.SalesOrderCreateManyDealInput | Prisma.SalesOrderCreateManyDealInput[]
+  skipDuplicates?: boolean
 }
 
 export type SalesOrderUpsertWithWhereUniqueWithoutDealInput = {
@@ -1178,6 +1182,7 @@ export type SalesOrderCreateOrConnectWithoutQuotationInput = {
 
 export type SalesOrderCreateManyQuotationInputEnvelope = {
   data: Prisma.SalesOrderCreateManyQuotationInput | Prisma.SalesOrderCreateManyQuotationInput[]
+  skipDuplicates?: boolean
 }
 
 export type SalesOrderUpsertWithWhereUniqueWithoutQuotationInput = {
@@ -2513,6 +2518,7 @@ export type SalesOrderCreateManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * The data used to create many SalesOrders.
    */
   data: Prisma.SalesOrderCreateManyInput | Prisma.SalesOrderCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -2531,6 +2537,7 @@ export type SalesOrderCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exte
    * The data used to create many SalesOrders.
    */
   data: Prisma.SalesOrderCreateManyInput | Prisma.SalesOrderCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

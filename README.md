@@ -84,7 +84,7 @@ npm install
 # 2. Configure environment
 cp .env.example .env
 
-# 3. Create the database and apply migrations
+# 3. Create the PostgreSQL database and apply migrations
 npm run db:migrate
 
 # 4. Seed realistic demo data (5 users, 8 companies, 30+ contacts,
@@ -127,18 +127,19 @@ before any real deployment.
 
 ## Database
 
-SQLite via Prisma (driver adapters) so the app runs anywhere with zero
-external services. The schema avoids Postgres-specific features, so
-switching to PostgreSQL in production is a one-line change:
+PostgreSQL via Prisma 7 (driver adapters). The datasource provider is
+`postgresql` and `DATABASE_URL` is required (there is no SQLite fallback):
 
 ```env
-DATABASE_URL="postgresql://user:pass@host:5432/crm"
+DATABASE_URL="postgresql://user:password@localhost:5432/crm"
 ```
 
-…then set the `sqlite` → `postgresql` provider in `prisma/schema.prisma`,
-swap the Prisma adapter in `src/server/db.ts` (e.g.
-`@prisma/adapter-pg`), and run `prisma migrate dev`. No application code
-changes. Schema documentation: `docs/database-schema.md`.
+`src/server/db.ts` connects through the official `@prisma/adapter-pg`
+driver adapter, which owns the connection pool. Provision a database and
+run `npm run db:migrate` (or `npx prisma db push` for a throwaway DB).
+Setup details and the SQLite→PostgreSQL migration guide:
+`docs/database-postgresql.md`. Schema documentation:
+`docs/database-schema.md`.
 
 ## Testing
 
@@ -190,19 +191,18 @@ API reference: `docs/api.md`.
 ```bash
 npm ci
 npm run build
-DATABASE_URL="file:./data/crm.db" npm run db:migrate
+DATABASE_URL="postgresql://user:password@localhost:5432/crm" npm run db:migrate
 npm run start   # set PORT if needed
 ```
 
 Run behind a TLS-terminating reverse proxy (Caddy, nginx). Cookies are
 `Secure`-flagged automatically in production.
 
-### PostgreSQL production
+### PostgreSQL (default)
 
-1. Provision PostgreSQL and set `DATABASE_URL` to the Postgres URL.
-2. Change the provider in `prisma/schema.prisma` to `postgresql`.
-3. Swap the adapter in `src/server/db.ts` to `@prisma/adapter-pg`.
-4. `npm run db:migrate && npm run start`.
+PostgreSQL is the supported database. Provision a server, set
+`DATABASE_URL`, then `npm run db:migrate && npm run start`. See
+`docs/database-postgresql.md` for provisioning and migration.
 
 ### Scaling notes
 
@@ -216,14 +216,15 @@ Run behind a TLS-terminating reverse proxy (Caddy, nginx). Cookies are
 - Reminder scans run when `POST /api/reminders/run` is called (requires
   MANAGER/ADMIN). Point a cron job at it every 15 minutes, or use an uptime
   monitor's webhook with a service account session.
-- Global search hits indexed columns (`email`, `name`) per entity; the
-  SQLite `contains` filter is case-insensitive. For large Postgres
-  deployments consider trigram indexes per entity.
+- Global search hits indexed columns (`email`, `name`) per entity. On
+  PostgreSQL `contains` is case-sensitive; for large deployments consider
+  `mode: "insensitive"` or trigram (`pg_trgm`) indexes per entity.
 
 ## Documentation
 
 - [Architecture](docs/architecture.md)
 - [Database schema](docs/database-schema.md)
+- [PostgreSQL setup & migration](docs/database-postgresql.md)
 - [Implementation plan](docs/implementation-plan.md)
 - [Security](docs/security.md)
 - [API reference](docs/api.md)

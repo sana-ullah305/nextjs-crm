@@ -1304,6 +1304,7 @@ export type LeadCreateOrConnectWithoutOrganizationInput = {
 
 export type LeadCreateManyOrganizationInputEnvelope = {
   data: Prisma.LeadCreateManyOrganizationInput | Prisma.LeadCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type LeadUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -1423,6 +1424,7 @@ export type LeadCreateOrConnectWithoutOwnerInput = {
 
 export type LeadCreateManyOwnerInputEnvelope = {
   data: Prisma.LeadCreateManyOwnerInput | Prisma.LeadCreateManyOwnerInput[]
+  skipDuplicates?: boolean
 }
 
 export type LeadCreateWithoutAssignedUserInput = {
@@ -1498,6 +1500,7 @@ export type LeadCreateOrConnectWithoutAssignedUserInput = {
 
 export type LeadCreateManyAssignedUserInputEnvelope = {
   data: Prisma.LeadCreateManyAssignedUserInput | Prisma.LeadCreateManyAssignedUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type LeadUpsertWithWhereUniqueWithoutOwnerInput = {
@@ -1605,6 +1608,7 @@ export type LeadCreateOrConnectWithoutCompanyInput = {
 
 export type LeadCreateManyCompanyInputEnvelope = {
   data: Prisma.LeadCreateManyCompanyInput | Prisma.LeadCreateManyCompanyInput[]
+  skipDuplicates?: boolean
 }
 
 export type LeadUpsertWithWhereUniqueWithoutCompanyInput = {
@@ -1696,6 +1700,7 @@ export type LeadCreateOrConnectWithoutContactInput = {
 
 export type LeadCreateManyContactInputEnvelope = {
   data: Prisma.LeadCreateManyContactInput | Prisma.LeadCreateManyContactInput[]
+  skipDuplicates?: boolean
 }
 
 export type LeadUpsertWithWhereUniqueWithoutContactInput = {
@@ -1787,6 +1792,7 @@ export type LeadCreateOrConnectWithoutSourceInput = {
 
 export type LeadCreateManySourceInputEnvelope = {
   data: Prisma.LeadCreateManySourceInput | Prisma.LeadCreateManySourceInput[]
+  skipDuplicates?: boolean
 }
 
 export type LeadUpsertWithWhereUniqueWithoutSourceInput = {
@@ -4824,6 +4830,7 @@ export type LeadCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * The data used to create many Leads.
    */
   data: Prisma.LeadCreateManyInput | Prisma.LeadCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -4842,6 +4849,7 @@ export type LeadCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * The data used to create many Leads.
    */
   data: Prisma.LeadCreateManyInput | Prisma.LeadCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

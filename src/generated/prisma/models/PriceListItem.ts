@@ -498,6 +498,7 @@ export type PriceListItemCreateOrConnectWithoutProductInput = {
 
 export type PriceListItemCreateManyProductInputEnvelope = {
   data: Prisma.PriceListItemCreateManyProductInput | Prisma.PriceListItemCreateManyProductInput[]
+  skipDuplicates?: boolean
 }
 
 export type PriceListItemUpsertWithWhereUniqueWithoutProductInput = {
@@ -551,6 +552,7 @@ export type PriceListItemCreateOrConnectWithoutPriceListInput = {
 
 export type PriceListItemCreateManyPriceListInputEnvelope = {
   data: Prisma.PriceListItemCreateManyPriceListInput | Prisma.PriceListItemCreateManyPriceListInput[]
+  skipDuplicates?: boolean
 }
 
 export type PriceListItemUpsertWithWhereUniqueWithoutPriceListInput = {
@@ -1369,6 +1371,7 @@ export type PriceListItemCreateManyArgs<ExtArgs extends runtime.Types.Extensions
    * The data used to create many PriceListItems.
    */
   data: Prisma.PriceListItemCreateManyInput | Prisma.PriceListItemCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1387,6 +1390,7 @@ export type PriceListItemCreateManyAndReturnArgs<ExtArgs extends runtime.Types.E
    * The data used to create many PriceListItems.
    */
   data: Prisma.PriceListItemCreateManyInput | Prisma.PriceListItemCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

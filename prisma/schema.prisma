@@ -1,5 +1,7 @@
-// CRM database schema. SQLite today; written to be PostgreSQL-compatible.
+// CRM database schema. PostgreSQL via Prisma (driver adapters).
 // No enums (string fields + Zod validation), no arrays (join tables).
+// Money fields (Lead.estimatedValue, Deal.value) use Float (double
+// precision); see docs/database-postgresql.md for the Decimal follow-up.
 
 generator client {
   provider = "prisma-client"
@@ -7,7 +9,10 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
+  // Prisma 7: the connection URL is NOT set here. Migrate reads it from
+  // prisma.config.ts (datasource.url); the client connects via the
+  // @prisma/adapter-pg driver adapter in src/server/db.ts.
 }
 
 model Organization {

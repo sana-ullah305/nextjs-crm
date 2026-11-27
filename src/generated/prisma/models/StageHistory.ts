@@ -608,6 +608,7 @@ export type StageHistoryCreateOrConnectWithoutUserInput = {
 
 export type StageHistoryCreateManyUserInputEnvelope = {
   data: Prisma.StageHistoryCreateManyUserInput | Prisma.StageHistoryCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type StageHistoryUpsertWithWhereUniqueWithoutUserInput = {
@@ -670,6 +671,7 @@ export type StageHistoryCreateOrConnectWithoutFromStageInput = {
 
 export type StageHistoryCreateManyFromStageInputEnvelope = {
   data: Prisma.StageHistoryCreateManyFromStageInput | Prisma.StageHistoryCreateManyFromStageInput[]
+  skipDuplicates?: boolean
 }
 
 export type StageHistoryCreateWithoutToStageInput = {
@@ -701,6 +703,7 @@ export type StageHistoryCreateOrConnectWithoutToStageInput = {
 
 export type StageHistoryCreateManyToStageInputEnvelope = {
   data: Prisma.StageHistoryCreateManyToStageInput | Prisma.StageHistoryCreateManyToStageInput[]
+  skipDuplicates?: boolean
 }
 
 export type StageHistoryUpsertWithWhereUniqueWithoutFromStageInput = {
@@ -764,6 +767,7 @@ export type StageHistoryCreateOrConnectWithoutDealInput = {
 
 export type StageHistoryCreateManyDealInputEnvelope = {
   data: Prisma.StageHistoryCreateManyDealInput | Prisma.StageHistoryCreateManyDealInput[]
+  skipDuplicates?: boolean
 }
 
 export type StageHistoryUpsertWithWhereUniqueWithoutDealInput = {
@@ -1728,6 +1732,7 @@ export type StageHistoryCreateManyArgs<ExtArgs extends runtime.Types.Extensions.
    * The data used to create many StageHistories.
    */
   data: Prisma.StageHistoryCreateManyInput | Prisma.StageHistoryCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1746,6 +1751,7 @@ export type StageHistoryCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ex
    * The data used to create many StageHistories.
    */
   data: Prisma.StageHistoryCreateManyInput | Prisma.StageHistoryCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

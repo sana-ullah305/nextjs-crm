@@ -894,6 +894,7 @@ export type SentEmailCreateOrConnectWithoutOrganizationInput = {
 
 export type SentEmailCreateManyOrganizationInputEnvelope = {
   data: Prisma.SentEmailCreateManyOrganizationInput | Prisma.SentEmailCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type SentEmailUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -979,6 +980,7 @@ export type SentEmailCreateOrConnectWithoutUserInput = {
 
 export type SentEmailCreateManyUserInputEnvelope = {
   data: Prisma.SentEmailCreateManyUserInput | Prisma.SentEmailCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type SentEmailUpsertWithWhereUniqueWithoutUserInput = {
@@ -1042,6 +1044,7 @@ export type SentEmailCreateOrConnectWithoutContactInput = {
 
 export type SentEmailCreateManyContactInputEnvelope = {
   data: Prisma.SentEmailCreateManyContactInput | Prisma.SentEmailCreateManyContactInput[]
+  skipDuplicates?: boolean
 }
 
 export type SentEmailUpsertWithWhereUniqueWithoutContactInput = {
@@ -1105,6 +1108,7 @@ export type SentEmailCreateOrConnectWithoutLeadInput = {
 
 export type SentEmailCreateManyLeadInputEnvelope = {
   data: Prisma.SentEmailCreateManyLeadInput | Prisma.SentEmailCreateManyLeadInput[]
+  skipDuplicates?: boolean
 }
 
 export type SentEmailUpsertWithWhereUniqueWithoutLeadInput = {
@@ -1168,6 +1172,7 @@ export type SentEmailCreateOrConnectWithoutDealInput = {
 
 export type SentEmailCreateManyDealInputEnvelope = {
   data: Prisma.SentEmailCreateManyDealInput | Prisma.SentEmailCreateManyDealInput[]
+  skipDuplicates?: boolean
 }
 
 export type SentEmailUpsertWithWhereUniqueWithoutDealInput = {
@@ -1231,6 +1236,7 @@ export type SentEmailCreateOrConnectWithoutTemplateInput = {
 
 export type SentEmailCreateManyTemplateInputEnvelope = {
   data: Prisma.SentEmailCreateManyTemplateInput | Prisma.SentEmailCreateManyTemplateInput[]
+  skipDuplicates?: boolean
 }
 
 export type SentEmailUpsertWithWhereUniqueWithoutTemplateInput = {
@@ -2648,6 +2654,7 @@ export type SentEmailCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * The data used to create many SentEmails.
    */
   data: Prisma.SentEmailCreateManyInput | Prisma.SentEmailCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -2666,6 +2673,7 @@ export type SentEmailCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exten
    * The data used to create many SentEmails.
    */
   data: Prisma.SentEmailCreateManyInput | Prisma.SentEmailCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

@@ -547,6 +547,7 @@ export type SequenceCreateOrConnectWithoutOrganizationInput = {
 
 export type SequenceCreateManyOrganizationInputEnvelope = {
   data: Prisma.SequenceCreateManyOrganizationInput | Prisma.SequenceCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type SequenceUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -610,6 +611,7 @@ export type SequenceCreateOrConnectWithoutCreatedByInput = {
 
 export type SequenceCreateManyCreatedByInputEnvelope = {
   data: Prisma.SequenceCreateManyCreatedByInput | Prisma.SequenceCreateManyCreatedByInput[]
+  skipDuplicates?: boolean
 }
 
 export type SequenceUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -1640,6 +1642,7 @@ export type SequenceCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * The data used to create many Sequences.
    */
   data: Prisma.SequenceCreateManyInput | Prisma.SequenceCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1658,6 +1661,7 @@ export type SequenceCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extens
    * The data used to create many Sequences.
    */
   data: Prisma.SequenceCreateManyInput | Prisma.SequenceCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

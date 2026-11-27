@@ -668,6 +668,7 @@ export type MeetingCreateOrConnectWithoutOrganizationInput = {
 
 export type MeetingCreateManyOrganizationInputEnvelope = {
   data: Prisma.MeetingCreateManyOrganizationInput | Prisma.MeetingCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type MeetingUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -747,6 +748,7 @@ export type MeetingCreateOrConnectWithoutCreatedByInput = {
 
 export type MeetingCreateManyCreatedByInputEnvelope = {
   data: Prisma.MeetingCreateManyCreatedByInput | Prisma.MeetingCreateManyCreatedByInput[]
+  skipDuplicates?: boolean
 }
 
 export type MeetingUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -1800,6 +1802,7 @@ export type MeetingCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * The data used to create many Meetings.
    */
   data: Prisma.MeetingCreateManyInput | Prisma.MeetingCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1818,6 +1821,7 @@ export type MeetingCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensi
    * The data used to create many Meetings.
    */
   data: Prisma.MeetingCreateManyInput | Prisma.MeetingCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

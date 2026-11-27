@@ -1,5 +1,7 @@
 # Database Schema
 
+> Provider: PostgreSQL (Prisma 7, `@prisma/adapter-pg`). See `docs/database-postgresql.md` for setup and migration.
+
 ## Entity Relationship Overview
 
 ```

@@ -576,6 +576,7 @@ export type DealLineItemCreateOrConnectWithoutDealInput = {
 
 export type DealLineItemCreateManyDealInputEnvelope = {
   data: Prisma.DealLineItemCreateManyDealInput | Prisma.DealLineItemCreateManyDealInput[]
+  skipDuplicates?: boolean
 }
 
 export type DealLineItemUpsertWithWhereUniqueWithoutDealInput = {
@@ -638,6 +639,7 @@ export type DealLineItemCreateOrConnectWithoutProductInput = {
 
 export type DealLineItemCreateManyProductInputEnvelope = {
   data: Prisma.DealLineItemCreateManyProductInput | Prisma.DealLineItemCreateManyProductInput[]
+  skipDuplicates?: boolean
 }
 
 export type DealLineItemUpsertWithWhereUniqueWithoutProductInput = {
@@ -1498,6 +1500,7 @@ export type DealLineItemCreateManyArgs<ExtArgs extends runtime.Types.Extensions.
    * The data used to create many DealLineItems.
    */
   data: Prisma.DealLineItemCreateManyInput | Prisma.DealLineItemCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1516,6 +1519,7 @@ export type DealLineItemCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ex
    * The data used to create many DealLineItems.
    */
   data: Prisma.DealLineItemCreateManyInput | Prisma.DealLineItemCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

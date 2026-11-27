@@ -465,6 +465,7 @@ export type LeadSourceCreateOrConnectWithoutOrganizationInput = {
 
 export type LeadSourceCreateManyOrganizationInputEnvelope = {
   data: Prisma.LeadSourceCreateManyOrganizationInput | Prisma.LeadSourceCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type LeadSourceUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -1419,6 +1420,7 @@ export type LeadSourceCreateManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * The data used to create many LeadSources.
    */
   data: Prisma.LeadSourceCreateManyInput | Prisma.LeadSourceCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1437,6 +1439,7 @@ export type LeadSourceCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exte
    * The data used to create many LeadSources.
    */
   data: Prisma.LeadSourceCreateManyInput | Prisma.LeadSourceCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

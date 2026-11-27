@@ -842,6 +842,7 @@ export type QuotationCreateOrConnectWithoutOrganizationInput = {
 
 export type QuotationCreateManyOrganizationInputEnvelope = {
   data: Prisma.QuotationCreateManyOrganizationInput | Prisma.QuotationCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type QuotationUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -923,6 +924,7 @@ export type QuotationCreateOrConnectWithoutCompanyInput = {
 
 export type QuotationCreateManyCompanyInputEnvelope = {
   data: Prisma.QuotationCreateManyCompanyInput | Prisma.QuotationCreateManyCompanyInput[]
+  skipDuplicates?: boolean
 }
 
 export type QuotationUpsertWithWhereUniqueWithoutCompanyInput = {
@@ -984,6 +986,7 @@ export type QuotationCreateOrConnectWithoutContactInput = {
 
 export type QuotationCreateManyContactInputEnvelope = {
   data: Prisma.QuotationCreateManyContactInput | Prisma.QuotationCreateManyContactInput[]
+  skipDuplicates?: boolean
 }
 
 export type QuotationUpsertWithWhereUniqueWithoutContactInput = {
@@ -1045,6 +1048,7 @@ export type QuotationCreateOrConnectWithoutDealInput = {
 
 export type QuotationCreateManyDealInputEnvelope = {
   data: Prisma.QuotationCreateManyDealInput | Prisma.QuotationCreateManyDealInput[]
+  skipDuplicates?: boolean
 }
 
 export type QuotationUpsertWithWhereUniqueWithoutDealInput = {
@@ -2359,6 +2363,7 @@ export type QuotationCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * The data used to create many Quotations.
    */
   data: Prisma.QuotationCreateManyInput | Prisma.QuotationCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -2377,6 +2382,7 @@ export type QuotationCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exten
    * The data used to create many Quotations.
    */
   data: Prisma.QuotationCreateManyInput | Prisma.QuotationCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

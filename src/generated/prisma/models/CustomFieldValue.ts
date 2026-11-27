@@ -434,6 +434,7 @@ export type CustomFieldValueCreateOrConnectWithoutFieldInput = {
 
 export type CustomFieldValueCreateManyFieldInputEnvelope = {
   data: Prisma.CustomFieldValueCreateManyFieldInput | Prisma.CustomFieldValueCreateManyFieldInput[]
+  skipDuplicates?: boolean
 }
 
 export type CustomFieldValueUpsertWithWhereUniqueWithoutFieldInput = {
@@ -1235,6 +1236,7 @@ export type CustomFieldValueCreateManyArgs<ExtArgs extends runtime.Types.Extensi
    * The data used to create many CustomFieldValues.
    */
   data: Prisma.CustomFieldValueCreateManyInput | Prisma.CustomFieldValueCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1253,6 +1255,7 @@ export type CustomFieldValueCreateManyAndReturnArgs<ExtArgs extends runtime.Type
    * The data used to create many CustomFieldValues.
    */
   data: Prisma.CustomFieldValueCreateManyInput | Prisma.CustomFieldValueCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

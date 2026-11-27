@@ -896,6 +896,7 @@ export type CompanyCreateOrConnectWithoutOrganizationInput = {
 
 export type CompanyCreateManyOrganizationInputEnvelope = {
   data: Prisma.CompanyCreateManyOrganizationInput | Prisma.CompanyCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type CompanyUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -996,6 +997,7 @@ export type CompanyCreateOrConnectWithoutOwnerInput = {
 
 export type CompanyCreateManyOwnerInputEnvelope = {
   data: Prisma.CompanyCreateManyOwnerInput | Prisma.CompanyCreateManyOwnerInput[]
+  skipDuplicates?: boolean
 }
 
 export type CompanyUpsertWithWhereUniqueWithoutOwnerInput = {
@@ -2949,6 +2951,7 @@ export type CompanyCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * The data used to create many Companies.
    */
   data: Prisma.CompanyCreateManyInput | Prisma.CompanyCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -2967,6 +2970,7 @@ export type CompanyCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensi
    * The data used to create many Companies.
    */
   data: Prisma.CompanyCreateManyInput | Prisma.CompanyCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

@@ -812,6 +812,7 @@ export type TaskCreateOrConnectWithoutOrganizationInput = {
 
 export type TaskCreateManyOrganizationInputEnvelope = {
   data: Prisma.TaskCreateManyOrganizationInput | Prisma.TaskCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type TaskUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -901,6 +902,7 @@ export type TaskCreateOrConnectWithoutAssignedUserInput = {
 
 export type TaskCreateManyAssignedUserInputEnvelope = {
   data: Prisma.TaskCreateManyAssignedUserInput | Prisma.TaskCreateManyAssignedUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type TaskCreateWithoutCreatedByInput = {
@@ -952,6 +954,7 @@ export type TaskCreateOrConnectWithoutCreatedByInput = {
 
 export type TaskCreateManyCreatedByInputEnvelope = {
   data: Prisma.TaskCreateManyCreatedByInput | Prisma.TaskCreateManyCreatedByInput[]
+  skipDuplicates?: boolean
 }
 
 export type TaskUpsertWithWhereUniqueWithoutAssignedUserInput = {
@@ -2385,6 +2388,7 @@ export type TaskCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * The data used to create many Tasks.
    */
   data: Prisma.TaskCreateManyInput | Prisma.TaskCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -2403,6 +2407,7 @@ export type TaskCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * The data used to create many Tasks.
    */
   data: Prisma.TaskCreateManyInput | Prisma.TaskCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

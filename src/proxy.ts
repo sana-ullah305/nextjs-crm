@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 // authentication (DB-backed session validation) is enforced in:
 //  - every API route handler (apiHandler → requireApiUser), and
 //  - the (app) server layout.
-// This keeps the Edge bundle free of native modules (better-sqlite3).
+// This keeps the Edge bundle free of native modules (pg / @prisma/adapter-pg).
 
 const SESSION_COOKIE = "crm_session";
 

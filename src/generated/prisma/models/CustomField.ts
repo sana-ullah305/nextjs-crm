@@ -548,6 +548,7 @@ export type CustomFieldCreateOrConnectWithoutOrganizationInput = {
 
 export type CustomFieldCreateManyOrganizationInputEnvelope = {
   data: Prisma.CustomFieldCreateManyOrganizationInput | Prisma.CustomFieldCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type CustomFieldUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -1472,6 +1473,7 @@ export type CustomFieldCreateManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * The data used to create many CustomFields.
    */
   data: Prisma.CustomFieldCreateManyInput | Prisma.CustomFieldCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1490,6 +1492,7 @@ export type CustomFieldCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    * The data used to create many CustomFields.
    */
   data: Prisma.CustomFieldCreateManyInput | Prisma.CustomFieldCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

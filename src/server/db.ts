@@ -1,21 +1,23 @@
 import { PrismaClient } from "@/generated/prisma/client";
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
-import path from "node:path";
+import { PrismaPg } from "@prisma/adapter-pg";
 
-const url = process.env.DATABASE_URL ?? "file:./dev.db";
-const dbFile = url.startsWith("file:") ? url.slice(5) : url;
+// Prisma 7 requires a driver adapter. For PostgreSQL we use the official
+// `@prisma/adapter-pg` adapter (node-postgres under the hood). Its internal
+// connection pool is shared for the lifetime of this module instance, so the
+// dev-mode global singleton is no longer needed.
+const connectionString = process.env.DATABASE_URL;
+if (!connectionString) {
+  throw new Error(
+    "DATABASE_URL is required. Set it to a PostgreSQL connection string, " +
+      'e.g. "postgresql://user:password@localhost:5432/crm".',
+  );
+}
 
-const adapter = new PrismaBetterSqlite3({ url: `file:${path.resolve(dbFile)}` });
+const adapter = new PrismaPg({ connectionString });
 
-const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
-
-export const db =
-  globalForPrisma.prisma ??
-  new PrismaClient({
-    adapter,
-    log: process.env.NODE_ENV === "development" ? ["warn", "error"] : ["error"],
-  });
-
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = db;
+export const db = new PrismaClient({
+  adapter,
+  log: process.env.NODE_ENV === "development" ? ["warn", "error"] : ["error"],
+});
 
 export default db;

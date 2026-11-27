@@ -576,6 +576,7 @@ export type QuotationLineItemCreateOrConnectWithoutProductInput = {
 
 export type QuotationLineItemCreateManyProductInputEnvelope = {
   data: Prisma.QuotationLineItemCreateManyProductInput | Prisma.QuotationLineItemCreateManyProductInput[]
+  skipDuplicates?: boolean
 }
 
 export type QuotationLineItemUpsertWithWhereUniqueWithoutProductInput = {
@@ -638,6 +639,7 @@ export type QuotationLineItemCreateOrConnectWithoutQuotationInput = {
 
 export type QuotationLineItemCreateManyQuotationInputEnvelope = {
   data: Prisma.QuotationLineItemCreateManyQuotationInput | Prisma.QuotationLineItemCreateManyQuotationInput[]
+  skipDuplicates?: boolean
 }
 
 export type QuotationLineItemUpsertWithWhereUniqueWithoutQuotationInput = {
@@ -1498,6 +1500,7 @@ export type QuotationLineItemCreateManyArgs<ExtArgs extends runtime.Types.Extens
    * The data used to create many QuotationLineItems.
    */
   data: Prisma.QuotationLineItemCreateManyInput | Prisma.QuotationLineItemCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1516,6 +1519,7 @@ export type QuotationLineItemCreateManyAndReturnArgs<ExtArgs extends runtime.Typ
    * The data used to create many QuotationLineItems.
    */
   data: Prisma.QuotationLineItemCreateManyInput | Prisma.QuotationLineItemCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

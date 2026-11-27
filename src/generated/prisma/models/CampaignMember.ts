@@ -578,6 +578,7 @@ export type CampaignMemberCreateOrConnectWithoutContactInput = {
 
 export type CampaignMemberCreateManyContactInputEnvelope = {
   data: Prisma.CampaignMemberCreateManyContactInput | Prisma.CampaignMemberCreateManyContactInput[]
+  skipDuplicates?: boolean
 }
 
 export type CampaignMemberUpsertWithWhereUniqueWithoutContactInput = {
@@ -634,6 +635,7 @@ export type CampaignMemberCreateOrConnectWithoutLeadInput = {
 
 export type CampaignMemberCreateManyLeadInputEnvelope = {
   data: Prisma.CampaignMemberCreateManyLeadInput | Prisma.CampaignMemberCreateManyLeadInput[]
+  skipDuplicates?: boolean
 }
 
 export type CampaignMemberUpsertWithWhereUniqueWithoutLeadInput = {
@@ -677,6 +679,7 @@ export type CampaignMemberCreateOrConnectWithoutDealInput = {
 
 export type CampaignMemberCreateManyDealInputEnvelope = {
   data: Prisma.CampaignMemberCreateManyDealInput | Prisma.CampaignMemberCreateManyDealInput[]
+  skipDuplicates?: boolean
 }
 
 export type CampaignMemberUpsertWithWhereUniqueWithoutDealInput = {
@@ -720,6 +723,7 @@ export type CampaignMemberCreateOrConnectWithoutCampaignInput = {
 
 export type CampaignMemberCreateManyCampaignInputEnvelope = {
   data: Prisma.CampaignMemberCreateManyCampaignInput | Prisma.CampaignMemberCreateManyCampaignInput[]
+  skipDuplicates?: boolean
 }
 
 export type CampaignMemberUpsertWithWhereUniqueWithoutCampaignInput = {
@@ -1640,6 +1644,7 @@ export type CampaignMemberCreateManyArgs<ExtArgs extends runtime.Types.Extension
    * The data used to create many CampaignMembers.
    */
   data: Prisma.CampaignMemberCreateManyInput | Prisma.CampaignMemberCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1658,6 +1663,7 @@ export type CampaignMemberCreateManyAndReturnArgs<ExtArgs extends runtime.Types.
    * The data used to create many CampaignMembers.
    */
   data: Prisma.CampaignMemberCreateManyInput | Prisma.CampaignMemberCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

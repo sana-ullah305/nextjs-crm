@@ -440,6 +440,7 @@ export type LostReasonCreateOrConnectWithoutOrganizationInput = {
 
 export type LostReasonCreateManyOrganizationInputEnvelope = {
   data: Prisma.LostReasonCreateManyOrganizationInput | Prisma.LostReasonCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type LostReasonUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -1319,6 +1320,7 @@ export type LostReasonCreateManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * The data used to create many LostReasons.
    */
   data: Prisma.LostReasonCreateManyInput | Prisma.LostReasonCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1337,6 +1339,7 @@ export type LostReasonCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exte
    * The data used to create many LostReasons.
    */
   data: Prisma.LostReasonCreateManyInput | Prisma.LostReasonCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

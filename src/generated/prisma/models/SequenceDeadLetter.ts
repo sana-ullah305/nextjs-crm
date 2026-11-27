@@ -618,6 +618,7 @@ export type SequenceDeadLetterCreateOrConnectWithoutOrganizationInput = {
 
 export type SequenceDeadLetterCreateManyOrganizationInputEnvelope = {
   data: Prisma.SequenceDeadLetterCreateManyOrganizationInput | Prisma.SequenceDeadLetterCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type SequenceDeadLetterUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -686,6 +687,7 @@ export type SequenceDeadLetterCreateOrConnectWithoutEnrollmentInput = {
 
 export type SequenceDeadLetterCreateManyEnrollmentInputEnvelope = {
   data: Prisma.SequenceDeadLetterCreateManyEnrollmentInput | Prisma.SequenceDeadLetterCreateManyEnrollmentInput[]
+  skipDuplicates?: boolean
 }
 
 export type SequenceDeadLetterUpsertWithWhereUniqueWithoutEnrollmentInput = {
@@ -1574,6 +1576,7 @@ export type SequenceDeadLetterCreateManyArgs<ExtArgs extends runtime.Types.Exten
    * The data used to create many SequenceDeadLetters.
    */
   data: Prisma.SequenceDeadLetterCreateManyInput | Prisma.SequenceDeadLetterCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1592,6 +1595,7 @@ export type SequenceDeadLetterCreateManyAndReturnArgs<ExtArgs extends runtime.Ty
    * The data used to create many SequenceDeadLetters.
    */
   data: Prisma.SequenceDeadLetterCreateManyInput | Prisma.SequenceDeadLetterCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

@@ -662,6 +662,7 @@ export type FollowUpReminderCreateOrConnectWithoutOrganizationInput = {
 
 export type FollowUpReminderCreateManyOrganizationInputEnvelope = {
   data: Prisma.FollowUpReminderCreateManyOrganizationInput | Prisma.FollowUpReminderCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type FollowUpReminderUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -730,6 +731,7 @@ export type FollowUpReminderCreateOrConnectWithoutUserInput = {
 
 export type FollowUpReminderCreateManyUserInputEnvelope = {
   data: Prisma.FollowUpReminderCreateManyUserInput | Prisma.FollowUpReminderCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type FollowUpReminderUpsertWithWhereUniqueWithoutUserInput = {
@@ -781,6 +783,7 @@ export type FollowUpReminderCreateOrConnectWithoutLeadInput = {
 
 export type FollowUpReminderCreateManyLeadInputEnvelope = {
   data: Prisma.FollowUpReminderCreateManyLeadInput | Prisma.FollowUpReminderCreateManyLeadInput[]
+  skipDuplicates?: boolean
 }
 
 export type FollowUpReminderUpsertWithWhereUniqueWithoutLeadInput = {
@@ -832,6 +835,7 @@ export type FollowUpReminderCreateOrConnectWithoutTaskInput = {
 
 export type FollowUpReminderCreateManyTaskInputEnvelope = {
   data: Prisma.FollowUpReminderCreateManyTaskInput | Prisma.FollowUpReminderCreateManyTaskInput[]
+  skipDuplicates?: boolean
 }
 
 export type FollowUpReminderUpsertWithWhereUniqueWithoutTaskInput = {
@@ -1840,6 +1844,7 @@ export type FollowUpReminderCreateManyArgs<ExtArgs extends runtime.Types.Extensi
    * The data used to create many FollowUpReminders.
    */
   data: Prisma.FollowUpReminderCreateManyInput | Prisma.FollowUpReminderCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1858,6 +1863,7 @@ export type FollowUpReminderCreateManyAndReturnArgs<ExtArgs extends runtime.Type
    * The data used to create many FollowUpReminders.
    */
   data: Prisma.FollowUpReminderCreateManyInput | Prisma.FollowUpReminderCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

@@ -430,6 +430,7 @@ export type TeamMemberCreateOrConnectWithoutTeamInput = {
 
 export type TeamMemberCreateManyTeamInputEnvelope = {
   data: Prisma.TeamMemberCreateManyTeamInput | Prisma.TeamMemberCreateManyTeamInput[]
+  skipDuplicates?: boolean
 }
 
 export type TeamMemberUpsertWithWhereUniqueWithoutTeamInput = {
@@ -480,6 +481,7 @@ export type TeamMemberCreateOrConnectWithoutUserInput = {
 
 export type TeamMemberCreateManyUserInputEnvelope = {
   data: Prisma.TeamMemberCreateManyUserInput | Prisma.TeamMemberCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type TeamMemberUpsertWithWhereUniqueWithoutUserInput = {
@@ -1284,6 +1286,7 @@ export type TeamMemberCreateManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * The data used to create many TeamMembers.
    */
   data: Prisma.TeamMemberCreateManyInput | Prisma.TeamMemberCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1302,6 +1305,7 @@ export type TeamMemberCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exte
    * The data used to create many TeamMembers.
    */
   data: Prisma.TeamMemberCreateManyInput | Prisma.TeamMemberCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

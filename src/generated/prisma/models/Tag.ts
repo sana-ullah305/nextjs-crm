@@ -433,6 +433,7 @@ export type TagCreateOrConnectWithoutOrganizationInput = {
 
 export type TagCreateManyOrganizationInputEnvelope = {
   data: Prisma.TagCreateManyOrganizationInput | Prisma.TagCreateManyOrganizationInput[]
+  skipDuplicates?: boolean
 }
 
 export type TagUpsertWithWhereUniqueWithoutOrganizationInput = {
@@ -1310,6 +1311,7 @@ export type TagCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * The data used to create many Tags.
    */
   data: Prisma.TagCreateManyInput | Prisma.TagCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1328,6 +1330,7 @@ export type TagCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.
    * The data used to create many Tags.
    */
   data: Prisma.TagCreateManyInput | Prisma.TagCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */
