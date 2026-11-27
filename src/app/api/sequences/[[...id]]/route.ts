@@ -75,22 +75,6 @@ async function getSequence(id: string) {
   return ok(sequence);
 }
 
-/** Create steps rows for a sequence from the validated steps payload. */
-async function createSteps(
-  sequenceId: string,
-  steps: z.infer<typeof sequenceCreateSchema>["steps"]
-) {
-  await db.sequenceStep.createMany({
-    data: steps.map((step, index) => ({
-      sequenceId,
-      position: step.position ?? index,
-      delayHours: step.delayHours,
-      subjectTemplate: step.subjectTemplate,
-      bodyTemplate: step.bodyTemplate,
-    })),
-  });
-}
-
 async function createSequence(req: NextRequest) {
   const user = await requireApiUserWith("settings:manage");
   const body = await parseBody(req, sequenceCreateSchema);
@@ -102,16 +86,29 @@ async function createSequence(req: NextRequest) {
     ]);
   }
 
-  const sequence = await db.sequence.create({
-    data: {
-      organizationId: user.organizationId,
-      name: body.name,
-      description: body.description,
-      isActive: true,
-      createdById: user.id,
-    },
+  // Sequence and its steps commit atomically: a sequence never exists without
+  // its steps, and a failed step insert rolls the sequence back too.
+  const sequence = await db.$transaction(async (tx) => {
+    const seq = await tx.sequence.create({
+      data: {
+        organizationId: user.organizationId,
+        name: body.name,
+        description: body.description,
+        isActive: true,
+        createdById: user.id,
+      },
+    });
+    await tx.sequenceStep.createMany({
+      data: body.steps.map((step, index) => ({
+        sequenceId: seq.id,
+        position: step.position ?? index,
+        delayHours: step.delayHours,
+        subjectTemplate: step.subjectTemplate,
+        bodyTemplate: step.bodyTemplate,
+      })),
+    });
+    return seq;
   });
-  await createSteps(sequence.id, body.steps);
 
   await writeAudit({
     organizationId: user.organizationId,

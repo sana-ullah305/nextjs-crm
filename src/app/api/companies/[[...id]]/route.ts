@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { apiHandler, ok, parseBody, parseQuery, ApiNotFoundError, clientIp } from "@/server/api";
-import { requireApiUserWith } from "@/server/rbac";
+import { requireApiUserWith, hasPermission, canAccessRecord, canReassignRecord } from "@/server/rbac";
 import { companyCreateSchema, companyUpdateSchema } from "@/lib/schemas";
 import { db } from "@/server/db";
 import { writeAudit } from "@/server/audit";
@@ -32,20 +32,27 @@ export const GET = apiHandler<Ctx>(async (req, ctx) => {
 async function listCompanies(req: NextRequest) {
   const user = await requireApiUserWith("contacts:read");
   const q = parseQuery(req, listQuerySchema);
+  // Ownership visibility (reps without contacts:read_all see own + unowned)
+  // and the free-text `q` OR clause are kept in separate AND entries so the
+  // search clause cannot overwrite the visibility filter (RBAC bypass).
+  const visibility = hasPermission(user, "contacts:read_all")
+    ? {}
+    : { OR: [{ ownerId: user.id }, { ownerId: null }] };
+  const searchClause = q.q
+    ? {
+        OR: [
+          { name: { contains: q.q } },
+          { domain: { contains: q.q } },
+          { industry: { contains: q.q } },
+        ],
+      }
+    : {};
   const where = {
     organizationId: user.organizationId,
     deletedAt: null,
     ...(q.industry ? { industry: q.industry } : {}),
     ...(q.ownerId ? { ownerId: q.ownerId } : {}),
-    ...(q.q
-      ? {
-          OR: [
-            { name: { contains: q.q } },
-            { domain: { contains: q.q } },
-            { industry: { contains: q.q } },
-          ],
-        }
-      : {}),
+    AND: [visibility, searchClause],
   };
   const [total, companies] = await Promise.all([
     db.company.count({ where }),
@@ -81,6 +88,12 @@ async function getCompany(id: string) {
     },
   });
   if (!company) throw new ApiNotFoundError("Company not found");
+  if (!canAccessRecord(user, company.ownerId)) {
+    return NextResponse.json(
+      { error: { code: "FORBIDDEN", message: "Forbidden" } },
+      { status: 403 }
+    );
+  }
   return ok(company);
 }
 
@@ -121,10 +134,26 @@ export const PATCH = apiHandler<Ctx>(async (req, ctx) => {
   const user = await requireApiUserWith("contacts:update");
   const existing = await db.company.findFirst({
     where: { id, organizationId: user.organizationId, deletedAt: null },
-    select: { id: true },
+    select: { id: true, ownerId: true },
   });
   if (!existing) throw new ApiNotFoundError("Company not found");
+  // Record-level write scoping: reps without contacts:update_all may only edit
+  // companies they own or that are unowned.
+  if (!hasPermission(user, "contacts:update_all") && !canAccessRecord(user, existing.ownerId)) {
+    return NextResponse.json(
+      { error: { code: "FORBIDDEN", message: "Forbidden" } },
+      { status: 403 }
+    );
+  }
   const body = await parseBody(req, companyUpdateSchema);
+  // A rep may only take ownership themselves; transferring to another user
+  // requires contacts:update_all.
+  if (body.ownerId !== undefined && !canReassignRecord(user, body.ownerId || null, "contacts:update_all")) {
+    return NextResponse.json(
+      { error: { code: "FORBIDDEN", message: "Forbidden" } },
+      { status: 403 }
+    );
+  }
   const { ownerId, ...rest } = body;
   const company = await db.company.update({
     where: { id },
@@ -150,9 +179,17 @@ export const DELETE = apiHandler<Ctx>(async (req, ctx) => {
   const user = await requireApiUserWith("contacts:delete");
   const existing = await db.company.findFirst({
     where: { id, organizationId: user.organizationId, deletedAt: null },
-    select: { id: true },
+    select: { id: true, ownerId: true },
   });
   if (!existing) throw new ApiNotFoundError("Company not found");
+  // Record-level write scoping mirrors update: reps without contacts:delete_all
+  // may only delete companies they own or that are unowned.
+  if (!hasPermission(user, "contacts:delete_all") && !canAccessRecord(user, existing.ownerId)) {
+    return NextResponse.json(
+      { error: { code: "FORBIDDEN", message: "Forbidden" } },
+      { status: 403 }
+    );
+  }
   await db.company.update({ where: { id }, data: { deletedAt: new Date() } });
   await writeAudit({
     organizationId: user.organizationId,

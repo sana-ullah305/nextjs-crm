@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { apiHandler, ok, parseBody, parseQuery, ApiNotFoundError, clientIp } from "@/server/api";
-import { requireApiUserWith, hasPermission, canAccessRecord } from "@/server/rbac";
+import { requireApiUserWith, hasPermission, canAccessRecord, canReassignRecord, visibilityScope } from "@/server/rbac";
 import { contactCreateSchema, contactUpdateSchema, contactImportSchema } from "@/lib/schemas";
 import { db } from "@/server/db";
 import { writeAudit } from "@/server/audit";
@@ -34,25 +34,27 @@ export const GET = apiHandler<Ctx>(async (req, ctx) => {
 async function listContacts(req: NextRequest) {
   const user = await requireApiUserWith("contacts:read");
   const q = parseQuery(req, listQuerySchema);
+  // Visibility scope and the free-text `q` clause are both OR-shaped, so they
+  // MUST live in separate AND entries — spreading two `OR` keys into one
+  // object would let the search clause overwrite the ownership filter (RBAC
+  // bypass). See visibilityScope() in src/server/rbac.ts.
+  const searchClause = q.q
+    ? {
+        OR: [
+          { firstName: { contains: q.q } },
+          { lastName: { contains: q.q } },
+          { email: { contains: q.q } },
+          { phone: { contains: q.q } },
+        ],
+      }
+    : {};
   const where = {
     organizationId: user.organizationId,
     deletedAt: null,
-    ...(hasPermission(user, "contacts:read_all")
-      ? {}
-      : { OR: [{ ownerId: user.id }, { ownerId: null }] }),
     ...(q.status ? { status: q.status } : {}),
     ...(q.companyId ? { companyId: q.companyId } : {}),
     ...(q.ownerId ? { ownerId: q.ownerId } : {}),
-    ...(q.q
-      ? {
-          OR: [
-            { firstName: { contains: q.q } },
-            { lastName: { contains: q.q } },
-            { email: { contains: q.q } },
-            { phone: { contains: q.q } },
-          ],
-        }
-      : {}),
+    AND: [visibilityScope(user, "contacts:read_all"), searchClause],
   };
   const [total, contacts] = await Promise.all([
     db.contact.count({ where }),
@@ -210,49 +212,58 @@ async function createContact(req: NextRequest) {
 async function importContacts(req: NextRequest) {
   const user = await requireApiUserWith("contacts:import");
   const body = await parseBody(req, contactImportSchema);
-  let imported = 0;
-  let skipped = 0;
-  for (const row of body.contacts) {
-    if (!row.firstName) {
-      skipped++;
-      continue;
-    }
-    const dup = row.email
-      ? await db.contact.findFirst({
-          where: { organizationId: user.organizationId, email: row.email, deletedAt: null },
+
+  // All contact rows import atomically: if any row fails the whole import
+  // rolls back, so a partial import can never leave orphaned companies or
+  // half-imported contacts behind. Reads inside the transaction see earlier
+  // rows of the same import, so duplicate emails within one payload are skipped.
+  const { imported, skipped } = await db.$transaction(async (tx) => {
+    let imported = 0;
+    let skipped = 0;
+    for (const row of body.contacts) {
+      if (!row.firstName) {
+        skipped++;
+        continue;
+      }
+      const dup = row.email
+        ? await tx.contact.findFirst({
+            where: { organizationId: user.organizationId, email: row.email, deletedAt: null },
+            select: { id: true },
+          })
+        : null;
+      if (dup) {
+        skipped++;
+        continue;
+      }
+      let companyId: string | null = null;
+      if (row.company) {
+        const company = await tx.company.findFirst({
+          where: { organizationId: user.organizationId, name: row.company, deletedAt: null },
           select: { id: true },
-        })
-      : null;
-    if (dup) {
-      skipped++;
-      continue;
-    }
-    let companyId: string | null = null;
-    if (row.company) {
-      const company = await db.company.findFirst({
-        where: { organizationId: user.organizationId, name: row.company, deletedAt: null },
-        select: { id: true },
+        });
+        companyId =
+          company?.id ??
+          (await tx.company.create({
+            data: { organizationId: user.organizationId, name: row.company },
+          })).id;
+      }
+      await tx.contact.create({
+        data: {
+          organizationId: user.organizationId,
+          firstName: row.firstName,
+          lastName: row.lastName,
+          email: row.email,
+          phone: row.phone,
+          title: row.title,
+          companyId,
+          ownerId: user.id,
+        },
       });
-      companyId =
-        company?.id ??
-        (await db.company.create({
-          data: { organizationId: user.organizationId, name: row.company },
-        })).id;
+      imported++;
     }
-    await db.contact.create({
-      data: {
-        organizationId: user.organizationId,
-        firstName: row.firstName,
-        lastName: row.lastName,
-        email: row.email,
-        phone: row.phone,
-        title: row.title,
-        companyId,
-        ownerId: user.id,
-      },
-    });
-    imported++;
-  }
+    return { imported, skipped };
+  });
+
   await writeAudit({
     organizationId: user.organizationId,
     userId: user.id,
@@ -279,6 +290,15 @@ export const PATCH = apiHandler<Ctx>(async (req, ctx) => {
     return NextResponse.json({ error: { code: "FORBIDDEN", message: "Forbidden" } }, { status: 403 });
   }
   const body = await parseBody(req, contactUpdateSchema);
+  // A rep may only take ownership themselves; transferring to another user
+  // requires contacts:update_all (otherwise they could gain read access to
+  // records they must not see via ownership).
+  if (body.ownerId !== undefined && !canReassignRecord(user, body.ownerId || null, "contacts:update_all")) {
+    return NextResponse.json(
+      { error: { code: "FORBIDDEN", message: "Forbidden" } },
+      { status: 403 }
+    );
+  }
   const tagIds = body.tags ? await resolveTags(user.organizationId, body.tags) : undefined;
   const { tags, email, ...data } = body;
   const contact = await db.contact.update({
