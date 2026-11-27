@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { apiHandler, ok, parseBody, parseQuery, ApiNotFoundError, clientIp } from "@/server/api";
-import { requireApiUserWith, hasPermission, canAccessRecord, canReassignRecord } from "@/server/rbac";
+import { requireApiUserWith, hasPermission, canAccessRecord, canReassignRecord, canWriteRecord, recordScope } from "@/server/rbac";
 import { companyCreateSchema, companyUpdateSchema } from "@/lib/schemas";
 import { db } from "@/server/db";
 import { writeAudit } from "@/server/audit";
@@ -30,14 +30,8 @@ export const GET = apiHandler<Ctx>(async (req, ctx) => {
 });
 
 async function listCompanies(req: NextRequest) {
-  const user = await requireApiUserWith("contacts:read");
+  const user = await requireApiUserWith("companies:read");
   const q = parseQuery(req, listQuerySchema);
-  // Ownership visibility (reps without contacts:read_all see own + unowned)
-  // and the free-text `q` OR clause are kept in separate AND entries so the
-  // search clause cannot overwrite the visibility filter (RBAC bypass).
-  const visibility = hasPermission(user, "contacts:read_all")
-    ? {}
-    : { OR: [{ ownerId: user.id }, { ownerId: null }] };
   const searchClause = q.q
     ? {
         OR: [
@@ -48,11 +42,11 @@ async function listCompanies(req: NextRequest) {
       }
     : {};
   const where = {
-    organizationId: user.organizationId,
+    ...recordScope(user, "company", "read"),
     deletedAt: null,
     ...(q.industry ? { industry: q.industry } : {}),
     ...(q.ownerId ? { ownerId: q.ownerId } : {}),
-    AND: [visibility, searchClause],
+    AND: [searchClause],
   };
   const [total, companies] = await Promise.all([
     db.company.count({ where }),
@@ -76,9 +70,9 @@ async function listCompanies(req: NextRequest) {
 }
 
 async function getCompany(id: string) {
-  const user = await requireApiUserWith("contacts:read");
+  const user = await requireApiUserWith("companies:read");
   const company = await db.company.findFirst({
-    where: { id, organizationId: user.organizationId, deletedAt: null },
+    where: { ...recordScope(user, "company", "read"), id, deletedAt: null },
     include: {
       owner: { select: { id: true, name: true, avatarColor: true } },
       contacts: {
@@ -98,7 +92,7 @@ async function getCompany(id: string) {
 }
 
 export const POST = apiHandler<Ctx>(async (req, _ctx) => {
-  const user = await requireApiUserWith("contacts:create");
+  const user = await requireApiUserWith("companies:create");
   const body = await parseBody(req, companyCreateSchema);
   const company = await db.company.create({
     data: {
@@ -131,24 +125,17 @@ export const POST = apiHandler<Ctx>(async (req, _ctx) => {
 export const PATCH = apiHandler<Ctx>(async (req, ctx) => {
   const id = await resolveId(ctx);
   if (!id) return NextResponse.json({ error: { code: "NOT_FOUND", message: "Missing id" } }, { status: 404 });
-  const user = await requireApiUserWith("contacts:update");
+  const user = await requireApiUserWith("companies:update");
   const existing = await db.company.findFirst({
     where: { id, organizationId: user.organizationId, deletedAt: null },
-    select: { id: true, ownerId: true },
+    select: { ownerId: true },
   });
   if (!existing) throw new ApiNotFoundError("Company not found");
-  // Record-level write scoping: reps without contacts:update_all may only edit
-  // companies they own or that are unowned.
-  if (!hasPermission(user, "contacts:update_all") && !canAccessRecord(user, existing.ownerId)) {
-    return NextResponse.json(
-      { error: { code: "FORBIDDEN", message: "Forbidden" } },
-      { status: 403 }
-    );
+  if (!canWriteRecord(user, existing.ownerId, "companies:update_all")) {
+    return NextResponse.json({ error: { code: "FORBIDDEN", message: "Forbidden" } }, { status: 403 });
   }
   const body = await parseBody(req, companyUpdateSchema);
-  // A rep may only take ownership themselves; transferring to another user
-  // requires contacts:update_all.
-  if (body.ownerId !== undefined && !canReassignRecord(user, body.ownerId || null, "contacts:update_all")) {
+  if (body.ownerId !== undefined && !canReassignRecord(user, body.ownerId || null, "companies:update_all")) {
     return NextResponse.json(
       { error: { code: "FORBIDDEN", message: "Forbidden" } },
       { status: 403 }
@@ -176,19 +163,14 @@ export const PATCH = apiHandler<Ctx>(async (req, ctx) => {
 export const DELETE = apiHandler<Ctx>(async (req, ctx) => {
   const id = await resolveId(ctx);
   if (!id) return NextResponse.json({ error: { code: "NOT_FOUND", message: "Missing id" } }, { status: 404 });
-  const user = await requireApiUserWith("contacts:delete");
+  const user = await requireApiUserWith("companies:delete");
   const existing = await db.company.findFirst({
     where: { id, organizationId: user.organizationId, deletedAt: null },
-    select: { id: true, ownerId: true },
+    select: { ownerId: true },
   });
   if (!existing) throw new ApiNotFoundError("Company not found");
-  // Record-level write scoping mirrors update: reps without contacts:delete_all
-  // may only delete companies they own or that are unowned.
-  if (!hasPermission(user, "contacts:delete_all") && !canAccessRecord(user, existing.ownerId)) {
-    return NextResponse.json(
-      { error: { code: "FORBIDDEN", message: "Forbidden" } },
-      { status: 403 }
-    );
+  if (!canWriteRecord(user, existing.ownerId, "companies:delete_all")) {
+    return NextResponse.json({ error: { code: "FORBIDDEN", message: "Forbidden" } }, { status: 403 });
   }
   await db.company.update({ where: { id }, data: { deletedAt: new Date() } });
   await writeAudit({

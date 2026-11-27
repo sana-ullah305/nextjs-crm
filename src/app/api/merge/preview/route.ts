@@ -194,10 +194,6 @@ export const GET = apiHandler(async (req) => {
     q.data.type === "contact"
       ? loadContact(q.data.id, user.organizationId)
       : loadLead(q.data.id, user.organizationId),
-    // The target is loaded by its own natural type from the id pair: a lead
-    // may merge into a lead or a contact; a contact into a contact. The
-    // caller may also pass ?targetType=contact|lead explicitly (used by the
-    // lead-into-contact flow); when absent both tables are probed in order.
     loadTarget(req, q.data, user.organizationId),
   ]);
   if (!source) throw new ApiNotFoundError("Source record not found");

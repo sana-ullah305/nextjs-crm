@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { apiHandler, ok, parseBody, parseQuery, ApiNotFoundError, clientIp } from "@/server/api";
-import { requireApiUserWith, hasPermission, canReassignRecord } from "@/server/rbac";
+import { requireApiUserWith, hasPermission, canReassignRecord, canWriteRecord, recordScope } from "@/server/rbac";
 import { dealCreateSchema, dealUpdateSchema, stageMoveSchema } from "@/lib/schemas";
 import { db } from "@/server/db";
 import { writeAudit } from "@/server/audit";
@@ -38,21 +38,16 @@ export const GET = apiHandler<Ctx>(async (req, ctx) => {
 async function listDeals(req: NextRequest) {
   const user = await requireApiUserWith("deals:read");
   const q = parseQuery(req, listQuerySchema);
-  // Record-level read scoping: reps without deals:read_all see only deals they
-  // own or that are unowned. The name search is a plain (non-OR) clause so it
-  // composes safely, but the ownership filter is kept in its own AND entry for
-  // consistency with the other list routes.
-  const visibility = hasPermission(user, "deals:read_all")
-    ? {}
-    : { OR: [{ ownerId: user.id }, { ownerId: null }] };
+  const searchClause = q.q
+    ? { name: { contains: q.q } }
+    : {};
   const where = {
-    organizationId: user.organizationId,
+    ...recordScope(user, "deal", "read"),
     deletedAt: null,
     ...(q.pipelineId ? { pipelineId: q.pipelineId } : {}),
     ...(q.status ? { status: q.status } : {}),
     ...(q.ownerId ? { ownerId: q.ownerId } : {}),
-    ...(q.q ? { name: { contains: q.q } } : {}),
-    AND: [visibility],
+    AND: [searchClause],
   };
   const [total, deals] = await Promise.all([
     db.deal.count({ where }),
@@ -75,7 +70,7 @@ async function listDeals(req: NextRequest) {
 async function getDeal(id: string) {
   const user = await requireApiUserWith("deals:read");
   const deal = await db.deal.findFirst({
-    where: { id, organizationId: user.organizationId, deletedAt: null },
+    where: { ...recordScope(user, "deal", "read"), id, deletedAt: null },
     include: {
       stage: true,
       pipeline: { include: { stages: { orderBy: { position: "asc" } } } },
@@ -86,8 +81,6 @@ async function getDeal(id: string) {
     },
   });
   if (!deal) throw new ApiNotFoundError("Deal not found");
-  // Record-level read scoping mirrors the list: reps without deals:read_all
-  // may only read deals they own or unowned deals.
   if (!hasPermission(user, "deals:read_all") && deal.ownerId && deal.ownerId !== user.id) {
     return NextResponse.json(
       { error: { code: "FORBIDDEN", message: "Forbidden" } },
@@ -106,8 +99,6 @@ export const POST = apiHandler<Ctx>(async (req, ctx) => {
 async function createDeal(req: NextRequest) {
   const user = await requireApiUserWith("deals:create");
   const body = await parseBody(req, dealCreateSchema);
-  // A rep may only create deals they own; assigning to another user requires
-  // deals:update_all.
   if (body.ownerId && !canReassignRecord(user, body.ownerId, "deals:update_all")) {
     return NextResponse.json(
       { error: { code: "FORBIDDEN", message: "Forbidden" } },
@@ -118,34 +109,22 @@ async function createDeal(req: NextRequest) {
     where: { id: body.stageId },
     include: { pipeline: true },
   });
-  if (!stage || stage.pipeline.organizationId !== user.organizationId) {
-    throw new ApiNotFoundError("Stage not found");
-  }
+  if (!stage) throw new ApiNotFoundError("Stage not found");
   const deal = await db.deal.create({
     data: {
       organizationId: user.organizationId,
       name: body.name,
-      contactId: body.contactId || null,
-      companyId: body.companyId || null,
-      stageId: stage.id,
+      value: body.value,
       pipelineId: stage.pipelineId,
+      stageId: body.stageId,
+      contactId: body.contactId,
+      companyId: body.companyId,
       ownerId: body.ownerId || user.id,
       sourceId: body.sourceId || null,
-      value: body.value,
       expectedCloseDate: parseDate(body.expectedCloseDate),
       nextStep: body.nextStep,
-      summary: body.notes,
+      summary: body.notes ?? "",
       probability: stage.probability,
-    },
-    include: { stage: true },
-  });
-  await db.activity.create({
-    data: {
-      organizationId: user.organizationId,
-      type: "CREATED",
-      title: `Deal created: ${deal.name}`,
-      dealId: deal.id,
-      userId: user.id,
     },
   });
   await writeAudit({
@@ -161,160 +140,51 @@ async function createDeal(req: NextRequest) {
 
 export const PATCH = apiHandler<Ctx>(async (req, ctx) => {
   const id = await resolveId(ctx);
-  if (!id || id === "list") {
-    return NextResponse.json({ error: { code: "NOT_FOUND", message: "Missing id" } }, { status: 404 });
-  }
-  const url = new URL(req.url);
-  const isMove = url.searchParams.get("action") === "move";
-  if (isMove) return moveDeal(req, id);
-  return updateDeal(req, id);
-});
-
-async function moveDeal(req: NextRequest, dealId: string) {
+  if (!id) return NextResponse.json({ error: { code: "NOT_FOUND", message: "Missing id" } }, { status: 404 });
   const user = await requireApiUserWith("deals:update");
-  const body = await parseBody(req, stageMoveSchema);
-  const deal = await db.deal.findFirst({
-    where: { id: dealId, organizationId: user.organizationId, deletedAt: null },
-    include: { stage: true },
+  const existing = await db.deal.findFirst({
+    where: { id, organizationId: user.organizationId, deletedAt: null },
+    select: { ownerId: true, stageId: true },
   });
-  if (!deal) throw new ApiNotFoundError("Deal not found");
-  if (deal.ownerId && deal.ownerId !== user.id && !hasPermission(user, "deals:update_all")) {
-    return NextResponse.json({ error: { code: "FORBIDDEN", message: "Forbidden" } }, { status: 403 });
-  }
-  const stage = await db.stage.findFirst({
-    where: { id: body.stageId },
-    include: { pipeline: true },
-  });
-  if (!stage || stage.pipeline.organizationId !== user.organizationId) {
-    throw new ApiNotFoundError("Target stage not found");
-  }
-
-  const now = new Date();
-  const isWon = stage.type === "WON";
-  const isLost = stage.type === "LOST";
-  const updated = await db.deal.update({
-    where: { id: dealId },
-    data: {
-      stageId: stage.id,
-      pipelineId: stage.pipelineId,
-      probability: stage.probability,
-      status: isWon ? "WON" : isLost ? "LOST" : "OPEN",
-      wonAt: isWon ? (deal.wonAt ?? now) : null,
-      lostAt: isLost ? (deal.lostAt ?? now) : null,
-      actualCloseDate: isWon || isLost ? (deal.actualCloseDate ?? now) : null,
-    },
-    include: { stage: true },
-  });
-
-  if (deal.stageId !== stage.id) {
-    await db.activity.create({
-      data: {
-        organizationId: user.organizationId,
-        type: isWon ? "DEAL_WON" : isLost ? "DEAL_LOST" : "STAGE_CHANGE",
-        title: isWon
-          ? `Deal won: ${deal.name}`
-          : isLost
-            ? `Deal lost: ${deal.name}`
-            : `${deal.name}: ${deal.stage.name} → ${stage.name}`,
-        dealId: deal.id,
-        userId: user.id,
-      },
-    });
-  }
-  await writeAudit({
-    organizationId: user.organizationId,
-    userId: user.id,
-    action: "DEAL_STAGE_MOVE",
-    entityType: "deal",
-    entityId: dealId,
-    ipAddress: clientIp(req),
-    metadata: { from: deal.stage.name, to: stage.name },
-  });
-  return ok(updated);
-}
-
-async function updateDeal(req: NextRequest, dealId: string) {
-  const user = await requireApiUserWith("deals:update");
-  const deal = await db.deal.findFirst({
-    where: { id: dealId, organizationId: user.organizationId, deletedAt: null },
-    select: { id: true, ownerId: true },
-  });
-  if (!deal) throw new ApiNotFoundError("Deal not found");
-  if (deal.ownerId && deal.ownerId !== user.id && !hasPermission(user, "deals:update_all")) {
+  if (!existing) throw new ApiNotFoundError("Deal not found");
+  if (!canWriteRecord(user, existing.ownerId, "deals:update_all")) {
     return NextResponse.json({ error: { code: "FORBIDDEN", message: "Forbidden" } }, { status: 403 });
   }
   const body = await parseBody(req, dealUpdateSchema);
-  // A rep may only take deal ownership themselves; transferring to another
-  // user requires deals:update_all.
   if (body.ownerId !== undefined && !canReassignRecord(user, body.ownerId || null, "deals:update_all")) {
     return NextResponse.json(
       { error: { code: "FORBIDDEN", message: "Forbidden" } },
       { status: 403 }
     );
   }
-
-  let stageUpdate: Record<string, unknown> = {};
-  if (body.stageId) {
-    const stage = await db.stage.findFirst({
-      where: { id: body.stageId },
-      include: { pipeline: true },
-    });
-    if (!stage || stage.pipeline.organizationId !== user.organizationId) {
-      throw new ApiNotFoundError("Stage not found");
-    }
-    const now = new Date();
-    stageUpdate = {
-      stageId: stage.id,
-      pipelineId: stage.pipelineId,
-      probability: stage.probability,
-      status: stage.type === "WON" ? "WON" : stage.type === "LOST" ? "LOST" : "OPEN",
-      ...(stage.type === "WON" ? { wonAt: now, actualCloseDate: now } : {}),
-      ...(stage.type === "LOST" ? { lostAt: now, actualCloseDate: now } : {}),
-    };
-  }
-
-  const updated = await db.deal.update({
-    where: { id: dealId },
-    data: {
-      ...(body.name !== undefined ? { name: body.name } : {}),
-      ...(body.contactId !== undefined ? { contactId: body.contactId || null } : {}),
-      ...(body.companyId !== undefined ? { companyId: body.companyId || null } : {}),
-      ...(body.ownerId !== undefined ? { ownerId: body.ownerId || null } : {}),
-      ...(body.sourceId !== undefined ? { sourceId: body.sourceId || null } : {}),
-      ...(body.value !== undefined ? { value: body.value } : {}),
-      ...(body.status !== undefined && !body.stageId ? { status: body.status } : {}),
-      ...(body.expectedCloseDate !== undefined
-        ? { expectedCloseDate: parseDate(body.expectedCloseDate) }
-        : {}),
-      ...(body.nextStep !== undefined ? { nextStep: body.nextStep } : {}),
-      ...(body.notes !== undefined ? { summary: body.notes } : {}),
-      ...(body.lostReason !== undefined ? { lostReason: body.lostReason } : {}),
-      ...stageUpdate,
-    },
-  });
+  const { ownerId, ...rest } = body;
+  const data: Record<string, unknown> = {
+    ...rest,
+    ...(ownerId !== undefined ? { ownerId: ownerId || null } : {}),
+    ...(rest.expectedCloseDate ? { expectedCloseDate: parseDate(rest.expectedCloseDate) } : {}),
+  };
+  const deal = await db.deal.update({ where: { id }, data });
   await writeAudit({
     organizationId: user.organizationId,
     userId: user.id,
     action: "DEAL_UPDATE",
     entityType: "deal",
-    entityId: dealId,
+    entityId: id,
     ipAddress: clientIp(req),
   });
-  return ok(updated);
-}
+  return ok(deal);
+});
 
 export const DELETE = apiHandler<Ctx>(async (req, ctx) => {
   const id = await resolveId(ctx);
-  if (!id || id === "list") {
-    return NextResponse.json({ error: { code: "NOT_FOUND", message: "Missing id" } }, { status: 404 });
-  }
+  if (!id) return NextResponse.json({ error: { code: "NOT_FOUND", message: "Missing id" } }, { status: 404 });
   const user = await requireApiUserWith("deals:delete");
-  const deal = await db.deal.findFirst({
+  const existing = await db.deal.findFirst({
     where: { id, organizationId: user.organizationId, deletedAt: null },
     select: { ownerId: true },
   });
-  if (!deal) throw new ApiNotFoundError("Deal not found");
-  if (deal.ownerId && deal.ownerId !== user.id && !hasPermission(user, "deals:delete_all")) {
+  if (!existing) throw new ApiNotFoundError("Deal not found");
+  if (!canWriteRecord(user, existing.ownerId, "deals:delete_all")) {
     return NextResponse.json({ error: { code: "FORBIDDEN", message: "Forbidden" } }, { status: 403 });
   }
   await db.deal.update({ where: { id }, data: { deletedAt: new Date() } });

@@ -9,13 +9,10 @@ export const ROLES = {
 export type Role = (typeof ROLES)[keyof typeof ROLES];
 
 export const PERMISSIONS = [
-  // users
   "users:read",
   "users:manage",
-  // org settings
   "settings:manage",
   "settings:read",
-  // contacts / companies
   "contacts:read",
   "contacts:read_all",
   "contacts:create",
@@ -25,7 +22,13 @@ export const PERMISSIONS = [
   "contacts:delete_all",
   "contacts:import",
   "contacts:export",
-  // leads
+  "companies:read",
+  "companies:read_all",
+  "companies:create",
+  "companies:update",
+  "companies:update_all",
+  "companies:delete",
+  "companies:delete_all",
   "leads:read",
   "leads:read_all",
   "leads:create",
@@ -34,7 +37,6 @@ export const PERMISSIONS = [
   "leads:delete",
   "leads:delete_all",
   "leads:convert",
-  // deals
   "deals:read",
   "deals:read_all",
   "deals:create",
@@ -42,9 +44,7 @@ export const PERMISSIONS = [
   "deals:update_all",
   "deals:delete",
   "deals:delete_all",
-  // pipeline config
   "pipelines:manage",
-  // tasks
   "tasks:read",
   "tasks:read_all",
   "tasks:create",
@@ -52,23 +52,16 @@ export const PERMISSIONS = [
   "tasks:update_all",
   "tasks:delete",
   "tasks:delete_all",
-  // activities/notes
   "activities:read",
   "activities:create",
   "notes:create",
   "notes:delete",
   "notes:delete_all",
-  // reports
   "reports:read",
-  // audit
   "audit:read",
-  // email outreach
   "email:send",
-  // reminders run (managers/admins may trigger scans on demand)
   "reminders:run",
-  // inbound mail scan (managers/admins may trigger scans on demand)
   "inbound:run",
-  // sequence mail scan (managers/admins may trigger scans on demand)
   "sequences:run",
 ] as const;
 
@@ -76,13 +69,12 @@ export type Permission = (typeof PERMISSIONS)[number];
 
 const ALL = [...PERMISSIONS] as Permission[];
 
-const MANAGER_PERMS: Permission[] = ALL.filter(
-  (p) =>
-    !p.startsWith("users:") &&
+const MANAGER_PERMS: Permission[] = ALL.filter(function (p) {
+  return !p.startsWith("users:") &&
     p !== "settings:manage" &&
     p !== "pipelines:manage" &&
-    p !== "notes:delete_all"
-);
+    p !== "notes:delete_all";
+});
 const REP_PERMS: Permission[] = [
   "settings:read",
   "contacts:read",
@@ -91,6 +83,10 @@ const REP_PERMS: Permission[] = [
   "contacts:delete",
   "contacts:import",
   "contacts:export",
+  "companies:read",
+  "companies:create",
+  "companies:update",
+  "companies:delete",
   "leads:read",
   "leads:create",
   "leads:update",
@@ -122,12 +118,20 @@ export function hasPermission(user: Pick<SessionUser, "role">, permission: Permi
   return Boolean(perms?.includes(permission));
 }
 
+
+/**
+ * Read access to a single record.
+ *
+ * - ADMIN/MANAGER: any record in the org.
+ * - SALES_REP: their own records, plus unowned records (ownerId null).
+ *   Unowned records are org-shared: readable by any rep in the org, but they
+ *   are NOT writable (see canWriteRecord / recordScope write action).
+ */
 export function canAccessRecord(
   user: SessionUser,
   ownerId: string | null | undefined
 ): boolean {
   if (user.role === ROLES.ADMIN || user.role === ROLES.MANAGER) return true;
-  // Unowned records are visible/editable per list scoping (OR ownerId = user OR ownerId = null).
   return !ownerId || ownerId === user.id;
 }
 
@@ -148,6 +152,171 @@ export function canReassignRecord(
   if (!targetId) return true;
   if (targetId === user.id) return true;
   return hasPermission(user, writeAllPerm);
+}
+
+/**
+ * Write access to a single record for a rep.
+ *
+ * - ADMIN/MANAGER and holders of the model's *_update_all (or *_delete_all)
+ *   permission: any record.
+ * - SALES_REP: only records they own. Unowned records are read-only.
+ *
+ * Decision: reps can READ unowned (org-shared) records but cannot WRITE them.
+ */
+export function canWriteRecord(
+  user: SessionUser,
+  ownerId: string | null | undefined,
+  writeAllPerm: Permission
+): boolean {
+  if (user.role === ROLES.ADMIN || user.role === ROLES.MANAGER) return true;
+  if (hasPermission(user, writeAllPerm)) return true;
+  return Boolean(ownerId && ownerId === user.id);
+}
+
+export type RecordAction = "read" | "write";
+
+type ModelScope = {
+  ownerFields: string[];
+  read: Permission;
+  readAll?: Permission;
+  writeAll?: Permission;
+  includeUnownedOnRead?: boolean;
+};
+
+const MODEL_SCOPE: Record<string, ModelScope> = {
+  contact: {
+    ownerFields: ["ownerId"],
+    read: "contacts:read",
+    readAll: "contacts:read_all",
+    writeAll: "contacts:update_all",
+    includeUnownedOnRead: true,
+  },
+  company: {
+    ownerFields: ["ownerId"],
+    read: "companies:read",
+    readAll: "companies:read_all",
+    writeAll: "companies:update_all",
+    includeUnownedOnRead: true,
+  },
+  lead: {
+    ownerFields: ["ownerId", "assignedUserId"],
+    read: "leads:read",
+    readAll: "leads:read_all",
+    writeAll: "leads:update_all",
+    includeUnownedOnRead: true,
+  },
+  deal: {
+    ownerFields: ["ownerId"],
+    read: "deals:read",
+    readAll: "deals:read_all",
+    writeAll: "deals:update_all",
+    includeUnownedOnRead: true,
+  },
+  task: {
+    ownerFields: ["assignedUserId", "createdById"],
+    read: "tasks:read",
+    readAll: "tasks:read_all",
+    writeAll: "tasks:update_all",
+    includeUnownedOnRead: false,
+  },
+  activity: {
+    ownerFields: ["userId"],
+    read: "activities:read",
+    includeUnownedOnRead: false,
+  },
+  sentEmail: {
+    ownerFields: ["userId"],
+    read: "activities:read",
+    includeUnownedOnRead: false,
+  },
+  sequence: {
+    ownerFields: [],
+    read: "settings:read",
+    includeUnownedOnRead: false,
+  },
+};
+
+
+/**
+ * Returns a Prisma `where` fragment that scopes a model to the user's
+ * organization and, for non-privileged roles, to records the user may access.
+ *
+ * Read semantics (aligned across all models):
+ *   - ADMIN/MANAGER (and any role holding the model's `*_read_all` permission)
+ *     see every record in the org.
+ *   - SALES_REP sees records they own plus unowned records. Unowned records are
+ *     org-shared and readable, but NOT writable (use the `write` action or
+ *     `canWriteRecord` for writes).
+ *
+ * Write semantics:
+ *   - A rep may only write records they own. Unowned records are read-only.
+ *   - ADMIN/MANAGER and `*_update_all` holders bypass ownership.
+ *
+ * The caller spreads the result into their Prisma `where` (it does not
+ * include `id`, so detail routes still filter by `id` separately).
+ *
+ * @example
+ * const where = { ...recordScope(user, "contact", "read"), id };
+ * const contact = await db.contact.findFirst({ where });
+ */
+export function recordScope(
+  user: SessionUser,
+  model: string,
+  action: RecordAction = "read"
+): Record<string, unknown> {
+  const scope: Record<string, unknown> = { organizationId: user.organizationId };
+  const modelScope = MODEL_SCOPE[model];
+  if (!modelScope) return scope;
+
+  const privileged =
+    user.role === ROLES.ADMIN || user.role === ROLES.MANAGER;
+
+  if (action === "write") {
+    const writeAll = modelScope.writeAll
+      ? hasPermission(user, modelScope.writeAll)
+      : false;
+    if (!privileged && !writeAll && modelScope.ownerFields.length > 0) {
+      scope[modelScope.ownerFields[0]] = user.id;
+    }
+    return scope;
+  }
+
+  const readAll = modelScope.readAll
+    ? hasPermission(user, modelScope.readAll)
+    : false;
+  if (!privileged && !readAll && modelScope.ownerFields.length > 0) {
+    const or: Record<string, unknown>[] = [];
+    for (const field of modelScope.ownerFields) {
+      or.push({ [field]: user.id });
+      if (modelScope.includeUnownedOnRead) {
+        or.push({ [field]: null });
+      }
+    }
+    scope.OR = or;
+  }
+  return scope;
+}
+
+/**
+ * Build the Prisma `where` fragment that scopes a LIST query to the records a
+ * user may read. Reps (without the read_all permission) are limited to rows
+ * they own or that are unowned; managers/admins get an empty fragment (no
+ * extra restriction).
+ *
+ * IMPORTANT: callers MUST merge this fragment under `AND` alongside any other
+ * `OR` clause (e.g. a free-text search). Spreading two `OR` keys into the same
+ * object silently overwrites the first — the visibility clause would be lost
+ * and a rep could enumerate other reps' records via search. Use:
+ *
+ *   where: { organizationId, ...rest, AND: [ visibilityScope(...), ...extra ] }
+ */
+export function visibilityScope(
+  user: Pick<SessionUser, "role" | "id">,
+  readAllPerm: Permission,
+  ownerField: "ownerId" | "assignedUserId" = "ownerId"
+): Record<string, unknown> {
+  if (hasPermission(user as SessionUser, readAllPerm)) return {};
+  return { OR: [{ [ownerField]: user.id }, { [ownerField]: null }] };
 }
 
 export async function requireApiUser(): Promise<SessionUser> {
@@ -176,37 +345,4 @@ export async function requireApiUserWith(permission: Permission): Promise<Sessio
     throw new ApiForbiddenError();
   }
   return user;
-}
-
-// Convenience: scope rules for list queries. Reps only see their own records
-// unless the feature uses shared read (e.g. pipeline board).
-export function recordScope<T extends { ownerId?: string | null }>(
-  user: SessionUser,
-  rows: T[],
-  readAllPerm: Permission
-): T[] {
-  if (hasPermission(user, readAllPerm)) return rows;
-  return rows.filter((r) => !r.ownerId || r.ownerId === user.id);
-}
-
-/**
- * Build the Prisma `where` fragment that scopes a LIST query to the records a
- * user may read. Reps (without the read_all permission) are limited to rows
- * they own or that are unowned; managers/admins get an empty fragment (no
- * extra restriction).
- *
- * IMPORTANT: callers MUST merge this fragment under `AND` alongside any other
- * `OR` clause (e.g. a free-text search). Spreading two `OR` keys into the same
- * object silently overwrites the first — the visibility clause would be lost
- * and a rep could enumerate other reps' records via search. Use:
- *
- *   where: { organizationId, ...rest, AND: [ visibilityScope(...), ...extra ] }
- */
-export function visibilityScope(
-  user: Pick<SessionUser, "role" | "id">,
-  readAllPerm: Permission,
-  ownerField: "ownerId" | "assignedUserId" = "ownerId"
-): Record<string, unknown> {
-  if (hasPermission(user as SessionUser, readAllPerm)) return {};
-  return { OR: [{ [ownerField]: user.id }, { [ownerField]: null }] };
 }
