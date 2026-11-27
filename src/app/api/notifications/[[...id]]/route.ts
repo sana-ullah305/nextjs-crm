@@ -32,6 +32,28 @@ export const POST = apiHandler(async () => {
   return ok({ ok: true });
 });
 
+export const PATCH = apiHandler<Ctx>(async (req, ctx) => {
+  const user = await requireApiUser();
+  const action = new URL(req.url).searchParams.get("action");
+
+  // Single-notification mark-read: PATCH /api/notifications/:id?action=mark-read
+  const id = await resolveId(ctx);
+  if (id && id !== "all" && action === "mark-read") {
+    const result = await db.notification.updateMany({
+      where: { id, userId: user.id },
+      data: { isRead: true },
+    });
+    return ok({ ok: true, updated: result.count });
+  }
+
+  // No id or action=all: mark all as read.
+  await db.notification.updateMany({
+    where: { userId: user.id, isRead: false },
+    data: { isRead: true },
+  });
+  return ok({ ok: true, updated: 0 });
+});
+
 export const DELETE = apiHandler<Ctx>(async (req, ctx) => {
   const user = await requireApiUser();
   const id = await resolveId(ctx);

@@ -36,6 +36,8 @@ export type UserMinAggregateOutputType = {
   avatarColor: string | null
   isActive: boolean | null
   lastLoginAt: Date | null
+  emailNotifications: boolean | null
+  inAppNotifications: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -52,6 +54,8 @@ export type UserMaxAggregateOutputType = {
   avatarColor: string | null
   isActive: boolean | null
   lastLoginAt: Date | null
+  emailNotifications: boolean | null
+  inAppNotifications: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -68,6 +72,9 @@ export type UserCountAggregateOutputType = {
   avatarColor: number
   isActive: number
   lastLoginAt: number
+  emailNotifications: number
+  inAppNotifications: number
+  notificationPreferences: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -86,6 +93,8 @@ export type UserMinAggregateInputType = {
   avatarColor?: true
   isActive?: true
   lastLoginAt?: true
+  emailNotifications?: true
+  inAppNotifications?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -102,6 +111,8 @@ export type UserMaxAggregateInputType = {
   avatarColor?: true
   isActive?: true
   lastLoginAt?: true
+  emailNotifications?: true
+  inAppNotifications?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -118,6 +129,9 @@ export type UserCountAggregateInputType = {
   avatarColor?: true
   isActive?: true
   lastLoginAt?: true
+  emailNotifications?: true
+  inAppNotifications?: true
+  notificationPreferences?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -207,6 +221,9 @@ export type UserGroupByOutputType = {
   avatarColor: string
   isActive: boolean
   lastLoginAt: Date | null
+  emailNotifications: boolean
+  inAppNotifications: boolean
+  notificationPreferences: runtime.JsonValue | null
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -244,6 +261,9 @@ export type UserWhereInput = {
   avatarColor?: Prisma.StringFilter<"User"> | string
   isActive?: Prisma.BoolFilter<"User"> | boolean
   lastLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  emailNotifications?: Prisma.BoolFilter<"User"> | boolean
+  inAppNotifications?: Prisma.BoolFilter<"User"> | boolean
+  notificationPreferences?: Prisma.JsonNullableFilter<"User">
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
@@ -277,6 +297,9 @@ export type UserOrderByWithRelationInput = {
   avatarColor?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   lastLoginAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  emailNotifications?: Prisma.SortOrder
+  inAppNotifications?: Prisma.SortOrder
+  notificationPreferences?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   organization?: Prisma.OrganizationOrderByWithRelationInput
@@ -314,6 +337,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   avatarColor?: Prisma.StringFilter<"User"> | string
   isActive?: Prisma.BoolFilter<"User"> | boolean
   lastLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  emailNotifications?: Prisma.BoolFilter<"User"> | boolean
+  inAppNotifications?: Prisma.BoolFilter<"User"> | boolean
+  notificationPreferences?: Prisma.JsonNullableFilter<"User">
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
@@ -347,6 +373,9 @@ export type UserOrderByWithAggregationInput = {
   avatarColor?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   lastLoginAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  emailNotifications?: Prisma.SortOrder
+  inAppNotifications?: Prisma.SortOrder
+  notificationPreferences?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -369,6 +398,9 @@ export type UserScalarWhereWithAggregatesInput = {
   avatarColor?: Prisma.StringWithAggregatesFilter<"User"> | string
   isActive?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   lastLoginAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  emailNotifications?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  inAppNotifications?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  notificationPreferences?: Prisma.JsonNullableWithAggregatesFilter<"User">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -384,6 +416,9 @@ export type UserCreateInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
@@ -417,6 +452,9 @@ export type UserUncheckedCreateInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -448,6 +486,9 @@ export type UserUpdateInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
@@ -481,6 +522,9 @@ export type UserUncheckedUpdateInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -513,6 +557,9 @@ export type UserCreateManyInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -528,6 +575,9 @@ export type UserUpdateManyMutationInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -544,6 +594,9 @@ export type UserUncheckedUpdateManyInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -575,6 +628,9 @@ export type UserCountOrderByAggregateInput = {
   avatarColor?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   lastLoginAt?: Prisma.SortOrder
+  emailNotifications?: Prisma.SortOrder
+  inAppNotifications?: Prisma.SortOrder
+  notificationPreferences?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -591,6 +647,8 @@ export type UserMaxOrderByAggregateInput = {
   avatarColor?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   lastLoginAt?: Prisma.SortOrder
+  emailNotifications?: Prisma.SortOrder
+  inAppNotifications?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -607,6 +665,8 @@ export type UserMinOrderByAggregateInput = {
   avatarColor?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   lastLoginAt?: Prisma.SortOrder
+  emailNotifications?: Prisma.SortOrder
+  inAppNotifications?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -920,6 +980,9 @@ export type UserCreateWithoutOrganizationInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -951,6 +1014,9 @@ export type UserUncheckedCreateWithoutOrganizationInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -1011,6 +1077,9 @@ export type UserScalarWhereInput = {
   avatarColor?: Prisma.StringFilter<"User"> | string
   isActive?: Prisma.BoolFilter<"User"> | boolean
   lastLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  emailNotifications?: Prisma.BoolFilter<"User"> | boolean
+  inAppNotifications?: Prisma.BoolFilter<"User"> | boolean
+  notificationPreferences?: Prisma.JsonNullableFilter<"User">
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
 }
@@ -1026,6 +1095,9 @@ export type UserCreateWithoutSessionsInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
@@ -1058,6 +1130,9 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
@@ -1104,6 +1179,9 @@ export type UserUpdateWithoutSessionsInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
@@ -1136,6 +1214,9 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
@@ -1166,6 +1247,9 @@ export type UserCreateWithoutOwnedCompaniesInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
@@ -1198,6 +1282,9 @@ export type UserUncheckedCreateWithoutOwnedCompaniesInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -1244,6 +1331,9 @@ export type UserUpdateWithoutOwnedCompaniesInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
@@ -1276,6 +1366,9 @@ export type UserUncheckedUpdateWithoutOwnedCompaniesInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1306,6 +1399,9 @@ export type UserCreateWithoutOwnedContactsInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
@@ -1338,6 +1434,9 @@ export type UserUncheckedCreateWithoutOwnedContactsInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -1384,6 +1483,9 @@ export type UserUpdateWithoutOwnedContactsInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
@@ -1416,6 +1518,9 @@ export type UserUncheckedUpdateWithoutOwnedContactsInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1446,6 +1551,9 @@ export type UserCreateWithoutAssignedLeadsInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
@@ -1478,6 +1586,9 @@ export type UserUncheckedCreateWithoutAssignedLeadsInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -1513,6 +1624,9 @@ export type UserCreateWithoutOwnedLeadsInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
@@ -1545,6 +1659,9 @@ export type UserUncheckedCreateWithoutOwnedLeadsInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -1591,6 +1708,9 @@ export type UserUpdateWithoutAssignedLeadsInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
@@ -1623,6 +1743,9 @@ export type UserUncheckedUpdateWithoutAssignedLeadsInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1664,6 +1787,9 @@ export type UserUpdateWithoutOwnedLeadsInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
@@ -1696,6 +1822,9 @@ export type UserUncheckedUpdateWithoutOwnedLeadsInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1726,6 +1855,9 @@ export type UserCreateWithoutOwnedDealsInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
@@ -1758,6 +1890,9 @@ export type UserUncheckedCreateWithoutOwnedDealsInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -1804,6 +1939,9 @@ export type UserUpdateWithoutOwnedDealsInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
@@ -1836,6 +1974,9 @@ export type UserUncheckedUpdateWithoutOwnedDealsInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1866,6 +2007,9 @@ export type UserCreateWithoutCreatedTasksInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
@@ -1898,6 +2042,9 @@ export type UserUncheckedCreateWithoutCreatedTasksInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -1933,6 +2080,9 @@ export type UserCreateWithoutTasksInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
@@ -1965,6 +2115,9 @@ export type UserUncheckedCreateWithoutTasksInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -2011,6 +2164,9 @@ export type UserUpdateWithoutCreatedTasksInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
@@ -2043,6 +2199,9 @@ export type UserUncheckedUpdateWithoutCreatedTasksInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -2084,6 +2243,9 @@ export type UserUpdateWithoutTasksInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
@@ -2116,6 +2278,9 @@ export type UserUncheckedUpdateWithoutTasksInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -2146,6 +2311,9 @@ export type UserCreateWithoutActivitiesInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
@@ -2178,6 +2346,9 @@ export type UserUncheckedCreateWithoutActivitiesInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -2224,6 +2395,9 @@ export type UserUpdateWithoutActivitiesInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
@@ -2256,6 +2430,9 @@ export type UserUncheckedUpdateWithoutActivitiesInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -2286,6 +2463,9 @@ export type UserCreateWithoutNotesInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
@@ -2318,6 +2498,9 @@ export type UserUncheckedCreateWithoutNotesInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -2364,6 +2547,9 @@ export type UserUpdateWithoutNotesInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
@@ -2396,6 +2582,9 @@ export type UserUncheckedUpdateWithoutNotesInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -2426,6 +2615,9 @@ export type UserCreateWithoutNotificationsInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
@@ -2458,6 +2650,9 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -2504,6 +2699,9 @@ export type UserUpdateWithoutNotificationsInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
@@ -2536,6 +2734,9 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -2566,6 +2767,9 @@ export type UserCreateWithoutSentEmailsInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
@@ -2598,6 +2802,9 @@ export type UserUncheckedCreateWithoutSentEmailsInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -2644,6 +2851,9 @@ export type UserUpdateWithoutSentEmailsInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
@@ -2676,6 +2886,9 @@ export type UserUncheckedUpdateWithoutSentEmailsInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -2706,6 +2919,9 @@ export type UserCreateWithoutRemindersInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
@@ -2738,6 +2954,9 @@ export type UserUncheckedCreateWithoutRemindersInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -2784,6 +3003,9 @@ export type UserUpdateWithoutRemindersInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
@@ -2816,6 +3038,9 @@ export type UserUncheckedUpdateWithoutRemindersInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -2846,6 +3071,9 @@ export type UserCreateWithoutCreatedApiKeysInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
@@ -2878,6 +3106,9 @@ export type UserUncheckedCreateWithoutCreatedApiKeysInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -2924,6 +3155,9 @@ export type UserUpdateWithoutCreatedApiKeysInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
@@ -2956,6 +3190,9 @@ export type UserUncheckedUpdateWithoutCreatedApiKeysInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -2986,6 +3223,9 @@ export type UserCreateWithoutCreatedSequencesInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
@@ -3018,6 +3258,9 @@ export type UserUncheckedCreateWithoutCreatedSequencesInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -3064,6 +3307,9 @@ export type UserUpdateWithoutCreatedSequencesInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
@@ -3096,6 +3342,9 @@ export type UserUncheckedUpdateWithoutCreatedSequencesInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -3126,6 +3375,9 @@ export type UserCreateWithoutSequenceEnrollmentsInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
@@ -3158,6 +3410,9 @@ export type UserUncheckedCreateWithoutSequenceEnrollmentsInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -3204,6 +3459,9 @@ export type UserUpdateWithoutSequenceEnrollmentsInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
@@ -3236,6 +3494,9 @@ export type UserUncheckedUpdateWithoutSequenceEnrollmentsInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -3266,6 +3527,9 @@ export type UserCreateManyOrganizationInput = {
   avatarColor?: string
   isActive?: boolean
   lastLoginAt?: Date | string | null
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -3281,6 +3545,9 @@ export type UserUpdateWithoutOrganizationInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -3312,6 +3579,9 @@ export type UserUncheckedUpdateWithoutOrganizationInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -3343,6 +3613,9 @@ export type UserUncheckedUpdateManyWithoutOrganizationInput = {
   avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  emailNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  inAppNotifications?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notificationPreferences?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -3525,6 +3798,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   avatarColor?: boolean
   isActive?: boolean
   lastLoginAt?: boolean
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
@@ -3559,6 +3835,9 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   avatarColor?: boolean
   isActive?: boolean
   lastLoginAt?: boolean
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
@@ -3576,6 +3855,9 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   avatarColor?: boolean
   isActive?: boolean
   lastLoginAt?: boolean
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
@@ -3593,11 +3875,14 @@ export type UserSelectScalar = {
   avatarColor?: boolean
   isActive?: boolean
   lastLoginAt?: boolean
+  emailNotifications?: boolean
+  inAppNotifications?: boolean
+  notificationPreferences?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "email" | "name" | "passwordHash" | "role" | "title" | "phone" | "avatarColor" | "isActive" | "lastLoginAt" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "email" | "name" | "passwordHash" | "role" | "title" | "phone" | "avatarColor" | "isActive" | "lastLoginAt" | "emailNotifications" | "inAppNotifications" | "notificationPreferences" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
@@ -3658,6 +3943,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     avatarColor: string
     isActive: boolean
     lastLoginAt: Date | null
+    emailNotifications: boolean
+    inAppNotifications: boolean
+    notificationPreferences: runtime.JsonValue | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -4111,6 +4399,9 @@ export interface UserFieldRefs {
   readonly avatarColor: Prisma.FieldRef<"User", 'String'>
   readonly isActive: Prisma.FieldRef<"User", 'Boolean'>
   readonly lastLoginAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly emailNotifications: Prisma.FieldRef<"User", 'Boolean'>
+  readonly inAppNotifications: Prisma.FieldRef<"User", 'Boolean'>
+  readonly notificationPreferences: Prisma.FieldRef<"User", 'Json'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }

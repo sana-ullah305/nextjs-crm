@@ -1,11 +1,15 @@
 import { db } from "@/server/db";
+import { sendEmail, EmailConfigError, EmailSendError } from "@/server/mailer";
+import type { SessionUser } from "@/server/auth";
 
 /**
  * Follow-up reminder scheduler.
  *
  * Scans for due lead follow-ups (followUpAt <= now, lead still open) and
  * due/overdue tasks (dueAt/reminderAt <= now, task not completed) and creates
- * in-app notifications for the responsible user.
+ * in-app notifications for the responsible user. When the recipient has the
+ * email channel enabled (User.emailNotifications) and the matching per-type
+ * preference is on, an email-channel reminder is also sent.
  *
  * Design notes:
  * - Deduplicated via FollowUpReminder.dedupeKey (org-scoped unique) so running
@@ -28,10 +32,78 @@ function dayKey(d: Date): string {
   return d.toISOString().slice(0, 10);
 }
 
+/** Preference keys in User.notificationPreferences. */
+const PREF_TASK_REMINDERS = "taskReminders";
+const PREF_LEAD_FOLLOW_UPS = "leadFollowUps";
+
+function preferenceEnabled(raw: unknown, key: string): boolean {
+  // Default true: an absent per-type key means "send it".
+  if (raw && typeof raw === "object" && !Array.isArray(raw)) {
+    const value = (raw as Record<string, unknown>)[key];
+    if (typeof value === "boolean") return value;
+  }
+  return true;
+}
+
+type Recipient = {
+  id: string;
+  email: string;
+  name: string;
+  emailNotifications: boolean;
+  notificationPreferences: unknown;
+};
+
+function asSessionUser(recipient: Recipient, organizationId: string): SessionUser {
+  return {
+    id: recipient.id,
+    organizationId,
+    email: recipient.email,
+    name: recipient.name,
+    role: "SALES_REP",
+    avatarColor: "#6366f1",
+    title: "",
+  } as SessionUser;
+}
+
+/**
+ * Email-channel reminder. Fire-and-forget: the scan never blocks on SMTP
+ * (connect timeouts can be long), and email failures never break the in-app
+ * notification path. Respects the recipient's emailNotifications flag and the
+ * per-type notificationPreferences key.
+ */
+function maybeSendEmailReminder(
+  orgId: string,
+  recipient: Recipient,
+  kind: "lead" | "task",
+  title: string,
+  body: string,
+  link: string,
+  leadId?: string
+): void {
+  if (!recipient.emailNotifications) return;
+  const prefKey = kind === "task" ? PREF_TASK_REMINDERS : PREF_LEAD_FOLLOW_UPS;
+  if (!preferenceEnabled(recipient.notificationPreferences, prefKey)) return;
+
+  void sendEmail({
+    user: asSessionUser(recipient, orgId),
+    to: { email: recipient.email, name: recipient.name },
+    subject: title,
+    body: `${body}\n\n${link}`,
+    leadId: leadId ?? null,
+    contactId: null,
+    dealId: null,
+  }).catch((err) => {
+    // Email is a secondary channel; in-app notification already created.
+    if (err instanceof EmailConfigError || err instanceof EmailSendError) return;
+    console.error("Reminder email send failed", err);
+  });
+}
+
 export type ReminderRunResult = {
   leadsReminded: number;
   tasksReminded: number;
   remindersCreated: number;
+  emailsSent: number;
   scannedAt: string;
 };
 
@@ -40,6 +112,7 @@ export async function runReminderScan(now: Date = new Date()): Promise<ReminderR
   let leadsReminded = 0;
   let tasksReminded = 0;
   let remindersCreated = 0;
+  let emailsSent = 0;
 
   for (const org of orgs) {
     const day = dayKey(now);
@@ -78,6 +151,7 @@ export async function runReminderScan(now: Date = new Date()): Promise<ReminderR
       const title = isOverdue
         ? `Overdue follow-up: ${lead.firstName} ${lead.lastName}`
         : `Follow-up due: ${lead.firstName} ${lead.lastName}`;
+      const link = `/leads?q=${encodeURIComponent(`${lead.firstName} ${lead.lastName}`)}`;
       await db.followUpReminder.create({
         data: {
           organizationId: org.id,
@@ -86,7 +160,7 @@ export async function runReminderScan(now: Date = new Date()): Promise<ReminderR
           kind: "LEAD_FOLLOW_UP",
           title,
           body: `Scheduled follow-up for lead ${lead.firstName} ${lead.lastName} is due.`,
-          link: `/leads?q=${encodeURIComponent(`${lead.firstName} ${lead.lastName}`)}`,
+          link,
           leadId: lead.id,
         },
       });
@@ -97,9 +171,38 @@ export async function runReminderScan(now: Date = new Date()): Promise<ReminderR
           title,
           body: `Lead follow-up is due. Open the lead to take action.`,
           type: "WARNING",
-          link: `/leads?q=${encodeURIComponent(`${lead.firstName} ${lead.lastName}`)}`,
+          link,
         },
       });
+
+      const recipient = await db.user.findUnique({
+        where: { id: recipientId },
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          emailNotifications: true,
+          notificationPreferences: true,
+        },
+      });
+      if (recipient) {
+        const emailDue =
+          recipient.emailNotifications &&
+          preferenceEnabled(recipient.notificationPreferences, PREF_LEAD_FOLLOW_UPS);
+        if (emailDue) {
+          maybeSendEmailReminder(
+            org.id,
+            recipient,
+            "lead",
+            title,
+            `Scheduled follow-up for lead ${lead.firstName} ${lead.lastName} is due.`,
+            link,
+            lead.id
+          );
+          emailsSent++;
+        }
+      }
+
       leadsReminded++;
       remindersCreated++;
     }
@@ -167,10 +270,38 @@ export async function runReminderScan(now: Date = new Date()): Promise<ReminderR
           link,
         },
       });
+
+      const recipient = await db.user.findUnique({
+        where: { id: recipientId },
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          emailNotifications: true,
+          notificationPreferences: true,
+        },
+      });
+      if (recipient) {
+        const emailDue =
+          recipient.emailNotifications &&
+          preferenceEnabled(recipient.notificationPreferences, PREF_TASK_REMINDERS);
+        if (emailDue) {
+          maybeSendEmailReminder(
+            org.id,
+            recipient,
+            "task",
+            title,
+            `Task "${task.title}" is due.`,
+            link
+          );
+          emailsSent++;
+        }
+      }
+
       tasksReminded++;
       remindersCreated++;
     }
   }
 
-  return { leadsReminded, tasksReminded, remindersCreated, scannedAt: now.toISOString() };
+  return { leadsReminded, tasksReminded, remindersCreated, emailsSent, scannedAt: now.toISOString() };
 }
