@@ -1,6 +1,7 @@
 import { apiHandler, ok, clientIp } from "@/server/api";
 import { requireApiUserWith } from "@/server/rbac";
 import { db } from "@/server/db";
+import { encrypt } from "@/server/encryption";
 import { writeAudit } from "@/server/audit";
 import { z } from "zod";
 import { emailSettingsSchema } from "@/lib/schemas";
@@ -32,12 +33,14 @@ export const PATCH = apiHandler<Ctx>(async (req, _ctx) => {
     smtpHost?: string;
     smtpPort?: number;
     smtpUser?: string;
+  smtpPasswordEncrypted?: string;
     fromAddress?: string;
     notificationsEnabled?: boolean;
   } = {};
   if (body.smtpHost !== undefined) data.smtpHost = body.smtpHost;
   if (body.smtpPort !== undefined) data.smtpPort = body.smtpPort;
   if (body.smtpUser !== undefined) data.smtpUser = body.smtpUser;
+  if (body.smtpPassword !== undefined && body.smtpPassword) data.smtpPasswordEncrypted = encrypt(body.smtpPassword);
   if (body.fromAddress !== undefined) data.fromAddress = body.fromAddress;
   if (body.notificationsEnabled !== undefined) data.notificationsEnabled = body.notificationsEnabled;
 
@@ -61,3 +64,18 @@ async function parseEmailSettings(req: Parameters<typeof import("@/server/api").
   const { parseBody } = await import("@/server/api");
   return parseBody(req, emailSettingsSchema);
 }
+
+export const POST = apiHandler<Ctx>(async (req, _ctx) => {
+  const user = await requireApiUserWith("settings:manage");
+  const body = await req.json().catch(() => ({}));
+  if (body?.action !== "test") return ok({ error: "Unknown action" });
+  const { getTransporter } = await import("@/server/mailer");
+  const t = await getTransporter(user.organizationId);
+  if (!t) return ok({ ok: false, error: "SMTP not configured" });
+  try {
+    await t.transporter.verify();
+    return ok({ ok: true });
+  } catch (e) {
+    return ok({ ok: false, error: e instanceof Error ? e.message : "verify failed" });
+  }
+});

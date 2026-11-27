@@ -40,6 +40,7 @@ export type EmailSettingsMinAggregateOutputType = {
   smtpHost: string | null
   smtpPort: number | null
   smtpUser: string | null
+  smtpPasswordEncrypted: string | null
   fromAddress: string | null
   notificationsEnabled: boolean | null
 }
@@ -50,6 +51,7 @@ export type EmailSettingsMaxAggregateOutputType = {
   smtpHost: string | null
   smtpPort: number | null
   smtpUser: string | null
+  smtpPasswordEncrypted: string | null
   fromAddress: string | null
   notificationsEnabled: boolean | null
 }
@@ -60,6 +62,7 @@ export type EmailSettingsCountAggregateOutputType = {
   smtpHost: number
   smtpPort: number
   smtpUser: number
+  smtpPasswordEncrypted: number
   fromAddress: number
   notificationsEnabled: number
   _all: number
@@ -80,6 +83,7 @@ export type EmailSettingsMinAggregateInputType = {
   smtpHost?: true
   smtpPort?: true
   smtpUser?: true
+  smtpPasswordEncrypted?: true
   fromAddress?: true
   notificationsEnabled?: true
 }
@@ -90,6 +94,7 @@ export type EmailSettingsMaxAggregateInputType = {
   smtpHost?: true
   smtpPort?: true
   smtpUser?: true
+  smtpPasswordEncrypted?: true
   fromAddress?: true
   notificationsEnabled?: true
 }
@@ -100,6 +105,7 @@ export type EmailSettingsCountAggregateInputType = {
   smtpHost?: true
   smtpPort?: true
   smtpUser?: true
+  smtpPasswordEncrypted?: true
   fromAddress?: true
   notificationsEnabled?: true
   _all?: true
@@ -197,6 +203,7 @@ export type EmailSettingsGroupByOutputType = {
   smtpHost: string
   smtpPort: number
   smtpUser: string
+  smtpPasswordEncrypted: string
   fromAddress: string
   notificationsEnabled: boolean
   _count: EmailSettingsCountAggregateOutputType | null
@@ -230,6 +237,7 @@ export type EmailSettingsWhereInput = {
   smtpHost?: Prisma.StringFilter<"EmailSettings"> | string
   smtpPort?: Prisma.IntFilter<"EmailSettings"> | number
   smtpUser?: Prisma.StringFilter<"EmailSettings"> | string
+  smtpPasswordEncrypted?: Prisma.StringFilter<"EmailSettings"> | string
   fromAddress?: Prisma.StringFilter<"EmailSettings"> | string
   notificationsEnabled?: Prisma.BoolFilter<"EmailSettings"> | boolean
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
@@ -241,6 +249,7 @@ export type EmailSettingsOrderByWithRelationInput = {
   smtpHost?: Prisma.SortOrder
   smtpPort?: Prisma.SortOrder
   smtpUser?: Prisma.SortOrder
+  smtpPasswordEncrypted?: Prisma.SortOrder
   fromAddress?: Prisma.SortOrder
   notificationsEnabled?: Prisma.SortOrder
   organization?: Prisma.OrganizationOrderByWithRelationInput
@@ -255,6 +264,7 @@ export type EmailSettingsWhereUniqueInput = Prisma.AtLeast<{
   smtpHost?: Prisma.StringFilter<"EmailSettings"> | string
   smtpPort?: Prisma.IntFilter<"EmailSettings"> | number
   smtpUser?: Prisma.StringFilter<"EmailSettings"> | string
+  smtpPasswordEncrypted?: Prisma.StringFilter<"EmailSettings"> | string
   fromAddress?: Prisma.StringFilter<"EmailSettings"> | string
   notificationsEnabled?: Prisma.BoolFilter<"EmailSettings"> | boolean
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
@@ -266,6 +276,7 @@ export type EmailSettingsOrderByWithAggregationInput = {
   smtpHost?: Prisma.SortOrder
   smtpPort?: Prisma.SortOrder
   smtpUser?: Prisma.SortOrder
+  smtpPasswordEncrypted?: Prisma.SortOrder
   fromAddress?: Prisma.SortOrder
   notificationsEnabled?: Prisma.SortOrder
   _count?: Prisma.EmailSettingsCountOrderByAggregateInput
@@ -284,6 +295,7 @@ export type EmailSettingsScalarWhereWithAggregatesInput = {
   smtpHost?: Prisma.StringWithAggregatesFilter<"EmailSettings"> | string
   smtpPort?: Prisma.IntWithAggregatesFilter<"EmailSettings"> | number
   smtpUser?: Prisma.StringWithAggregatesFilter<"EmailSettings"> | string
+  smtpPasswordEncrypted?: Prisma.StringWithAggregatesFilter<"EmailSettings"> | string
   fromAddress?: Prisma.StringWithAggregatesFilter<"EmailSettings"> | string
   notificationsEnabled?: Prisma.BoolWithAggregatesFilter<"EmailSettings"> | boolean
 }
@@ -293,6 +305,7 @@ export type EmailSettingsCreateInput = {
   smtpHost?: string
   smtpPort?: number
   smtpUser?: string
+  smtpPasswordEncrypted?: string
   fromAddress?: string
   notificationsEnabled?: boolean
   organization: Prisma.OrganizationCreateNestedOneWithoutEmailSettingsInput
@@ -304,6 +317,7 @@ export type EmailSettingsUncheckedCreateInput = {
   smtpHost?: string
   smtpPort?: number
   smtpUser?: string
+  smtpPasswordEncrypted?: string
   fromAddress?: string
   notificationsEnabled?: boolean
 }
@@ -313,6 +327,7 @@ export type EmailSettingsUpdateInput = {
   smtpHost?: Prisma.StringFieldUpdateOperationsInput | string
   smtpPort?: Prisma.IntFieldUpdateOperationsInput | number
   smtpUser?: Prisma.StringFieldUpdateOperationsInput | string
+  smtpPasswordEncrypted?: Prisma.StringFieldUpdateOperationsInput | string
   fromAddress?: Prisma.StringFieldUpdateOperationsInput | string
   notificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutEmailSettingsNestedInput
@@ -324,6 +339,7 @@ export type EmailSettingsUncheckedUpdateInput = {
   smtpHost?: Prisma.StringFieldUpdateOperationsInput | string
   smtpPort?: Prisma.IntFieldUpdateOperationsInput | number
   smtpUser?: Prisma.StringFieldUpdateOperationsInput | string
+  smtpPasswordEncrypted?: Prisma.StringFieldUpdateOperationsInput | string
   fromAddress?: Prisma.StringFieldUpdateOperationsInput | string
   notificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
@@ -334,6 +350,7 @@ export type EmailSettingsCreateManyInput = {
   smtpHost?: string
   smtpPort?: number
   smtpUser?: string
+  smtpPasswordEncrypted?: string
   fromAddress?: string
   notificationsEnabled?: boolean
 }
@@ -343,6 +360,7 @@ export type EmailSettingsUpdateManyMutationInput = {
   smtpHost?: Prisma.StringFieldUpdateOperationsInput | string
   smtpPort?: Prisma.IntFieldUpdateOperationsInput | number
   smtpUser?: Prisma.StringFieldUpdateOperationsInput | string
+  smtpPasswordEncrypted?: Prisma.StringFieldUpdateOperationsInput | string
   fromAddress?: Prisma.StringFieldUpdateOperationsInput | string
   notificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
@@ -353,6 +371,7 @@ export type EmailSettingsUncheckedUpdateManyInput = {
   smtpHost?: Prisma.StringFieldUpdateOperationsInput | string
   smtpPort?: Prisma.IntFieldUpdateOperationsInput | number
   smtpUser?: Prisma.StringFieldUpdateOperationsInput | string
+  smtpPasswordEncrypted?: Prisma.StringFieldUpdateOperationsInput | string
   fromAddress?: Prisma.StringFieldUpdateOperationsInput | string
   notificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
@@ -368,6 +387,7 @@ export type EmailSettingsCountOrderByAggregateInput = {
   smtpHost?: Prisma.SortOrder
   smtpPort?: Prisma.SortOrder
   smtpUser?: Prisma.SortOrder
+  smtpPasswordEncrypted?: Prisma.SortOrder
   fromAddress?: Prisma.SortOrder
   notificationsEnabled?: Prisma.SortOrder
 }
@@ -382,6 +402,7 @@ export type EmailSettingsMaxOrderByAggregateInput = {
   smtpHost?: Prisma.SortOrder
   smtpPort?: Prisma.SortOrder
   smtpUser?: Prisma.SortOrder
+  smtpPasswordEncrypted?: Prisma.SortOrder
   fromAddress?: Prisma.SortOrder
   notificationsEnabled?: Prisma.SortOrder
 }
@@ -392,6 +413,7 @@ export type EmailSettingsMinOrderByAggregateInput = {
   smtpHost?: Prisma.SortOrder
   smtpPort?: Prisma.SortOrder
   smtpUser?: Prisma.SortOrder
+  smtpPasswordEncrypted?: Prisma.SortOrder
   fromAddress?: Prisma.SortOrder
   notificationsEnabled?: Prisma.SortOrder
 }
@@ -437,6 +459,7 @@ export type EmailSettingsCreateWithoutOrganizationInput = {
   smtpHost?: string
   smtpPort?: number
   smtpUser?: string
+  smtpPasswordEncrypted?: string
   fromAddress?: string
   notificationsEnabled?: boolean
 }
@@ -446,6 +469,7 @@ export type EmailSettingsUncheckedCreateWithoutOrganizationInput = {
   smtpHost?: string
   smtpPort?: number
   smtpUser?: string
+  smtpPasswordEncrypted?: string
   fromAddress?: string
   notificationsEnabled?: boolean
 }
@@ -471,6 +495,7 @@ export type EmailSettingsUpdateWithoutOrganizationInput = {
   smtpHost?: Prisma.StringFieldUpdateOperationsInput | string
   smtpPort?: Prisma.IntFieldUpdateOperationsInput | number
   smtpUser?: Prisma.StringFieldUpdateOperationsInput | string
+  smtpPasswordEncrypted?: Prisma.StringFieldUpdateOperationsInput | string
   fromAddress?: Prisma.StringFieldUpdateOperationsInput | string
   notificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
@@ -480,6 +505,7 @@ export type EmailSettingsUncheckedUpdateWithoutOrganizationInput = {
   smtpHost?: Prisma.StringFieldUpdateOperationsInput | string
   smtpPort?: Prisma.IntFieldUpdateOperationsInput | number
   smtpUser?: Prisma.StringFieldUpdateOperationsInput | string
+  smtpPasswordEncrypted?: Prisma.StringFieldUpdateOperationsInput | string
   fromAddress?: Prisma.StringFieldUpdateOperationsInput | string
   notificationsEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
@@ -492,6 +518,7 @@ export type EmailSettingsSelect<ExtArgs extends runtime.Types.Extensions.Interna
   smtpHost?: boolean
   smtpPort?: boolean
   smtpUser?: boolean
+  smtpPasswordEncrypted?: boolean
   fromAddress?: boolean
   notificationsEnabled?: boolean
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
@@ -503,6 +530,7 @@ export type EmailSettingsSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   smtpHost?: boolean
   smtpPort?: boolean
   smtpUser?: boolean
+  smtpPasswordEncrypted?: boolean
   fromAddress?: boolean
   notificationsEnabled?: boolean
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
@@ -514,6 +542,7 @@ export type EmailSettingsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   smtpHost?: boolean
   smtpPort?: boolean
   smtpUser?: boolean
+  smtpPasswordEncrypted?: boolean
   fromAddress?: boolean
   notificationsEnabled?: boolean
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
@@ -525,11 +554,12 @@ export type EmailSettingsSelectScalar = {
   smtpHost?: boolean
   smtpPort?: boolean
   smtpUser?: boolean
+  smtpPasswordEncrypted?: boolean
   fromAddress?: boolean
   notificationsEnabled?: boolean
 }
 
-export type EmailSettingsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "smtpHost" | "smtpPort" | "smtpUser" | "fromAddress" | "notificationsEnabled", ExtArgs["result"]["emailSettings"]>
+export type EmailSettingsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "smtpHost" | "smtpPort" | "smtpUser" | "smtpPasswordEncrypted" | "fromAddress" | "notificationsEnabled", ExtArgs["result"]["emailSettings"]>
 export type EmailSettingsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
 }
@@ -551,6 +581,7 @@ export type $EmailSettingsPayload<ExtArgs extends runtime.Types.Extensions.Inter
     smtpHost: string
     smtpPort: number
     smtpUser: string
+    smtpPasswordEncrypted: string
     fromAddress: string
     notificationsEnabled: boolean
   }, ExtArgs["result"]["emailSettings"]>
@@ -982,6 +1013,7 @@ export interface EmailSettingsFieldRefs {
   readonly smtpHost: Prisma.FieldRef<"EmailSettings", 'String'>
   readonly smtpPort: Prisma.FieldRef<"EmailSettings", 'Int'>
   readonly smtpUser: Prisma.FieldRef<"EmailSettings", 'String'>
+  readonly smtpPasswordEncrypted: Prisma.FieldRef<"EmailSettings", 'String'>
   readonly fromAddress: Prisma.FieldRef<"EmailSettings", 'String'>
   readonly notificationsEnabled: Prisma.FieldRef<"EmailSettings", 'Boolean'>
 }
