@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { apiHandler, ok, parseBody, parseQuery, ApiNotFoundError, ApiValidationError, clientIp } from "@/server/api";
-import { requireApiUserWith, hasPermission } from "@/server/rbac";
+import { requireApiUserWith, hasPermission, teamMemberIds } from "@/server/rbac";
 import { leadCreateSchema, leadUpdateSchema, leadConvertSchema } from "@/lib/schemas";
 import { db } from "@/server/db";
 import { writeAudit } from "@/server/audit";
@@ -42,12 +42,15 @@ export const GET = apiHandler<Ctx>(async (req, ctx) => {
 async function listLeads(req: NextRequest) {
   const user = await requireApiUserWith("leads:read");
   const q = parseQuery(req, listQuerySchema);
+  const teamIds = hasPermission(user, "leads:read_all")
+    ? undefined
+    : await teamMemberIds(user);
   const where = {
     organizationId: user.organizationId,
     deletedAt: null,
     ...(hasPermission(user, "leads:read_all")
       ? {}
-      : { OR: [{ assignedUserId: user.id }, { ownerId: user.id }, { assignedUserId: null }] }),
+      : { OR: [{ assignedUserId: { in: teamIds } }, { ownerId: { in: teamIds } }, { assignedUserId: null }] }),
     ...(q.status ? { status: q.status } : {}),
     ...(q.sourceId ? { sourceId: q.sourceId } : {}),
     ...(q.assignedUserId ? { assignedUserId: q.assignedUserId } : {}),

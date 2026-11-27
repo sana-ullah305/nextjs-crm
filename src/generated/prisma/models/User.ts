@@ -247,6 +247,7 @@ export type UserWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
+  teamMemberships?: Prisma.TeamMemberListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
   ownedCompanies?: Prisma.CompanyListRelationFilter
   ownedContacts?: Prisma.ContactListRelationFilter
@@ -282,6 +283,7 @@ export type UserOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   organization?: Prisma.OrganizationOrderByWithRelationInput
+  teamMemberships?: Prisma.TeamMemberOrderByRelationAggregateInput
   sessions?: Prisma.SessionOrderByRelationAggregateInput
   ownedCompanies?: Prisma.CompanyOrderByRelationAggregateInput
   ownedContacts?: Prisma.ContactOrderByRelationAggregateInput
@@ -321,6 +323,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
+  teamMemberships?: Prisma.TeamMemberListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
   ownedCompanies?: Prisma.CompanyListRelationFilter
   ownedContacts?: Prisma.ContactListRelationFilter
@@ -393,6 +396,7 @@ export type UserCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
@@ -427,6 +431,7 @@ export type UserUncheckedCreateInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
@@ -461,6 +466,7 @@ export type UserUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
@@ -495,6 +501,7 @@ export type UserUncheckedUpdateInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
@@ -572,6 +579,11 @@ export type UserOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
+}
+
 export type UserOrganizationIdEmailCompoundUniqueInput = {
   organizationId: string
   email: string
@@ -625,11 +637,6 @@ export type UserMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type UserScalarRelationFilter = {
-  is?: Prisma.UserWhereInput
-  isNot?: Prisma.UserWhereInput
-}
-
 export type UserNullableScalarRelationFilter = {
   is?: Prisma.UserWhereInput | null
   isNot?: Prisma.UserWhereInput | null
@@ -675,6 +682,20 @@ export type UserUncheckedUpdateManyWithoutOrganizationNestedInput = {
   update?: Prisma.UserUpdateWithWhereUniqueWithoutOrganizationInput | Prisma.UserUpdateWithWhereUniqueWithoutOrganizationInput[]
   updateMany?: Prisma.UserUpdateManyWithWhereWithoutOrganizationInput | Prisma.UserUpdateManyWithWhereWithoutOrganizationInput[]
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserCreateNestedOneWithoutTeamMembershipsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTeamMembershipsInput, Prisma.UserUncheckedCreateWithoutTeamMembershipsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTeamMembershipsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutTeamMembershipsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTeamMembershipsInput, Prisma.UserUncheckedCreateWithoutTeamMembershipsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTeamMembershipsInput
+  upsert?: Prisma.UserUpsertWithoutTeamMembershipsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTeamMembershipsInput, Prisma.UserUpdateWithoutTeamMembershipsInput>, Prisma.UserUncheckedUpdateWithoutTeamMembershipsInput>
 }
 
 export type BoolFieldUpdateOperationsInput = {
@@ -964,6 +985,7 @@ export type UserCreateWithoutOrganizationInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
@@ -997,6 +1019,7 @@ export type UserUncheckedCreateWithoutOrganizationInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
@@ -1061,6 +1084,158 @@ export type UserScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
 }
 
+export type UserCreateWithoutTeamMembershipsInput = {
+  id?: string
+  email: string
+  name: string
+  passwordHash: string
+  role?: string
+  title?: string
+  phone?: string
+  avatarColor?: string
+  isActive?: boolean
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
+  ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
+  ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
+  assignedLeads?: Prisma.LeadCreateNestedManyWithoutAssignedUserInput
+  ownedDeals?: Prisma.DealCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutAssignedUserInput
+  createdTasks?: Prisma.TaskCreateNestedManyWithoutCreatedByInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutUserInput
+  notes?: Prisma.NoteCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutUploadedByInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutUserInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyCreateNestedManyWithoutCreatedByInput
+  createdSequences?: Prisma.SequenceCreateNestedManyWithoutCreatedByInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutResponderInput
+}
+
+export type UserUncheckedCreateWithoutTeamMembershipsInput = {
+  id?: string
+  organizationId: string
+  email: string
+  name: string
+  passwordHash: string
+  role?: string
+  title?: string
+  phone?: string
+  avatarColor?: string
+  isActive?: boolean
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
+  ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
+  ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
+  assignedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutAssignedUserInput
+  ownedDeals?: Prisma.DealUncheckedCreateNestedManyWithoutOwnerInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutAssignedUserInput
+  createdTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutCreatedByInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutUserInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutUserInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutUploadedByInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutUserInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutUserInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutCreatedByInput
+  createdSequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutCreatedByInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutResponderInput
+}
+
+export type UserCreateOrConnectWithoutTeamMembershipsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTeamMembershipsInput, Prisma.UserUncheckedCreateWithoutTeamMembershipsInput>
+}
+
+export type UserUpsertWithoutTeamMembershipsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTeamMembershipsInput, Prisma.UserUncheckedUpdateWithoutTeamMembershipsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTeamMembershipsInput, Prisma.UserUncheckedCreateWithoutTeamMembershipsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTeamMembershipsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTeamMembershipsInput, Prisma.UserUncheckedUpdateWithoutTeamMembershipsInput>
+}
+
+export type UserUpdateWithoutTeamMembershipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
+  ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
+  ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
+  assignedLeads?: Prisma.LeadUpdateManyWithoutAssignedUserNestedInput
+  ownedDeals?: Prisma.DealUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutAssignedUserNestedInput
+  createdTasks?: Prisma.TaskUpdateManyWithoutCreatedByNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutUserNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutUploadedByNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUpdateManyWithoutCreatedByNestedInput
+  createdSequences?: Prisma.SequenceUpdateManyWithoutCreatedByNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutResponderNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTeamMembershipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarColor?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
+  ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
+  ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
+  assignedLeads?: Prisma.LeadUncheckedUpdateManyWithoutAssignedUserNestedInput
+  ownedDeals?: Prisma.DealUncheckedUpdateManyWithoutOwnerNestedInput
+  stageHistoryEntries?: Prisma.StageHistoryUncheckedUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutAssignedUserNestedInput
+  createdTasks?: Prisma.TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutUserNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutUserNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutUploadedByNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutUserNestedInput
+  createdApiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdSequences?: Prisma.SequenceUncheckedUpdateManyWithoutCreatedByNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutResponderNestedInput
+}
+
 export type UserCreateWithoutSessionsInput = {
   id?: string
   email: string
@@ -1075,6 +1250,7 @@ export type UserCreateWithoutSessionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
   ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
@@ -1108,6 +1284,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
   ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
@@ -1157,6 +1334,7 @@ export type UserUpdateWithoutSessionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
   ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
@@ -1190,6 +1368,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
   ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
@@ -1223,6 +1402,7 @@ export type UserCreateWithoutOwnedCompaniesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
   ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
@@ -1256,6 +1436,7 @@ export type UserUncheckedCreateWithoutOwnedCompaniesInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
   ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
@@ -1305,6 +1486,7 @@ export type UserUpdateWithoutOwnedCompaniesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
   ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
@@ -1338,6 +1520,7 @@ export type UserUncheckedUpdateWithoutOwnedCompaniesInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
   ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
@@ -1371,6 +1554,7 @@ export type UserCreateWithoutOwnedContactsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
   ownedLeads?: Prisma.LeadCreateNestedManyWithoutOwnerInput
@@ -1404,6 +1588,7 @@ export type UserUncheckedCreateWithoutOwnedContactsInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
   ownedLeads?: Prisma.LeadUncheckedCreateNestedManyWithoutOwnerInput
@@ -1453,6 +1638,7 @@ export type UserUpdateWithoutOwnedContactsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
   ownedLeads?: Prisma.LeadUpdateManyWithoutOwnerNestedInput
@@ -1486,6 +1672,7 @@ export type UserUncheckedUpdateWithoutOwnedContactsInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
   ownedLeads?: Prisma.LeadUncheckedUpdateManyWithoutOwnerNestedInput
@@ -1519,6 +1706,7 @@ export type UserCreateWithoutAssignedLeadsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
@@ -1552,6 +1740,7 @@ export type UserUncheckedCreateWithoutAssignedLeadsInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
@@ -1590,6 +1779,7 @@ export type UserCreateWithoutOwnedLeadsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
@@ -1623,6 +1813,7 @@ export type UserUncheckedCreateWithoutOwnedLeadsInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
@@ -1672,6 +1863,7 @@ export type UserUpdateWithoutAssignedLeadsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
@@ -1705,6 +1897,7 @@ export type UserUncheckedUpdateWithoutAssignedLeadsInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
@@ -1749,6 +1942,7 @@ export type UserUpdateWithoutOwnedLeadsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
@@ -1782,6 +1976,7 @@ export type UserUncheckedUpdateWithoutOwnedLeadsInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
@@ -1815,6 +2010,7 @@ export type UserCreateWithoutOwnedDealsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
@@ -1848,6 +2044,7 @@ export type UserUncheckedCreateWithoutOwnedDealsInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
@@ -1897,6 +2094,7 @@ export type UserUpdateWithoutOwnedDealsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
@@ -1930,6 +2128,7 @@ export type UserUncheckedUpdateWithoutOwnedDealsInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
@@ -1963,6 +2162,7 @@ export type UserCreateWithoutCreatedTasksInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
@@ -1996,6 +2196,7 @@ export type UserUncheckedCreateWithoutCreatedTasksInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
@@ -2034,6 +2235,7 @@ export type UserCreateWithoutTasksInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
@@ -2067,6 +2269,7 @@ export type UserUncheckedCreateWithoutTasksInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
@@ -2116,6 +2319,7 @@ export type UserUpdateWithoutCreatedTasksInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
@@ -2149,6 +2353,7 @@ export type UserUncheckedUpdateWithoutCreatedTasksInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
@@ -2193,6 +2398,7 @@ export type UserUpdateWithoutTasksInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
@@ -2226,6 +2432,7 @@ export type UserUncheckedUpdateWithoutTasksInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
@@ -2259,6 +2466,7 @@ export type UserCreateWithoutActivitiesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
@@ -2292,6 +2500,7 @@ export type UserUncheckedCreateWithoutActivitiesInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
@@ -2341,6 +2550,7 @@ export type UserUpdateWithoutActivitiesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
@@ -2374,6 +2584,7 @@ export type UserUncheckedUpdateWithoutActivitiesInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
@@ -2407,6 +2618,7 @@ export type UserCreateWithoutNotesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
@@ -2440,6 +2652,7 @@ export type UserUncheckedCreateWithoutNotesInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
@@ -2489,6 +2702,7 @@ export type UserUpdateWithoutNotesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
@@ -2522,6 +2736,7 @@ export type UserUncheckedUpdateWithoutNotesInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
@@ -2555,6 +2770,7 @@ export type UserCreateWithoutAttachmentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
@@ -2588,6 +2804,7 @@ export type UserUncheckedCreateWithoutAttachmentsInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
@@ -2637,6 +2854,7 @@ export type UserUpdateWithoutAttachmentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
@@ -2670,6 +2888,7 @@ export type UserUncheckedUpdateWithoutAttachmentsInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
@@ -2703,6 +2922,7 @@ export type UserCreateWithoutNotificationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
@@ -2736,6 +2956,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
@@ -2785,6 +3006,7 @@ export type UserUpdateWithoutNotificationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
@@ -2818,6 +3040,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
@@ -2851,6 +3074,7 @@ export type UserCreateWithoutSentEmailsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
@@ -2884,6 +3108,7 @@ export type UserUncheckedCreateWithoutSentEmailsInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
@@ -2933,6 +3158,7 @@ export type UserUpdateWithoutSentEmailsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
@@ -2966,6 +3192,7 @@ export type UserUncheckedUpdateWithoutSentEmailsInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
@@ -2999,6 +3226,7 @@ export type UserCreateWithoutRemindersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
@@ -3032,6 +3260,7 @@ export type UserUncheckedCreateWithoutRemindersInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
@@ -3081,6 +3310,7 @@ export type UserUpdateWithoutRemindersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
@@ -3114,6 +3344,7 @@ export type UserUncheckedUpdateWithoutRemindersInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
@@ -3147,6 +3378,7 @@ export type UserCreateWithoutCreatedApiKeysInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
@@ -3180,6 +3412,7 @@ export type UserUncheckedCreateWithoutCreatedApiKeysInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
@@ -3229,6 +3462,7 @@ export type UserUpdateWithoutCreatedApiKeysInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
@@ -3262,6 +3496,7 @@ export type UserUncheckedUpdateWithoutCreatedApiKeysInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
@@ -3295,6 +3530,7 @@ export type UserCreateWithoutCreatedSequencesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
@@ -3328,6 +3564,7 @@ export type UserUncheckedCreateWithoutCreatedSequencesInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
@@ -3377,6 +3614,7 @@ export type UserUpdateWithoutCreatedSequencesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
@@ -3410,6 +3648,7 @@ export type UserUncheckedUpdateWithoutCreatedSequencesInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
@@ -3443,6 +3682,7 @@ export type UserCreateWithoutSequenceEnrollmentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
@@ -3476,6 +3716,7 @@ export type UserUncheckedCreateWithoutSequenceEnrollmentsInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
@@ -3525,6 +3766,7 @@ export type UserUpdateWithoutSequenceEnrollmentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
@@ -3558,6 +3800,7 @@ export type UserUncheckedUpdateWithoutSequenceEnrollmentsInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
@@ -3591,6 +3834,7 @@ export type UserCreateWithoutStageHistoryEntriesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactCreateNestedManyWithoutOwnerInput
@@ -3624,6 +3868,7 @@ export type UserUncheckedCreateWithoutStageHistoryEntriesInput = {
   lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   ownedCompanies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOwnerInput
   ownedContacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOwnerInput
@@ -3673,6 +3918,7 @@ export type UserUpdateWithoutStageHistoryEntriesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
@@ -3706,6 +3952,7 @@ export type UserUncheckedUpdateWithoutStageHistoryEntriesInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
@@ -3753,6 +4000,7 @@ export type UserUpdateWithoutOrganizationInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUpdateManyWithoutOwnerNestedInput
@@ -3786,6 +4034,7 @@ export type UserUncheckedUpdateWithoutOrganizationInput = {
   lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   ownedCompanies?: Prisma.CompanyUncheckedUpdateManyWithoutOwnerNestedInput
   ownedContacts?: Prisma.ContactUncheckedUpdateManyWithoutOwnerNestedInput
@@ -3827,6 +4076,7 @@ export type UserUncheckedUpdateManyWithoutOrganizationInput = {
  */
 
 export type UserCountOutputType = {
+  teamMemberships: number
   sessions: number
   ownedCompanies: number
   ownedContacts: number
@@ -3848,6 +4098,7 @@ export type UserCountOutputType = {
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  teamMemberships?: boolean | UserCountOutputTypeCountTeamMembershipsArgs
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   ownedCompanies?: boolean | UserCountOutputTypeCountOwnedCompaniesArgs
   ownedContacts?: boolean | UserCountOutputTypeCountOwnedContactsArgs
@@ -3876,6 +4127,13 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
    * Select specific fields to fetch from the UserCountOutputType
    */
   select?: Prisma.UserCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTeamMembershipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TeamMemberWhereInput
 }
 
 /**
@@ -4020,6 +4278,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdAt?: boolean
   updatedAt?: boolean
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  teamMemberships?: boolean | Prisma.User$teamMembershipsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   ownedCompanies?: boolean | Prisma.User$ownedCompaniesArgs<ExtArgs>
   ownedContacts?: boolean | Prisma.User$ownedContactsArgs<ExtArgs>
@@ -4094,6 +4353,7 @@ export type UserSelectScalar = {
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationId" | "email" | "name" | "passwordHash" | "role" | "title" | "phone" | "avatarColor" | "isActive" | "lastLoginAt" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
+  teamMemberships?: boolean | Prisma.User$teamMembershipsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   ownedCompanies?: boolean | Prisma.User$ownedCompaniesArgs<ExtArgs>
   ownedContacts?: boolean | Prisma.User$ownedContactsArgs<ExtArgs>
@@ -4125,6 +4385,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     organization: Prisma.$OrganizationPayload<ExtArgs>
+    teamMemberships: Prisma.$TeamMemberPayload<ExtArgs>[]
     sessions: Prisma.$SessionPayload<ExtArgs>[]
     ownedCompanies: Prisma.$CompanyPayload<ExtArgs>[]
     ownedContacts: Prisma.$ContactPayload<ExtArgs>[]
@@ -4553,6 +4814,7 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   organization<T extends Prisma.OrganizationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationDefaultArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  teamMemberships<T extends Prisma.User$teamMembershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$teamMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeamMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ownedCompanies<T extends Prisma.User$ownedCompaniesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ownedCompaniesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ownedContacts<T extends Prisma.User$ownedContactsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ownedContactsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -5009,6 +5271,30 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Users to delete.
    */
   limit?: number
+}
+
+/**
+ * User.teamMemberships
+ */
+export type User$teamMembershipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TeamMember
+   */
+  select?: Prisma.TeamMemberSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TeamMember
+   */
+  omit?: Prisma.TeamMemberOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TeamMemberInclude<ExtArgs> | null
+  where?: Prisma.TeamMemberWhereInput
+  orderBy?: Prisma.TeamMemberOrderByWithRelationInput | Prisma.TeamMemberOrderByWithRelationInput[]
+  cursor?: Prisma.TeamMemberWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TeamMemberScalarFieldEnum | Prisma.TeamMemberScalarFieldEnum[]
 }
 
 /**

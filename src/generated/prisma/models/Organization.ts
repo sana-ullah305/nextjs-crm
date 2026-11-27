@@ -242,6 +242,7 @@ export type OrganizationWhereInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterListRelationFilter
   lostReasons?: Prisma.LostReasonListRelationFilter
   priceLists?: Prisma.PriceListListRelationFilter
+  teams?: Prisma.TeamListRelationFilter
 }
 
 export type OrganizationOrderByWithRelationInput = {
@@ -282,6 +283,7 @@ export type OrganizationOrderByWithRelationInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterOrderByRelationAggregateInput
   lostReasons?: Prisma.LostReasonOrderByRelationAggregateInput
   priceLists?: Prisma.PriceListOrderByRelationAggregateInput
+  teams?: Prisma.TeamOrderByRelationAggregateInput
 }
 
 export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
@@ -325,6 +327,7 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   sequenceDeadLetters?: Prisma.SequenceDeadLetterListRelationFilter
   lostReasons?: Prisma.LostReasonListRelationFilter
   priceLists?: Prisma.PriceListListRelationFilter
+  teams?: Prisma.TeamListRelationFilter
 }, "id">
 
 export type OrganizationOrderByWithAggregationInput = {
@@ -395,6 +398,7 @@ export type OrganizationCreateInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateInput = {
@@ -435,6 +439,7 @@ export type OrganizationUncheckedCreateInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUpdateInput = {
@@ -475,6 +480,7 @@ export type OrganizationUpdateInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateInput = {
@@ -515,6 +521,7 @@ export type OrganizationUncheckedUpdateInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateManyInput = {
@@ -600,6 +607,20 @@ export type StringFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type OrganizationCreateNestedOneWithoutTeamsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutTeamsInput, Prisma.OrganizationUncheckedCreateWithoutTeamsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutTeamsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutTeamsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutTeamsInput, Prisma.OrganizationUncheckedCreateWithoutTeamsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutTeamsInput
+  upsert?: Prisma.OrganizationUpsertWithoutTeamsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutTeamsInput, Prisma.OrganizationUpdateWithoutTeamsInput>, Prisma.OrganizationUncheckedUpdateWithoutTeamsInput>
 }
 
 export type OrganizationCreateNestedOneWithoutUsersInput = {
@@ -994,6 +1015,182 @@ export type OrganizationUpdateOneRequiredWithoutSalesOrdersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutSalesOrdersInput, Prisma.OrganizationUpdateWithoutSalesOrdersInput>, Prisma.OrganizationUncheckedUpdateWithoutSalesOrdersInput>
 }
 
+export type OrganizationCreateWithoutTeamsInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutTeamsInput = {
+  id?: string
+  name: string
+  industry?: string
+  website?: string
+  phone?: string
+  address?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  currency?: string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
+  companies?: Prisma.CompanyUncheckedCreateNestedManyWithoutOrganizationInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutOrganizationInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutOrganizationInput
+  pipelines?: Prisma.PipelineUncheckedCreateNestedManyWithoutOrganizationInput
+  deals?: Prisma.DealUncheckedCreateNestedManyWithoutOrganizationInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutOrganizationInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutOrganizationInput
+  notes?: Prisma.NoteUncheckedCreateNestedManyWithoutOrganizationInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutOrganizationInput
+  quotations?: Prisma.QuotationUncheckedCreateNestedManyWithoutOrganizationInput
+  salesOrders?: Prisma.SalesOrderUncheckedCreateNestedManyWithoutOrganizationInput
+  products?: Prisma.ProductUncheckedCreateNestedManyWithoutOrganizationInput
+  leadSources?: Prisma.LeadSourceUncheckedCreateNestedManyWithoutOrganizationInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  customFields?: Prisma.CustomFieldUncheckedCreateNestedManyWithoutOrganizationInput
+  emailSettings?: Prisma.EmailSettingsUncheckedCreateNestedOneWithoutOrganizationInput
+  sentEmails?: Prisma.SentEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  inboundEmails?: Prisma.InboundEmailUncheckedCreateNestedManyWithoutOrganizationInput
+  reminders?: Prisma.FollowUpReminderUncheckedCreateNestedManyWithoutOrganizationInput
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrganizationInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
+  sequences?: Prisma.SequenceUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
+  lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
+  priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutTeamsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutTeamsInput, Prisma.OrganizationUncheckedCreateWithoutTeamsInput>
+}
+
+export type OrganizationUpsertWithoutTeamsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutTeamsInput, Prisma.OrganizationUncheckedUpdateWithoutTeamsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutTeamsInput, Prisma.OrganizationUncheckedCreateWithoutTeamsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutTeamsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutTeamsInput, Prisma.OrganizationUncheckedUpdateWithoutTeamsInput>
+}
+
+export type OrganizationUpdateWithoutTeamsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutTeamsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  industry?: Prisma.StringFieldUpdateOperationsInput | string
+  website?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
+  companies?: Prisma.CompanyUncheckedUpdateManyWithoutOrganizationNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutOrganizationNestedInput
+  pipelines?: Prisma.PipelineUncheckedUpdateManyWithoutOrganizationNestedInput
+  deals?: Prisma.DealUncheckedUpdateManyWithoutOrganizationNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutOrganizationNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutOrganizationNestedInput
+  notes?: Prisma.NoteUncheckedUpdateManyWithoutOrganizationNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutOrganizationNestedInput
+  quotations?: Prisma.QuotationUncheckedUpdateManyWithoutOrganizationNestedInput
+  salesOrders?: Prisma.SalesOrderUncheckedUpdateManyWithoutOrganizationNestedInput
+  products?: Prisma.ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+  leadSources?: Prisma.LeadSourceUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailTemplates?: Prisma.EmailTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  customFields?: Prisma.CustomFieldUncheckedUpdateManyWithoutOrganizationNestedInput
+  emailSettings?: Prisma.EmailSettingsUncheckedUpdateOneWithoutOrganizationNestedInput
+  sentEmails?: Prisma.SentEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  inboundEmails?: Prisma.InboundEmailUncheckedUpdateManyWithoutOrganizationNestedInput
+  reminders?: Prisma.FollowUpReminderUncheckedUpdateManyWithoutOrganizationNestedInput
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequences?: Prisma.SequenceUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+  sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
+  lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
+  priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
 export type OrganizationCreateWithoutUsersInput = {
   id?: string
   name: string
@@ -1031,6 +1228,7 @@ export type OrganizationCreateWithoutUsersInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutUsersInput = {
@@ -1070,6 +1268,7 @@ export type OrganizationUncheckedCreateWithoutUsersInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutUsersInput = {
@@ -1125,6 +1324,7 @@ export type OrganizationUpdateWithoutUsersInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutUsersInput = {
@@ -1164,6 +1364,7 @@ export type OrganizationUncheckedUpdateWithoutUsersInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutCompaniesInput = {
@@ -1203,6 +1404,7 @@ export type OrganizationCreateWithoutCompaniesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutCompaniesInput = {
@@ -1242,6 +1444,7 @@ export type OrganizationUncheckedCreateWithoutCompaniesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutCompaniesInput = {
@@ -1297,6 +1500,7 @@ export type OrganizationUpdateWithoutCompaniesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutCompaniesInput = {
@@ -1336,6 +1540,7 @@ export type OrganizationUncheckedUpdateWithoutCompaniesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutContactsInput = {
@@ -1375,6 +1580,7 @@ export type OrganizationCreateWithoutContactsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutContactsInput = {
@@ -1414,6 +1620,7 @@ export type OrganizationUncheckedCreateWithoutContactsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutContactsInput = {
@@ -1469,6 +1676,7 @@ export type OrganizationUpdateWithoutContactsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutContactsInput = {
@@ -1508,6 +1716,7 @@ export type OrganizationUncheckedUpdateWithoutContactsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutTagsInput = {
@@ -1547,6 +1756,7 @@ export type OrganizationCreateWithoutTagsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutTagsInput = {
@@ -1586,6 +1796,7 @@ export type OrganizationUncheckedCreateWithoutTagsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutTagsInput = {
@@ -1641,6 +1852,7 @@ export type OrganizationUpdateWithoutTagsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutTagsInput = {
@@ -1680,6 +1892,7 @@ export type OrganizationUncheckedUpdateWithoutTagsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutLeadSourcesInput = {
@@ -1719,6 +1932,7 @@ export type OrganizationCreateWithoutLeadSourcesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutLeadSourcesInput = {
@@ -1758,6 +1972,7 @@ export type OrganizationUncheckedCreateWithoutLeadSourcesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutLeadSourcesInput = {
@@ -1813,6 +2028,7 @@ export type OrganizationUpdateWithoutLeadSourcesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutLeadSourcesInput = {
@@ -1852,6 +2068,7 @@ export type OrganizationUncheckedUpdateWithoutLeadSourcesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutLeadsInput = {
@@ -1891,6 +2108,7 @@ export type OrganizationCreateWithoutLeadsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutLeadsInput = {
@@ -1930,6 +2148,7 @@ export type OrganizationUncheckedCreateWithoutLeadsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutLeadsInput = {
@@ -1985,6 +2204,7 @@ export type OrganizationUpdateWithoutLeadsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutLeadsInput = {
@@ -2024,6 +2244,7 @@ export type OrganizationUncheckedUpdateWithoutLeadsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutPipelinesInput = {
@@ -2063,6 +2284,7 @@ export type OrganizationCreateWithoutPipelinesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPipelinesInput = {
@@ -2102,6 +2324,7 @@ export type OrganizationUncheckedCreateWithoutPipelinesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPipelinesInput = {
@@ -2157,6 +2380,7 @@ export type OrganizationUpdateWithoutPipelinesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPipelinesInput = {
@@ -2196,6 +2420,7 @@ export type OrganizationUncheckedUpdateWithoutPipelinesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutDealsInput = {
@@ -2235,6 +2460,7 @@ export type OrganizationCreateWithoutDealsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutDealsInput = {
@@ -2274,6 +2500,7 @@ export type OrganizationUncheckedCreateWithoutDealsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutDealsInput = {
@@ -2329,6 +2556,7 @@ export type OrganizationUpdateWithoutDealsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutDealsInput = {
@@ -2368,6 +2596,7 @@ export type OrganizationUncheckedUpdateWithoutDealsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutTasksInput = {
@@ -2407,6 +2636,7 @@ export type OrganizationCreateWithoutTasksInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutTasksInput = {
@@ -2446,6 +2676,7 @@ export type OrganizationUncheckedCreateWithoutTasksInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutTasksInput = {
@@ -2501,6 +2732,7 @@ export type OrganizationUpdateWithoutTasksInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutTasksInput = {
@@ -2540,6 +2772,7 @@ export type OrganizationUncheckedUpdateWithoutTasksInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutActivitiesInput = {
@@ -2579,6 +2812,7 @@ export type OrganizationCreateWithoutActivitiesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutActivitiesInput = {
@@ -2618,6 +2852,7 @@ export type OrganizationUncheckedCreateWithoutActivitiesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutActivitiesInput = {
@@ -2673,6 +2908,7 @@ export type OrganizationUpdateWithoutActivitiesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutActivitiesInput = {
@@ -2712,6 +2948,7 @@ export type OrganizationUncheckedUpdateWithoutActivitiesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutNotesInput = {
@@ -2751,6 +2988,7 @@ export type OrganizationCreateWithoutNotesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutNotesInput = {
@@ -2790,6 +3028,7 @@ export type OrganizationUncheckedCreateWithoutNotesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutNotesInput = {
@@ -2845,6 +3084,7 @@ export type OrganizationUpdateWithoutNotesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutNotesInput = {
@@ -2884,6 +3124,7 @@ export type OrganizationUncheckedUpdateWithoutNotesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutAttachmentsInput = {
@@ -2923,6 +3164,7 @@ export type OrganizationCreateWithoutAttachmentsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutAttachmentsInput = {
@@ -2962,6 +3204,7 @@ export type OrganizationUncheckedCreateWithoutAttachmentsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutAttachmentsInput = {
@@ -3017,6 +3260,7 @@ export type OrganizationUpdateWithoutAttachmentsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutAttachmentsInput = {
@@ -3056,6 +3300,7 @@ export type OrganizationUncheckedUpdateWithoutAttachmentsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutNotificationsInput = {
@@ -3095,6 +3340,7 @@ export type OrganizationCreateWithoutNotificationsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutNotificationsInput = {
@@ -3134,6 +3380,7 @@ export type OrganizationUncheckedCreateWithoutNotificationsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutNotificationsInput = {
@@ -3189,6 +3436,7 @@ export type OrganizationUpdateWithoutNotificationsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutNotificationsInput = {
@@ -3228,6 +3476,7 @@ export type OrganizationUncheckedUpdateWithoutNotificationsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutEmailTemplatesInput = {
@@ -3267,6 +3516,7 @@ export type OrganizationCreateWithoutEmailTemplatesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutEmailTemplatesInput = {
@@ -3306,6 +3556,7 @@ export type OrganizationUncheckedCreateWithoutEmailTemplatesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutEmailTemplatesInput = {
@@ -3361,6 +3612,7 @@ export type OrganizationUpdateWithoutEmailTemplatesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutEmailTemplatesInput = {
@@ -3400,6 +3652,7 @@ export type OrganizationUncheckedUpdateWithoutEmailTemplatesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutCustomFieldsInput = {
@@ -3439,6 +3692,7 @@ export type OrganizationCreateWithoutCustomFieldsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutCustomFieldsInput = {
@@ -3478,6 +3732,7 @@ export type OrganizationUncheckedCreateWithoutCustomFieldsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutCustomFieldsInput = {
@@ -3533,6 +3788,7 @@ export type OrganizationUpdateWithoutCustomFieldsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutCustomFieldsInput = {
@@ -3572,6 +3828,7 @@ export type OrganizationUncheckedUpdateWithoutCustomFieldsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutEmailSettingsInput = {
@@ -3611,6 +3868,7 @@ export type OrganizationCreateWithoutEmailSettingsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutEmailSettingsInput = {
@@ -3650,6 +3908,7 @@ export type OrganizationUncheckedCreateWithoutEmailSettingsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutEmailSettingsInput = {
@@ -3705,6 +3964,7 @@ export type OrganizationUpdateWithoutEmailSettingsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutEmailSettingsInput = {
@@ -3744,6 +4004,7 @@ export type OrganizationUncheckedUpdateWithoutEmailSettingsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutSentEmailsInput = {
@@ -3783,6 +4044,7 @@ export type OrganizationCreateWithoutSentEmailsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutSentEmailsInput = {
@@ -3822,6 +4084,7 @@ export type OrganizationUncheckedCreateWithoutSentEmailsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutSentEmailsInput = {
@@ -3877,6 +4140,7 @@ export type OrganizationUpdateWithoutSentEmailsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutSentEmailsInput = {
@@ -3916,6 +4180,7 @@ export type OrganizationUncheckedUpdateWithoutSentEmailsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutRemindersInput = {
@@ -3955,6 +4220,7 @@ export type OrganizationCreateWithoutRemindersInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutRemindersInput = {
@@ -3994,6 +4260,7 @@ export type OrganizationUncheckedCreateWithoutRemindersInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutRemindersInput = {
@@ -4049,6 +4316,7 @@ export type OrganizationUpdateWithoutRemindersInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutRemindersInput = {
@@ -4088,6 +4356,7 @@ export type OrganizationUncheckedUpdateWithoutRemindersInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutInboundEmailsInput = {
@@ -4127,6 +4396,7 @@ export type OrganizationCreateWithoutInboundEmailsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutInboundEmailsInput = {
@@ -4166,6 +4436,7 @@ export type OrganizationUncheckedCreateWithoutInboundEmailsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutInboundEmailsInput = {
@@ -4221,6 +4492,7 @@ export type OrganizationUpdateWithoutInboundEmailsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutInboundEmailsInput = {
@@ -4260,6 +4532,7 @@ export type OrganizationUncheckedUpdateWithoutInboundEmailsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutApiKeysInput = {
@@ -4299,6 +4572,7 @@ export type OrganizationCreateWithoutApiKeysInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutApiKeysInput = {
@@ -4338,6 +4612,7 @@ export type OrganizationUncheckedCreateWithoutApiKeysInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutApiKeysInput = {
@@ -4393,6 +4668,7 @@ export type OrganizationUpdateWithoutApiKeysInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutApiKeysInput = {
@@ -4432,6 +4708,7 @@ export type OrganizationUncheckedUpdateWithoutApiKeysInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutSequencesInput = {
@@ -4471,6 +4748,7 @@ export type OrganizationCreateWithoutSequencesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutSequencesInput = {
@@ -4510,6 +4788,7 @@ export type OrganizationUncheckedCreateWithoutSequencesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutSequencesInput = {
@@ -4565,6 +4844,7 @@ export type OrganizationUpdateWithoutSequencesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutSequencesInput = {
@@ -4604,6 +4884,7 @@ export type OrganizationUncheckedUpdateWithoutSequencesInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutSequenceEnrollmentsInput = {
@@ -4643,6 +4924,7 @@ export type OrganizationCreateWithoutSequenceEnrollmentsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutSequenceEnrollmentsInput = {
@@ -4682,6 +4964,7 @@ export type OrganizationUncheckedCreateWithoutSequenceEnrollmentsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutSequenceEnrollmentsInput = {
@@ -4737,6 +5020,7 @@ export type OrganizationUpdateWithoutSequenceEnrollmentsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutSequenceEnrollmentsInput = {
@@ -4776,6 +5060,7 @@ export type OrganizationUncheckedUpdateWithoutSequenceEnrollmentsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutSequenceDeadLettersInput = {
@@ -4815,6 +5100,7 @@ export type OrganizationCreateWithoutSequenceDeadLettersInput = {
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutSequenceDeadLettersInput = {
@@ -4854,6 +5140,7 @@ export type OrganizationUncheckedCreateWithoutSequenceDeadLettersInput = {
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutSequenceDeadLettersInput = {
@@ -4909,6 +5196,7 @@ export type OrganizationUpdateWithoutSequenceDeadLettersInput = {
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutSequenceDeadLettersInput = {
@@ -4948,6 +5236,7 @@ export type OrganizationUncheckedUpdateWithoutSequenceDeadLettersInput = {
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutLostReasonsInput = {
@@ -4987,6 +5276,7 @@ export type OrganizationCreateWithoutLostReasonsInput = {
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutLostReasonsInput = {
@@ -5026,6 +5316,7 @@ export type OrganizationUncheckedCreateWithoutLostReasonsInput = {
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutLostReasonsInput = {
@@ -5081,6 +5372,7 @@ export type OrganizationUpdateWithoutLostReasonsInput = {
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutLostReasonsInput = {
@@ -5120,6 +5412,7 @@ export type OrganizationUncheckedUpdateWithoutLostReasonsInput = {
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutProductsInput = {
@@ -5159,6 +5452,7 @@ export type OrganizationCreateWithoutProductsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutProductsInput = {
@@ -5198,6 +5492,7 @@ export type OrganizationUncheckedCreateWithoutProductsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutProductsInput = {
@@ -5253,6 +5548,7 @@ export type OrganizationUpdateWithoutProductsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutProductsInput = {
@@ -5292,6 +5588,7 @@ export type OrganizationUncheckedUpdateWithoutProductsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutPriceListsInput = {
@@ -5331,6 +5628,7 @@ export type OrganizationCreateWithoutPriceListsInput = {
   sequenceEnrollments?: Prisma.SequenceEnrollmentCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutPriceListsInput = {
@@ -5370,6 +5668,7 @@ export type OrganizationUncheckedCreateWithoutPriceListsInput = {
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutPriceListsInput = {
@@ -5425,6 +5724,7 @@ export type OrganizationUpdateWithoutPriceListsInput = {
   sequenceEnrollments?: Prisma.SequenceEnrollmentUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutPriceListsInput = {
@@ -5464,6 +5764,7 @@ export type OrganizationUncheckedUpdateWithoutPriceListsInput = {
   sequenceEnrollments?: Prisma.SequenceEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutQuotationsInput = {
@@ -5503,6 +5804,7 @@ export type OrganizationCreateWithoutQuotationsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutQuotationsInput = {
@@ -5542,6 +5844,7 @@ export type OrganizationUncheckedCreateWithoutQuotationsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutQuotationsInput = {
@@ -5597,6 +5900,7 @@ export type OrganizationUpdateWithoutQuotationsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutQuotationsInput = {
@@ -5636,6 +5940,7 @@ export type OrganizationUncheckedUpdateWithoutQuotationsInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutSalesOrdersInput = {
@@ -5675,6 +5980,7 @@ export type OrganizationCreateWithoutSalesOrdersInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutSalesOrdersInput = {
@@ -5714,6 +6020,7 @@ export type OrganizationUncheckedCreateWithoutSalesOrdersInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedCreateNestedManyWithoutOrganizationInput
   lostReasons?: Prisma.LostReasonUncheckedCreateNestedManyWithoutOrganizationInput
   priceLists?: Prisma.PriceListUncheckedCreateNestedManyWithoutOrganizationInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutSalesOrdersInput = {
@@ -5769,6 +6076,7 @@ export type OrganizationUpdateWithoutSalesOrdersInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutSalesOrdersInput = {
@@ -5808,6 +6116,7 @@ export type OrganizationUncheckedUpdateWithoutSalesOrdersInput = {
   sequenceDeadLetters?: Prisma.SequenceDeadLetterUncheckedUpdateManyWithoutOrganizationNestedInput
   lostReasons?: Prisma.LostReasonUncheckedUpdateManyWithoutOrganizationNestedInput
   priceLists?: Prisma.PriceListUncheckedUpdateManyWithoutOrganizationNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 
@@ -5843,6 +6152,7 @@ export type OrganizationCountOutputType = {
   sequenceDeadLetters: number
   lostReasons: number
   priceLists: number
+  teams: number
 }
 
 export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5873,6 +6183,7 @@ export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   sequenceDeadLetters?: boolean | OrganizationCountOutputTypeCountSequenceDeadLettersArgs
   lostReasons?: boolean | OrganizationCountOutputTypeCountLostReasonsArgs
   priceLists?: boolean | OrganizationCountOutputTypeCountPriceListsArgs
+  teams?: boolean | OrganizationCountOutputTypeCountTeamsArgs
 }
 
 /**
@@ -6074,6 +6385,13 @@ export type OrganizationCountOutputTypeCountPriceListsArgs<ExtArgs extends runti
   where?: Prisma.PriceListWhereInput
 }
 
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountTeamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TeamWhereInput
+}
+
 
 export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -6113,6 +6431,7 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   sequenceDeadLetters?: boolean | Prisma.Organization$sequenceDeadLettersArgs<ExtArgs>
   lostReasons?: boolean | Prisma.Organization$lostReasonsArgs<ExtArgs>
   priceLists?: boolean | Prisma.Organization$priceListsArgs<ExtArgs>
+  teams?: boolean | Prisma.Organization$teamsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organization"]>
 
@@ -6182,6 +6501,7 @@ export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   sequenceDeadLetters?: boolean | Prisma.Organization$sequenceDeadLettersArgs<ExtArgs>
   lostReasons?: boolean | Prisma.Organization$lostReasonsArgs<ExtArgs>
   priceLists?: boolean | Prisma.Organization$priceListsArgs<ExtArgs>
+  teams?: boolean | Prisma.Organization$teamsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrganizationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -6218,6 +6538,7 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     sequenceDeadLetters: Prisma.$SequenceDeadLetterPayload<ExtArgs>[]
     lostReasons: Prisma.$LostReasonPayload<ExtArgs>[]
     priceLists: Prisma.$PriceListPayload<ExtArgs>[]
+    teams: Prisma.$TeamPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -6651,6 +6972,7 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   sequenceDeadLetters<T extends Prisma.Organization$sequenceDeadLettersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$sequenceDeadLettersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SequenceDeadLetterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   lostReasons<T extends Prisma.Organization$lostReasonsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$lostReasonsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LostReasonPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   priceLists<T extends Prisma.Organization$priceListsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$priceListsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PriceListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  teams<T extends Prisma.Organization$teamsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$teamsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7744,6 +8066,30 @@ export type Organization$priceListsArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.PriceListScalarFieldEnum | Prisma.PriceListScalarFieldEnum[]
+}
+
+/**
+ * Organization.teams
+ */
+export type Organization$teamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Team
+   */
+  select?: Prisma.TeamSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Team
+   */
+  omit?: Prisma.TeamOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TeamInclude<ExtArgs> | null
+  where?: Prisma.TeamWhereInput
+  orderBy?: Prisma.TeamOrderByWithRelationInput | Prisma.TeamOrderByWithRelationInput[]
+  cursor?: Prisma.TeamWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TeamScalarFieldEnum | Prisma.TeamScalarFieldEnum[]
 }
 
 /**

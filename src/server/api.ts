@@ -116,6 +116,9 @@ export function apiHandler<C>(
       if (err instanceof ZodError) {
         return fail(400, "VALIDATION_ERROR", "Invalid request", err.issues);
       }
+      if ((err as { code?: string })?.code === "P2002") {
+        return fail(409, "CONFLICT", "A record with this value already exists");
+      }
       console.error("API error:", err);
       return fail(500, "INTERNAL", "An unexpected error occurred");
     }

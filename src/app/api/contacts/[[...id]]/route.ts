@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { apiHandler, ok, parseBody, parseQuery, ApiNotFoundError, clientIp } from "@/server/api";
-import { requireApiUserWith, hasPermission, canAccessRecord } from "@/server/rbac";
+import { requireApiUserWith, hasPermission, canAccessTeamRecord, teamMemberIds } from "@/server/rbac";
 import { contactCreateSchema, contactUpdateSchema, contactImportSchema } from "@/lib/schemas";
 import { db } from "@/server/db";
 import { writeAudit } from "@/server/audit";
@@ -34,12 +34,15 @@ export const GET = apiHandler<Ctx>(async (req, ctx) => {
 async function listContacts(req: NextRequest) {
   const user = await requireApiUserWith("contacts:read");
   const q = parseQuery(req, listQuerySchema);
+  const teamIds = hasPermission(user, "contacts:read_all")
+    ? undefined
+    : await teamMemberIds(user);
   const where = {
     organizationId: user.organizationId,
     deletedAt: null,
     ...(hasPermission(user, "contacts:read_all")
       ? {}
-      : { OR: [{ ownerId: user.id }, { ownerId: null }] }),
+      : { OR: [{ ownerId: { in: teamIds } }, { ownerId: null }] }),
     ...(q.status ? { status: q.status } : {}),
     ...(q.companyId ? { companyId: q.companyId } : {}),
     ...(q.ownerId ? { ownerId: q.ownerId } : {}),
@@ -87,7 +90,7 @@ async function getContact(id: string) {
     },
   });
   if (!contact) throw new ApiNotFoundError("Contact not found");
-  if (!canAccessRecord(user, contact.ownerId)) {
+  if (!(await canAccessTeamRecord(user, contact.ownerId))) {
     return NextResponse.json({ error: { code: "FORBIDDEN", message: "Forbidden" } }, { status: 403 });
   }
   return ok(contact);
