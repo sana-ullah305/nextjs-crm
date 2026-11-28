@@ -22,7 +22,7 @@ vi.mock("next/headers", () => ({
 }));
 
 import { POST as loginRoute } from "@/app/api/auth/login/route";
-import { POST as leadsPost } from "@/app/api/leads/[[...id]]/route";
+import { POST as leadsPost } from "@/app/api/leads/[id]/route";
 import { POST as capturePost } from "@/app/api/leads/capture/route";
 import {
   GET as settingsGet,
@@ -87,7 +87,7 @@ function makeBearerRequest(
   };
 }
 
-function settingsCtx(segments?: string[]) {
+function settingsCtx(segments?: string[] | undefined) {
   return { params: Promise.resolve({ section: segments }) };
 }
 

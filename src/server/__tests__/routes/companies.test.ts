@@ -11,7 +11,7 @@ vi.mock("next/headers", () => ({
   }),
 }));
 
-import { GET as companiesGet, POST as companiesPost, PATCH as companiesPatch, DELETE as companiesDelete } from "@/app/api/companies/[[...id]]/route";
+import { GET as companiesGet, POST as companiesPost, PATCH as companiesPatch, DELETE as companiesDelete } from "@/app/api/companies/[id]/route";
 import db from "@/server/db";
 import { hashPassword } from "@/server/auth";
 
@@ -38,8 +38,8 @@ function makeRequest(pathname: string, init?: { method?: string; headers?: Recor
   };
 }
 
-function ctx(segments: string[] | undefined) {
-  return { params: Promise.resolve({ id: segments }) };
+function ctx(segments: string | undefined) {
+  return { params: Promise.resolve({ id: segments as string }) };
 }
 
 let orgId: string;
@@ -201,7 +201,7 @@ describe("Companies API routes", () => {
       data: { organizationId: orgId, firstName: "John", lastName: "Doe", email: "john@detail.com", companyId: company.id },
     });
 
-    const res = await companiesGet(makeRequest(`/api/companies/${company.id}`) as never, ctx([company.id]));
+    const res = await companiesGet(makeRequest(`/api/companies/${company.id}`) as never, ctx(company.id));
     expect(res.status).toBe(200);
     const body = await res.json();
     expect(body.data.name).toBe("Detail Company");
@@ -221,7 +221,7 @@ describe("Companies API routes", () => {
         headers: { "content-type": "application/json" },
         json: { name: "Updated Company", industry: "Finance", size: "201-500" },
       }) as never,
-      ctx([company.id])
+      ctx(company.id)
     );
     expect(res.status).toBe(200);
     const body = await res.json();
@@ -245,7 +245,7 @@ describe("Companies API routes", () => {
         headers: { "content-type": "application/json" },
         json: { ownerId: rep.id },
       }) as never,
-      ctx([company.id])
+      ctx(company.id)
     );
     expect(res.status).toBe(200);
     const body = await res.json();
@@ -264,7 +264,7 @@ describe("Companies API routes", () => {
         headers: { "content-type": "application/json" },
         json: { ownerId: null },
       }) as never,
-      ctx([company.id])
+      ctx(company.id)
     );
     expect(res.status).toBe(200);
     const body = await res.json();
@@ -279,7 +279,7 @@ describe("Companies API routes", () => {
 
     const res = await companiesDelete(
       makeRequest(`/api/companies/${company.id}`, { method: "DELETE" }) as never,
-      ctx([company.id])
+      ctx(company.id)
     );
     expect(res.status).toBe(200);
     const body = await res.json();
@@ -291,7 +291,7 @@ describe("Companies API routes", () => {
 
   it("returns 404 for missing company", async () => {
     await loginAs("admin-companies@example.org");
-    const res = await companiesGet(makeRequest("/api/companies/does-not-exist") as never, ctx(["does-not-exist"]));
+    const res = await companiesGet(makeRequest("/api/companies/does-not-exist") as never, ctx("does-not-exist"));
     expect(res.status).toBe(404);
   });
 
@@ -303,7 +303,7 @@ describe("Companies API routes", () => {
         headers: { "content-type": "application/json" },
         json: { name: "Test" },
       }) as never,
-      ctx(["does-not-exist"])
+      ctx("does-not-exist")
     );
     expect(res.status).toBe(404);
   });

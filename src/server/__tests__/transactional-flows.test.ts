@@ -12,9 +12,9 @@ vi.mock("next/headers", () => ({
 }));
 
 import { POST as loginRoute } from "@/app/api/auth/login/route";
-import { POST as leadsPost } from "@/app/api/leads/[[...id]]/route";
-import { POST as contactsPost } from "@/app/api/contacts/[[...id]]/route";
-import { POST as sequencesPost } from "@/app/api/sequences/[[...id]]/route";
+import { POST as leadsPost } from "@/app/api/leads/[id]/route";
+import { POST as contactsPost } from "@/app/api/contacts/[id]/route";
+import { POST as sequencesPost } from "@/app/api/sequences/[id]/route";
 import { PATCH as settingsPatch } from "@/app/api/settings/[[...section]]/route";
 import db from "@/server/db";
 import { hashPassword } from "@/server/auth";
@@ -39,8 +39,8 @@ function makeRequest(pathname: string, init?: { method?: string; json?: unknown 
   };
 }
 function leadCtx(id: string) { return { params: Promise.resolve({ id: [id] }) }; }
-function settingsCtx(segments: string[]) { return { params: Promise.resolve({ section: segments }) }; }
-function seqCtx() { return { params: Promise.resolve({ id: [] as string[] }) }; }
+function settingsCtx(segments?: string[] | undefined) { return { params: Promise.resolve({ section: segments }) }; }
+function seqCtx() { return { params: Promise.resolve({ id: "" as string }) }; }
 
 async function loginAs(email: string) {
   cookieStore.clear();

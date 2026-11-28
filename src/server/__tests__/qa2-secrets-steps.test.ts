@@ -10,7 +10,7 @@
  *   and hit the public /api/unsubscribe?token=... to permanently suppress
  *   that email from every future sequence in the org (the suppression
  *   check is org-wide by email). Fixed by adding a scalar select
- *   allow-list to listEnrollments in src/app/api/sequences/[[...id]]/route.ts
+ *   allow-list to listEnrollments in src/app/api/sequences/[id]/route.ts
  *   that drops unsubToken from the response.
  *
  * The second describe is a behavioral snapshot of the route-level
@@ -34,7 +34,7 @@ import { POST as loginRoute } from "@/app/api/auth/login/route";
 import {
   GET as sequencesGet,
   POST as sequencesPost,
-} from "@/app/api/sequences/[[...id]]/route";
+} from "@/app/api/sequences/[id]/route";
 import db from "@/server/db";
 import { hashPassword } from "@/server/auth";
 

@@ -24,7 +24,7 @@ import { GET as prefsGet, PATCH as prefsPatch } from "@/app/api/settings/notific
 import {
   GET as notificationsGet,
   PATCH as notificationsPatch,
-} from "@/app/api/notifications/[[...id]]/route";
+} from "@/app/api/notifications/[id]/route";
 import db from "@/server/db";
 import { hashPassword } from "@/server/auth";
 
@@ -54,8 +54,8 @@ function makeRequest(
   };
 }
 
-function ctx(segments: string[] | undefined) {
-  return { params: Promise.resolve({ id: segments }) };
+function ctx(segments: string | undefined) {
+  return { params: Promise.resolve({ id: segments as string }) };
 }
 
 let orgId: string;
@@ -190,7 +190,7 @@ describe("mark one notification read", () => {
     const res = await call(
       notificationsPatch,
       makeRequest(`/api/notifications/${a.id}?action=mark-read`, { method: "PATCH" }),
-      ctx([a.id])
+      ctx(a.id)
     );
     expect(res.status).toBe(200);
     const body = await res.json();
@@ -228,7 +228,7 @@ describe("mark one notification read", () => {
     const res = await call(
       notificationsPatch,
       makeRequest(`/api/notifications/${foreign.id}?action=mark-read`, { method: "PATCH" }),
-      ctx([foreign.id])
+      ctx(foreign.id)
     );
     expect(res.status).toBe(200);
     const body = await res.json();

@@ -23,13 +23,13 @@ vi.mock("next/headers", () => ({
 }));
 
 import { POST as loginRoute } from "@/app/api/auth/login/route";
-import { GET as contactsGet, POST as contactsPost, PATCH as contactsPatch, DELETE as contactsDelete } from "@/app/api/contacts/[[...id]]/route";
-import { GET as leadsGet, POST as leadsPost } from "@/app/api/leads/[[...id]]/route";
-import { GET as tasksGet, POST as tasksPost } from "@/app/api/tasks/[[...id]]/route";
+import { GET as contactsGet, POST as contactsPost, PATCH as contactsPatch, DELETE as contactsDelete } from "@/app/api/contacts/[id]/route";
+import { GET as leadsGet, POST as leadsPost } from "@/app/api/leads/[id]/route";
+import { GET as tasksGet, POST as tasksPost } from "@/app/api/tasks/[id]/route";
 import { GET as dashboardGet } from "@/app/api/dashboard/route";
 import { GET as reportsGet } from "@/app/api/reports/route";
-import { GET as usersGet } from "@/app/api/users/[[...id]]/route";
-import { PATCH as tasksPatch } from "@/app/api/tasks/[[...id]]/route";
+import { GET as usersGet } from "@/app/api/users/[id]/route";
+import { PATCH as tasksPatch } from "@/app/api/tasks/[id]/route";
 import db from "@/server/db";
 import { hashPassword } from "@/server/auth";
 
@@ -56,8 +56,8 @@ function makeRequest(pathname: string, init?: { method?: string; headers?: Recor
   };
 }
 
-function ctx(segments: string[] | undefined) {
-  return { params: Promise.resolve({ id: segments }) };
+function ctx(segments: string | undefined) {
+  return { params: Promise.resolve({ id: segments as string }) };
 }
 
 let orgId: string;
@@ -168,7 +168,7 @@ describe("auth + contacts API integration", () => {
   });
 
   it("gets, updates, then soft-deletes a contact", async () => {
-    const got = await contactsGet(makeRequest(`/api/contacts/${contactId}`) as never, ctx([contactId]));
+    const got = await contactsGet(makeRequest(`/api/contacts/${contactId}`) as never, ctx(contactId));
     expect(got.status).toBe(200);
     expect((await got.json()).data.email).toBe("ada@example.org");
 
@@ -178,14 +178,14 @@ describe("auth + contacts API integration", () => {
         headers: { "content-type": "application/json" },
         json: { title: "Countess of Lovelace" },
       }) as never,
-      ctx([contactId])
+      ctx(contactId)
     );
     expect(patched.status).toBe(200);
     expect((await patched.json()).data.title).toBe("Countess of Lovelace");
 
     const del = await contactsDelete(
       makeRequest(`/api/contacts/${contactId}`, { method: "DELETE" }) as never,
-      ctx([contactId])
+      ctx(contactId)
     );
     expect(del.status).toBe(200);
 
@@ -196,7 +196,7 @@ describe("auth + contacts API integration", () => {
   it("returns 404 for a missing contact", async () => {
     const res = await contactsGet(
       makeRequest("/api/contacts/does-not-exist") as never,
-      ctx(["does-not-exist"])
+      ctx("does-not-exist")
     );
     expect(res.status).toBe(404);
   });
@@ -254,7 +254,7 @@ describe("leads + tasks API integration", () => {
 
     const dup = await leadsGet(
       makeRequest("/api/leads/check-duplicate?email=grace@example.org") as never,
-      ctx(["check-duplicate"])
+      ctx("check-duplicate")
     );
     expect((await dup.json()).data.isDuplicate).toBe(true);
   });
@@ -277,7 +277,7 @@ describe("leads + tasks API integration", () => {
         headers: { "content-type": "application/json" },
         json: { status: "COMPLETED" },
       }) as never,
-      ctx([task.id])
+      ctx(task.id)
     );
     expect(done.status).toBe(200);
     expect((await done.json()).data.completedAt).not.toBeNull();

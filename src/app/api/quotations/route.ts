@@ -6,12 +6,12 @@ import { quotationCreateSchema } from "@/lib/schemas";
 import { db } from "@/server/db";
 import { writeAudit } from "@/server/audit";
 
-type Ctx = { params: Promise<{ id?: string[] }> };
+type Ctx = { params: Promise<{}> };
 
 async function resolveId(ctx: Ctx): Promise<string | null> {
-  const parts = (await ctx.params) as unknown as { id?: string[] };
+  const parts = (await ctx.params) as unknown as { id: string };
   const segs = parts.id;
-  return segs && segs.length > 0 && segs[0] ? segs[0] : null;
+  return segs ?? null;
 }
 
 function parseDate(v: string | undefined | null): Date | null {

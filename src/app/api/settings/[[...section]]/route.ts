@@ -18,7 +18,7 @@ import { db } from "@/server/db";
 import { writeAudit } from "@/server/audit";
 import { generateApiKey } from "@/server/apikeys";
 
-type Ctx = { params: Promise<{ section?: string[]; id?: string[] }> };
+type Ctx = { params: Promise<{ section?: string[] }> };
 
 async function resolvePath(ctx: Ctx): Promise<string[]> {
   const parts = (await ctx.params) as unknown as { section?: string[] };

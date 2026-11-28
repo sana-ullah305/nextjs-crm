@@ -14,13 +14,13 @@ vi.mock("next/headers", () => ({
 }));
 
 import { POST as loginRoute } from "@/app/api/auth/login/route";
-import { GET as contactsGet, PATCH as contactsPatch } from "@/app/api/contacts/[[...id]]/route";
-import { GET as leadsGet, POST as leadsPost } from "@/app/api/leads/[[...id]]/route";
-import { GET as dealsGet, GET as dealsGetSingle } from "@/app/api/deals/[[...id]]/route";
-import { GET as companiesGet, PATCH as companiesPatch } from "@/app/api/companies/[[...id]]/route";
+import { GET as contactsGet, PATCH as contactsPatch } from "@/app/api/contacts/[id]/route";
+import { GET as leadsGet, POST as leadsPost } from "@/app/api/leads/[id]/route";
+import { GET as dealsGet, GET as dealsGetSingle } from "@/app/api/deals/[id]/route";
+import { GET as companiesGet, PATCH as companiesPatch } from "@/app/api/companies/[id]/route";
 import { GET as mergePreviewGet } from "@/app/api/merge/preview/route";
-import { PATCH as usersPatch } from "@/app/api/users/[[...id]]/route";
-import { POST as sequencesPost } from "@/app/api/sequences/[[...id]]/route";
+import { PATCH as usersPatch } from "@/app/api/users/[id]/route";
+import { POST as sequencesPost } from "@/app/api/sequences/[id]/route";
 import { GET as unsubscribeGet } from "@/app/api/unsubscribe/route";
 import db from "@/server/db";
 import { hashPassword } from "@/server/auth";
@@ -45,8 +45,8 @@ function makeRequest(pathname: string, init?: { method?: string; headers?: Recor
     nextUrl: url,
   };
 }
-function ctx(segments: string[] | undefined) {
-  return { params: Promise.resolve({ id: segments }) };
+function ctx(segments: string | undefined) {
+  return { params: Promise.resolve({ id: segments as string }) };
 }
 
 let orgId: string;
@@ -131,7 +131,7 @@ describe("password change revokes all sessions", () => {
       method: "PATCH",
       headers: { "content-type": "application/json" },
       json: { password: "newpassword123" },
-    }) as never, ctx([repCId]));
+    }) as never, ctx(repCId));
     expect(patch.status).toBe(200);
 
     // repA's old session cookie should no longer resolve to a user
@@ -155,13 +155,13 @@ describe("RBAC filter-override (search cannot bypass visibility)", () => {
 describe("record-level read scoping", () => {
   it("rep cannot read another rep's contact/lead/deal/company (403)", async () => {
     await loginAs("repa@example.org");
-    const c = await call(contactsGet, makeRequest(`/api/contacts/${contactBId}`) as never, ctx([contactBId]));
+    const c = await call(contactsGet, makeRequest(`/api/contacts/${contactBId}`) as never, ctx(contactBId));
     expect(c.status).toBe(403);
-    const l = await call(leadsGet, makeRequest(`/api/leads/${leadBId}`) as never, ctx([leadBId]));
+    const l = await call(leadsGet, makeRequest(`/api/leads/${leadBId}`) as never, ctx(leadBId));
     expect(l.status).toBe(403);
-    const d = await call(dealsGetSingle, makeRequest(`/api/deals/${dealBId}`) as never, ctx([dealBId]));
+    const d = await call(dealsGetSingle, makeRequest(`/api/deals/${dealBId}`) as never, ctx(dealBId));
     expect(d.status).toBe(403);
-    const co = await call(companiesGet, makeRequest(`/api/companies/${companyBId}`) as never, ctx([companyBId]));
+    const co = await call(companiesGet, makeRequest(`/api/companies/${companyBId}`) as never, ctx(companyBId));
     expect(co.status).toBe(403);
   });
 
@@ -179,7 +179,7 @@ describe("owner/assignee reassignment validation", () => {
       method: "PATCH",
       headers: { "content-type": "application/json" },
       json: { ownerId: repBId },
-    }) as never, ctx([contactAId]));
+    }) as never, ctx(contactAId));
     expect(res.status).toBe(403);
   });
 
@@ -193,11 +193,11 @@ describe("owner/assignee reassignment validation", () => {
     }) as never, ctx(undefined));
     expect(res.status).toBe(201);
     const leadId = (await res.json()).data.id;
-    const patch = await call((await import("@/app/api/leads/[[...id]]/route")).PATCH, makeRequest(`/api/leads/${leadId}`, {
+    const patch = await call((await import("@/app/api/leads/[id]/route")).PATCH, makeRequest(`/api/leads/${leadId}`, {
       method: "PATCH",
       headers: { "content-type": "application/json" },
       json: { assignedUserId: repBId },
-    }) as never, ctx([leadId]));
+    }) as never, ctx(leadId));
     expect(patch.status).toBe(403);
   });
 
@@ -207,7 +207,7 @@ describe("owner/assignee reassignment validation", () => {
       method: "PATCH",
       headers: { "content-type": "application/json" },
       json: { ownerId: repBId },
-    }) as never, ctx([contactAId]));
+    }) as never, ctx(contactAId));
     expect(res.status).toBe(200);
   });
 });
@@ -225,11 +225,11 @@ describe("transactions", () => {
     const leadId = (await created.json()).data.id;
 
     // invalid pipelineId -> 404, and no contact created for this lead
-    const bad = await call((await import("@/app/api/leads/[[...id]]/route")).POST, makeRequest(`/api/leads/${leadId}`, {
+    const bad = await call((await import("@/app/api/leads/[id]/route")).POST, makeRequest(`/api/leads/${leadId}`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       json: { createDeal: true, pipelineId: "does-not-exist" },
-    }) as never, ctx([leadId]));
+    }) as never, ctx(leadId));
     expect(bad.status).toBe(404);
     const lead = await db.lead.findUnique({ where: { id: leadId } });
     expect(lead?.status).toBe("NEW");

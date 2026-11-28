@@ -20,10 +20,10 @@ vi.mock("next/headers", () => ({
 
 import { POST as loginRoute } from "@/app/api/auth/login/route";
 import { GET as qList, POST as qCreate } from "@/app/api/quotations/route";
-import { GET as qGet, PATCH as qPatch, DELETE as qDelete } from "@/app/api/quotations/[[...id]]/route";
-import { GET as qPdf } from "@/app/api/quotations/[[...id]]/pdf/route";
+import { GET as qGet, PATCH as qPatch, DELETE as qDelete } from "@/app/api/quotations/[id]/route";
+import { GET as qPdf } from "@/app/api/quotations/[id]/pdf/route";
 import { GET as soList, POST as soCreate } from "@/app/api/sales-orders/route";
-import { GET as soGet, PATCH as soPatch, DELETE as soDelete } from "@/app/api/sales-orders/[[...id]]/route";
+import { GET as soGet, PATCH as soPatch, DELETE as soDelete } from "@/app/api/sales-orders/[id]/route";
 import db from "@/server/db";
 import { hashPassword } from "@/server/auth";
 
@@ -50,8 +50,8 @@ function makeRequest(pathname: string, init?: { method?: string; headers?: Recor
   } as unknown as Request;
 }
 
-function ctx(segments: string[] | undefined) {
-  return { params: Promise.resolve({ id: segments }) };
+function ctx(segments: string | undefined) {
+  return { params: Promise.resolve({ id: segments as string }) };
 }
 
 let orgId: string;
@@ -141,7 +141,7 @@ function logout() {
 }
 
 function qCtx(id: string | undefined) {
-  return ctx(id === undefined ? undefined : [id]);
+  return ctx(id);
 }
 
 describe("Quotations API", () => {

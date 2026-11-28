@@ -17,10 +17,10 @@ vi.mock("next/headers", () => ({
 }));
 
 import { POST as loginRoute } from "@/app/api/auth/login/route";
-import { POST as leadsPost } from "@/app/api/leads/[[...id]]/route";
+import { POST as leadsPost } from "@/app/api/leads/[id]/route";
 import { GET as dealsExport } from "@/app/api/deals/export/route";
 import { POST as bulkPost } from "@/app/api/bulk/route";
-import { GET as contactsGet } from "@/app/api/contacts/[[...id]]/route";
+import { GET as contactsGet } from "@/app/api/contacts/[id]/route";
 import db from "@/server/db";
 import { hashPassword } from "@/server/auth";
 
@@ -47,8 +47,8 @@ function makeRequest(pathname: string, init?: { method?: string; headers?: Recor
   };
 }
 
-function ctx(segments: string[] | undefined) {
-  return { params: Promise.resolve({ id: segments }) };
+function ctx(segments: string | undefined) {
+  return { params: Promise.resolve({ id: segments as string }) };
 }
 
 let orgId: string;
@@ -127,7 +127,7 @@ describe("leads CSV import", () => {
           ],
         },
       }) as never,
-      ctx(["import"])
+      ctx("import")
     );
     expect(res.status).toBe(200);
     const body = await res.json();
@@ -150,7 +150,7 @@ describe("leads CSV import", () => {
         headers: { "content-type": "application/json" },
         json: { leads: [{ firstName: "X", lastName: "Y", email: "x@bulk.org" }] },
       }) as never,
-      ctx(["import"])
+      ctx("import")
     );
     expect(res.status).toBe(401);
   });

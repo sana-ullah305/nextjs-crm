@@ -24,7 +24,7 @@ import {
   POST as sequencesPost,
   PATCH as sequencesPatch,
   DELETE as sequencesDelete,
-} from "@/app/api/sequences/[[...id]]/route";
+} from "@/app/api/sequences/[id]/route";
 import { POST as sequencesRun } from "@/app/api/sequences/run/route";
 import { GET as unsubscribeGet } from "@/app/api/unsubscribe/route";
 import { runSequenceScan, renderSequenceStep, buildUnsubscribeUrl } from "@/server/sequences";
@@ -56,8 +56,8 @@ function makeRequest(pathname: string, init?: { method?: string; json?: unknown 
   };
 }
 
-function seqCtx(segments?: string[]) {
-  return { params: Promise.resolve({ id: segments }) };
+function seqCtx(segments?: string | undefined) {
+  return { params: Promise.resolve({ id: segments as string }) };
 }
 
 let orgId: string;

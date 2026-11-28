@@ -20,11 +20,11 @@ vi.mock("next/headers", () => ({
 
 import { POST as loginRoute } from "@/app/api/auth/login/route";
 import { GET as meetingsGet, POST as meetingsPost } from "@/app/api/meetings/route";
-import { GET as meetingGet, PATCH as meetingPatch, DELETE as meetingDelete } from "@/app/api/meetings/[[...id]]/route";
-import { GET as attendeesGet, POST as attendeesPost } from "@/app/api/meetings/[[...id]]/attendees/route";
-import { PATCH as attendeePatch, DELETE as attendeeDelete } from "@/app/api/meetings/[[...id]]/attendees/[[attendeeId]]/route";
+import { GET as meetingGet, PATCH as meetingPatch, DELETE as meetingDelete } from "@/app/api/meetings/[id]/route";
+import { GET as attendeesGet, POST as attendeesPost } from "@/app/api/meetings/[id]/attendees/route";
+import { PATCH as attendeePatch, DELETE as attendeeDelete } from "@/app/api/meetings/[id]/attendees/[attendeeId]/route";
 import { GET as callsGet, POST as callsPost } from "@/app/api/calls/route";
-import { GET as callGet, PATCH as callPatch, DELETE as callDelete } from "@/app/api/calls/[[...id]]/route";
+import { GET as callGet, PATCH as callPatch, DELETE as callDelete } from "@/app/api/calls/[id]/route";
 import db from "@/server/db";
 import { hashPassword } from "@/server/auth";
 
@@ -51,8 +51,8 @@ function makeRequest(pathname: string, init?: { method?: string; headers?: Recor
   };
 }
 
-function ctx(segments: string[] | undefined) {
-  return { params: Promise.resolve({ id: segments }) };
+function ctx(segments: string | undefined, attendeeId?: string) {
+  return { params: Promise.resolve({ id: segments as string, attendeeId: attendeeId as string }) };
 }
 
 let orgId: string;
@@ -129,7 +129,7 @@ describe("meetings CRUD", () => {
   });
 
   it("gets a single meeting", async () => {
-    const res = await meetingGet(makeRequest(`/api/meetings/${meetingId}`) as never, ctx([meetingId]));
+    const res = await meetingGet(makeRequest(`/api/meetings/${meetingId}`) as never, ctx(meetingId));
     expect(res.status).toBe(200);
     expect((await res.json()).data.title).toBe("Discovery call");
   });
@@ -142,7 +142,7 @@ describe("meetings CRUD", () => {
         headers: { "content-type": "application/json" },
         json: { status: "COMPLETED" },
       }) as never,
-      ctx([meetingId])
+      ctx(meetingId)
     );
     expect(res.status).toBe(403);
   });
@@ -155,7 +155,7 @@ describe("meetings CRUD", () => {
         headers: { "content-type": "application/json" },
         json: { status: "COMPLETED", outcome: "Interested" },
       }) as never,
-      ctx([meetingId])
+      ctx(meetingId)
     );
     expect(res.status).toBe(200);
     const body = await res.json();
@@ -170,12 +170,12 @@ describe("meetings CRUD", () => {
         headers: { "content-type": "application/json" },
         json: { contactId, status: "ACCEPTED" },
       }) as never,
-      ctx([meetingId])
+      ctx(meetingId)
     );
     expect(added.status).toBe(201);
     const attendee = (await added.json()).data;
 
-    const listed = await attendeesGet(makeRequest(`/api/meetings/${meetingId}/attendees`) as never, ctx([meetingId]));
+    const listed = await attendeesGet(makeRequest(`/api/meetings/${meetingId}/attendees`) as never, ctx(meetingId));
     expect((await listed.json()).data.attendees.length).toBeGreaterThanOrEqual(1);
 
     const patched = await attendeePatch(
@@ -184,14 +184,14 @@ describe("meetings CRUD", () => {
         headers: { "content-type": "application/json" },
         json: { status: "ATTENDED" },
       }) as never,
-      ctx([meetingId, attendee.id])
+      ctx(meetingId, attendee.id)
     );
     expect(patched.status).toBe(200);
     expect((await patched.json()).data.status).toBe("ATTENDED");
 
     const del = await attendeeDelete(
       makeRequest(`/api/meetings/${meetingId}/attendees/${attendee.id}`, { method: "DELETE" }) as never,
-      ctx([meetingId, attendee.id])
+      ctx(meetingId, attendee.id)
     );
     expect(del.status).toBe(200);
   });
@@ -209,7 +209,7 @@ describe("meetings CRUD", () => {
   });
 
   it("admin deletes a meeting", async () => {
-    const res = await meetingDelete(makeRequest(`/api/meetings/${meetingId}`, { method: "DELETE" }) as never, ctx([meetingId]));
+    const res = await meetingDelete(makeRequest(`/api/meetings/${meetingId}`, { method: "DELETE" }) as never, ctx(meetingId));
     expect(res.status).toBe(200);
     const row = await db.meeting.findUnique({ where: { id: meetingId } });
     expect(row).toBeNull();
@@ -243,7 +243,7 @@ describe("calls CRUD", () => {
   });
 
   it("gets a single call", async () => {
-    const res = await callGet(makeRequest(`/api/calls/${callId}`) as never, ctx([callId]));
+    const res = await callGet(makeRequest(`/api/calls/${callId}`) as never, ctx(callId));
     expect(res.status).toBe(200);
     expect((await res.json()).data.title).toBe("Intro call");
   });
@@ -255,7 +255,7 @@ describe("calls CRUD", () => {
         headers: { "content-type": "application/json" },
         json: { outcome: "Updated" },
       }) as never,
-      ctx([callId])
+      ctx(callId)
     );
     expect(res.status).toBe(403);
   });
@@ -268,12 +268,12 @@ describe("calls CRUD", () => {
         headers: { "content-type": "application/json" },
         json: { outcome: "Closed", duration: 600 },
       }) as never,
-      ctx([callId])
+      ctx(callId)
     );
     expect(patched.status).toBe(200);
     expect((await patched.json()).data.duration).toBe(600);
 
-    const del = await callDelete(makeRequest(`/api/calls/${callId}`, { method: "DELETE" }) as never, ctx([callId]));
+    const del = await callDelete(makeRequest(`/api/calls/${callId}`, { method: "DELETE" }) as never, ctx(callId));
     expect(del.status).toBe(200);
     expect(await db.call.findUnique({ where: { id: callId } })).toBeNull();
   });

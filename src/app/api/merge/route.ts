@@ -13,7 +13,7 @@ import { writeAudit } from "@/server/audit";
  *   "lead-into-contact"    conversion merge: the loser lead is marked
  *                          CONVERTED with contactId set — the same
  *                          semantics as the convert route in
- *                          src/app/api/leads/[[...id]]/route.ts
+ *                          src/app/api/leads/[id]/route.ts
  *   "contact-into-contact" same entity, both contacts
  *   "lead-into-lead"       same entity, both leads
  *

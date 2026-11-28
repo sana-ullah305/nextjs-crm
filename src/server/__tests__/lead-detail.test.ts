@@ -19,7 +19,7 @@ vi.mock("next/headers", () => ({
   }),
 }));
 
-import { GET as leadsGet } from "@/app/api/leads/[[...id]]/route";
+import { GET as leadsGet } from "@/app/api/leads/[id]/route";
 import { POST as loginRoute } from "@/app/api/auth/login/route";
 import { findDuplicateCandidates } from "@/server/dedupe";
 import db from "@/server/db";
@@ -48,8 +48,8 @@ function makeRequest(pathname: string, init?: { method?: string; json?: unknown 
   };
 }
 
-function ctx(segments: string[] | undefined) {
-  return { params: Promise.resolve({ id: segments }) };
+function ctx(segments: string | undefined) {
+  return { params: Promise.resolve({ id: segments as string }) };
 }
 
 let orgId: string;
@@ -216,7 +216,7 @@ afterAll(async () => {
 
 describe("GET /api/leads/:id (lead detail data)", () => {
   it("returns the lead with its relations", async () => {
-    const res = await call(leadsGet, makeRequest(`/api/leads/${leadId}`), ctx([leadId]));
+    const res = await call(leadsGet, makeRequest(`/api/leads/${leadId}`), ctx(leadId));
     expect(res.status).toBe(200);
     const body = (await res.json()) as {
       data: {
@@ -240,7 +240,7 @@ describe("GET /api/leads/:id (lead detail data)", () => {
   });
 
   it("404s for a missing lead", async () => {
-    const res = await call(leadsGet, makeRequest("/api/leads/nope"), ctx(["nope"]));
+    const res = await call(leadsGet, makeRequest("/api/leads/nope"), ctx("nope"));
     expect(res.status).toBe(404);
   });
 });

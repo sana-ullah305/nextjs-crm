@@ -6,7 +6,7 @@ import { callCreateSchema } from "@/lib/schemas";
 import { db } from "@/server/db";
 import { writeAudit } from "@/server/audit";
 
-type Ctx = { params: Promise<{ id?: string[] }> };
+type Ctx = { params: Promise<{}> };
 
 function parseDate(v: string | undefined | null): Date | null {
   if (!v) return null;

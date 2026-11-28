@@ -24,13 +24,13 @@ import {
   GET as teamGet,
   PATCH as teamPatch,
   DELETE as teamDelete,
-} from "@/app/api/settings/sales-teams/[[...id]]/route";
+} from "@/app/api/settings/sales-teams/[id]/route";
 import {
   GET as membersGet,
   POST as membersPost,
-} from "@/app/api/settings/sales-teams/[[...id]]/members/route";
-import { DELETE as memberDelete } from "@/app/api/settings/sales-teams/[[...id]]/members/[[memberId]]/route";
-import { GET as leadsGet } from "@/app/api/leads/[[...id]]/route";
+} from "@/app/api/settings/sales-teams/[id]/members/route";
+import { DELETE as memberDelete } from "@/app/api/settings/sales-teams/[id]/members/[memberId]/route";
+import { GET as leadsGet } from "@/app/api/leads/[id]/route";
 import db from "@/server/db";
 import { hashPassword } from "@/server/auth";
 
@@ -57,7 +57,7 @@ function makeRequest(pathname: string, init?: { method?: string; headers?: Recor
   };
 }
 
-function ctx(id: string[] | undefined, memberId?: string[]) {
+function ctx(id: string | undefined, memberId?: string) {
   return { params: Promise.resolve({ id, memberId }) };
 }
 
@@ -211,7 +211,7 @@ describe("sales teams CRUD", () => {
 
   it("gets a single team with its members", async () => {
     setSession("admin@example.org");
-    const res = await teamGet(makeRequest(`/api/settings/sales-teams/${teamId}`) as never, ctx([teamId]));
+    const res = await teamGet(makeRequest(`/api/settings/sales-teams/${teamId}`) as never, ctx(teamId));
     expect(res.status).toBe(200);
     const body = await res.json();
     expect(body.data.id).toBe(teamId);
@@ -220,7 +220,7 @@ describe("sales teams CRUD", () => {
 
   it("returns 404 for an unknown team", async () => {
     setSession("admin@example.org");
-    const res = await teamGet(makeRequest("/api/settings/sales-teams/does-not-exist") as never, ctx(["does-not-exist"]));
+    const res = await teamGet(makeRequest("/api/settings/sales-teams/does-not-exist") as never, ctx("does-not-exist"));
     expect(res.status).toBe(404);
   });
 
@@ -232,7 +232,7 @@ describe("sales teams CRUD", () => {
         headers: { "content-type": "application/json" },
         json: { name: "Closers Elite" },
       }) as never,
-      ctx([teamId])
+      ctx(teamId)
     );
     expect(res.status).toBe(200);
     const body = await res.json();
@@ -247,7 +247,7 @@ describe("sales teams CRUD", () => {
         headers: { "content-type": "application/json" },
         json: { name: "Nope" },
       }) as never,
-      ctx([teamId])
+      ctx(teamId)
     );
     expect(res.status).toBe(403);
   });
@@ -264,7 +264,7 @@ describe("team members", () => {
         headers: { "content-type": "application/json" },
         json: { userId: repId, role: "LEAD" },
       }) as never,
-      ctx([teamId])
+      ctx(teamId)
     );
     expect(res.status).toBe(201);
     const body = await res.json();
@@ -282,7 +282,7 @@ describe("team members", () => {
         headers: { "content-type": "application/json" },
         json: { userId: rep2Id },
       }) as never,
-      ctx([teamId])
+      ctx(teamId)
     );
     expect(res.status).toBe(201);
     const body = await res.json();
@@ -291,7 +291,7 @@ describe("team members", () => {
 
   it("lists team members", async () => {
     setSession("admin@example.org");
-    const res = await membersGet(makeRequest(`/api/settings/sales-teams/${teamId}/members`) as never, ctx([teamId]));
+    const res = await membersGet(makeRequest(`/api/settings/sales-teams/${teamId}/members`) as never, ctx(teamId));
     expect(res.status).toBe(200);
     const body = await res.json();
     expect(Array.isArray(body.data)).toBe(true);
@@ -307,7 +307,7 @@ describe("team members", () => {
         headers: { "content-type": "application/json" },
         json: { userId: repId },
       }) as never,
-      ctx([teamId])
+      ctx(teamId)
     );
     expect(res.status).toBe(409);
   });
@@ -329,7 +329,7 @@ describe("team members", () => {
         headers: { "content-type": "application/json" },
         json: { userId: outsider.id },
       }) as never,
-      ctx([teamId])
+      ctx(teamId)
     );
     expect(res.status).toBe(404);
   });
@@ -342,7 +342,7 @@ describe("team members", () => {
         headers: { "content-type": "application/json" },
         json: { userId: rep2Id },
       }) as never,
-      ctx([teamId])
+      ctx(teamId)
     );
     expect(res.status).toBe(403);
   });
@@ -351,7 +351,7 @@ describe("team members", () => {
     setSession("admin@example.org");
     const res = await memberDelete(
       makeRequest(`/api/settings/sales-teams/${teamId}/members/${membershipId}`, { method: "DELETE" }) as never,
-      ctx([teamId], [membershipId])
+      ctx(teamId, membershipId)
     );
     expect(res.status).toBe(200);
     const remaining = await db.teamMember.findMany({ where: { teamId } });
@@ -363,7 +363,7 @@ describe("team members", () => {
     setSession("admin@example.org");
     const res = await memberDelete(
       makeRequest(`/api/settings/sales-teams/${teamId}/members/does-not-exist`, { method: "DELETE" }) as never,
-      ctx([teamId], ["does-not-exist"])
+      ctx(teamId, "does-not-exist")
     );
     expect(res.status).toBe(404);
   });
@@ -372,7 +372,7 @@ describe("team members", () => {
     setSession("admin@example.org");
     const res = await teamDelete(
       makeRequest(`/api/settings/sales-teams/${teamId}`, { method: "DELETE" }) as never,
-      ctx([teamId])
+      ctx(teamId)
     );
     expect(res.status).toBe(200);
     const gone = await db.team.findUnique({ where: { id: teamId } });
@@ -407,7 +407,7 @@ describe("team-scoped visibility", () => {
         headers: { "content-type": "application/json" },
         json: { userId: repId },
       }) as never,
-      ctx([visibilityTeamId])
+      ctx(visibilityTeamId)
     );
     await membersPost(
       makeRequest(`/api/settings/sales-teams/${visibilityTeamId}/members`, {
@@ -415,7 +415,7 @@ describe("team-scoped visibility", () => {
         headers: { "content-type": "application/json" },
         json: { userId: rep2Id },
       }) as never,
-      ctx([visibilityTeamId])
+      ctx(visibilityTeamId)
     );
 
     leadAId = (await db.lead.create({

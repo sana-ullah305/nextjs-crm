@@ -11,7 +11,7 @@ vi.mock("next/headers", () => ({
   }),
 }));
 
-import { GET as dealsGet, POST as dealsPost, PATCH as dealsPatch, DELETE as dealsDelete } from "@/app/api/deals/[[...id]]/route";
+import { GET as dealsGet, POST as dealsPost, PATCH as dealsPatch, DELETE as dealsDelete } from "@/app/api/deals/[id]/route";
 import db from "@/server/db";
 import { hashPassword } from "@/server/auth";
 
@@ -38,8 +38,8 @@ function makeRequest(pathname: string, init?: { method?: string; headers?: Recor
   };
 }
 
-function ctx(segments: string[] | undefined) {
-  return { params: Promise.resolve({ id: segments }) };
+function ctx(segments: string | undefined) {
+  return { params: Promise.resolve({ id: segments as string }) };
 }
 
 let orgId: string;
@@ -195,7 +195,7 @@ describe("Deals API routes", () => {
       data: { organizationId: orgId, name: "Detail Deal", stageId, pipelineId, contactId, companyId, ownerId: adminUserId },
     });
 
-    const res = await dealsGet(makeRequest(`/api/deals/${deal.id}`) as never, ctx([deal.id]));
+    const res = await dealsGet(makeRequest(`/api/deals/${deal.id}`) as never, ctx(deal.id));
     expect(res.status).toBe(200);
     const body = await res.json();
     expect(body.data.name).toBe("Detail Deal");
@@ -224,7 +224,7 @@ describe("Deals API routes", () => {
           notes: "Initial contact made",
         },
       }) as never,
-      ctx(["list"])
+      ctx("list")
     );
     expect(res.status).toBe(201);
     const body = await res.json();
@@ -242,7 +242,7 @@ describe("Deals API routes", () => {
         headers: { "content-type": "application/json" },
         json: { name: "Minimal Deal", stageId },
       }) as never,
-      ctx(["list"])
+      ctx("list")
     );
     expect(res.status).toBe(201);
     const body = await res.json();
@@ -258,7 +258,7 @@ describe("Deals API routes", () => {
         headers: { "content-type": "application/json" },
         json: { name: "Bad Deal", stageId: "invalid-stage-id" },
       }) as never,
-      ctx(["list"])
+      ctx("list")
     );
     expect(res.status).toBe(404);
   });
@@ -275,7 +275,7 @@ describe("Deals API routes", () => {
         headers: { "content-type": "application/json" },
         json: { name: "Updated Deal", value: 25000, nextStep: "Follow up" },
       }) as never,
-      ctx([deal.id])
+      ctx(deal.id)
     );
     expect(res.status).toBe(200);
     const body = await res.json();
@@ -296,7 +296,7 @@ describe("Deals API routes", () => {
         headers: { "content-type": "application/json" },
         json: { stageId: stageWonId },
       }) as never,
-      ctx([deal.id])
+      ctx(deal.id)
     );
     expect(res.status).toBe(200);
     const body = await res.json();
@@ -318,7 +318,7 @@ describe("Deals API routes", () => {
         headers: { "content-type": "application/json" },
         json: { stageId: stageLostId },
       }) as never,
-      ctx([deal.id])
+      ctx(deal.id)
     );
     expect(res.status).toBe(200);
     const body = await res.json();
@@ -339,7 +339,7 @@ describe("Deals API routes", () => {
         headers: { "content-type": "application/json" },
         json: { stageId: stageWonId },
       }) as never,
-      ctx([deal.id])
+      ctx(deal.id)
     );
 
     const activities = await db.activity.findMany({
@@ -363,7 +363,7 @@ describe("Deals API routes", () => {
         headers: { "content-type": "application/json" },
         json: { name: "Admin Updated" },
       }) as never,
-      ctx([deal.id])
+      ctx(deal.id)
     );
     expect(res.status).toBe(200);
   });
@@ -380,7 +380,7 @@ describe("Deals API routes", () => {
         headers: { "content-type": "application/json" },
         json: { name: "Hacker Updated" },
       }) as never,
-      ctx([deal.id])
+      ctx(deal.id)
     );
     expect(res.status).toBe(403);
   });
@@ -393,7 +393,7 @@ describe("Deals API routes", () => {
 
     const res = await dealsDelete(
       makeRequest(`/api/deals/${deal.id}`, { method: "DELETE" }) as never,
-      ctx([deal.id])
+      ctx(deal.id)
     );
     expect(res.status).toBe(200);
     const body = await res.json();
@@ -411,14 +411,14 @@ describe("Deals API routes", () => {
 
     const res = await dealsDelete(
       makeRequest(`/api/deals/${deal.id}`, { method: "DELETE" }) as never,
-      ctx([deal.id])
+      ctx(deal.id)
     );
     expect(res.status).toBe(403);
   });
 
   it("returns 404 for missing deal", async () => {
     await loginAs("admin-deals@example.org");
-    const res = await dealsGet(makeRequest("/api/deals/does-not-exist") as never, ctx(["does-not-exist"]));
+    const res = await dealsGet(makeRequest("/api/deals/does-not-exist") as never, ctx("does-not-exist"));
     expect(res.status).toBe(404);
   });
 

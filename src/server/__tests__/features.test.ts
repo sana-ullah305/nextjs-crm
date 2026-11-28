@@ -27,10 +27,10 @@ vi.mock("@/server/mailer", async (importOriginal) => {
 });
 
 import { POST as loginRoute } from "@/app/api/auth/login/route";
-import { POST as emailPost } from "@/app/api/emails/[[...id]]/route";
+import { POST as emailPost } from "@/app/api/emails/[id]/route";
 import { POST as remindersRun } from "@/app/api/reminders/run/route";
 import { GET as searchGet } from "@/app/api/search/route";
-import { GET as notificationsGet } from "@/app/api/notifications/[[...id]]/route";
+import { GET as notificationsGet } from "@/app/api/notifications/[id]/route";
 import { runReminderScan } from "@/server/reminders";
 import { __testHooks, invalidateTransporterCache } from "@/server/mailer";
 import db from "@/server/db";
@@ -59,7 +59,7 @@ function makeRequest(pathname: string, init?: { method?: string; json?: unknown 
   };
 }
 
-function ctx(_segments: string[] | undefined) {
+function ctx(_segments: string | undefined) {
   return { params: Promise.resolve({ id: _segments }) };
 }
 void ctx;

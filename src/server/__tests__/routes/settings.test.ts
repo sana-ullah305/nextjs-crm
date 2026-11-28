@@ -40,7 +40,7 @@ function makeRequest(pathname: string, init?: { method?: string; headers?: Recor
 }
 
 function ctx(segments: string[] | undefined) {
-  return { params: Promise.resolve({ section: segments, id: segments }) };
+  return { params: Promise.resolve({ section: segments }) };
 }
 
 let orgId: string;

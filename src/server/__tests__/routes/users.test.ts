@@ -13,7 +13,7 @@ vi.mock("next/headers", () => ({
   }),
 }));
 
-import { GET as usersGet, POST as usersPost, PATCH as usersPatch, DELETE as usersDelete } from "@/app/api/users/[[...id]]/route";
+import { GET as usersGet, POST as usersPost, PATCH as usersPatch, DELETE as usersDelete } from "@/app/api/users/[id]/route";
 import db from "@/server/db";
 import { hashPassword } from "@/server/auth";
 
@@ -40,8 +40,8 @@ function makeRequest(pathname: string, init?: { method?: string; headers?: Recor
   };
 }
 
-function ctx(segments: string[] | undefined) {
-  return { params: Promise.resolve({ id: segments }) };
+function ctx(segments: string | undefined) {
+  return { params: Promise.resolve({ id: segments as string }) };
 }
 
 let orgId: string;
@@ -184,7 +184,7 @@ describe("Users API routes", () => {
         headers: { "content-type": "application/json" },
         json: { title: "Senior Rep", phone: "555-0000" },
       }) as never,
-      ctx([repUserId])
+      ctx(repUserId)
     );
     expect(res.status).toBe(200);
     const body = await res.json();
@@ -200,7 +200,7 @@ describe("Users API routes", () => {
         headers: { "content-type": "application/json" },
         json: { isActive: false },
       }) as never,
-      ctx([adminUserId])
+      ctx(adminUserId)
     );
     expect(res.status).toBe(400);
     const body = await res.json();
@@ -215,7 +215,7 @@ describe("Users API routes", () => {
         headers: { "content-type": "application/json" },
         json: { isActive: false },
       }) as never,
-      ctx([repUserId])
+      ctx(repUserId)
     );
     expect(res.status).toBe(200);
     const body = await res.json();
@@ -230,7 +230,7 @@ describe("Users API routes", () => {
     await loginAs("admin-users@example.org");
     const res = await usersDelete(
       makeRequest(`/api/users/${adminUserId}`, { method: "DELETE" }) as never,
-      ctx([adminUserId])
+      ctx(adminUserId)
     );
     expect(res.status).toBe(400);
     const body = await res.json();
@@ -241,7 +241,7 @@ describe("Users API routes", () => {
     await loginAs("admin-users@example.org");
     const res = await usersDelete(
       makeRequest(`/api/users/${repUserId}`, { method: "DELETE" }) as never,
-      ctx([repUserId])
+      ctx(repUserId)
     );
     expect(res.status).toBe(200);
     const body = await res.json();
@@ -255,14 +255,14 @@ describe("Users API routes", () => {
     await loginAs("admin-users@example.org");
     const res = await usersGet(
       makeRequest("/api/users/does-not-exist") as never,
-      ctx(["does-not-exist"])
+      ctx("does-not-exist")
     );
     expect(res.status).toBe(404);
   });
 
   it("lists audit logs for admin", async () => {
     await loginAs("admin-users@example.org");
-    const res = await usersGet(makeRequest("/api/users/audit") as never, ctx(["audit"]));
+    const res = await usersGet(makeRequest("/api/users/audit") as never, ctx("audit"));
     expect(res.status).toBe(200);
     const body = await res.json();
     expect(body.data.logs).toBeDefined();

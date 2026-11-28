@@ -11,7 +11,7 @@ vi.mock("next/headers", () => ({
   }),
 }));
 
-import { GET as activitiesGet, POST as activitiesPost, DELETE as activitiesDelete } from "@/app/api/activities/[[...id]]/route";
+import { GET as activitiesGet, POST as activitiesPost, DELETE as activitiesDelete } from "@/app/api/activities/[id]/route";
 import db from "@/server/db";
 import { hashPassword } from "@/server/auth";
 
@@ -38,8 +38,8 @@ function makeRequest(pathname: string, init?: { method?: string; headers?: Recor
   };
 }
 
-function ctx(segments: string[] | undefined) {
-  return { params: Promise.resolve({ id: segments }) };
+function ctx(segments: string | undefined) {
+  return { params: Promise.resolve({ id: segments as string }) };
 }
 
 let orgId: string;
@@ -205,7 +205,7 @@ describe("Activities/Notes API routes", () => {
           contactId,
         },
       }) as never,
-      ctx(["note"])
+      ctx("note")
     );
     expect(res.status).toBe(201);
     const body = await res.json();
@@ -222,7 +222,7 @@ describe("Activities/Notes API routes", () => {
         headers: { "content-type": "application/json" },
         json: { body: "Orphan note" },
       }) as never,
-      ctx(["note"])
+      ctx("note")
     );
     expect(res.status).toBe(400);
     const body = await res.json();
@@ -237,7 +237,7 @@ describe("Activities/Notes API routes", () => {
         headers: { "content-type": "application/json" },
         json: { body: "Company note", companyId },
       }) as never,
-      ctx(["note"])
+      ctx("note")
     );
     expect(res.status).toBe(201);
     const body = await res.json();
@@ -252,7 +252,7 @@ describe("Activities/Notes API routes", () => {
         headers: { "content-type": "application/json" },
         json: { body: "Deal note", dealId },
       }) as never,
-      ctx(["note"])
+      ctx("note")
     );
     expect(res.status).toBe(201);
     const body = await res.json();
@@ -267,7 +267,7 @@ describe("Activities/Notes API routes", () => {
         headers: { "content-type": "application/json" },
         json: { body: "Lead note", leadId },
       }) as never,
-      ctx(["note"])
+      ctx("note")
     );
     expect(res.status).toBe(201);
     const body = await res.json();
@@ -282,7 +282,7 @@ describe("Activities/Notes API routes", () => {
 
     const res = await activitiesDelete(
       makeRequest(`/api/activities/${note.id}`, { method: "DELETE" }) as never,
-      ctx([note.id])
+      ctx(note.id)
     );
     expect(res.status).toBe(200);
     const body = await res.json();
@@ -310,7 +310,7 @@ describe("Activities/Notes API routes", () => {
     await loginAs("rep2-activities@example.org");
     const res = await activitiesDelete(
       makeRequest(`/api/activities/${note.id}`, { method: "DELETE" }) as never,
-      ctx([note.id])
+      ctx(note.id)
     );
     expect(res.status).toBe(403);
   });
@@ -326,7 +326,7 @@ describe("Activities/Notes API routes", () => {
 
     const res = await activitiesDelete(
       makeRequest(`/api/activities/${note.id}`, { method: "DELETE" }) as never,
-      ctx([note.id])
+      ctx(note.id)
     );
     expect(res.status).toBe(200);
   });
@@ -335,7 +335,7 @@ describe("Activities/Notes API routes", () => {
     await loginAs("admin-activities@example.org");
     const res = await activitiesDelete(
       makeRequest("/api/activities/does-not-exist", { method: "DELETE" }) as never,
-      ctx(["does-not-exist"])
+      ctx("does-not-exist")
     );
     expect(res.status).toBe(404);
   });
@@ -348,7 +348,7 @@ describe("Activities/Notes API routes", () => {
 
     const res = await activitiesDelete(
       makeRequest(`/api/activities/${activity.id}`, { method: "DELETE" }) as never,
-      ctx([activity.id])
+      ctx(activity.id)
     );
     // The DELETE endpoint only handles notes, activities should 404
     expect(res.status).toBe(404);

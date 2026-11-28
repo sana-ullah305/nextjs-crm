@@ -14,7 +14,7 @@ vi.mock("next/headers", () => ({
 }));
 
 import { GET as attachmentsGet, POST as attachmentsPost } from "@/app/api/attachments/route";
-import { GET as attachmentGet, DELETE as attachmentDelete } from "@/app/api/attachments/[[...id]]/route";
+import { GET as attachmentGet, DELETE as attachmentDelete } from "@/app/api/attachments/[id]/route";
 import db from "@/server/db";
 import { hashPassword } from "@/server/auth";
 import { resolveUploadPath } from "@/server/storage";
@@ -50,8 +50,8 @@ function makeRequest(pathname: string, init?: { method?: string; headers?: Recor
   };
 }
 
-function ctx(segments: string[] | undefined) {
-  return { params: Promise.resolve({ id: segments }) };
+function ctx(segments: string | undefined) {
+  return { params: Promise.resolve({ id: segments as string }) };
 }
 
 let orgId: string;
